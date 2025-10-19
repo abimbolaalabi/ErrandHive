@@ -127,5 +127,166 @@
 }
 .angleup{
   font-size: 30px;
+}
 
+@media (max-width: 1024px) {
+  .clientvs-wrapper {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+  }
+
+  .client-right,
+  .client-left {
+    width: 100%;
+    height: auto;
+    border: none;
+  }
+
+  .carousel-container {
+    width: 80%;
+    min-height: 30rem;
+    margin: 4rem auto;
+  }
+
+  .client-carousel-img {
+    max-width: 25rem;
+    height: 17rem;
+  }
+
+  .client-text h1 {
+    font-size: 28px;
+  }
+
+  .client-text p {
+    font-size: 18px;
+    max-width: 90%;
+  }
+
+  .client-left h1 {
+    font-size: 27px;
+  }
+
+  .client-dropdown {
+    width: 85%;
+    margin: 6rem auto;
+    height: 3.5rem;
+  }
+
+  .client-dropdown p {
+    font-size: 18px;
+  }
+
+  .angledown,
+  .angleup {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 768px) {
+  .clientvs-wrapper {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+
+  .client-right,
+  .client-left {
+    width: 100%;
+    height: auto;
+    border: none;
+  }
+
+  .carousel-container {
+    width: 90%;
+    min-height: 26rem;
+    margin: 3rem auto;
+  }
+
+  .client-carousel-img {
+    max-width: 22rem;
+    height: 15rem;
+  }
+
+  .client-text {
+    margin-top: 2rem;
+  }
+
+  .client-text h1 {
+    font-size: 25px;
+  }
+
+  .client-text p {
+    font-size: 17px;
+    max-width: 95%;
+  }
+
+  .client-left h1 {
+    font-size: 25px;
+  }
+
+  .client-dropdown {
+    width: 90%;
+    margin: 3rem auto;
+  }
+
+  .angledown,
+  .angleup {
+    font-size: 25px;
+  }
+}
+
+
+@media (max-width: 600px) {
+  .clientvs-wrapper {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+
+  .client-right,
+  .client-left {
+    width: 100%;
+    height: auto;
+  }
+
+  .carousel-container {
+    width: 95%;
+    min-height: 22rem;
+    margin: 2rem auto;
+  }
+
+  .client-carousel-img {
+    max-width: 18rem;
+    height: 13rem;
+  }
+
+  .client-text h1 {
+    font-size: 22px;
+  }
+
+  .client-text p {
+    font-size: 15px;
+    line-height: 1.4;
+    max-width: 95%;
+  }
+
+  .client-left h1 {
+    font-size: 22px;
+  }
+
+  .client-dropdown {
+    width: 95%;
+    margin: 2rem auto;
+    height: 3rem;
+  }
+
+  .client-dropdown p {
+    font-size: 16px;
+  }
+
+  .angledown,
+  .angleup {
+    font-size: 22px;
+  }
 }
