@@ -278,103 +278,43 @@
   
 }
 
-@media screen and (min-width: 768px) {
-  .login-container {
-    flex-direction: column;
-    height: auto;
-    padding: 2rem;
-    gap: 2rem;
-  }
-
-  .login-left {
-    width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: center;
-  }
-
-  .img-box-wrapper {
-    width: 80%;
-    padding-top: 1rem;
-  }
-
-  .login-right {
-    width: 100%;
-    height: auto;
-    background-color: white;
-  }
-
-  .login-right-form {
-    width: 100%;
-    padding-inline: 2rem;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 5px 20px 0px;
-  }
-
-  .login-rigt-text {
-    font-size: 1.4rem;
-    margin-bottom: 2.5rem;
-  }
-
-  .form-wrapper {
-    padding: 1.5rem 0;
-    gap: 1.8rem;
-  }
-
-  .form-right-title {
-    font-size: 1.2rem;
-  }
-
-  .email-right-input-box,
-  .password-right-input-box {
-    width: 100%;
-    height: 3.2rem;
-  }
-
-  .email-input,
-  .pasword-input {
-    font-size: 1rem;
-    padding-left: 2rem;
-  }
-
-  .eye {
-    right: 1.2rem;
-    top: 43%;
-    transform: translateY(-50%);
-  }
-
-  .checkbox-login-form {
-    padding-block: 1rem;
-    gap: 0.5rem;
-  }
-
-  .checkbox {
-    width: 22px;
-    height: 22px;
-  }
-
-  .remember-me-checkbox {
-    font-size: 1.1rem;
-  }
-
-  .login-btn,
-  .continue-with-google {
-    font-size: 1.1rem;
-    height: 3rem;
-  }
-
-  .forgot-password-form {
-    font-size: 0.95rem;
-  }
-
-  .dont-account {
-    padding-block: 2rem;
-    font-size: 1rem;
-  }
-
-  .error-message {
-    font-size: 0.85rem;
-  }
+@media screen and (min-width: 401) and (max-width:480px){
 }
+
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+
 
 
     
