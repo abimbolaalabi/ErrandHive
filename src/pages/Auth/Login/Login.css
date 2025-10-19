@@ -1,0 +1,381 @@
+.login-container {
+  width: 100%;
+  height: 100vh;
+  /* background-color: purple; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+.login-left {
+  width: 50%;
+  height: 100%;
+}
+.img-box-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 2rem;
+}
+.img-box {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+.login-right {
+  width: 43%;
+  height: 100%;
+  background-color: rgb(165, 58, 165);
+}
+.login-right-form {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  padding-inline: 2rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.login-rigt-text {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+.form-wrapper {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.email-container {
+  display: flex;
+  flex-direction: column;
+  padding-block: 0.1rem;
+  padding-inline: 0.1rem;
+}
+.form-right-title {
+  font-family: Poppins;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #212121;
+}
+.email-right-input-box {
+  width: 95%;
+  height: 3.5rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid gray;
+}
+.email-input {
+  outline: none;
+  height: 100%;
+  width: 100%;
+  border: none;
+  font-size: 1rem;
+  padding-left: 1.7rem;
+  color: black;
+  font-family: sans-serif;
+}
+.password-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+.password-right-input-box {
+  width: 95%;
+  height: 3.5rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid #212121;
+}
+.pasword-input {
+  outline: none;
+  height: 100%;
+  width: 100%;
+  border: none;
+  font-size: 1rem;
+  padding-left: 1.7rem;
+  color: black;
+  font-family: sans-serif;
+}
+.eye {
+  position: absolute;
+  right: 11%;
+  bottom: 57%;
+  cursor: pointer;
+}
+.checkbox-login-form {
+  padding-block: 2rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.2rem;
+}
+.checkbox {
+  width: 28px;
+  height: 28px;
+}
+.remember-me-checkbox {
+  font-weight: 800;
+  font-size: 1.3rem;
+  font-family: Poppins;
+}
+.login-btn {
+  width: 100%;
+  height: 3rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  color: white;
+  background-color: #8133f1;
+  border: none;
+  font-size: 1rem;
+}
+.login-btn:hover {
+  background-color: #6a20cc;
+}
+.login-right-or {
+  width: 100%;
+  height: 2rem;
+  padding-block: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.login-right-or {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background-color: #8133f1;
+}
+
+.or {
+  white-space: nowrap;
+  font-weight: 800;
+}
+.continue-with-google {
+  width: 100%;
+  height: 3rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  color: white;
+  background-color: #202124;
+  border: none;
+  font-size: 1.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.forgot-password-form {
+  margin-top: 1rem;
+  color: #8133f1;
+  font-weight: 400;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.dont-account {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-block: 4rem;
+}
+.error-message{
+    color: red;
+}
+@media screen and (max-width: 401px) {
+  .login-container {
+    flex-direction: column;
+    height: auto;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .login-left {
+    display: none;
+  }
+
+  .login-right {
+    width: 100%;
+    background-color: white;
+  }
+
+  .login-right-form {
+    padding-inline: 1rem;
+  }
+
+  .login-rigt-text {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+  }
+
+  .form-wrapper {
+    padding: 1rem 0;
+    gap: 1.5rem;
+  }
+
+  .form-right-title {
+    font-size: 1.1rem;
+  }
+
+  .email-right-input-box,
+  .password-right-input-box {
+    width: 100%;
+    height: 3rem;
+  }
+
+  .email-input,
+  .pasword-input {
+    font-size: 0.95rem;
+    padding-left: 2.5rem;
+  }
+
+  .checkbox-login-form {
+    padding-block: 1rem;
+    gap: 0.4rem;
+  }
+
+  .checkbox {
+    width: 18px;
+    height: 18px;
+  }
+
+  .remember-me-checkbox {
+    font-size: 0.95rem;
+  }
+
+  .login-btn,
+  .continue-with-google {
+    font-size: 1rem;
+    height: 2.8rem;
+  }
+
+  .forgot-password-form {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+
+  .dont-account {
+    padding-block: 2rem;
+    font-size: 0.9rem;
+  }
+
+  .error-message {
+    font-size: 0.8rem;
+  }
+
+   .eye {
+    right: 0.8rem;
+    top: 37%;
+    left: 81%;
+    transform: translateY(-50%);
+  }
+  
+}
+
+@media screen and (min-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    height: auto;
+    padding: 2rem;
+    gap: 2rem;
+  }
+
+  .login-left {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .img-box-wrapper {
+    width: 80%;
+    padding-top: 1rem;
+  }
+
+  .login-right {
+    width: 100%;
+    height: auto;
+    background-color: white;
+  }
+
+  .login-right-form {
+    width: 100%;
+    padding-inline: 2rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 5px 20px 0px;
+  }
+
+  .login-rigt-text {
+    font-size: 1.4rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .form-wrapper {
+    padding: 1.5rem 0;
+    gap: 1.8rem;
+  }
+
+  .form-right-title {
+    font-size: 1.2rem;
+  }
+
+  .email-right-input-box,
+  .password-right-input-box {
+    width: 100%;
+    height: 3.2rem;
+  }
+
+  .email-input,
+  .pasword-input {
+    font-size: 1rem;
+    padding-left: 2rem;
+  }
+
+  .eye {
+    right: 1.2rem;
+    top: 43%;
+    transform: translateY(-50%);
+  }
+
+  .checkbox-login-form {
+    padding-block: 1rem;
+    gap: 0.5rem;
+  }
+
+  .checkbox {
+    width: 22px;
+    height: 22px;
+  }
+
+  .remember-me-checkbox {
+    font-size: 1.1rem;
+  }
+
+  .login-btn,
+  .continue-with-google {
+    font-size: 1.1rem;
+    height: 3rem;
+  }
+
+  .forgot-password-form {
+    font-size: 0.95rem;
+  }
+
+  .dont-account {
+    padding-block: 2rem;
+    font-size: 1rem;
+  }
+
+  .error-message {
+    font-size: 0.85rem;
+  }
+}
+
+
+    
+
