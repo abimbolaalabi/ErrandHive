@@ -18,30 +18,6 @@ const ClientVsRunner = () => {
   };
 
   return (
-    <div className='clientvs-wrapper'>
-      <div className='client-right'>
-        <aside className='logo'>
-          <p>ErrandHive</p>
-        </aside>
-       {slides.map((slide, index) => (
-          <div
-            key={slide.id}
-            className='carousel-container'
-            style={{
-              display: index === current ? 'flex' : 'none',
-            }}
-        >
-            <div className='client-carousel-img'>
-              <img src={slide.image} alt="client-img" />
-            </div>
-            <div className='client-text'>
-              <h1>{slide.title}</h1>
-              <p>{slide.text}</p>
-            </div>
-          </div>
-        ))}
-
-  
     <div className="clientvs-wrapper">
       <div className="client-right">
         <Carousel/>
