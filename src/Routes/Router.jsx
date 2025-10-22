@@ -5,6 +5,8 @@ import Login from '../pages/Auth/Login/Login'
 import VerifyEmail from '../pages/Auth/VerifyEmail/VerifyEmail'
 import PageNotFound from '../pages/PageNotFound'
 import ClientVsRunner from '../pages/ClientVsRunner/ClientVsRunner'
+import ForgotPassword from "../pages/Auth/Forgotpassword/Forget"
+import ResetPassword from "../pages/Auth/Reset/ResetPassword"
 const Router = () => {
   return (
     <BrowserRouter>
@@ -15,6 +17,8 @@ const Router = () => {
         <Route path='/login' element={<Login/>}/>
         <Route path='/verifyemail' element={<VerifyEmail/>}/>
         <Route path='/clientvsrunner' element={<ClientVsRunner/>}/>
+       <Route path='/forgot' element={<ForgotPassword/>}/>
+        <Route path='/reset' element={<ResetPassword/>}/>
     </Routes>
     </BrowserRouter>
   )

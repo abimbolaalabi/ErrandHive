@@ -47,7 +47,7 @@ const ClientVsRunner = () => {
             style={{
               display: index === current ? 'flex' : 'none',
             }}
-          >
+        >
             <div className='client-carousel-img'>
               <img src={slide.image} alt="client-img" />
             </div>
