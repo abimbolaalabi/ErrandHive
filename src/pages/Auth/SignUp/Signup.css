@@ -1,0 +1,148 @@
+.signup-container{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    font-family: "Arial", sans-serif;
+    background-color: #f8f9fa;
+}
+
+.signup-left {
+    width: 60%;
+    height: 100%;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+    padding: 40px;
+    border-right: 1px solid #e0e0e0;
+}
+
+.content {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #070707;
+    gap: 50%;
+}
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #b10cb1;
+    margin-bottom: 30px;
+}
+
+.logo img {
+    width: 25px;  
+    height: 25px;
+    object-fit: contain;
+    background-color: purple;
+    border-radius: 0.3rem;
+}
+
+.illustration{
+    width: 60%;
+    height: 60%;
+    margin-bottom: 30px;
+}
+
+.illustration img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.for-client {
+    text-align: center;
+    color: #333;
+}
+
+.for-client h2 {
+    margin-bottom: 10px;
+}
+
+.for-client p {
+   width: 85%;
+   font-size: 20px;
+   text-align: center;
+}
+
+.signup-right {
+    width: 40%;
+    height: 100%;
+    overflow: auto;
+    flex: 1;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: #555;
+}
+
+.signup-right h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 26px;
+    color: #333;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.signup-form label {
+    font-weight: 600;
+    color: #444;
+}
+
+.signup-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.terms {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+.terms a {
+    color: #3b3bff;
+    text-decoration: none;
+}
+
+.signup-btn {
+    background-color: #3b3bff;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.signup-btn:hover {
+    background-color: #2a2adf;
+}
+
+.error-text {
+  color: red;
+  font-size: 13px;
+  margin: 4px 0 10px 0;
+}
