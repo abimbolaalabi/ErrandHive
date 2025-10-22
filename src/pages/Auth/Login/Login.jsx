@@ -112,6 +112,7 @@ const Login = () => {
                 marginTop: "2rem",
               }}
             />
+            
             <article className="carousel-text">
               <h1 className="carousel-text-header">{item.description}</h1>
               <p className="carousel-text-paragrah">{item.title}</p>
