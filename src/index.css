@@ -1,3 +1,8 @@
 /* :root{ */
     /* --main_color : red */
 /* } */
+.link{
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
