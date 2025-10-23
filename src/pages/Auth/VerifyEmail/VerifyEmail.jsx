@@ -15,15 +15,14 @@ const VerifyEmail = () => {
   const handleChange = (e, index) => {
     const value = e.target.value;
 
-    // Only allow numbers
     if (!/^[0-9]?$/.test(value)) return;
 
     const updated = [...codes];
     updated[index] = value;
     setCodes(updated);
-    setError(""); // clear error when typing
+    setError(""); 
 
-    // Move to next automatically
+
     if (value && index < codes.length - 1) {
       const next = e.target.parentElement.children[index + 1];
       if (next) next.focus();
@@ -31,7 +30,6 @@ const VerifyEmail = () => {
   };
 
   const handleKeyDown = (e, index) => {
-    // Move back on backspace if empty
     if (e.key === "Backspace" && !codes[index] && index > 0) {
       const prev = e.target.parentElement.children[index - 1];
       if (prev) prev.focus();
@@ -53,7 +51,7 @@ const VerifyEmail = () => {
   return (
     <main className="verify-section">
       <div className="logo-holder">
-        <img src={logo1} alt="logo" />
+   <img src="https://res.cloudinary.com/dwzomhflw/image/upload/v1761056644/IMG-20251021-WA0052_lf7sms.jpg" className ="logo" alt="" />
         <span className="errand">Errandhive</span>
       </div>
 

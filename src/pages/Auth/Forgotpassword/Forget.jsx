@@ -10,7 +10,6 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Forgot.css";
 
 const Forget = () => {
-  const nav = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,7 +19,7 @@ const Forget = () => {
   return (
     <main className="verify-section">
       <div className="logo-holder">
-        <img src={logo1} alt="logo" />
+          <img src="https://res.cloudinary.com/dwzomhflw/image/upload/v1761056644/IMG-20251021-WA0052_lf7sms.jpg" className ="logo" alt="" />
         <span className="errand">Errandhive</span>
       </div>
 

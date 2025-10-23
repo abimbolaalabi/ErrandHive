@@ -7,6 +7,7 @@ height: 31.5rem;
 display: flex;
 align-items: center;
 flex-direction: column;
+background: orange;
 }
 .forget-header{
      width: 50%;
@@ -14,6 +15,9 @@ flex-direction: column;
  margin-top: 0.5rem;
  padding: 0.5rem;
  margin-top: 3.8rem;
+ background: white;
+ display: flex;
+ flex-direction: column;
 }
 .forget-icon-box{
     display: flex;
@@ -40,12 +44,12 @@ flex-direction: column;
 .input-email-holder{
     width: 100%;
     height: 100%;
-
     display: flex;
     justify-content: center;
+    background: #000;
 }
 .input-label-holder-wrapper{
-    width: 80%;
+    width: 100%;
     height: 84%;
     margin-top: 2.5rem;
     display: flex;
@@ -63,13 +67,14 @@ flex-direction: column;
     margin-bottom: 0.2rem;
 }
 .forget-email-input-box{
-    width: 70%;
+    width: 90%;
     background: white;
     border-radius: 4px;
     padding: 0.5rem;
     font-size: 1rem;
     color: #212121;
     border: 1px solid #21212180;
+    /* background-color: green; */
 }
 .forget-email-input{
     outline: none;
@@ -81,8 +86,7 @@ color: black;
 font-family: Poppins;
 }
 .forget-btn{
-      width: 70%;
-height: 2.5rem;
+ width: 70%;
 border-radius: 0.5rem;
 cursor: pointer;
 color: white;
@@ -93,6 +97,7 @@ font-weight: 600;
 font-style: Semibold;
 font-family: Poppins;
 margin-top: 1.2rem;
+padding:0.5rem;
 }
 .back-to-login-holder{
     margin-top: 1.3rem;

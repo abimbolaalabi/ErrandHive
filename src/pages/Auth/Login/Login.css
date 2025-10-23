@@ -1,15 +1,17 @@
-.login-container{
+.login-container {
   width: 100%;
-  height: 100vh;
-  background-color: orange;
+  min-height: 100vh;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  gap: 0.2rem;
+  overflow: hidden;
+  
 }
-.left-container{
+
+.login-left {
   width: 50%;
   height: 100%;
-<<<<<<< Updated upstream
-  background-color: #fff;
-}
-=======
 }
 .login-left-header{
  display: flex;
@@ -18,71 +20,38 @@
  margin-left: 1rem;
  margin-top: 1rem;
 }
-.errand{
-  color:#8133F1;
-  font-weight: 700;
-  font-style: bold;
-  font-size: 1.3rem;
-}
-.img-carosel-box{
-  height: auto;
-  max-width: 100%;
-  max-height: 100%;
-  display: flex;
-  justify-content: center;
-}
-  .carousel-text{
-    width: 100%;
-    height: max-content;
-  }
-.carousel-text-header{
-   text-align: center;
-   font-weight: 500;
-   font-style: medium;
-   font-family: Poppins;
-}
-.carousel-text-paragrah{
-  font-family: Poppins;
-  font-weight: medium;
-  font-size: 1.2rem;
-  text-align: center;
-  width: 100%;
-}
 .login-right{
   width: 45%;
-  height: auto;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden; 
 }
 .login-right-form {
-  width: 100%;
-  max-width: 100%;
+  width: 90%;
   height: auto;
   background-color: white;
   padding-inline: 2rem;
   box-sizing: border-box;
-}
-
-
-.login-right-text {
-  width: 100%;
-  text-align: center;
-  color: #212121;
-  font-size: 31px;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.form-wrapper {
-  padding: 2rem;
-  display: flex;
+  padding: 1.5rem;
+display: flex;
   flex-direction: column;
   gap: 2rem;
-  height: 80%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.login-text-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   width: 100%;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.login-right-text {
+  color: #212121;
+  font-size: 1.8rem;
+  text-align: center;
+  font-weight: 700;
 }
 
 .email-container {
@@ -102,7 +71,7 @@
 
 .email-right-input-box {
   width: 95%;
-  height: 3.5rem;
+  height: 3rem;
   border-radius: 0.5rem;
   overflow: hidden;
   border: 1px solid gray;
@@ -127,7 +96,7 @@
 
 .password-right-input-box {
   width: 95%;
-  height: 3.5rem;
+  height: 3rem;
   border-radius: 0.5rem;
   overflow: hidden;
   border: 1px solid #212121;
@@ -175,7 +144,7 @@
 }
 
 .login-btn {
-  width: 100%;
+  width: 95%;
   height: 3rem;
   border-radius: 0.5rem;
   cursor: pointer;
@@ -190,31 +159,36 @@
 }
 
 .login-right-or {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin: 1rem 0;
+  width: 95%;
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 0.5rem;
+margin-top: 1rem;
+margin-bottom: 1rem;
 }
 
 .line {
-  flex: 1;
-  height: 0.5px;
+  flex: 1;            
+  height: 1px;         
   background-color: #8133f1;
 }
 
+
+
 .or {
   white-space: nowrap;
-  font-weight:500;
-  font-style: Medium;
+  font-weight: 500;
   font-family: Poppins;
   font-size: 1.4rem;
+  text-align: center;
 }
 
 .continue-with-google {
-  width: 100%;
-  height: 3rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
+   width: 95%;
+ height: 3rem;
+ border-radius: 0.5rem;
+ cursor: pointer;
   color: #212121;
   background-color: #f2ebfe;
   border: none;
@@ -420,4 +394,3 @@
     font-size: 0.8rem;
   }
 }
->>>>>>> Stashed changes
