@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import './Signup.css'
 import Dispatch from "../../../assets/Dispatch.svg"
 import Run from "../../../assets/Run.png"
+import Carousel from '../../../Components/Carousel/Carousel'
+import { FcGoogle } from "react-icons/fc";
 
 
 const SignUp = () => {
@@ -61,22 +63,65 @@ const SignUp = () => {
   return (
     <div className="signup-container">
       <div className="signup-left">
-        <div className="logo">
-          <img src={Run} />
-          <span>ErrandHive</span>
-        </div>
-        <div className="content">
-          <div className="illustration">
-          <img src={Dispatch} />
-        </div>
-        <div className="for-client">
-          <h2>For Client</h2>
-          <p>Delegate tasks effortlessly and save time with trusted local runners</p>
-        </div>
-        </div>
+      <Carousel/>
       </div>
 
-      <div className="signup-right">
+       <div className="signup-right">
+        <div className='signup-right-cont'>
+           <form>
+                    <h1>Sign Up As A Client</h1>
+                    <div className="input-cont">
+                        <label>First Name</label>
+                        <input type="text" placeholder="Enter your first name" />
+                    </div>
+                    <div className="input-cont">
+                        <label>Last Name</label>
+                        <input type="text" placeholder="Enter your last name" />
+                    </div>
+                    <div className="input-cont">
+                        <label>Email Address</label>
+                        <input type="text" placeholder="Enter your email address" />
+                    </div>
+                    <div className="input-cont">
+                        <label>Password</label>
+                        <input type="text" placeholder="Enter Your Password" />
+                    </div>
+                    <div className="input-cont">
+                        <label>Confirm Password</label>
+                        <input type="text" placeholder="Confirm Password" />
+                    </div>
+                    <div className="checkbox-input">
+                        <input type="checkbox" className="checkbox" />
+                        <p className="remember-me-checkbox">I have read the <span>Terms and condition </span> and i agree</p>
+                    </div>
+                    <div className="button-cont">
+                        <button>Sign up for free</button>
+                    </div>
+
+                    <article className="signup-line-cont">
+                        <div className="firstline"></div>
+                        <div className="text-or">or</div>
+                        <div className="firstline"></div>
+                    </article>
+
+
+                    <button className="google" type="button">
+                        <FcGoogle />
+                        <p> Continue with Google</p>
+                    </button>
+                    <aside className="account-text">
+                        <p>Already have an account? <span>Click here to login</span> </p>
+                    </aside>
+
+
+                </form>
+        </div>
+
+                
+
+            </div>
+
+      {/* <div className="signup-right">
         <h2>Sign Up As A Runner</h2>
 
         {successMessage && <p style={{ color: 'green', marginBottom: '10px' }}>{successMessage}</p>}
@@ -147,7 +192,7 @@ const SignUp = () => {
 
           <button type="submit" className="signup-btn">Sign-Up</button>
         </form>
-      </div>
+      </div> */}
     </div>
   )
 }

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+
 import "./ModalSpinner.css";
-import { ClipLoader, MoonLoader } from "react-spinners";
+import { ClipLoader} from "react-spinners";
 
 const ModalSpinner = () => {
  

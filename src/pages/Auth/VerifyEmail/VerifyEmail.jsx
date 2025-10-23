@@ -45,7 +45,7 @@ const VerifyEmail = () => {
               <div className="input-code-box">
                 <div className="input-code-text-holder"><p className="input-code-text-p">Input Code</p></div>
               <div className="input-field-holder">
-     <input type="text" maxLength="1" className="code-input" />
+     <input type="number"className="code-input" />
     <input type="text" maxLength="1" className="code-input" />
   <input type="text" maxLength="1" className="code-input" />
   <input type="text" maxLength="1" className="code-input" />

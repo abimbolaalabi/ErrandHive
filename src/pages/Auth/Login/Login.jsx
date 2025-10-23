@@ -7,6 +7,7 @@ import { RxEyeOpen } from "react-icons/rx";
 import { FcGoogle } from "react-icons/fc";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Carousel from "../../../Components/Carousel/Carousel";
 
 const carouselData = [
   {
@@ -87,38 +88,7 @@ const Login = () => {
   return (
     <main className="login-container">
       <section className="login-left">
-        <div className="login-left-header">
-          <img src={logo} alt="Logo" className="img" />
-          <span className="errand">ErrandHive</span>
-        </div>
-
-        {carouselData.map((item, index) => (
-          <div
-            key={item.id}
-            className="img-carosel-box"
-            style={{
-              display: index === current ? "flex" : "none",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <img
-              src={item.image}
-              alt={item.alt}
-              style={{
-                width: "80%",
-                height: "auto",
-                borderRadius: "0.5rem",
-                marginTop: "2rem",
-              }}
-            />
-            
-            <article className="carousel-text">
-              <h1 className="carousel-text-header">{item.description}</h1>
-              <p className="carousel-text-paragrah">{item.title}</p>
-            </article>
-          </div>
-        ))}
+       <Carousel/>
       </section>
 
       <section className="login-right">
