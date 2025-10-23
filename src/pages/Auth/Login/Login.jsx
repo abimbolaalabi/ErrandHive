@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const carouselData = [
   {
-    id: 1,
+    id: 1,  
     image: dispatch,
     alt: "Dispatch service",
     description: "For Client",

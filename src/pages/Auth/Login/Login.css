@@ -7,6 +7,7 @@
   align-items: center;
   gap: 0.2rem;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .login-left {
@@ -49,7 +50,6 @@
   font-size: 1.2rem;
   text-align: center;
   width: 100%;
-  
 }
 .login-right{
   width: 45%;
@@ -73,10 +73,9 @@
   width: 100%;
   text-align: center;
   color: #212121;
-  font-size: 1.8rem;
+  font-size: 31px;
   font-weight: 700;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .form-wrapper {
