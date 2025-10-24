@@ -11,7 +11,7 @@ import {  useParams } from 'react-router-dom';
 
 const SignUp = () => {
   const BaseUrl = import.meta.env.VITE_BASE_URL;
-
+console.log(BaseUrl)
   const { role } = useParams()
 
 
@@ -77,7 +77,7 @@ const SignUp = () => {
       e.preventDefault();
     if (validateForm()) {
       try {
-        const res = await axios.post(`${BaseUrl}/register`, formData, {
+        const res = await axios.post(`https://errandhive-project.onrender.com/api/v1/register`, formData, {
           headers: { "Content-Type": "application/json" }
         });
         setFormData({
@@ -106,7 +106,7 @@ const SignUp = () => {
       <div className="signup-right">
         <div className='signup-right-cont'>
           <form onSubmit={handleSubmit}>
-            <h1>Sign Up As A Client</h1>
+            <h1>Sign Up As {role}</h1>
             <div className="input-cont">
               <label>First Name</label>
               <input
