@@ -3,17 +3,24 @@ import "./ClientVsRunner.css";
 import { FaAngleDown, FaChevronUp } from "react-icons/fa6";
 import ModalSpinner from "../../Components/ModalSpinner/ModalSpinner";
 import Carousel from "../../Components/Carousel/Carousel";
+import { useNavigate } from "react-router-dom";
 
 const ClientVsRunner = () => {
   const [showDropDown, setShowDropDown] = useState(false);
   const [modal, setModal] = useState(false);
+  const [user, setUser] = useState("")
 
-  const handleSelectRole = (role) => {
-    console.log("Selected:", role);
-    setModal(true);
-    setShowDropDown(false);
-    setTimeout(() => setModal(false), 1000);
-  };
+const handleSelectRole = (role) => {
+  console.log("Selected:", role);
+  setModal(true);
+  setShowDropDown(false);
+  
+  setTimeout(() => {
+    setModal(false);
+     navigate(`/signup/${role}`);
+  }, 1000);
+};
+   const navigate = useNavigate()
 
   return (
     <div className="clientvs-wrapper">
@@ -60,8 +67,14 @@ const ClientVsRunner = () => {
                 className="client-drop"
                 onClick={(e) => e.stopPropagation()}
               >
-                <p onClick={() => handleSelectRole("Client")}>Client</p>
-                <p onClick={() => handleSelectRole("Runner")}>Runner</p>
+                <p onClick={() => {
+                  handleSelectRole("Client")
+              
+                  }}>Client</p>
+                <p onClick={() => { 
+                  handleSelectRole("Runner")
+                
+                  }}>Runner</p>
               </div>
             )}
           </div>

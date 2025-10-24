@@ -46,7 +46,7 @@ const Forget = () => {
           </div>
           <h1 className="forget-header-h1">Forgot Password</h1>
           <p className="forget-header-p">
-            Enter your email to reset your password
+            Enter your email address to reset your password
           </p>
         </div>
 
