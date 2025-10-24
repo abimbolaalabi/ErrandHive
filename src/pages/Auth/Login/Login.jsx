@@ -1,7 +1,4 @@
 import "./Login.css";
-import logo from "../../../assets/logo.svg";
-import dispatch from "../../../assets/Dispatch.svg";
-import secure from "../../../assets/secure.jpg";
 import { GoEyeClosed } from "react-icons/go";
 import { RxEyeOpen } from "react-icons/rx";
 import { FcGoogle } from "react-icons/fc";
@@ -9,38 +6,13 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Carousel from "../../../Components/Carousel/Carousel";
 
-const carouselData = [
-  {
-    id: 1,
-    image: dispatch,
-    alt: "Dispatch service",
-    description: "For Client",
-    title:
-      "Delegate tasks effortlessly and save time with trusted local runners.",
-  },
-  {
-    id: 2,
-    image: secure,
-    alt: "Secure delivery",
-    description: "Secure & Reliable",
-    title:
-      "Enjoy secure and Verified Runners for a stress-free experience",
-  },
-];
+
 
 const Login = () => {
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({ email: "", password: "" });
-  const [current, setCurrent] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % carouselData.length);
-    }, 6000); 
-    return () => clearInterval(interval);
-  }, []);
 
   const validate = () => {
     const newErrors = { email: "", password: "" };
@@ -57,10 +29,7 @@ const Login = () => {
     if (!password.trim()) {
       newErrors.password = "Password is required";
       isValid = false;
-    } else if (password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters";
-      isValid = false;
-    }
+    } 
 
     setErrors(newErrors);
     return isValid;
@@ -78,12 +47,8 @@ const Login = () => {
 
   const loginSubmit = (e) => {
     e.preventDefault();
-    if (validate()) {
-      console.log("Login successful!");
-    } else {
-      console.log("Please fix the errors before submitting.");
     }
-  };
+  
 
   return (
     <main className="login-container">
@@ -93,9 +58,9 @@ const Login = () => {
 
       <section className="login-right">
         <form className="login-right-form" onSubmit={loginSubmit}>
-          <div className="form-wrapper">
+          <div className="login-text-layout">
             <h1 className="login-right-text">Login to your account</h1>
-
+            </div>
             <div className="email-container">
               <label className="form-right-title">Email address</label>
               <div className="email-right-input-box">
@@ -153,12 +118,12 @@ const Login = () => {
 
               <article className="login-right-or">
                 <div className="line"></div>
-                <div className="or">or</div>
+                <div className="or"><span style={{fontSize : "1.7rem"}}>o</span>r</div>
                 <div className="line"></div>
               </article>
 
-              <button className="continue-with-google" type="button">
-                <FcGoogle />
+              <button className="continue-with-google" type="submit">
+                <FcGoogle style={{ fontSize: "1.5rem" }} />
                 Continue with Google
               </button>
 
@@ -173,7 +138,6 @@ const Login = () => {
                 </p>
               </div>
             </div>
-          </div>
         </form>
       </section>
     </main>
