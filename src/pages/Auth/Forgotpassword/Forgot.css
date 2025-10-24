@@ -127,9 +127,7 @@
     font-family: Poppins;
 }
 
-/* ----------- MEDIA QUERIES ----------- */
 
-/* For tablets and smaller desktops */
 @media screen and (max-width: 780px) {
     .forget-form {
         right: 10%;
