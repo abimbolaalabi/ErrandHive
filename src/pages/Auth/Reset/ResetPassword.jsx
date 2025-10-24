@@ -36,8 +36,8 @@ const ResetPassword = () => {
   return (
     <main className="verify-section">
       <div className="logo-holder">
-        <img src={logo1} alt="logo" />
-        <span className="errand">Errandhive</span>
+                  <img src="https://res.cloudinary.com/dwzomhflw/image/upload/v1761056644/IMG-20251021-WA0052_lf7sms.jpg" className ="logo" alt="" />
+        <span className="errand">ErrandHive</span>
       </div>
 
       <div className="eclipse-left">
