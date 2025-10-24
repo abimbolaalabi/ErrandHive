@@ -108,8 +108,8 @@ const SignUpRunner = () => {
               <div className='password'>
                 <input type={ShowPassword ? "text" : "password"}
                   placeholder="Enter your password"
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
+                  name="password"
+                  value={formData.password}
                   onChange={handleChange}
                 />
                 {

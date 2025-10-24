@@ -2,18 +2,26 @@ import React, { useState } from 'react'
 import './Signup.css'
 import Carousel from '../../../Components/Carousel/Carousel'
 import { FcGoogle } from "react-icons/fc";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import { FaEyeSlash } from "react-icons/fa6";
 import { FaEye } from "react-icons/fa";
+import axios from 'axios';
+import {  useParams } from 'react-router-dom';
 
 
 const SignUp = () => {
+  const BaseUrl = import.meta.env.VITE_BASE_URL;
+
+  const { role } = useParams()
+
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
     confirmPassword: '',
+    role: role
   })
 
   const [formErrors, setFormErrors] = useState({})
@@ -25,9 +33,9 @@ const SignUp = () => {
   }
 
   const validateForm = () => {
-    const { fullName, lastName, email, password, confirmPassword } = formData;
+    const { firstName, lastName, email, password, confirmPassword } = formData;
 
-    if (!fullName || !lastName || !email || !password || !confirmPassword) {
+    if (!firstName || !lastName || !email || !password || !confirmPassword) {
       toast.error("All fields are required");
       return false;
     }
@@ -63,6 +71,30 @@ const SignUp = () => {
     return true;
   };
 
+  console.log("This is form data", formData)
+
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+    if (validateForm()) {
+      try {
+        const res = await axios.post(`${BaseUrl}/register`, formData, {
+          headers: { "Content-Type": "application/json" }
+        });
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
+          role: role
+        })
+        console.log(res.data)
+        toast.success("Registration successful")
+      } catch (error) {
+        console.log("this is the error", error)
+      }
+    }
+  }
 
 
   return (
@@ -73,7 +105,7 @@ const SignUp = () => {
 
       <div className="signup-right">
         <div className='signup-right-cont'>
-          <form>
+          <form onSubmit={handleSubmit}>
             <h1>Sign Up As A Client</h1>
             <div className="input-cont">
               <label>First Name</label>
@@ -108,8 +140,8 @@ const SignUp = () => {
               <div className='password'>
                 <input type={ShowPassword ? "text" : "password"}
                   placeholder="Enter your password"
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
+                  name="password"
+                  value={formData.password}
                   onChange={handleChange}
                 />
                 {
@@ -128,7 +160,7 @@ const SignUp = () => {
                 }
 
               </div>
-              
+
             </div>
             <div className="input-contt">
               <label>Confirm Password</label>
@@ -162,7 +194,7 @@ const SignUp = () => {
               <p className="remember-me-checkbox">I have read the <span>Terms and condition </span> and i agree</p>
             </div>
             <div className="button-cont">
-              <button>Sign up for free</button>
+              <button type='submit'>Sign up for free</button>
             </div>
 
             <article className="signup-line-cont">
