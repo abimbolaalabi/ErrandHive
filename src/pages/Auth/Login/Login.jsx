@@ -2,10 +2,11 @@ import "./Login.css";
 import { GoEyeClosed } from "react-icons/go";
 import { RxEyeOpen } from "react-icons/rx";
 import { FcGoogle } from "react-icons/fc";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Carousel from "../../../Components/Carousel/Carousel";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 const Login = () => {
@@ -29,115 +30,130 @@ const Login = () => {
     if (!password.trim()) {
       newErrors.password = "Password is required";
       isValid = false;
-    } 
+    }
 
     setErrors(newErrors);
     return isValid;
   };
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-    if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
+    const value = e.target.value;
+    setEmail(value);
+    setErrors((prev) => ({
+      ...prev,
+      email: /\S+@\S+\.\S+/.test(value) ? "" : prev.email,
+    }));
   };
 
   const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-    if (errors.password) setErrors((prev) => ({ ...prev, password: "" }));
+    const value = e.target.value;
+    setPassword(value);
+    if (value.trim()) setErrors((prev) => ({ ...prev, password: "" }));
   };
 
   const loginSubmit = (e) => {
     e.preventDefault();
-    }
-  
+    validate()
+  };
 
   return (
     <main className="login-container">
       <section className="login-left">
-       <Carousel/>
+        <Carousel />
       </section>
 
       <section className="login-right">
         <form className="login-right-form" onSubmit={loginSubmit}>
           <div className="login-text-layout">
             <h1 className="login-right-text">Login to your account</h1>
+          </div>
+
+          <div className="email-container">
+            <label className="form-right-title">Email address</label>
+            <div className="email-right-input-box">
+              <input
+                type="text"
+                name="email"
+                value={email}
+                onFocus={() => setErrors((prev) => ({ ...prev, email: "" }))}
+                onChange={handleEmailChange}
+                placeholder="Enter your email address"
+                className="email-input"
+              />
             </div>
-            <div className="email-container">
-              <label className="form-right-title">Email address</label>
-              <div className="email-right-input-box">
-                <input
-                  type="email"
-                  name="email"
-                  value={email}
-                  onChange={handleEmailChange}
-                  placeholder="Enter your email address"
-                  className="email-input"
+            {errors.email && (
+              <span className="error-message">{errors.email}</span>
+            )}
+          </div>
+
+          <div className="password-container">
+            <label className="form-right-title">Password</label>
+            <div className="password-right-input-box">
+              <input
+                type={show ? "text" : "password"}
+                name="password"
+                value={password}
+                onChange={handlePasswordChange}
+                placeholder="Enter your Password"
+                className="pasword-input"
+              />
+              {show ? (
+                <RxEyeOpen
+                  className="eye"
+                  size={22}
+                  onClick={() => setShow(false)}
                 />
-              </div>
-              {errors.email && (
-                <span className="error-message">{errors.email}</span>
+              ) : (
+                <GoEyeClosed
+                  className="eye"
+                  size={22}
+                  onClick={() => setShow(true)}
+                />
               )}
             </div>
+            {errors.password && (
+              <span className="error-message">{errors.password}</span>
+            )}
 
-            <div className="password-container">
-              <label className="form-right-title">Password</label>
-              <div className="password-right-input-box">
-                <input
-                  type={show ? "text" : "password"}
-                  name="password"
-                  value={password}
-                  onChange={handlePasswordChange}
-                  placeholder="Enter your Password"
-                  className="pasword-input"
-                />
-                {show ? (
-                  <RxEyeOpen
-                    className="eye"
-                    size={22}
-                    onClick={() => setShow(false)}
-                  />
-                ) : (
-                  <GoEyeClosed
-                    className="eye"
-                    size={22}
-                    onClick={() => setShow(true)}
-                  />
-                )}
-              </div>
-              {errors.password && (
-                <span className="error-message">{errors.password}</span>
-              )}
-
-              <div className="checkbox-login-form">
-                <input type="checkbox" className="checkbox" />
-                <span className="remember-me-checkbox">Remember me</span>
-              </div>
-
-              <button type="submit" className="login-btn">
-                Login
-              </button>
-
-              <article className="login-right-or">
-                <div className="line"></div>
-                <div className="or"><span style={{fontSize : "1.7rem"}}>o</span>r</div>
-                <div className="line"></div>
-              </article>
-
-              <button className="continue-with-google" type="submit">
-                <FcGoogle style={{ fontSize: "1.5rem" }} />
-                Continue with Google
-              </button>
-
-              <span className="forgot-password-form"><Link to={"/forgot"} className="link">Forget password?</Link></span>
-
-              <div className="dont-account">
-                <p>
-                  Don't have an account?{" "}
-                  <span style={{ color: "#8133F1", cursor: "pointer" }}>
-                    <Link to={"/signup"} className="link">sign up</Link>
-                  </span>
-                </p>
-              </div>
+            <div className="checkbox-login-form">
+              <input type="checkbox" className="checkbox" />
+              <span className="remember-me-checkbox">Remember me</span>
             </div>
+
+            <button type="submit" className="login-btn">
+              Login
+            </button>
+
+            <article className="login-right-or">
+              <div className="line"></div>
+              <div className="or">
+                <span style={{ fontSize: "1.7rem" }}>o</span>r
+              </div>
+              <div className="line"></div>
+            </article>
+
+            <button className="continue-with-google" type="button">
+              <FcGoogle style={{ fontSize: "1.5rem" }} />
+              Continue with Google
+            </button>
+
+            <span className="forgot-password-form">
+              <Link to={"/forgot"} className="link">
+                Forget password?
+              </Link>
+            </span>
+
+            <div className="dont-account">
+              <p>
+                Don't have an account?{" "}
+                <span style={{ color: "#8133F1", cursor: "pointer" }}>
+                  <Link to={"/signup"} className="link">
+                    sign up
+                  </Link>
+                </span>
+              </p>
+            </div>
+          </div>
         </form>
       </section>
     </main>
