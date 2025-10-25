@@ -42,7 +42,7 @@ const Carousel = () => {
       <div className="carousel-right">
         <aside className="logo">
           <div className="errandlogo">
-            <img src="https://res.cloudinary.com/dwzomhflw/image/upload/v1761056644/IMG-20251021-WA0052_lf7sms.jpg" alt="" />
+                    <img src="https://res.cloudinary.com/dwzomhflw/image/upload/v1761056644/IMG-20251021-WA0052_lf7sms.jpg" alt="" />
           </div>
           <p>ErrandHive</p>
         </aside>

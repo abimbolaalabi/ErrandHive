@@ -5,6 +5,9 @@ import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Carousel from "../../../Components/Carousel/Carousel";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const Login = () => {
   const [show, setShow] = useState(false);
