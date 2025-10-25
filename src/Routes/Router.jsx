@@ -15,7 +15,7 @@ const Router = () => {
         <Route path='*' element={<PageNotFound/>}/>
         <Route path='/' element={<LandingPage/>}/>
         <Route path='/signup/:role' element={<SignUp/>}/>
-        <Route path='/signup/:role' element={<SignUpRunner/>}/>
+        {/* <Route path='/signup/:role' element={<SignUpRunner/>}/> */}
         <Route path='/login' element={<Login/>}/>
         <Route path='/verifyemail' element={<VerifyEmail/>}/>
         <Route path='/clientvsrunner' element={<ClientVsRunner/>}/>
