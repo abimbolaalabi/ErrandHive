@@ -6,12 +6,12 @@ import { toast } from "react-toastify";
 import { FaEyeSlash } from "react-icons/fa6";
 import { FaEye } from "react-icons/fa";
 import axios from 'axios';
-import {  useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 const SignUp = () => {
   const BaseUrl = import.meta.env.VITE_BASE_URL;
-console.log(BaseUrl)
+  // console.log(BaseUrl)
   const { role } = useParams()
 
 
@@ -33,51 +33,48 @@ console.log(BaseUrl)
   }
 
   const validateForm = () => {
-    const { firstName, lastName, email, password, confirmPassword } = formData;
+  const { firstName, lastName, email, password, confirmPassword } = formData;
 
-    if (!firstName || !lastName || !email || !password || !confirmPassword) {
-      toast.error("All fields are required");
-      return false;
-    }
+  if (!firstName || !lastName || !email || !password || !confirmPassword) {
+    toast.error("All fields are required");
+    return false;
+  }
 
-    if (!/^\S+@\S+\.\S+$/.test(email)) {
-      toast.error("Invalid email format");
-      return false;
-    }
+  if (!/^\S+@\S+\.\S+$/.test(email)) {
+    toast.error("Invalid email format");
+    return false;
+  }
 
+  if (password[0] !== password[0].toUpperCase()) {
+    toast.error("Password must start with an uppercase letter");
+    return false;
+  }
 
-    if (password[0] !== password[0].toUpperCase()) {
-      toast.error("Password must start with an uppercase letter");
-      return false;
-    }
+  if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[^\w\s]).{8,}$/.test(password)) {
+    toast.error("Password must contain at least one letter, one number, and one symbol");
+    return false;
+  }
 
-    if (password.length < 8) {
-      toast.error("Password must be at least 8 characters long");
-      return false;
-    }
+  if (password !== confirmPassword) {
+    toast.error("Passwords do not match");
+    return false;
+  }
 
-    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])/.test(password)) {
-      toast.error(
-        "Password must contain uppercase, lowercase, number, and symbol"
-      );
-      return false;
-    }
+  return true;
+};
 
-    if (password !== confirmPassword) {
-      toast.error("Passwords do not match");
-      return false;
-    }
-
-    return true;
-  };
 
   console.log("This is form data", formData)
+  const navigate = useNavigate()
+  const navigatetoverify = ()=> {
+    navigate("/verifyemail")
+  }
 
   const handleSubmit = async (e) => {
-      e.preventDefault();
+    e.preventDefault();
     if (validateForm()) {
       try {
-        const res = await axios.post(`https://errandhive-project.onrender.com/api/v1/register`, formData, {
+        const res = await axios.post(`${BaseUrl}/register`, formData, {
           headers: { "Content-Type": "application/json" }
         });
         setFormData({
@@ -89,13 +86,17 @@ console.log(BaseUrl)
           role: role
         })
         console.log(res.data)
-        toast.success("Registration successful")
+        toast.success(res?.data?.message)
+        localStorage.setItem("email", JSON.stringify(formData.email));
+        navigatetoverify()
       } catch (error) {
         console.log("this is the error", error)
+          toast.error(error?.response?.data?.message || "Registration failed");
       }
     }
   }
 
+  // `https://errandhive-project.onrender.com/api/v1/register`
 
   return (
     <div className="signup-container">
