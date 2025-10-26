@@ -11,7 +11,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 const SignUp = () => {
   const BaseUrl = import.meta.env.VITE_BASE_URL;
-  // console.log(BaseUrl)
+  
   const { role } = useParams()
 
 

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import logo1 from "../../../assets/logo.svg";
 import eclipseleft from "../../../assets/eclipse.svg";
 import eclipseright from "../../../assets/eclipse2.svg";
@@ -9,15 +10,22 @@ import security from "../../../assets/security.svg";
 import { GoEyeClosed } from "react-icons/go";
 import { RxEyeOpen } from "react-icons/rx";
 import "./Resetpassword.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+
 
 const ResetPassword = () => {
+   const BaseUrl = import.meta.env.VITE_BASE_URL;
+
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     if (!password || !confirmPassword) {
@@ -30,7 +38,24 @@ const ResetPassword = () => {
     }
 
     setError("");
-    console.log("Password reset:", password);
+    console.log("Password reset:", password, confirmPassword);
+    try{
+     const res = await axios.post(`${BaseUrl}/reset`,  {
+       newPassword: password,
+       confirmPassword: confirmPassword
+     },{
+       headers: { "Content-Type": "application/json" }
+     })
+     console.log(res?.data)
+     const successMessage = res?.data?.message || "Password reset successfully!";
+     toast.success(successMessage);
+
+    }catch(err){
+      console.log(err,"err")
+      const errorMessage = err?.response?.data?.message || "Failed to reset password.";
+       toast.error(errorMessage);
+    }
+
   };
 
   return (
@@ -76,6 +101,7 @@ const ResetPassword = () => {
               <div className="input-wrap">
                 <input
                   type={showPassword ? "text" : "password"}
+                  name="newPassword"
                   placeholder="Enter your password"
                   value={password}
                   onChange={e => (setPassword(e.target.value), setError(""))} 
@@ -94,6 +120,7 @@ const ResetPassword = () => {
               <div className="input-wrap">
                 <input
                   type={showConfirm ? "text" : "password"}
+                  name="confirmPassword"
                   placeholder="Confirm your password"
                   value={confirmPassword}
                   onChange={e => (setConfirmPassword(e.target.value), setError(""))} 

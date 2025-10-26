@@ -5,21 +5,39 @@ import runner from "../../../assets/runner.svg";
 import bicycle from "../../../assets/bicycle.svg";
 import money from "../../../assets/money.svg";
 import security from "../../../assets/Padlock.jpg";
+import { useState } from "react";
 import { IoChevronBackSharp } from "react-icons/io5";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Forgot.css";
 
 const Forget = () => {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Verification code sent")
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!email) {
+      setError("Email is required.");
+      return;
+    }
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    setError("");
   };
 
   return (
     <main className="verify-section">
       <div className="logo-holder">
-          <img src="https://res.cloudinary.com/dwzomhflw/image/upload/v1761056644/IMG-20251021-WA0052_lf7sms.jpg" className ="logo" alt="" />
+        <img
+          src="https://res.cloudinary.com/dwzomhflw/image/upload/v1761056644/IMG-20251021-WA0052_lf7sms.jpg"
+          className="logo"
+          alt="Logo"
+        />
         <span className="errand">Errandhive</span>
       </div>
 
@@ -58,9 +76,12 @@ const Forget = () => {
                 type="email"
                 placeholder="Enter email address"
                 className="forget-email-input"
+                value={email}                   
+                onChange={(e) => setEmail(e.target.value)} 
+                
               />
             </div>
-
+              {error && <p style={{ color: "red" }}>{error}</p>}
             <button type="submit" className="forget-btn">
               Send Verification code
             </button>
@@ -68,7 +89,9 @@ const Forget = () => {
             <div className="back-to-login-holder">
               <div className="back-hold">
                 <IoChevronBackSharp className="back-icon" />
-                <p className="back-text"><Link to="/login" className="link">Back to login</Link></p>
+                <p className="back-text">
+                  <Link to="/login" className="link">Back to login</Link>
+                </p>
               </div>
             </div>
           </div>

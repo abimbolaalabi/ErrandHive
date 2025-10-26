@@ -38,14 +38,13 @@ const VerifyEmail = () => {
     }
   };
 
-  // handle backspace focus
   const handleKeyDown = (e, index) => {
     if (e.key === "Backspace" && !codes[index] && index > 0) {
       inputRefs.current[index - 1]?.focus();
     }
   };
 
-  // countdown timer
+
   useEffect(() => {
     if (timer > 0) {
       const interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
@@ -53,7 +52,6 @@ const VerifyEmail = () => {
     }
   }, [timer]);
 
-  // resend otp
   const handleResendOtp = async () => {
     if (timer > 0) return;
     try {
@@ -68,7 +66,7 @@ const VerifyEmail = () => {
     }
   };
 
-  // verify otp
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const otpCode = codes.join("");
