@@ -1,0 +1,16 @@
+.sidebar-container{
+    width: 100%;
+    height: 100vh;
+    border: 1px solid orange;
+}
+.menu{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+.menu-cont {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 40px;
+}
