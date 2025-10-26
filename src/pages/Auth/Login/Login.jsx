@@ -5,17 +5,22 @@ import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Carousel from "../../../Components/Carousel/Carousel";
+import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 const Login = () => {
   const [show, setShow] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
   const [errors, setErrors] = useState({ email: "", password: "" });
 
+  const BaseURL = import.meta.env.VITE_BASE_URL;
+
   const validate = () => {
+    const { email, password } = formData;
     const newErrors = { email: "", password: "" };
     let isValid = true;
 
@@ -36,28 +41,37 @@ const Login = () => {
     return isValid;
   };
 
-  const handleEmailChange = (e) => {
-    const value = e.target.value;
-    setEmail(value);
-    setErrors((prev) => ({
-      ...prev,
-      email: /\S+@\S+\.\S+/.test(value) ? "" : prev.email,
-    }));
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handlePasswordChange = (e) => {
-    const value = e.target.value;
-    setPassword(value);
-    if (value.trim()) setErrors((prev) => ({ ...prev, password: "" }));
-  };
-
-  const loginSubmit = (e) => {
+  const loginSubmit = async (e) => {
     e.preventDefault();
-    validate()
+    if (validate()) {
+      try {
+        const res = await axios.post(`${BaseURL}/login`, formData, {
+          headers: { "Content-Type": "application/json" },
+        });
+
+        console.log(res?.data);
+        toast.success(res?.data?.message);
+
+        localStorage.setItem("userToken", res?.data?.data?.id);
+
+        setFormData({
+          email: "",
+          password: "",
+        });
+      } catch (error) {
+        console.log("Login error:", error.response?.data || error.message);
+        toast.error(error?.response?.data?.message || "Login failed");
+      }
+    }
   };
 
   return (
     <main className="login-container">
+      <ToastContainer />
       <section className="login-left">
         <Carousel />
       </section>
@@ -74,9 +88,9 @@ const Login = () => {
               <input
                 type="text"
                 name="email"
-                value={email}
+                value={formData.email}
                 onFocus={() => setErrors((prev) => ({ ...prev, email: "" }))}
-                onChange={handleEmailChange}
+                onChange={handleChange}
                 placeholder="Enter your email address"
                 className="email-input"
               />
@@ -92,8 +106,8 @@ const Login = () => {
               <input
                 type={show ? "text" : "password"}
                 name="password"
-                value={password}
-                onChange={handlePasswordChange}
+                value={formData.password}
+                onChange={handleChange}
                 placeholder="Enter your Password"
                 className="pasword-input"
               />
@@ -147,8 +161,8 @@ const Login = () => {
               <p>
                 Don't have an account?{" "}
                 <span style={{ color: "#8133F1", cursor: "pointer" }}>
-                  <Link to={"/signup"} className="link">
-                    sign up
+                  <Link to={"/clientvsrunner"} className="link">
+                    Sign up
                   </Link>
                 </span>
               </p>
