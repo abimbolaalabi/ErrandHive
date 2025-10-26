@@ -8,20 +8,30 @@ import ClientVsRunner from '../pages/ClientVsRunner/ClientVsRunner'
 import ForgotPassword from "../pages/Auth/Forgotpassword/Forget"
 import ResetPassword from "../pages/Auth/Reset/ResetPassword"
 import SignUpRunner from '../pages/Auth/SignUpRunner/SignUpRunner'
+import UserDashboard from '../pages/UserDashboard/UserDashboard'
+import Account from '../Components/dashLayout/Account'
+import Dashboard from '../Components/dashLayout/Dashboard'
 const Router = () => {
   return (
     <BrowserRouter>
-    <Routes>
-        <Route path='*' element={<PageNotFound/>}/>
-        <Route path='/' element={<LandingPage/>}/>
-        <Route path='/signup/:role' element={<SignUp/>}/>
+      <Routes>
+        <Route path='*' element={<PageNotFound />} />
+        <Route path='/' element={<LandingPage />} />
+        <Route path='/signup/:role' element={<SignUp />} />
         {/* <Route path='/signup/:role' element={<SignUpRunner/>}/> */}
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/verifyemail' element={<VerifyEmail/>}/>
-        <Route path='/clientvsrunner' element={<ClientVsRunner/>}/>
-       <Route path='/forgot' element={<ForgotPassword/>}/>
-        <Route path='/reset' element={<ResetPassword/>}/>
-    </Routes>
+        <Route path='/login' element={<Login />} />
+        <Route path='/verifyemail' element={<VerifyEmail />} />
+        <Route path='/clientvsrunner' element={<ClientVsRunner />} />
+        <Route path='/forgot' element={<ForgotPassword />} />
+        <Route path='/reset' element={<ResetPassword />} />
+
+        <Route path='/userdashboard' element={<UserDashboard />}>
+           <Route path='account' element={<Account/>}/>
+           <Route path='' element={ <Dashboard/>}/>
+           <Route path='date' element={ <Date/>}/>
+        </Route>
+      </Routes>
+
     </BrowserRouter>
   )
 }
