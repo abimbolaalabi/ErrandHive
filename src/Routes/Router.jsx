@@ -12,12 +12,14 @@ import PaymentsPage from '../pages/Dashboard/PaymentsPage'
 import ProfilePage from '../pages/Dashboard/ProfilePage'
 import LandingPage from '../pages/LandingPage/LandingPage'
 import PageNotFound from '../pages/PageNotFound'
+import ClientVsRunner from '../pages/ClientVsRunner/ClientVsRunner'
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path='*' element={<PageNotFound />} />
         <Route path='/' element={<LandingPage />} />
+           <Route path='/clientvsrunner' element={<ClientVsRunner/>}/>
         <Route path='/signup/:role' element={<SignUp />} />
         {/* <Route path='/signup/:role' element={<SignUpRunner/>}/> */}
         <Route path='/login' element={<Login />} />
