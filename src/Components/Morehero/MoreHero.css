@@ -1,0 +1,102 @@
+.morehero {
+  width: 100%;
+  max-width: 1443px; 
+  height: 645px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, #361565 34.62%, rgba(71, 28, 133, 0.7) 72.12%, rgba(71, 28, 133, 0.6) 100%);
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.morehero-title {
+  font-size: 32px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  color: #FFFFFF;
+}
+
+.morehero-subtitle {
+  margin-top: 8px;
+  opacity: 0.8;
+  display: flex;
+  justify-content: center;
+  color: #FFFFFF;
+  font-weight: 300;
+  font-style: light;
+}
+
+.feedback-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.feedback-card {
+  width: 290px;
+  height: 310px;
+  background: rgba(255,255,255,0.1);
+  padding: 15px;
+  border-radius: 18px;
+  backdrop-filter: blur(6px);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.feedback-card:hover {
+  transform: translateY(-6px);
+}
+
+.quote {
+  font-size: 40px;
+  opacity: 0.7;
+}
+
+.feedback-card p {
+  line-height: 1.6;
+  font-size: 12px;
+}
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 18px;
+}
+
+.user-info img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-info h4 {
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+  color: #fff;
+}
+
+.stars {
+  color: #ffd700;
+  font-size: 13px;
+  margin-left: 2px;
+  letter-spacing: 1px;
+}
+.quote {
+  top: 5px;
+  left: 8px;
+  font-size: 95px; 
+  color: rgba(255, 255, 255, 0.12); 
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}

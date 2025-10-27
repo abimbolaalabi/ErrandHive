@@ -1,0 +1,77 @@
+.myhero-section {
+  width: 80%;
+  margin: 70px auto;
+  text-align: center;
+}
+
+.myhero-title {
+  font-size: 2.3rem;
+  color: #212121;
+  font-weight: 500;
+}
+
+.myhero-subtitle {
+  color: #212121;
+  margin-top: 5px;
+  margin-bottom: 50px;
+}
+
+.myhero-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.myhero-box {
+  flex: 1; 
+  text-align: left;
+}
+
+.box-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.users-title {
+  color: #8133F1;
+}
+
+.runners-title {
+  color: #F1BA2A;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+.step-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #8133F1;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: .9rem;
+  margin-right: 12px;
+}
+
+.step-number.yellow {
+  background: #F1BA2A;
+}
+
+.step h4 {
+  margin-bottom: 3px;
+  font-size: 1rem;
+}
+
+.step p {
+  font-size: 0.85rem;
+  color: #444;
+}
