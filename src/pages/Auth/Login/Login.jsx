@@ -2,19 +2,25 @@ import "./Login.css";
 import { GoEyeClosed } from "react-icons/go";
 import { RxEyeOpen } from "react-icons/rx";
 import { FcGoogle } from "react-icons/fc";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Carousel from "../../../Components/Carousel/Carousel";
-
-
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [show, setShow] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
   const [errors, setErrors] = useState({ email: "", password: "" });
 
+  const BaseURL = import.meta.env.VITE_BASE_URL;
+
   const validate = () => {
+    const { email, password } = formData;
     const newErrors = { email: "", password: "" };
     let isValid = true;
 
@@ -29,115 +35,139 @@ const Login = () => {
     if (!password.trim()) {
       newErrors.password = "Password is required";
       isValid = false;
-    } 
+    }
 
     setErrors(newErrors);
     return isValid;
   };
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-    if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-    if (errors.password) setErrors((prev) => ({ ...prev, password: "" }));
-  };
-
-  const loginSubmit = (e) => {
+  const loginSubmit = async (e) => {
     e.preventDefault();
+    if (validate()) {
+      try {
+        const res = await axios.post(`${BaseURL}/login`, formData, {
+          headers: { "Content-Type": "application/json" },
+        });
+
+        console.log(res?.data);
+        toast.success(res?.data?.message);
+
+        localStorage.setItem("userToken", res?.data?.data?.id);
+
+        setFormData({
+          email: "",
+          password: "",
+        });
+      } catch (error) {
+        console.log("Login error:", error.response?.data || error.message);
+        toast.error(error?.response?.data?.message || "Login failed");
+      }
     }
-  
+  };
 
   return (
     <main className="login-container">
+      <ToastContainer />
       <section className="login-left">
-       <Carousel/>
+        <Carousel />
       </section>
 
       <section className="login-right">
         <form className="login-right-form" onSubmit={loginSubmit}>
           <div className="login-text-layout">
             <h1 className="login-right-text">Login to your account</h1>
+          </div>
+
+          <div className="email-container">
+            <label className="form-right-title">Email address</label>
+            <div className="email-right-input-box">
+              <input
+                type="text"
+                name="email"
+                value={formData.email}
+                onFocus={() => setErrors((prev) => ({ ...prev, email: "" }))}
+                onChange={handleChange}
+                placeholder="Enter your email address"
+                className="email-input"
+              />
             </div>
-            <div className="email-container">
-              <label className="form-right-title">Email address</label>
-              <div className="email-right-input-box">
-                <input
-                  type="email"
-                  name="email"
-                  value={email}
-                  onChange={handleEmailChange}
-                  placeholder="Enter your email address"
-                  className="email-input"
+            {errors.email && (
+              <span className="error-message">{errors.email}</span>
+            )}
+          </div>
+
+          <div className="password-container">
+            <label className="form-right-title">Password</label>
+            <div className="password-right-input-box">
+              <input
+                type={show ? "text" : "password"}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Enter your Password"
+                className="pasword-input"
+              />
+              {show ? (
+                <RxEyeOpen
+                  className="eye"
+                  size={22}
+                  onClick={() => setShow(false)}
                 />
-              </div>
-              {errors.email && (
-                <span className="error-message">{errors.email}</span>
+              ) : (
+                <GoEyeClosed
+                  className="eye"
+                  size={22}
+                  onClick={() => setShow(true)}
+                />
               )}
             </div>
+            {errors.password && (
+              <span className="error-message">{errors.password}</span>
+            )}
 
-            <div className="password-container">
-              <label className="form-right-title">Password</label>
-              <div className="password-right-input-box">
-                <input
-                  type={show ? "text" : "password"}
-                  name="password"
-                  value={password}
-                  onChange={handlePasswordChange}
-                  placeholder="Enter your Password"
-                  className="pasword-input"
-                />
-                {show ? (
-                  <RxEyeOpen
-                    className="eye"
-                    size={22}
-                    onClick={() => setShow(false)}
-                  />
-                ) : (
-                  <GoEyeClosed
-                    className="eye"
-                    size={22}
-                    onClick={() => setShow(true)}
-                  />
-                )}
-              </div>
-              {errors.password && (
-                <span className="error-message">{errors.password}</span>
-              )}
-
-              <div className="checkbox-login-form">
-                <input type="checkbox" className="checkbox" />
-                <span className="remember-me-checkbox">Remember me</span>
-              </div>
-
-              <button type="submit" className="login-btn">
-                Login
-              </button>
-
-              <article className="login-right-or">
-                <div className="line"></div>
-                <div className="or"><span style={{fontSize : "1.7rem"}}>o</span>r</div>
-                <div className="line"></div>
-              </article>
-
-              <button className="continue-with-google" type="submit">
-                <FcGoogle style={{ fontSize: "1.5rem" }} />
-                Continue with Google
-              </button>
-
-              <span className="forgot-password-form"><Link to={"/forgot"} className="link">Forget password?</Link></span>
-
-              <div className="dont-account">
-                <p>
-                  Don't have an account?{" "}
-                  <span style={{ color: "#8133F1", cursor: "pointer" }}>
-                    <Link to={"/signup"} className="link">sign up</Link>
-                  </span>
-                </p>
-              </div>
+            <div className="checkbox-login-form">
+              <input type="checkbox" className="checkbox" />
+              <span className="remember-me-checkbox">Remember me</span>
             </div>
+
+            <button type="submit" className="login-btn">
+              Login
+            </button>
+
+            <article className="login-right-or">
+              <div className="line"></div>
+              <div className="or">
+                <span style={{ fontSize: "1.7rem" }}>o</span>r
+              </div>
+              <div className="line"></div>
+            </article>
+
+            <button className="continue-with-google" type="button">
+              <FcGoogle style={{ fontSize: "1.5rem" }} />
+              Continue with Google
+            </button>
+
+            <span className="forgot-password-form">
+              <Link to={"/forgot"} className="link">
+                Forget password?
+              </Link>
+            </span>
+
+            <div className="dont-account">
+              <p>
+                Don't have an account?{" "}
+                <span style={{ color: "#8133F1", cursor: "pointer" }}>
+                  <Link to={"/clientvsrunner"} className="link">
+                    Sign up
+                  </Link>
+                </span>
+              </p>
+            </div>
+          </div>
         </form>
       </section>
     </main>

@@ -1,0 +1,1 @@
+so i want you to undstand this codebase and then build the ui for the dashboard note we have two type of user in our app userType[Runner or Client] not modularize and use pure css like other files 

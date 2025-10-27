@@ -10,6 +10,7 @@ import DownHero from "../../Components/DownHero/DownHero"
 import Footer from "../../Components/Footer/Footer"
 
 const LandingPage = () => {
+
   return (
     <main className='landing-page-container'>
           <Header />
@@ -24,4 +25,4 @@ const LandingPage = () => {
   )
 }
 
-export default LandingPage
+export default LandingPage;
