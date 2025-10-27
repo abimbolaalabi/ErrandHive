@@ -1,0 +1,62 @@
+.downhero {
+  width: 100%;
+  max-width: 1200px;
+  margin: 80px auto;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.downhero-title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #000;
+}
+
+.downhero-subtitle {
+  margin-top: 6px;
+  font-size: 15px;
+  color: #666;
+}
+
+.faq-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+  gap: 40px;
+}
+
+.faq-column {
+  width: 100%;
+}
+
+.faq-heading {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 18px;
+  color: #000;
+  text-align: left;
+}
+
+.faq-box {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #DCDCDC;
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.faq-box p {
+  font-size: 15px;
+  color: #000;
+  margin: 0;
+}
+
+.faq-icon {
+  font-size: 18px;
+  color: #000;
+}
