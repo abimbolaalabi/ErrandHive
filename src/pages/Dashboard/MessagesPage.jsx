@@ -54,14 +54,13 @@ const MessagesPage = () => {
           {messages.map((msg, i) => (
             <div key={i} className={`message ${msg.fromUser ? "from-user" : ""}`}>
               {!msg.fromUser && <div className="avatar small">{msg.sender}</div>}
-              <div style={{display: "flex" , gap: "10px", backgroundColor: "red"}}>
-                <div className="bubble">
-                  <p>{msg.text}</p>
-                  <span className="time">{msg.time}</span>
-                </div>
-                   {msg.fromUser && <div className="avatar small">{msg.sender}</div>}
+
+              <div className="bubble">
+                <p>{msg.text}</p>
+                <span className="time">{msg.time}</span>
               </div>
 
+              {msg.fromUser && <div className="avatar small">{msg.sender}</div>}
             </div>
           ))}
         </div>
