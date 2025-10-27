@@ -5,7 +5,7 @@ import Login from '../pages/Auth/Login/Login'
 import ResetPassword from "../pages/Auth/Reset/ResetPassword"
 import SignUp from '../pages/Auth/SignUp/SignUp'
 import VerifyEmail from '../pages/Auth/VerifyEmail/VerifyEmail'
-import DashboardPage from '../pages/Dashboard/DashboardPage'
+import DashboardPage from '../pages/Dashboard/DashboardPage/DashboardPage'
 import MessagesPage from '../pages/Dashboard/MessagesPage'
 import MyErrandsPage from '../pages/Dashboard/MyErrandsPage'
 import PaymentsPage from '../pages/Dashboard/PaymentsPage'
@@ -13,6 +13,7 @@ import ProfilePage from '../pages/Dashboard/ProfilePage'
 import LandingPage from '../pages/LandingPage/LandingPage'
 import PageNotFound from '../pages/PageNotFound'
 import ClientVsRunner from '../pages/ClientVsRunner/ClientVsRunner'
+
 const Router = () => {
   return (
     <BrowserRouter>
@@ -29,7 +30,7 @@ const Router = () => {
         
         {/* Dashboard Routes */}
         <Route path='/dashboard' element={<DashboardLayout />}>
-          <Route index element={<DashboardPage />} />
+          <Route index element={<DashboardPage/>} />
           <Route path='my-errands' element={<MyErrandsPage />} />
           <Route path='active-jobs' element={<MyErrandsPage />} />
           <Route path='payments' element={<PaymentsPage />} />

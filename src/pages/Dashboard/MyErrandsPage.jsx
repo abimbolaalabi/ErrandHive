@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../Context/App';
-import './DashboardPage.css';
+import '../Dashboard/DashboardPage/DashboardPage.css';
 
 const MyErrandsPage = () => {
   const { userType } = useContext(AppContext);

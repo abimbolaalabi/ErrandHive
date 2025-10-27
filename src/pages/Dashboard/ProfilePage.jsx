@@ -1,5 +1,5 @@
 import React from 'react';
-import './DashboardPage.css';
+import '../Dashboard/DashboardPage/DashboardPage.css';
 
 const ProfilePage = () => {
   return (

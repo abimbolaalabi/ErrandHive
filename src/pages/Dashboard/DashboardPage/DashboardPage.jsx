@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import { AppContext } from '../../Context/App';
-import './DashboardPage.css';
-
+// import '..//DashboardPage/DashboardPage.css';
+import '../DashboardPage/DashboardPage.css'
+import { AppContext } from '../../../Context/App';
 const DashboardPage = () => {
   const { userType } = useContext(AppContext);
 
