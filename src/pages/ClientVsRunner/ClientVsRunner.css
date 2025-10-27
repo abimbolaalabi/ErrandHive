@@ -195,7 +195,7 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 600px) { 
   .clientvs-wrapper {
     flex-direction: column;
     height: auto;
@@ -245,6 +245,6 @@
 
   .angledown,
   .angleup {
-    font-size: 22px;
-  }
+    font-size:22px;
+}
 }

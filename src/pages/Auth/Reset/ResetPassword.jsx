@@ -36,7 +36,7 @@ const ResetPassword = () => {
   return (
     <main className="verify-section">
       <div className="logo-holder">
-                  <img src="https://res.cloudinary.com/dwzomhflw/image/upload/v1761056644/IMG-20251021-WA0052_lf7sms.jpg" className ="logo" alt="" />
+      <img src="https://res.cloudinary.com/dwzomhflw/image/upload/v1761056644/IMG-20251021-WA0052_lf7sms.jpg" className ="logo" alt="" />
         <span className="errand">ErrandHive</span>
       </div>
 
@@ -46,6 +46,16 @@ const ResetPassword = () => {
       <div className="eclipse-right">
         <img src={eclipseright} alt="eclipse-right" className="eclipse-right" />
       </div>
+        <div className="bicycle">
+          <img src={bicycle} alt="bicycle" className="bicycle" />
+        </div>
+      
+       <div className="runner">
+   <img src={runner} alt="runner" className="runner" />
+ </div>
+ <div className="money">
+   <img src={money} alt="money" className="money" />
+ </div>
 
       <section>
         <form className="verify-form" onSubmit={handleSubmit}>
