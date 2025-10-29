@@ -1,10 +1,12 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import DashboardLayout from '../Components/Dashboard/DashboardLayout'
+import RunnerLayout from '../Components/RunerDashboardLayout/RunnerLayout'
 import ForgotPassword from "../pages/Auth/Forgotpassword/Forget"
 import Login from '../pages/Auth/Login/Login'
 import ResetPassword from "../pages/Auth/Reset/ResetPassword"
 import SignUp from '../pages/Auth/SignUp/SignUp'
 import VerifyEmail from '../pages/Auth/VerifyEmail/VerifyEmail'
+import ResetPasswordOtp from "../pages/Auth/ResetOtp/ResetOtp"
 import DashboardPage from '../pages/Dashboard/DashboardPage'
 import MessagesPage from '../pages/Dashboard/MessagesPage'
 import MyErrandsPage from '../pages/Dashboard/MyErrandsPage'
@@ -26,7 +28,7 @@ const Router = () => {
         <Route path='/verifyemail' element={<VerifyEmail />} />
         <Route path='/forgot' element={<ForgotPassword />} />
         <Route path='/reset' element={<ResetPassword />} />
-        
+           <Route path='/reset-otp' element={<ResetPasswordOtp />} />
         {/* Dashboard Routes */}
         <Route path='/dashboard' element={<DashboardLayout />}>
           <Route index element={<DashboardPage />} />
@@ -36,8 +38,9 @@ const Router = () => {
           <Route path='my-earnings' element={<PaymentsPage />} />
           <Route path='messages' element={<MessagesPage />} />
           <Route path='profile' element={<ProfilePage />} />
+           
         </Route>
-
+         <Route path='/runnerlayout' element={<RunnerLayout />}></Route>
       </Routes>
 
     </BrowserRouter>

@@ -17,6 +17,9 @@ import { useNavigate } from "react-router-dom";
 
 const ResetPassword = () => {
    const BaseUrl = import.meta.env.VITE_BASE_URL;
+   const userEmail = JSON.parse(localStorage.getItem("email"));
+     
+   const nav = useNavigate()
 
 
   const [showPassword, setShowPassword] = useState(false);
@@ -41,6 +44,7 @@ const ResetPassword = () => {
     console.log("Password reset:", password, confirmPassword);
     try{
      const res = await axios.post(`${BaseUrl}/reset`,  {
+       email : userEmail,
        newPassword: password,
        confirmPassword: confirmPassword
      },{
@@ -49,7 +53,8 @@ const ResetPassword = () => {
      console.log(res?.data)
      const successMessage = res?.data?.message || "Password reset successfully!";
      toast.success(successMessage);
-
+     nav("/login")
+     
     }catch(err){
       console.log(err,"err")
       const errorMessage = err?.response?.data?.message || "Failed to reset password.";
