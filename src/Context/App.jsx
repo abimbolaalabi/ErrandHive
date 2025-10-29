@@ -14,6 +14,7 @@ const AppProvider=({ children}) => {
         </AppContext.Provider >
     )
 };
-//josjua
+//joshua
 
 export { AppContext, AppProvider };
+
