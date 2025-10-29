@@ -2,7 +2,7 @@ import React from 'react'
 import "./LandingPage.css"
 import Header from "../../Components/Header/Header"
 import SubHeaderHero from "../../Components/SubHeaderhero/SubHeaderHero"
- import MyHero from "../../Components/Myhero/MyHero"
+//  import MyHero from "../../Components/Myhero/MyHero"
 import NewHero from "../../Components/NewHero/NewHero"
 import MoreHero from "../../Components/MoreHero/MoreHero"
 import DownHero from "../../Components/DownHero/DownHero"
