@@ -220,7 +220,7 @@ const SignUp = () => {
 
           </form>
         </div>
-       <ModalSpinner/>
+       {/* <ModalSpinner/> */}
       </div>
 
       {/* <div className="signup-right">
