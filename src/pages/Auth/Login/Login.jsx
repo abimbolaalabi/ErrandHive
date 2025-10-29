@@ -8,6 +8,8 @@ import Carousel from "../../../Components/Carousel/Carousel";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { setUserDetails } from "../../../global/userSlice";
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -44,6 +46,7 @@ const Login = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  const dispatch = useDispatch()
 
   const loginSubmit = async (e) => {
     e.preventDefault();
@@ -55,8 +58,10 @@ const Login = () => {
 
         console.log(res?.data);
         toast.success(res?.data?.message);
+        const userDetails = res?.data?.data;  // depends on API response
+      const userToken = res?.data?.token;
 
-        localStorage.setItem("userToken", res?.data?.data?.id);
+      dispatch(setUserDetails({ userDetails, userToken }));
 
         setFormData({
           email: "",

@@ -1,0 +1,17 @@
+.welcome-section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.welcome-section button{
+    width: 12%;
+    height: 40px;
+    background-color: #8133F1;
+    gap: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+}
