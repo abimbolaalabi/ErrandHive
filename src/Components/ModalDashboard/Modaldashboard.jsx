@@ -1,20 +1,31 @@
 import React, { useState } from 'react';
-import { X, Upload, CheckCircle, Home, CreditCard, Camera } from 'lucide-react';
+import { X, CheckCircle, Home, CreditCard, Camera } from 'lucide-react';
 
 const Modaldashboard = ({ close }) => {
   const [files, setFiles] = useState({
     id: null,
     address: null,
-    selfie: null
+    selfie: null,
   });
 
-  const handleFileUpload = (type) => {
-    // Simulate file upload
-    setFiles(prev => ({ ...prev, [type]: true }));
+  const handleFileChange = (e, type) => {
+    const file = e.target.files[0];
+    if (file) {
+      setFiles((prev) => ({ ...prev, [type]: file }));
+    }
   };
+
+  const completedSteps = [
+    !!files.id,
+    !!files.address,
+    !!files.selfie,
+  ];
+
+  const isSubmitEnabled = completedSteps.every(Boolean);
 
   return (
     <div className="modaldash-container">
+      
       <style>{`
         .modaldash-container {
           position: fixed;
@@ -36,42 +47,29 @@ const Modaldashboard = ({ close }) => {
           border-radius: 1rem;
           display: flex;
           flex-direction: column;
-          gap: 0;
-          box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-          z-index: 1001;
           overflow: hidden;
         }
 
         .modal-header {
-          padding: 24px 24px 16px 24px;
+          padding: 24px;
           border-bottom: 1px solid #f0f0f0;
           position: relative;
         }
 
         .close-button {
           position: absolute;
-          top: 20px;
-          right: 20px;
+          top: 22px;
+          right: 22px;
           background: none;
           border: none;
           cursor: pointer;
           color: #666;
-          padding: 4px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: color 0.2s;
-        }
-
-        .close-button:hover {
-          color: #000;
         }
 
         .modal-title {
           font-size: 20px;
           font-weight: 700;
           color: #1a1a1a;
-          margin-bottom: 8px;
         }
 
         .modal-subtitle {
@@ -79,10 +77,11 @@ const Modaldashboard = ({ close }) => {
           color: #666;
         }
 
+     
         .progress-steps {
           display: flex;
           justify-content: space-between;
-          padding: 24px 24px 0 24px;
+          padding: 24px;
           gap: 8px;
         }
 
@@ -91,8 +90,28 @@ const Modaldashboard = ({ close }) => {
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 8px;
           position: relative;
+          gap: 6px;
+        }
+
+        .step-icon {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: 0.3s;
+        }
+
+        .step-inactive {
+          background: #E4E6EB;
+          color: #999;
+        }
+
+        .step-completed {
+          background: #10b981;
+          color: white;
         }
 
         .step::after {
@@ -101,7 +120,7 @@ const Modaldashboard = ({ close }) => {
           top: 16px;
           left: 50%;
           width: 100%;
-          height: 2px;
+          height: 3px;
           background: #e0e0e0;
           z-index: -1;
         }
@@ -110,24 +129,17 @@ const Modaldashboard = ({ close }) => {
           display: none;
         }
 
-        .step-icon {
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          background: #10b981;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          font-size: 14px;
+        .step-completed + .step::after {
+          background: #10b981 !important;
         }
 
         .step-label {
           font-size: 12px;
-          color: #666;
           font-weight: 500;
+          color: #666;
         }
 
+    
         .modal-content {
           flex: 1;
           overflow-y: auto;
@@ -140,71 +152,43 @@ const Modaldashboard = ({ close }) => {
 
         .section-header {
           display: flex;
+          gap: 10px;
           align-items: flex-start;
-          gap: 12px;
-          margin-bottom: 16px;
         }
 
         .section-icon {
-          width: 40px;
-          height: 40px;
-          border-radius: 8px;
           background: #f5f3ff;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
+          padding: 10px;
+          border-radius: 8px;
         }
 
         .section-icon svg {
           color: #8b5cf6;
         }
 
-        .section-text {
-          flex: 1;
-        }
-
-        .section-title {
-          font-size: 16px;
-          font-weight: 600;
-          color: #1a1a1a;
-          margin-bottom: 4px;
-        }
-
-        .section-description {
-          font-size: 13px;
-          color: #666;
-          line-height: 1.5;
-        }
-
-        .upload-button {
+        .file-input-label {
           width: 100%;
           padding: 14px;
           border: 1.5px dashed #d0d0d0;
           border-radius: 8px;
           background: #fafafa;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 8px;
-          cursor: pointer;
-          transition: all 0.2s;
           font-size: 14px;
           color: #666;
-          font-weight: 500;
+          cursor: pointer;
+          margin-top: 12px;
+          display: flex;
+          justify-content: center;
         }
 
-        .upload-button:hover {
+        .file-input-label:hover {
           border-color: #8b5cf6;
           background: #f5f3ff;
           color: #8b5cf6;
         }
 
-        .upload-button svg {
-          width: 18px;
-          height: 18px;
-        }
+        .file-input { display: none; }
 
+      
         .guidelines-box {
           background: #f5f3ff;
           border-radius: 8px;
@@ -213,177 +197,124 @@ const Modaldashboard = ({ close }) => {
         }
 
         .guidelines-title {
-          display: flex;
-          align-items: center;
-          gap: 8px;
           font-size: 14px;
-          font-weight: 600;
+          font-weight: 700;
           color: #6d28d9;
-          margin-bottom: 12px;
-        }
-
-        .guidelines-list {
-          list-style: none;
-          padding: 0;
-          margin: 0;
+          margin-bottom: 10px;
         }
 
         .guidelines-list li {
           font-size: 13px;
           color: #6d28d9;
           margin-bottom: 6px;
-          padding-left: 16px;
-          position: relative;
         }
 
-        .guidelines-list li::before {
-          content: '•';
-          position: absolute;
-          left: 0;
-          font-weight: bold;
-        }
-
-        .guidelines-list li:last-child {
-          margin-bottom: 0;
-        }
-
+   
         .modal-footer {
-          padding: 20px 24px;
+          padding: 20px;
           border-top: 1px solid #f0f0f0;
         }
 
         .submit-button {
           width: 100%;
-          padding: 14px;
-          background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
-          color: white;
+          background: linear-gradient(135deg, #a78bfa, #8b5cf6);
           border: none;
           border-radius: 8px;
-          font-size: 15px;
+          font-size: 14px;
           font-weight: 600;
+          color: #fff;
+          padding: 14px;
           cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 8px;
-          transition: all 0.2s;
-          box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+          transition: 0.3s;
         }
 
-        .submit-button:hover {
-          transform: translateY(-1px);
-          box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
-        }
-
-        @media (max-width: 640px) {
-          .modaldash-child {
-            width: 95%;
-            height: 95vh;
-          }
-
-          .progress-steps {
-            padding: 16px 16px 0 16px;
-          }
-
-          .step-label {
-            font-size: 10px;
-          }
-
-          .step-icon {
-            width: 28px;
-            height: 28px;
-            font-size: 12px;
-          }
+        .submit-button:disabled {
+          background: #d3d3d3 !important;
+          cursor: not-allowed !important;
+          opacity: 0.7;
         }
       `}</style>
 
       <div className="modaldash-child">
+        
+    
         <div className="modal-header">
           <button className="close-button" onClick={() => close(false)}>
-            <X size={24} />
+            <X size={22} />
           </button>
           <h2 className="modal-title">KYC Verification</h2>
           <p className="modal-subtitle">Upload the required documents to verify your identity</p>
         </div>
 
+       
         <div className="progress-steps">
-          <div className="step">
-            <div className="step-icon">
-              <CheckCircle size={16} />
+          {["ID", "Address", "Selfie"].map((label, index) => (
+            <div className="step" key={index}>
+              <div className={`step-icon ${completedSteps[index] ? "step-completed" : "step-inactive"}`}>
+                <CheckCircle size={16} />
+              </div>
+              <span className="step-label">{label}</span>
             </div>
-            <span className="step-label">ID</span>
-          </div>
-          <div className="step">
-            <div className="step-icon">
-              <CheckCircle size={16} />
-            </div>
-            <span className="step-label">Address</span>
-          </div>
-          <div className="step">
-            <div className="step-icon">
-              <CheckCircle size={16} />
-            </div>
-            <span className="step-label">Selfie</span>
-          </div>
+          ))}
         </div>
 
+      
         <div className="modal-content">
+
+          {/* ID Upload */}
           <div className="upload-section">
             <div className="section-header">
-              <div className="section-icon">
-                <CreditCard size={20} />
-              </div>
-              <div className="section-text">
+              <div className="section-icon"><CreditCard size={20} /></div>
+              <div>
                 <h3 className="section-title">Government-issued ID</h3>
-                <p className="section-description">Driver's license, passport, or national ID card</p>
+                <p className="section-description">Driver's License, Passport, or National ID</p>
               </div>
             </div>
-            <button className="upload-button" onClick={() => handleFileUpload('id')}>
-              <Upload size={18} />
-              Click to upload
-            </button>
+            <label className="file-input-label">
+              <input type="file" accept="image/*,application/pdf" className="file-input"
+                onChange={(e) => handleFileChange(e, "id")}
+              />
+              {files.id ? files.id.name : "Click to upload"}
+            </label>
           </div>
 
+      
           <div className="upload-section">
             <div className="section-header">
-              <div className="section-icon">
-                <Home size={20} />
-              </div>
-              <div className="section-text">
+              <div className="section-icon"><Home size={20} /></div>
+              <div>
                 <h3 className="section-title">Proof of Address</h3>
-                <p className="section-description">Utility bill, bank statement, or lease agreement (max 3 months old)</p>
+                <p className="section-description">Utility Bill, Bank Statement, or Lease Agreement</p>
               </div>
             </div>
-            <button className="upload-button" onClick={() => handleFileUpload('address')}>
-              <Upload size={18} />
-              Click to upload
-            </button>
+            <label className="file-input-label">
+              <input type="file" accept="image/*,application/pdf" className="file-input"
+                onChange={(e) => handleFileChange(e, "address")}
+              />
+              {files.address ? files.address.name : "Click to upload"}
+            </label>
           </div>
 
+       
           <div className="upload-section">
             <div className="section-header">
-              <div className="section-icon">
-                <Camera size={20} />
-              </div>
-              <div className="section-text">
+              <div className="section-icon"><Camera size={20} /></div>
+              <div>
                 <h3 className="section-title">Selfie with ID</h3>
-                <p className="section-description">Take a photo of yourself holding your ID next to your face</p>
+                <p className="section-description">Take a selfie holding your ID</p>
               </div>
             </div>
-            <button className="upload-button" onClick={() => handleFileUpload('selfie')}>
-              <Upload size={18} />
-              Click to upload
-            </button>
+            <label className="file-input-label">
+              <input type="file" accept="image/*" className="file-input"
+                onChange={(e) => handleFileChange(e, "selfie")}
+              />
+              {files.selfie ? files.selfie.name : "Click to upload"}
+            </label>
           </div>
 
+      
           <div className="guidelines-box">
-            <div className="guidelines-title">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 16v-4M12 8h.01" />
-              </svg>
-              Important Guidelines:
-            </div>
+            <div className="guidelines-title"> ℹ️ Important Guidelines:</div>
             <ul className="guidelines-list">
               <li>All documents must be clear and readable</li>
               <li>Ensure your full name and address are visible</li>
@@ -391,14 +322,16 @@ const Modaldashboard = ({ close }) => {
               <li>File size should not exceed 10MB</li>
             </ul>
           </div>
+
         </div>
 
+      
         <div className="modal-footer">
-          <button className="submit-button">
-            <Upload size={18} />
-            Submit for Verification
+          <button className="submit-button" disabled={!isSubmitEnabled}>
+            {isSubmitEnabled ? "Submit for Verification" : "Upload All Required Documents"}
           </button>
         </div>
+
       </div>
     </div>
   );
