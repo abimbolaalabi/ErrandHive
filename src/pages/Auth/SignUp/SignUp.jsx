@@ -24,7 +24,7 @@ const SignUp = () => {
   const [formErrors, setFormErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
   const [ShowPassword, SetShowPassword] = useState(false);
-  const navigate = useNavigate();
+  const [modal, setModal] = useState(false)
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -93,7 +93,9 @@ const SignUp = () => {
         toast.error(error?.response?.data?.message || "Registration failed");
       }
     }
-  };
+  }
+
+
 
   return (
     <div className="signup-container">
@@ -210,11 +212,12 @@ const SignUp = () => {
             </button>
 
             <aside className="account-text">
-              <p>Already have an account? <span onClick={navigatetologin}>Click here to login</span></p> 
+              <p>Already have an account? <span onClick={navigatetologin}>Click here to login</span> </p>
             </aside>
 
           </form>
         </div>
+       <ModalSpinner/>
       </div>
     </div>
   );

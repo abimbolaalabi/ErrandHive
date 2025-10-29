@@ -1,9 +1,14 @@
 import React, { useContext } from 'react';
-import { AppContext } from '../../Context/App';
-import './DashboardPage.css';
-
+// import '..//DashboardPage/DashboardPage.css';
+import '../DashboardPage/DashboardPage.css'
+import { AppContext } from '../../../Context/App';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 const DashboardPage = () => {
   const { userType } = useContext(AppContext);
+  const userKyc = useSelector((state)=> state.user.userKyc)
+  console.log(userKyc)
+  const navigate = useNavigate()
 
   const stats = [
     {
@@ -40,7 +45,7 @@ const DashboardPage = () => {
       color: '#8133F1'
     },
     {
-      title: userType === 'Client' ? 'Total Spent' : 'Total Earned',
+      title: 'Total Spent',
       value: '0',
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -59,7 +64,7 @@ const DashboardPage = () => {
           Welcome back, John! 👋
         </h1>
         <p className="welcome-subtitle">
-          {userType === 'Client' ? 'Manage your errands today.' : 'Complete tasks and earn money.'}
+          Manage your errands today.
         </p>
       </div>
 
@@ -86,14 +91,18 @@ const DashboardPage = () => {
             </svg>
           </div>
           <h2 className="no-errands-title">
-            {userType === 'Client' ? 'No errands yet' : 'You have no active job yet'}
+            No errands yet
           </h2>
           <p className="no-errands-subtitle">
-            Complete KYC to get started
+           {!userKyc? "Create your first errand to get started": " Complete KYC to get started"}
           </p>
-          <button className="kyc-button">
+         {
+          !userKyc? (
+             <button onClick={()=> navigate('profile')} className="kyc-button">
             Complete Kyc
           </button>
+          ): null
+         }
         </div>
       </div>
     </div>
