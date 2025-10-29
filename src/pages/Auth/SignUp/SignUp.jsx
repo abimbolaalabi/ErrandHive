@@ -217,7 +217,7 @@ const SignUp = () => {
 
           </form>
         </div>
-       <ModalSpinner/>
+       {/* <ModalSpinner/> */}
       </div>
     </div>
   );
