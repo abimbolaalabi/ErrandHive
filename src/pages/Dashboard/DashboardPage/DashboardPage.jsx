@@ -94,10 +94,10 @@ const DashboardPage = () => {
             No errands yet
           </h2>
           <p className="no-errands-subtitle">
-           {userKyc? "Create your first errand to get started": " Complete KYC to get started"}
+           {!userKyc? "Create your first errand to get started": " Complete KYC to get started"}
           </p>
          {
-          userKyc? (
+          !userKyc? (
              <button onClick={()=> navigate('profile')} className="kyc-button">
             Complete Kyc
           </button>

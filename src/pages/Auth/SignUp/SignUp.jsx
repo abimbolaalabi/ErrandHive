@@ -27,6 +27,7 @@ const SignUp = () => {
   const [formErrors, setFormErrors] = useState({})
   const [successMessage, setSuccessMessage] = useState('')
   const [ShowPassword, SetShowPassword] = useState(false);
+  const [modal, setModal] = useState(false)
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -99,7 +100,7 @@ const SignUp = () => {
     }
   }
 
-  // `https://errandhive-project.onrender.com/api/v1/register`
+
 
   return (
     <div className="signup-container">
@@ -219,9 +220,7 @@ const SignUp = () => {
 
           </form>
         </div>
-
-
-
+       <ModalSpinner/>
       </div>
 
       {/* <div className="signup-right">

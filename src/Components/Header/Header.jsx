@@ -1,5 +1,5 @@
 import "./Header.css"
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 
 const Header = () => {
   return (
@@ -21,7 +21,10 @@ const Header = () => {
            <Link to ={"/login"}>
              <button className="sign-in-btn">Sign in</button>
              </Link>
-             <button className="get-started-btn">Get Started</button>
+             <Link to = {"/clientvsrunner"}>
+                    <button className="get-started-btn" >Get Started</button>
+             </Link>
+        
         </div>
       </div>
      </header>

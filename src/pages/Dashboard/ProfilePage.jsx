@@ -6,7 +6,16 @@ import { IoShieldCheckmarkOutline } from "react-icons/io5";
 import Modaldashboard from "../../Components/ModalDashboard/Modaldashboard";
 
 const ProfilePage = () => {
-  const [modaldash, setModalDash] = useState(false)
+  const [modaldash, setModalDash] = useState(false);
+  const [image, setImage] = useState(null);
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImage(URL.createObjectURL(file));
+    }
+  };
+
   return (
     <div className="profile-container">
       {/* Header */}
@@ -19,8 +28,16 @@ const ProfilePage = () => {
       <div className="profile-card">
         <div className="profile-left">
           <div className="profile-avatar">
-            <div className="avatar-circle">JD</div>
-            <div className="camera-icon">
+            <div className="avatar-circle">
+              {image ? (
+                <img src={image} alt="profile" className="avatar-img" />
+              ) : (
+                "JD"
+              )}
+            </div>
+
+            {/* Upload Input */}
+            <label htmlFor="profileImage" className="camera-icon">
               <svg width="20" height="20" viewBox="0 0 24 24">
                 <path
                   fill="currentColor"
@@ -28,7 +45,15 @@ const ProfilePage = () => {
                      2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h2Z"
                 />
               </svg>
-            </div>
+            </label>
+
+            <input
+              id="profileImage"
+              type="file"
+              accept="image/*"
+              style={{ display: "none" }}
+              onChange={handleImageUpload}
+            />
           </div>
 
           <div className="profile-info">
@@ -54,7 +79,7 @@ const ProfilePage = () => {
               January 2024
             </p>
           </div>
-          <div style={{paddingTop: "10px"}}>
+          <div style={{ paddingTop: "10px" }}>
             <p className="bio">
               Busy professional who values reliable service. Looking for trusted
               runners for regular errands.
@@ -69,6 +94,7 @@ const ProfilePage = () => {
           <div className="kyc-icon">
             <IoShieldCheckmarkOutline size={22} />
           </div>
+
           <div className="kyc-info">
             <h3>
               KYC Verification{" "}
@@ -78,10 +104,13 @@ const ProfilePage = () => {
           </div>
         </div>
         <div className="kyc-right">
-          <button className="verify-btn" onClick={()=>setModalDash(true)}>Start Verification</button>
+          <button className="verify-btn" onClick={() => setModalDash(true)}>
+            Start Verification
+          </button>
         </div>
       </div>
-      { modaldash && ( <Modaldashboard close={setModalDash}/>)}
+
+      {modaldash && <Modaldashboard close={setModalDash} />}
     </div>
   );
 };
