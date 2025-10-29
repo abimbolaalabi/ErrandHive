@@ -1,72 +1,157 @@
-.header-container{
-    width: 100%;
-    height: 70px;
-    display: flex;
-    justify-content: center;
+.header-container {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  background: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
 }
-.header-container-wrapper{
-    width: 98%;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-}
-.header-logo{
-    width: 15%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-}
-.header-navlink{
-    width: 30%;
-     height: 100%;
-}
-.header-navlink-list-holder{
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: 100% ;
 
+.header-container-wrapper {
+  width: 98%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.header-navlink-list{
-    font-size: 1rem;
-    font-family: Poppins;
-   font-weight:600;
+
+.header-logo {
+  width: 15%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.header-navlink {
+  width: 30%;
+  height: 100%;
+}
+
+.header-navlink-list-holder {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.header-navlink-list {
+  font-size: 1rem;
+  font-family: Poppins;
+  font-weight: 600;
+  cursor: pointer;
+  color: #212121;
+}
+
+.header-btn-holder {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sign-in-btn {
+  padding: 0.3rem 0.8rem;
+  border: 1px solid #8133f1;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: Poppins;
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.sign-in-btn:hover {
+  background-color: #8133f1;
+  color: #fff;
+}
+
+.get-started-btn {
+  padding: 0.3rem 0.8rem;
+  border: none;
+  background-color: #8133f1;
+  border-radius: 0.3rem;
+  font-size: 1rem;
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.get-started-btn:hover {
+  background-color: #6a25d9;
+}
+
+@media (max-width: 1440px) {
+  .header-container-wrapper {
+    width: 95%;
+  }
+
+  .header-navlink {
+    width: 35%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .header-logo {
+    width: 20%;
+  }
+
+  .header-navlink {
+    width: 40%;
+  }
+
+  .header-btn-holder {
+    width: 25%;
+  }
+
+  .header-navlink-list {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    height: 65px;
+  }
+
+  .header-navlink {
+    display: none;
+  }
+
+  .header-btn-holder {
+    width: auto;
+  }
+
+  .menu-icon {
+    display: block;
+    font-size: 24px;
     cursor: pointer;
     color: #212121;
-    font-style: SemiBold;
-}
-.header-btn-holder{
-     width: 20%;
-     height: 100%;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     gap: 0.5rem;
-}
-.sign-in-btn{
-    padding: 0.5rem;
-    border: 1px solid #8133F1;
-     border-radius:0.3rem;
-    cursor:pointer;
-    font-weight:600;
-    font-family: Poppins;
-    font-style:SemiBold;
-    background-color:transparent;
-}
-.sign-in-btn:hover{
-background-color: #8133F1;
+  }
 }
 
-.get-started-btn{
-    padding: 0.5rem;
-    border: none;
-background-color:#8133F1;
-  border-radius:0.3rem;
- font-size:1rem;
- cursor:pointer;
- color:white;
- font-weight:600;
- font-style:SemiBold;
+@media (max-width: 480px) {
+  .header-container-wrapper {
+    justify-content: space-between;
+  }
+
+  .header-logo {
+    width: auto;
+  }
+
+  .header-btn-holder {
+    display: none; 
+  }
+
+  .menu-icon {
+    font-size: 22px;
+  }
 }

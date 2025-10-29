@@ -1,102 +1,202 @@
 .morehero {
   width: 100%;
-  max-width: 1443px; 
-  height: 645px;
+  max-width: 1443px;
   margin: 0 auto;
-  background: linear-gradient(180deg, #361565 34.62%, rgba(71, 28, 133, 0.7) 72.12%, rgba(71, 28, 133, 0.6) 100%);
   padding: 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    #361565 34.62%,
+    rgba(71, 28, 133, 0.7) 72.12%,
+    rgba(71, 28, 133, 0.6) 100%
+  );
+  text-align: center;
+  color: white;
 }
 
 .morehero-title {
   font-size: 32px;
-  font-weight: 500;
-  display: flex;
-  justify-content: center;
-  color: #FFFFFF;
+  font-weight: 700;
+  margin-bottom: 8px;
 }
 
 .morehero-subtitle {
-  margin-top: 8px;
+  font-size: 16px;
   opacity: 0.8;
-  display: flex;
-  justify-content: center;
-  color: #FFFFFF;
-  font-weight: 300;
-  font-style: light;
+  margin-bottom: 40px;
 }
 
 .feedback-container {
-  width: 100%;
   display: flex;
   justify-content: space-between;
-  gap: 25px;
-  margin-top: 40px;
+  align-items: stretch;
+  gap: 20px;
 }
 
 .feedback-card {
-  width: 290px;
-  height: 310px;
-  background: rgba(255,255,255,0.1);
-  padding: 15px;
-  border-radius: 18px;
-  backdrop-filter: blur(6px);
-  color: #fff;
+  flex: 1;
+  min-width: 300px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  padding: 25px;
+  color: #FFFFFF;
+  text-align: left;
+  position: relative;
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-
 .feedback-card:hover {
-  transform: translateY(-6px);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transform: translateY(-5px);
+  box-shadow: none;
 }
 
 .quote {
-  font-size: 40px;
-  opacity: 0.7;
+  font-size: 60px;
+  color: #FFFFFF;
+  margin-bottom: 15px;
 }
 
 .feedback-card p {
+  font-size: 14px;
   line-height: 1.6;
-  font-size: 12px;
+  margin-bottom: 20px;
+  display: flex;
 }
-.user-info {
+
+.user-row {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-top: 18px;
+  justify-content: center;
+  gap: 8px;
 }
 
-.user-info img {
-  width: 38px;
-  height: 38px;
+.user-img {
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
-  object-fit: cover;
 }
 
-.user-info h4 {
-  font-size: 16px;
-  font-weight: 400;
-  margin: 0;
-  color: #fff;
+.user-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #FFFFFF;
 }
 
 .stars {
-  color: #ffd700;
-  font-size: 13px;
-  margin-left: 2px;
-  letter-spacing: 1px;
+  display: flex;
+  gap: 3px;
 }
-.quote {
-  top: 5px;
-  left: 8px;
-  font-size: 95px; 
-  color: rgba(255, 255, 255, 0.12); 
-  line-height: 1;
-  pointer-events: none;
-  user-select: none;
+
+.star {
+  color: #f9d949;
+  font-size: 14px;
+}
+
+/* ---------------- RESPONSIVE DESIGN ---------------- */
+
+/* 🖥️ Large Laptops and Desktops */
+@media (max-width: 1440px) {
+  .morehero {
+    padding: 50px;
+  }
+
+  .morehero-title {
+    font-size: 30px;
+  }
+
+  .feedback-card {
+    padding: 20px;
+  }
+}
+
+/* 💻 Tablets (Landscape & small laptops) */
+@media (max-width: 1024px) {
+  .feedback-container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .feedback-card {
+    flex: 0 0 45%;
+    margin-bottom: 25px;
+  }
+
+  .quote {
+    font-size: 50px;
+  }
+
+  .morehero-title {
+    font-size: 28px;
+  }
+
+  .morehero-subtitle {
+    font-size: 15px;
+  }
+}
+
+/* 📱 Tablets (Portrait) and Medium Phones */
+@media (max-width: 768px) {
+  .morehero {
+    padding: 40px 25px;
+  }
+
+  .feedback-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .feedback-card {
+    width: 90%;
+    min-width: auto;
+  }
+
+  .morehero-title {
+    font-size: 26px;
+  }
+
+  .quote {
+    font-size: 45px;
+  }
+}
+
+/* 📲 Small Phones (iPhone 6 and below) */
+@media (max-width: 480px) {
+  .morehero {
+    padding: 30px 20px;
+  }
+
+  .morehero-title {
+    font-size: 22px;
+  }
+
+  .morehero-subtitle {
+    font-size: 14px;
+  }
+
+  .feedback-card {
+    width: 100%;
+    padding: 20px 15px;
+  }
+
+  .quote {
+    font-size: 40px;
+  }
+
+  .feedback-card p {
+    font-size: 13px;
+  }
+
+  .user-name {
+    font-size: 13px;
+  }
+
+  .user-img {
+    width: 30px;
+    height: 30px;
+  }
 }
