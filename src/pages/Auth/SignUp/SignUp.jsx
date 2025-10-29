@@ -213,7 +213,7 @@ const SignUp = () => {
               <p> Continue with Google</p>
             </button>
             <aside className="account-text">
-              <p>Already have an account? <span onClick={navigatetologin()}>Click here to login</span> </p>
+              <p>Already have an account? <span onClick={navigatetologin}>Click here to login</span> </p>
             </aside>
 
 

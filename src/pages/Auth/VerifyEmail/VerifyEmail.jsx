@@ -89,7 +89,7 @@ const VerifyEmail = () => {
       setCodes(["", "", "", "", "", ""]);
 
       setTimeout(() => {
-        navigate("/sign_in");
+        navigate("/login");
       }, 2000);
     } catch (error) {
       console.log(error);

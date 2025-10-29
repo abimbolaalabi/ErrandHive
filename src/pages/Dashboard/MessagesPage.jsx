@@ -5,7 +5,7 @@ const MessagesPage = () => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([
     { sender: "JD", text: "Hi! I've accepted your pickup errand. I’ll head to the pickup location now", time: "10:16am", fromUser: false },
-    { sender: "You", text: "Alright! please handle the package with care.", time: "10:17am", fromUser: true },
+    { sender: "JD", text: "Alright! please handle the package with care.", time: "10:17am", fromUser: true },
     { sender: "JD", text: "Absolutely! Your package will get to you safely", time: "10:18am", fromUser: false },
   ]);
 
@@ -54,14 +54,13 @@ const MessagesPage = () => {
           {messages.map((msg, i) => (
             <div key={i} className={`message ${msg.fromUser ? "from-user" : ""}`}>
               {!msg.fromUser && <div className="avatar small">{msg.sender}</div>}
-              <div style={{display: "flex" , gap: "10px", backgroundColor: "red"}}>
-                <div className="bubble">
-                  <p>{msg.text}</p>
-                  <span className="time">{msg.time}</span>
-                </div>
-                   {msg.fromUser && <div className="avatar small">{msg.sender}</div>}
+
+              <div className="bubble">
+                <p>{msg.text}</p>
+                <span className="time">{msg.time}</span>
               </div>
 
+              {msg.fromUser && <div className="avatar small">{msg.sender}</div>}
             </div>
           ))}
         </div>
