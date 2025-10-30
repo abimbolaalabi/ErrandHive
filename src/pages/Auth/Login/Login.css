@@ -10,7 +10,7 @@
 
 .login-left {
   width: 50%;
-  height: auto;
+  height: 100vh;
 }
 .login-left-header{
  display: flex;
@@ -38,7 +38,7 @@
 display: flex;
   flex-direction: column;
   gap: 2rem;
-  background-color:black;
+  /* background-color:black; */
 }
 .login-text-layout {
   display: flex;

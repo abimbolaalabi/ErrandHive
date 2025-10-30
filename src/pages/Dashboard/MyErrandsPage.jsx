@@ -37,23 +37,24 @@ const MyErrandsPage = () => {
               <CiLocationOn className='loc-icon' />
               <div className='pickup-text'>
                 <p>PickUp</p>
-                <span>50 Kiriri street</span>
+                <span>50 Kiriri Road</span>
               </div>
             </div>
 
           </div>
           <div></div>
-          <div className='erand-locationn'>
+          <div className='errand-cont'>
 
-            <div>
-              <div>
+            <div  className='errand-time-wrapper'>
+              <div className='errand-time'>
                 <CiClock1 />
-                <div >
+                <div style={{display: "flex", gap: "10px"}}>
                   <p>20/10/2025</p>
                   <span>&#8358;3,000</span>
                 </div>
               </div>
             </div>
+            <button>View details</button>
           </div>
 
         </div>
