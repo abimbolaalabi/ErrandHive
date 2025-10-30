@@ -35,28 +35,25 @@ const validateForm = () => {
   const { firstName, lastName, email, password, confirmPassword } = formData;
   const newErrors = {};
 
-  // 🔹 First name
   if (!firstName.trim()) {
     newErrors.firstName = "First name is required";
   } else if (!/^[A-Za-z]+$/.test(firstName)) {
     newErrors.firstName = "First name should only contain letters.";
   }
 
-  // 🔹 Last name
   if (!lastName.trim()) {
     newErrors.lastName = "Last name is required";
   } else if (!/^[A-Za-z]+$/.test(lastName)) {
     newErrors.lastName = "Last name should only contain letters.";
   }
 
-  // 🔹 Email validation
   if (email === "") {
     newErrors.email = "Email is required";
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     newErrors.email = "Invalid Email Format";
   }
 
-  // 🔹 Password validation (your new regex)
+ 
   if (!password) {
     newErrors.password = "Password is required";
   } else if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(password)) {
@@ -64,7 +61,7 @@ const validateForm = () => {
       "Password must contain at least one letter, one number, one special character, and be 8 characters long";
   }
 
-  // 🔹 Confirm password
+
   if (!confirmPassword) {
     newErrors.confirmPassword = "Please confirm your password";
   } else if (password !== confirmPassword) {
@@ -78,13 +75,10 @@ const validateForm = () => {
     toast.error(firstError);
     return false;
   }
-
   return true;
 };
 
 
-
-  // submit handler
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
@@ -98,7 +92,6 @@ const validateForm = () => {
       toast.success(res?.data?.message || "Registration successful!");
       localStorage.setItem("email", JSON.stringify(formData.email));
 
-      // reset form
       setFormData({
         firstName: "",
         lastName: "",
