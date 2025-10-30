@@ -112,9 +112,13 @@ const Login = () => {
                 type={show ? "text" : "password"}
                 name="password"
                 value={formData.password}
-                onChange={handleChange}
+               onChange={(e) => {
+        setFormData({ ...formData, password: e.target.value });
+        setErrors((prev) => ({ ...prev, password: "" })); // Clear password error while typing
+      }}
                 placeholder="Enter your Password"
                 className="pasword-input"
+                
               />
               {show ? (
                 <RxEyeOpen

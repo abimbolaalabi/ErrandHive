@@ -1,0 +1,12 @@
+.runner-dashboard-layout{
+    height: 100vh;
+    width: 100%;
+}
+.title-dashboard-runner{
+    margin-bottom: 1.5rem;
+}
+.dashboard-kyc{
+    width: 100%;
+    height: 15rem;
+    background-color: #fff;
+}

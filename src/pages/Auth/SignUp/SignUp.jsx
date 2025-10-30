@@ -78,6 +78,9 @@ const validateForm = () => {
   return true;
 };
 
+  const navigatetoverify = () => {
+    navigate("/verifyemail");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
