@@ -5,22 +5,68 @@ import runner from "../../../assets/runner.svg";
 import bicycle from "../../../assets/bicycle.svg";
 import money from "../../../assets/money.svg";
 import security from "../../../assets/Padlock.jpg";
+import { useState } from "react";
 import { IoChevronBackSharp } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./Forgot.css";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Forget = () => {
+  const BaseUrl = import.meta.env.VITE_BASE_URL;
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const navigatetoverify = () => {
+    navigate("/verifyemail");
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Verification code sent")
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!email) {
+      setError("Email is required.");
+      return;
+    }
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    setError("");
+
+    try {
+      const res = await axios.post(`${BaseUrl}/forgot-password`, { email });
+      console.log("Response:", res.data);
+      localStorage.setItem("resetEmail", email);
+      setEmail("");
+      toast.success(res?.data?.message);
+      navigatetoverify();
+      localStorage.setItem("isReset", true); // if coming from forgot password
+
+    } catch (err) {
+      console.error("Error:", err);
+      toast.error(
+        err?.response?.data?.message ||
+          "Failed to send verification code. Please try again."
+      );
+    }
   };
 
   return (
     <main className="verify-section">
+      <ToastContainer />
       <div className="logo-holder">
-          <img src="https://res.cloudinary.com/dwzomhflw/image/upload/v1761056644/IMG-20251021-WA0052_lf7sms.jpg" className ="logo" alt="" />
-        <span className="errand">Errandhive</span>
+        <img
+          src="https://res.cloudinary.com/dwzomhflw/image/upload/v1761056644/IMG-20251021-WA0052_lf7sms.jpg"
+          className="logo"
+          alt="Logo"
+        />
+        <span className="errand">ErrandHive</span>
       </div>
 
       <div className="eclipse-left">
@@ -58,17 +104,28 @@ const Forget = () => {
                 type="email"
                 placeholder="Enter email address"
                 className="forget-email-input"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setError("");
+                }}
               />
             </div>
 
+            {error && <p style={{ color: "red" }}>{error}</p>}
+
             <button type="submit" className="forget-btn">
-              Send Verification code
+              Send Verification Code
             </button>
 
             <div className="back-to-login-holder">
               <div className="back-hold">
                 <IoChevronBackSharp className="back-icon" />
-                <p className="back-text"><Link to="/login" className="link">Back to login</Link></p>
+                <p className="back-text">
+                  <Link to="/login" className="link">
+                    Back to login
+                  </Link>
+                </p>
               </div>
             </div>
           </div>
