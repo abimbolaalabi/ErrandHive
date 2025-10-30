@@ -46,7 +46,7 @@ const Forget = () => {
       setEmail("");
       toast.success(res?.data?.message);
       navigatetoverify();
-      localStorage.setItem("isReset", true); // if coming from forgot password
+      localStorage.setItem("isReset", true); 
 
     } catch (err) {
       console.error("Error:", err);

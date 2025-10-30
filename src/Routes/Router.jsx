@@ -1,6 +1,11 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import DashboardLayout from '../Components/Dashboard/DashboardLayout'
 import RunnerLayout from '../Components/RunerDashboardLayout/RunnerLayout'
+import RunnerDashboard from '../pages/Auth/RunnerDashboard/RunnerDashboard'
+import RunnerEarning from '../pages/Auth/RunnerDashboard/RunnerEarning'
+import ActiveJob from '../pages/Auth/RunnerDashboard/ActiveJob'
+import RunnerProfile from '../pages/Auth/RunnerDashboard/RunnerProfile'
+import RunnerMessage from "../pages/Auth/RunnerDashboard/RunnerMessage"
 import ForgotPassword from "../pages/Auth/Forgotpassword/Forget"
 import Login from '../pages/Auth/Login/Login'
 import ResetPassword from "../pages/Auth/Reset/ResetPassword"
@@ -38,9 +43,15 @@ const Router = () => {
           <Route path='my-earnings' element={<PaymentsPage />} />
           <Route path='messages' element={<MessagesPage />} />
           <Route path='profile' element={<ProfilePage />} />
-           
         </Route>
-         <Route path='/runnerlayout' element={<RunnerLayout />}></Route>
+
+         <Route path='/runnerlayout' element={<RunnerLayout />}>
+        <Route index element={<RunnerDashboard />} />
+         <Route path='runneractive' element={<ActiveJob />} />
+         <Route path='runnerearning' element={<RunnerEarning  />} />
+          <Route path='runnermessage' element={<RunnerMessage  />} />
+           <Route path='runnerprofile' element={<RunnerProfile />} />
+         </Route>
       </Routes>
 
     </BrowserRouter>
