@@ -28,7 +28,7 @@ const Router = () => {
         <Route path='/verifyemail' element={<VerifyEmail />} />
         <Route path='/forgot' element={<ForgotPassword />} />
         <Route path='/reset' element={<ResetPassword />} />
-           <Route path='/reset-otp' element={<ResetPasswordOtp />} />
+           {/* <Route path='/reset-otp' element={<ResetPasswordOtp />} /> */}
         {/* Dashboard Routes */}
         <Route path='/dashboard' element={<DashboardLayout />}>
           <Route index element={<DashboardPage/>} />
