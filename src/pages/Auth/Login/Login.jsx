@@ -3,7 +3,7 @@ import { GoEyeClosed } from "react-icons/go";
 import { RxEyeOpen } from "react-icons/rx";
 import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Carousel from "../../../Components/Carousel/Carousel";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -20,7 +20,7 @@ const Login = () => {
   const [errors, setErrors] = useState({ email: "", password: "" });
 
   const BaseURL = import.meta.env.VITE_BASE_URL;
-
+   const navigate = useNavigate()
   const validate = () => {
     const { email, password } = formData;
     const newErrors = { email: "", password: "" };
@@ -60,9 +60,9 @@ const Login = () => {
         toast.success(res?.data?.message);
         const userDetails = res?.data?.data;  // depends on API response
       const userToken = res?.data?.token;
-
       dispatch(setUserDetails({ userDetails, userToken }));
-
+      
+      navigate("/dashboard")
         setFormData({
           email: "",
           password: "",
