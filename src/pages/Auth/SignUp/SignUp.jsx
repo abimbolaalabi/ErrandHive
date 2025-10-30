@@ -79,9 +79,12 @@ const validateForm = () => {
     return false;
   }
 
-  return true;
-};
+    return true;
+  };
 
+  const navigatetoverify = () => {
+    navigate("/verifyemail");
+  };
 
 
   // submit handler
