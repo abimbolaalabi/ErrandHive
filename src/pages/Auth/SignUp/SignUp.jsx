@@ -107,7 +107,7 @@ const validateForm = () => {
       navigate("/verifyemail");
     } catch (error) {
       console.log("Signup error:", error);
-      toast.error(error?.response?.data?.message || "Registration failed");
+      toast.error(response?.data?.message || "Registration failed");
     } finally {
       setLoading(false);
     }

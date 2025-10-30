@@ -168,7 +168,7 @@ const Login = () => {
 
             <div className="dont-account">
               <p>
-                Don't have an account?{" "}
+                Don't have an account?
                 <span style={{ color: "#8133F1", cursor: "pointer" }}>
                   <Link to={"/clientvsrunner"} className="link">
                     Sign up
