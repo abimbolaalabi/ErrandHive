@@ -26,7 +26,6 @@ const Footer = () => {
             <li>Press</li>
           </ul>
         </div>
-
         <div className="footer-section">
           <h4>Support</h4>
           <ul>
