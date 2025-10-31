@@ -13,11 +13,11 @@ import { setUserDetails } from "../../../global/userSlice";
 
 const Login = () => {
   const [show, setShow] = useState(false);
-  const [loading, setLoading] = useState(false); // ✅ Added loading state
+  const [loading, setLoading] = useState(false); 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    remember: false, // ✅ Added checkbox state
+    remember: false, 
   });
   const [errors, setErrors] = useState({ email: "", password: "", remember: "" });
 
@@ -25,7 +25,7 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // ✅ Updated validation
+  
   const validate = () => {
     const { email, password, remember } = formData;
     const newErrors = { email: "", password: "", remember: "" };
@@ -44,7 +44,7 @@ const Login = () => {
       isValid = false;
     }
 
-    // ✅ Checkbox validation
+  
     if (!remember) {
       newErrors.remember = "You must check this box to continue";
       isValid = false;
@@ -66,7 +66,7 @@ const Login = () => {
     e.preventDefault();
     if (validate()) {
       try {
-        setLoading(true); // ✅ Start loading
+        setLoading(true); 
         const res = await axios.post(`${BaseURL}/login`, formData, {
           headers: { "Content-Type": "application/json" },
         });
@@ -87,7 +87,7 @@ const Login = () => {
         console.log("Login error:", error.response?.data || error.message);
         toast.error(error?.response?.data?.message || "Login failed");
       } finally {
-        setLoading(false); // ✅ Stop loading
+        setLoading(false); 
       }
     }
   };
@@ -124,7 +124,7 @@ const Login = () => {
             )}
           </div>
 
-          {/* Password */}
+          
           <div className="password-container">
             <label className="form-right-title">Password</label>
             <div className="password-right-input-box">
@@ -154,7 +154,7 @@ const Login = () => {
               <span className="error-message">{errors.password}</span>
             )}
 
-            {/* Checkbox */}
+            
             <div className="checkbox-login-form">
               <input
                 type="checkbox"
@@ -169,11 +169,11 @@ const Login = () => {
               <span className="error-message">{errors.remember}</span>
             )}
 
-            {/* Button with loading */}
+            
             <button
               type="submit"
               className="login-btn"
-              disabled={loading} // ✅ prevent double clicks
+              disabled={loading}
             >
               {loading ? "Logging in..." : "Login"}
             </button>
