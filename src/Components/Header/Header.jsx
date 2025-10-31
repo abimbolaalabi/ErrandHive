@@ -32,7 +32,6 @@ const Header = () => {
             <li className="header-navlink-list">How it Works</li>
           </ul>
         </nav>
-
         <div className="header-btn-holder">
            <Link to ={"/login"}>
              <button className="sign-in-btn">Sign in</button>
