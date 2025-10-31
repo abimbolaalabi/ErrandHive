@@ -76,7 +76,7 @@
   border-radius: 18px;
   overflow: hidden;
   position: absolute;
-  top: 20px;
+  top: 30px;
   right: 0;
 }
 
@@ -86,7 +86,7 @@
   border-radius: 18px;
   overflow: hidden;
   position: absolute;
-  bottom: 20px;
+  bottom: 40px;
   left: 60px;
 }
 
@@ -107,12 +107,12 @@
 
 .dot-1 {
   top: 140px;
-  right: 400px;
+  right: 500px;
 }
 
 .dot-2 {
   bottom: 140px;
-  left: 460px;
+  left: 550px;
 }
 
 @media (max-width: 1440px) {

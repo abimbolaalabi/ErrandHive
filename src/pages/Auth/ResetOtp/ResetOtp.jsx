@@ -21,7 +21,7 @@ const ResetOtp = () => {
   const navigate = useNavigate();
 
   const BaseURL = import.meta.env.VITE_BASE_URL;
-  const userEmail = JSON.parse(localStorage.getItem("email"));
+  const userEmail = JSON.parse(localStorage.getItem("resetEmail"));
 
   const handleChange = (e, index) => {
     const value = e.target.value.replace(/[^0-9]/g, "");
@@ -79,15 +79,17 @@ const ResetOtp = () => {
       setBtnLoading(true);
       const res = await axios.post(`${BaseURL}/reset-otp`, {
         email: userEmail,
-        otp: otpCode,
+        otp: otpCode,   
       });
 
       toast.success(res?.data?.message || "Verification successful!");
       setCodes(["", "", "", "", "", ""]);
 
-      setTimeout(() => {
-        navigate("/reset");
-      }, 2000);
+      // setTimeout(() => {
+      //   navigate("/reset");
+      // }, 2000);
+
+      navigate("/reset");
       
     } catch (error) { 
       console.log(error);
