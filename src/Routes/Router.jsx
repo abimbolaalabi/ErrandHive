@@ -9,6 +9,7 @@ import RunnerMessage from "../pages/Auth/RunnerDashboard/RunnerMessage"
 import ForgotPassword from "../pages/Auth/Forgotpassword/Forget"
 import Login from '../pages/Auth/Login/Login'
 import ResetPassword from "../pages/Auth/Reset/ResetPassword"
+import ResetOtp from "../pages/Auth/ResetOtp/ResetOtp"
 import SignUp from '../pages/Auth/SignUp/SignUp'
 import VerifyEmail from '../pages/Auth/VerifyEmail/VerifyEmail'
 import DashboardPage from '../pages/Dashboard/DashboardPage/DashboardPage'
@@ -33,7 +34,7 @@ const Router = () => {
         <Route path='/verifyemail' element={<VerifyEmail />} />
         <Route path='/forgot' element={<ForgotPassword />} />
         <Route path='/reset' element={<ResetPassword />} />
-           {/* <Route path='/reset-otp' element={<ResetPasswordOtp />} /> */}
+           <Route path='/reset-otp' element={<ResetOtp />} />
         {/* Dashboard Routes */}
         <Route path='/dashboard' element={<DashboardLayout />}>
           <Route index element={<DashboardPage/>} />
