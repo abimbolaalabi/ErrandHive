@@ -82,7 +82,7 @@
 
 .right-bottom-image {
   width: 350px;
-  height: 213px;
+  height: 250px;
   border-radius: 18px;
   overflow: hidden;
   position: absolute;
@@ -115,11 +115,6 @@
   left: 460px;
 }
 
-/* ================================
-   🔹 MEDIA QUERIES
-================================ */
-
-/* Large Screens (1440px and below) */
 @media (max-width: 1440px) {
   .subheader-writeup-holder-h1 {
     font-size: 42px;
@@ -140,7 +135,6 @@
   }
 }
 
-/* Laptops (1024px and below) */
 @media (max-width: 1024px) {
   .subheader-container {
     padding: 50px;
@@ -169,7 +163,6 @@
   }
 }
 
-/* Tablets (768px and below) */
 @media (max-width: 768px) {
   .subheader-container {
     flex-direction: column;
@@ -215,6 +208,5 @@
   }
 }
 
-/* Mobile (480px and below — iPhone 6 and smaller) */
 @media (max-width: 480px) {
   .subheader-contain

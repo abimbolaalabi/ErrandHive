@@ -1,8 +1,11 @@
 import "./Header.css";
 import { Link } from "react-router-dom";
-import { FaBars } from "react-icons/fa"; // ✅ added for the hamburger icon
+import { FaBars } from "react-icons/fa";
+import { useState } from "react";
 
 const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <header className="header-container">
       <div className="header-container-wrapper">
@@ -14,7 +17,8 @@ const Header = () => {
           />
           <span className="errand">Errandhive</span>
         </div>
-        <div className="menu-icon">
+
+        <div className="menu-icon" onClick={() => setMenuOpen(!menuOpen)}>
           <FaBars />
         </div>
 
@@ -34,6 +38,23 @@ const Header = () => {
           <button className="get-started-btn">Get Started</button>
         </div>
       </div>
+
+      {menuOpen && (
+        <div className="mobile-dropdown">
+          <ul className="mobile-menu-list">
+            <li className="mobile-menu-item">Home</li>
+            <li className="mobile-menu-item">About</li>
+            <li className="mobile-menu-item">Features</li>
+            <li className="mobile-menu-item">How it Works</li>
+          </ul>
+          <div className="mobile-btn-holder">
+            <Link to="/login">
+              <button className="sign-in-btn">Sign in</button>
+            </Link>
+            <button className="get-started-btn">Get Started</button>
+          </div>
+        </div>
+      )}
     </header>
   );
 };

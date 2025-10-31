@@ -70,7 +70,6 @@
 .faq-icon.rotate {
   transform: rotate(180deg);
 }
-
 .faq-answer {
   background: #fff;
   border: 1px solid #e6e6e6;
@@ -99,6 +98,7 @@
     transform: translateY(0);
   }
 }
+
 @media (max-width: 1024px) {
   .faq-wrapper {
     flex-direction: column;
@@ -141,16 +141,3 @@
     font-size: 16px;
   }
 }
-.menu-icon {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .menu-icon {
-    display: block;
-    font-size: 26px;
-    cursor: pointer;
-    color: #212121;
-  }
-}
-
