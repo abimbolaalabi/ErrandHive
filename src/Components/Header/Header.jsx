@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { useState } from "react";
 import "./Header.css"
-import {Link, useNavigate} from "react-router-dom"
+
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
