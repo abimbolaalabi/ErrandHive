@@ -50,7 +50,7 @@ const Router = () => {
          <Route path='runneractive' element={<ActiveJob />} />
          <Route path='runnerearning' element={<RunnerEarning  />} />
           <Route path='runnermessage' element={<RunnerMessage  />} />
-           <Route path='runnerprofile' element={<RunnerProfile />} />
+         <Route path='runnerprofile' element={<RunnerProfile />} />
          </Route>
       </Routes>
 

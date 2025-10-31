@@ -1,0 +1,157 @@
+.active-job{
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+}
+.active-job-title{
+    font-weight: 400;
+    font-size: 24px;
+    font-family: Arial;
+    font-style: Regular;
+}
+.card-holder-active-job{
+    width: 100%;
+    height: 15rem;
+    /* background-color: green; */
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+}
+.card-active-job{
+    width: 260px;
+    height: 70%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+     transition: all 0.3s ease; 
+}
+
+.card-active-job:hover {
+  transform: translateY(-5px) ;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 10px 25px 0px;
+  cursor: pointer;
+}
+
+.text-container-job{
+ width: 65%;
+ height: 60%;
+ padding-block: 1.5rem;
+ padding-inline: 1rem;
+}
+.active-job-description{
+    font-family: Poppins;
+    font-weight: 600;
+    font-style: SemiBold;
+    color: #212121;
+    font-size: 1rem;
+}
+.numbr-jobs{
+  font-size: 25px;
+   font-family: Poppins;
+   font-weight: 700;
+ font-style: Bold;
+ color: #212121;
+}
+.icon-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-holder-jobs  {
+  stroke: white; 
+  width: 24px;
+  height: 24px;
+}
+.delivery-card-job{
+    width: 100%;
+    height: 20rem;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+}
+.active-delivery-holder-1{
+    width: 40%;
+    height: 100%;
+}
+.active-delivery-holder-2{
+     width: 30%;
+ height: 100%;
+ display: flex;
+ flex-direction: column;
+ gap: 2rem;
+}
+.picky-wrapper{
+     margin-top: 3rem;
+}
+.pickup-holder{
+ font-style: Medium;
+ font-weight: 500;
+ font-size: 25px;
+ font-family: Poppins;
+}
+.pickup-address-job{
+    padding-block: 3rem;
+    padding-inline: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+.pickup-address-street-tiyle{
+    font-weight: 400;
+    font-family: Poppins;
+    font-size: 1rem;
+    font-size: 1rem;
+    font-style: Regular;
+}
+.pickup-address-street-{
+    font-weight: 400;
+font-family: Poppins;
+font-size: 1rem;
+font-size: 1rem;
+font-style: Regular;
+}
+.pickup-address-date-job{
+    padding-block: 1rem;
+padding-inline: 1.5rem;
+display: flex;
+flex-direction: column;
+gap: 0.4rem;
+}
+.pckup-2-box{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 7.5rem;
+}
+.pickup-2-20box{
+     width: 100%;
+ height: 20%;
+ display: flex;
+ justify-content: center;
+align-items: center;
+}
+.negotiation-btn{
+    height: 22px;
+    background-color: #8133F1;
+    border: none;
+    width: 150px;
+     font-weight: 400;
+ font-family: Poppins;
+ font-size: 1rem;
+ font-size: 1rem;
+ font-style: Regular;
+ color: white;
+ margin-left: 2rem;
+ cursor: pointer;
+}

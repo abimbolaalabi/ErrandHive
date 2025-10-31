@@ -7,9 +7,9 @@
 .sidebar-runner {
   width: 250px;
   height: 100%;
-  position: sticky;
-  left: 0;
+   position: sticky;
   top: 0;
+   left: 0;
 }
 .sidebar-header{
   width: 100%;
@@ -92,6 +92,9 @@ align-items: center;
   padding: 10px 20px;
   background-color: #FFFFFF;
   height: 70px;
+  position: sticky;
+  top: 0;
+ left: 0;
 }
 
 .input-holder {
@@ -168,8 +171,6 @@ right: 8px;
   display: flex;
 justify-content: center;
 align-items: center;
-
-
 }
 .Profile-name-user-holder{
  width: 30%;

@@ -1,0 +1,81 @@
+.runner-message{
+width: 100%;
+height: auto;
+min-height: 100vh;
+}
+.runner-message-h1{
+     font-weight: 500;
+ font-family: Poppins;
+ font-size: 24px;
+ font-style: Medium;
+}
+.runner-message-p{
+     font-weight: 400;
+ font-family: Poppins;
+ font-size: 1rem;
+ font-size: 1rem;
+ font-style: Regular;
+}
+.chat-box{
+    width: 100%;
+    height: 600px;
+    /* background-color: #fff; */
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+.chat-search-box{
+    width: 40%;
+    height: 32rem;
+    background:#F4F6F8;
+    border-radius: 1rem;
+}
+.search-the-message{
+    display: flex;
+    width: 350px;
+    background:#F2EBFE;
+    margin-top: 2rem;
+    border-radius: 20px;
+    height: 34px;
+    margin-left: 2rem;
+    align-items: center;
+   
+}
+.search-the-message input{
+    border: none;
+    outline: none;
+    overflow: hidden;
+    background: transparent;
+    padding-left: 0.3rem;
+}
+.chat-app-box{
+    width: 55%;
+    height: 35rem;
+    background:#F4F6F8;
+border-radius: 1rem;
+overflow-y: auto;
+}
+.chat-search-history{
+    width: 80%;
+    height: 8rem;
+    background-color: red;
+    margin-top: 2.5rem;
+    margin-left: 2rem;
+    background: #8133F11A;
+    border-radius: 12px;
+    border:1px solid #8133F1;
+}
+.circle-profile{
+ background-color:#AB76F6;
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  display: flex;
+justify-content: center;
+align-items: center;
+ color: #FFFFFF;
+ font-size: 24px;
+ font-weight: 400;
+
+}

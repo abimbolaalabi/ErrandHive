@@ -11,8 +11,6 @@ import Footer from '../../Components/Footer/Footer'
 
 
 
-
-
 const LandingPage = () => {
   return (
     <main className='landing-page-container'>

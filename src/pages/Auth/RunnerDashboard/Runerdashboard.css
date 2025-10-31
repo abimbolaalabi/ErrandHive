@@ -1,5 +1,5 @@
 .runner-dashboard-layout{
-    height: 100vh;
+    height: max-content;
     width: 100%;
 }
 .title-dashboard-runner{
@@ -7,6 +7,50 @@
 }
 .dashboard-kyc{
     width: 100%;
-    height: 15rem;
+    height: 20rem;
     background-color: #fff;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-block: 0.5rem;
+}
+.cube-holder{
+    width: 12%;
+    height: 50%;
+    margin-bottom: 0.5rem;
+}
+.cube-holder img{
+    width: 100%;
+}
+.remainder-holder{
+    width: 100%;
+    /* height: max-content; */
+}
+.kyc-reminder{
+    font-size: 25px;
+    font-weight: 500;
+    color: #212121;
+    font-style: Medium;
+}
+.complete-kyc{
+    font-weight: 400;
+    font-size: 1rem;
+    font-style: Regular;
+}
+.kyc-btn-holder{
+    margin-top: 2rem;
+}
+.kyc-btn{
+  height: 30px;
+  width: 150px;
+  border: none;
+  background-color:#8133F1;
+  color: white;
+  border-radius: 8px;
+  font-family: Poppins;
+  font-style: SemiBold;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
 }
