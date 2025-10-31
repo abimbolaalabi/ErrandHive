@@ -1,0 +1,226 @@
+/* --- Base Modal Styles (Kept your original code) --- */
+.modalerrand-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;           
+  height: 100vh;          
+  background-color: rgba(0, 0, 0, 0.3); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;         
+}
+
+.modalerrand-child {
+  background-color: #fff;
+  width: 40%; /* Adjusted for a desktop-like view */
+/* Min size for smaller screens */
+  height: 90%;
+  max-height: 750px; /* Prevent it from getting too tall */
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 4px 20px rgba(0,0,0,0.15);
+  z-index: 1001;
+  padding: 0; /* Remove default padding for controlled layout */
+  overflow: hidden; /* Contains the children */
+}
+
+.top-note-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    font-size: 13px;
+    color: #333;
+    font-weight: 400;
+}
+
+.top-note {
+    margin: 0;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.top-note strong {
+    font-weight: 700;
+}
+
+.close-button {
+    cursor: pointer;
+    font-weight: bold;
+    line-height: 1;
+    padding: 0 5px;
+}
+
+/* Header/Subheader */
+.post-errand-header {
+    text-align: center;
+    font-size: 18px;
+    color: #1a1a1a;
+    margin: 15px 0 5px 0;
+    font-weight: 600;
+}
+
+.post-errand-subheader {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 400;
+    color: #666;
+    margin: 0 0 20px 0;
+}
+
+/* --- Form Specific Styles --- */
+.form-content {
+    padding: 0 20px;
+    overflow-y: auto; /* Allows scrolling for the form fields */
+    flex-grow: 1; /* Takes up available space */
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.label-with-icon,
+.label-text {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    color: #212121;
+    margin-bottom: 8px;
+    font-weight: 400;
+}
+
+.label-with-icon svg {
+    margin-right: 8px;
+    color: #999; /* Icon color */
+    font-size: 1rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #F2EBFE66; 
+    box-sizing: border-box; 
+}
+
+.form-input::placeholder {
+    color: #aaa;
+    font-size: 0.95rem;
+}
+
+.form-textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #f7f7f7;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.form-textarea::placeholder {
+    color: #aaa;
+    font-size: 0.95rem;
+}
+
+
+/* --- Attachments Section --- */
+.attachments-section {
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.attachment-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    /* border: 2px dashed #a052ff;  */
+    border-radius: 8px;
+    background-color: #f9f0ff; /* Very light background for the box */
+    text-align: center;
+    cursor: pointer;
+}
+
+.attachment-icon {
+    font-size: 1.5rem;
+    color: #a052ff;
+    margin-bottom: 5px;
+}
+
+.attachment-box p {
+    margin: 2px 0;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.attachment-box .max-file-size {
+    font-size: 0.75rem;
+    color: #777;
+}
+
+/* --- Action Buttons --- */
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 15px;
+    border-top: 1px solid #eee; /* Separator line */
+}
+
+.btn {
+    flex: 1;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.cancel-btn {
+    background-color: #fff;
+    color: #a052ff; /* Primary color text */
+    border: 2px solid #a052ff; /* Primary color outline */
+}
+
+.cancel-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.post-btn {
+    background-color: #a052ff; /* Primary action color */
+    color: #fff;
+    border: 2px solid #a052ff; /* Consistent border */
+}
+
+.post-btn:hover {
+    background-color: #8c42e5; /* Slightly darker hover */
+}
+
+/* --- Media Query for Mobile Responsiveness --- */
+@media (max-width: 600px) {
+    .modalerrand-child {
+        width: 90%;
+        height: 95%;
+        border-radius: 0.5rem;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

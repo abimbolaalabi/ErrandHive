@@ -2,12 +2,16 @@ import React from 'react'
 import "./LandingPage.css"
 import Header from "../../Components/Header/Header"
 import SubHeaderHero from "../../Components/SubHeaderhero/SubHeaderHero"
-import MidHero from "../../Components/MidHero/MidHero"
-import MyHero from "../../Components/MyHero/MyHero"
-import NewHero from "../../Components/NewHero/NewHero"
-import MoreHero from "../../Components/MoreHero/MoreHero"
-import DownHero from "../../Components/DownHero/DownHero"
-import Footer from "../../Components/Footer/Footer"
+import MidHero from '../../Components/Midhero/MidHero'
+import MyHero from '../../Components/Myhero/MyHero'
+import NewHero from '../../Components/Newhero/NewHero'
+import MoreHero from '../../Components/Morehero/MoreHero'
+import DownHero from '../../Components/DownHero/DownHero'
+import Footer from '../../Components/Footer/Footer'
+
+
+
+
 
 const LandingPage = () => {
   return (
@@ -19,10 +23,12 @@ const LandingPage = () => {
           <NewHero />
           <MoreHero />
           <DownHero />
-          <Footer />
-         </main>
+          <Footer/>
+          {/* <Footer /> */}
+</main>
   )
 }
 
 export default LandingPage
+
 

@@ -3,25 +3,32 @@ import { GoEyeClosed } from "react-icons/go";
 import { RxEyeOpen } from "react-icons/rx";
 import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Carousel from "../../../Components/Carousel/Carousel";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { setUserDetails } from "../../../global/userSlice";
 
 const Login = () => {
   const [show, setShow] = useState(false);
+  const [loading, setLoading] = useState(false); 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    remember: false, 
   });
-  const [errors, setErrors] = useState({ email: "", password: "" });
+  const [errors, setErrors] = useState({ email: "", password: "", remember: "" });
 
   const BaseURL = import.meta.env.VITE_BASE_URL;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
+  
   const validate = () => {
-    const { email, password } = formData;
-    const newErrors = { email: "", password: "" };
+    const { email, password, remember } = formData;
+    const newErrors = { email: "", password: "", remember: "" };
     let isValid = true;
 
     if (!email.trim()) {
@@ -37,34 +44,50 @@ const Login = () => {
       isValid = false;
     }
 
+  
+    if (!remember) {
+      newErrors.remember = "You must check this box to continue";
+      isValid = false;
+    }
+
     setErrors(newErrors);
     return isValid;
   };
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value, type, checked } = e.target;
+    setFormData({ ...formData, [name]: type === "checkbox" ? checked : value });
+    setErrors({ ...errors, [name]: "" });
   };
+
+  const dispatchUser = useDispatch();
 
   const loginSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
       try {
+        setLoading(true); 
         const res = await axios.post(`${BaseURL}/login`, formData, {
           headers: { "Content-Type": "application/json" },
         });
 
         console.log(res?.data);
         toast.success(res?.data?.message);
+        const userDetails = res?.data?.data;
+        const userToken = res?.data?.token;
+        dispatchUser(setUserDetails({ userDetails, userToken }));
 
-        localStorage.setItem("userToken", res?.data?.data?.id);
-
+        navigate("/dashboard");
         setFormData({
           email: "",
           password: "",
+          remember: false,
         });
       } catch (error) {
         console.log("Login error:", error.response?.data || error.message);
         toast.error(error?.response?.data?.message || "Login failed");
+      } finally {
+        setLoading(false); 
       }
     }
   };
@@ -82,6 +105,7 @@ const Login = () => {
             <h1 className="login-right-text">Login to your account</h1>
           </div>
 
+          {/* Email */}
           <div className="email-container">
             <label className="form-right-title">Email address</label>
             <div className="email-right-input-box">
@@ -100,6 +124,7 @@ const Login = () => {
             )}
           </div>
 
+          
           <div className="password-container">
             <label className="form-right-title">Password</label>
             <div className="password-right-input-box">
@@ -129,13 +154,28 @@ const Login = () => {
               <span className="error-message">{errors.password}</span>
             )}
 
+            
             <div className="checkbox-login-form">
-              <input type="checkbox" className="checkbox" />
+              <input
+                type="checkbox"
+                name="remember"
+                checked={formData.remember}
+                onChange={handleChange}
+                className="checkbox"
+              />
               <span className="remember-me-checkbox">Remember me</span>
             </div>
+            {errors.remember && (
+              <span className="error-message">{errors.remember}</span>
+            )}
 
-            <button type="submit" className="login-btn">
-              Login
+            
+            <button
+              type="submit"
+              className="login-btn"
+              disabled={loading}
+            >
+              {loading ? "Logging in..." : "Login"}
             </button>
 
             <article className="login-right-or">
@@ -159,7 +199,7 @@ const Login = () => {
 
             <div className="dont-account">
               <p>
-                Don't have an account?{" "}
+                Don't have an account?
                 <span style={{ color: "#8133F1", cursor: "pointer" }}>
                   <Link to={"/clientvsrunner"} className="link">
                     Sign up

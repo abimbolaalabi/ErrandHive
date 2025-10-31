@@ -1,4 +1,4 @@
-import "./VerifyEmail.css";
+import "./Resetotp.css"
 import logo1 from "../../../assets/logo.svg";
 import eclipseleft from "../../../assets/eclipse.svg";
 import eclipseright from "../../../assets/eclipse2.svg";
@@ -12,7 +12,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 
-const VerifyEmail = () => {
+const ResetOtp = () => {
   const [codes, setCodes] = useState(["", "", "", "", "", ""]);
   const [error, setError] = useState("");
   const [BtnLoading, setBtnLoading] = useState(false);
@@ -22,7 +22,6 @@ const VerifyEmail = () => {
 
   const BaseURL = import.meta.env.VITE_BASE_URL;
   const userEmail = JSON.parse(localStorage.getItem("email"));
-
 
   const handleChange = (e, index) => {
     const value = e.target.value.replace(/[^0-9]/g, "");
@@ -37,7 +36,6 @@ const VerifyEmail = () => {
       inputRefs.current[index + 1]?.focus();
     }
   };
-
 
   const handleKeyDown = (e, index) => {
     if (e.key === "Backspace" && !codes[index] && index > 0) {
@@ -79,7 +77,7 @@ const VerifyEmail = () => {
 
     try {
       setBtnLoading(true);
-      const res = await axios.post(`${BaseURL}/verify-otp`, {
+      const res = await axios.post(`${BaseURL}/reset-otp`, {
         email: userEmail,
         otp: otpCode,
       });
@@ -88,8 +86,9 @@ const VerifyEmail = () => {
       setCodes(["", "", "", "", "", ""]);
 
       setTimeout(() => {
-        navigate("/login");
+        navigate("/reset");
       }, 2000);
+      
     } catch (error) { 
       console.log(error);
       toast.error(error?.response?.data?.message || "Invalid verification code");
@@ -97,15 +96,6 @@ const VerifyEmail = () => {
       setBtnLoading(false);
     }
   };
-  const resetOtp = async()=>{
-  try{
-  const res = await axios.post(`${BaseURL}/reset-otp`, {
-    email:userEmail
-  })
-  }catch(err){
-    console.log("err",err)
-  }
-  }
 
   return (
     <main className="verify-section">
@@ -206,4 +196,4 @@ const VerifyEmail = () => {
   );
 };
 
-export default VerifyEmail;
+export default ResetOtp;

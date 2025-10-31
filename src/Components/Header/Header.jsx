@@ -2,6 +2,8 @@ import "./Header.css";
 import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { useState } from "react";
+import "./Header.css"
+import {Link, useNavigate} from "react-router-dom"
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -32,10 +34,13 @@ const Header = () => {
         </nav>
 
         <div className="header-btn-holder">
-          <Link to="/login">
-            <button className="sign-in-btn">Sign in</button>
-          </Link>
-          <button className="get-started-btn">Get Started</button>
+           <Link to ={"/login"}>
+             <button className="sign-in-btn">Sign in</button>
+             </Link>
+             <Link to = {"/clientvsrunner"}>
+                    <button className="get-started-btn" >Get Started</button>
+             </Link>
+        
         </div>
       </div>
 
