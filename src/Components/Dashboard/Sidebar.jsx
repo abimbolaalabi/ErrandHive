@@ -68,7 +68,6 @@ const Sidebar = () => {
           />
           <div className="logo-text">
             <span className="logo-title">ErrandHive</span>
-            <span className="logo-subtitle">Post errands</span>
           </div>
         </div>
       </div>
