@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+
 import "./RunnerLayout.css";
 import { IoIosSearch } from "react-icons/io";
 import { 
@@ -15,8 +15,6 @@ import { Outlet, useNavigate, useLocation } from "react-router-dom";
 
 const RunnerLayout = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-
   const menuItems = [
     { label: "Dashboard", icon: <MdOutlineDashboard />, path: "/runnerlayout" },
     { label: "Active Jobs", icon: <FaRunning />, path: "/runnerlayout/runneractive" },
@@ -45,7 +43,6 @@ const RunnerLayout = () => {
           </div>
         </div>
 
-        {/* ✅ Sidebar Links */}
         <div className="sidebar-main">
           {menuItems.map((item, index) => {
             const isActive = location.pathname === item.path;
@@ -69,7 +66,6 @@ const RunnerLayout = () => {
         </div>
       </aside>
 
-      {/* Main Section */}
       <div className="main-section">
         <header className="header">
           <div className="input-holder">

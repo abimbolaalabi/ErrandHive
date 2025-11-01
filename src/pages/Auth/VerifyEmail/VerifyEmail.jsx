@@ -23,6 +23,7 @@ const VerifyEmail = () => {
   const BaseURL = import.meta.env.VITE_BASE_URL;
   const userEmail = JSON.parse(localStorage.getItem("email"));
 
+
   const handleChange = (e, index) => {
     const value = e.target.value.replace(/[^0-9]/g, "");
     if (!/^[0-9]?$/.test(value)) return;
@@ -36,6 +37,7 @@ const VerifyEmail = () => {
       inputRefs.current[index + 1]?.focus();
     }
   };
+
 
   const handleKeyDown = (e, index) => {
     if (e.key === "Backspace" && !codes[index] && index > 0) {
