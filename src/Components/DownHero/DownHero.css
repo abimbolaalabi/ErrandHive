@@ -70,8 +70,6 @@
 .faq-icon.rotate {
   transform: rotate(180deg);
 }
-
-/* Dropdown answer */
 .faq-answer {
   background: #fff;
   border: 1px solid #e6e6e6;
@@ -101,7 +99,6 @@
   }
 }
 
-/* ✅ Responsive for tablets and laptops */
 @media (max-width: 1024px) {
   .faq-wrapper {
     flex-direction: column;
@@ -122,7 +119,6 @@
   }
 }
 
-/* ✅ Responsive for small screens (phones) */
 @media (max-width: 600px) {
   .downhero {
     padding: 40px 15px;

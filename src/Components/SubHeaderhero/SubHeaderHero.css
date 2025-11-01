@@ -76,17 +76,17 @@
   border-radius: 18px;
   overflow: hidden;
   position: absolute;
-  top: 20px;
+  top: 30px;
   right: 0;
 }
 
 .right-bottom-image {
   width: 350px;
-  height: 213px;
+  height: 250px;
   border-radius: 18px;
   overflow: hidden;
   position: absolute;
-  bottom: 20px;
+  bottom: 40px;
   left: 60px;
 }
 
@@ -107,19 +107,14 @@
 
 .dot-1 {
   top: 140px;
-  right: 400px;
+  right: 500px;
 }
 
 .dot-2 {
   bottom: 140px;
-  left: 460px;
+  left: 550px;
 }
 
-/* ================================
-   🔹 MEDIA QUERIES
-================================ */
-
-/* Large Screens (1440px and below) */
 @media (max-width: 1440px) {
   .subheader-writeup-holder-h1 {
     font-size: 42px;
@@ -140,7 +135,6 @@
   }
 }
 
-/* Laptops (1024px and below) */
 @media (max-width: 1024px) {
   .subheader-container {
     padding: 50px;
@@ -169,7 +163,6 @@
   }
 }
 
-/* Tablets (768px and below) */
 @media (max-width: 768px) {
   .subheader-container {
     flex-direction: column;
@@ -215,7 +208,6 @@
   }
 }
 
-/* Mobile (480px and below — iPhone 6 and smaller) */
 @media (max-width: 480px) {
 
 }
