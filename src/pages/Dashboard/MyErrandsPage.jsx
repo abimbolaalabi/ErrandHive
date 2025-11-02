@@ -21,9 +21,6 @@ const MyErrandsPage = () => {
       </div>
 
 
-
-      <h3 className="recent-title">Recent Errands</h3>
-
       <div className="recent-card">
   <div className="recent-header">
     <h4>Pickup Document</h4>

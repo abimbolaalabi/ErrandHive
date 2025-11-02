@@ -4,11 +4,11 @@
   display: flex;
   justify-content: center;
   gap: 0.2rem;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .login-left {
-  width: 50%;
+  width: 60%;
   /* height: 100vh; */
 }
 .login-left-header {
@@ -21,6 +21,7 @@
 .login-right {
   width: 40%;
   /* min-height: 100vh; */
+  background-color: cornflowerblue;
   display: flex;
   justify-content: center;
   align-items: center;
