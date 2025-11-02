@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './MyErrandPage.css';
 import ModalErrand from '../../Components/ModalErrand/ModalErrand';
 import { CiLocationOn, CiClock1 } from "react-icons/ci";
+import { BsClock } from 'react-icons/bs';
 
 
 const MyErrandsPage = () => {
@@ -16,50 +17,46 @@ const MyErrandsPage = () => {
             Manage your errands.
           </p>
         </div>
-        <button onClick={() => setErrandMod(true)}>+ <span>New Errand</span></button>
+        <button onClick={() => setErrandMod(true)}> <span>+ New Errand</span></button>
       </div>
 
-      <div className="errands-list">
-        <div className="errand-card">
-          <div className='errand-text'>
-            <p>Picking Document</p>
-            <button>pending</button>
-          </div>
-          <div className='errand-location-wrapper'>
-            <div className='errand-location'>
-              <CiLocationOn className='loc-icon' />
-              <div className='pickup-text'>
-                <p>PickUp</p>
-                <span>40 Muyibi street</span>
-              </div>
-            </div>
-            <div className='errand-locationn'>
-              <CiLocationOn className='loc-icon' />
-              <div className='pickup-text'>
-                <p>PickUp</p>
-                <span>50 Kiriri Road</span>
-              </div>
-            </div>
 
-          </div>
-          <div></div>
-          <div className='errand-cont'>
 
-            <div  className='errand-time-wrapper'>
-              <div className='errand-time'>
-                <CiClock1 />
-                <div style={{display: "flex", gap: "10px"}}>
-                  <p>20/10/2025</p>
-                  <span>&#8358;3,000</span>
-                </div>
-              </div>
-            </div>
-            <button>View details</button>
-          </div>
+      <h3 className="recent-title">Recent Errands</h3>
 
-        </div>
+      <div className="recent-card">
+  <div className="recent-header">
+    <h4>Pickup Document</h4>
+    <span className="status-badge">Pending</span>
+  </div>
 
-      </div>
+  <div className="pickup-delivery-row">
+    {/* Pickup Section */}
+    <div className="pickup-section">
+      <p className="icon-text">
+        <CiLocationOn size={18} /> <span className="label">Pickup</span>
+      </p>
+      <p className="address">40 Muyibi street</p>
+    </div>
+
+    {/* Delivery Section */}
+    <div className="delivery-section">
+      <p className="icon-text">
+        <CiLocationOn size={18} /> <span className="label">Delivery</span>
+      </p>
+      <p className="address">50 Kirikiri road</p>
+    </div>
+  </div>
+
+  <div className="recent-footer">
+    <p className="date">
+      <BsClock size={17} /> 20/10/2025
+    </p>
+    <p className="price">₦3,000</p>
+
+    <button className="details-btn">View Details</button>
+  </div>
+</div>
 
 
 

@@ -97,15 +97,7 @@ const VerifyEmail = () => {
       setBtnLoading(false);
     }
   };
-  const resetOtp = async()=>{
-  try{
-  const res = await axios.post(`${BaseURL}/reset-otp`, {
-    email:userEmail
-  })
-  }catch(err){
-    console.log("err",err)
-  }
-  }
+
 
   return (
     <main className="verify-section">

@@ -1,4 +1,4 @@
-
+/* 
 .landing-page {
   min-height: 100vh;
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
@@ -228,7 +228,7 @@
   color: #64748b;
   font-size: 0.95rem;
   line-height: 1.5;
-}
+} */
 
 /* Responsive Design */
 @media (max-width: 768px) {

@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../Context/App';
 import './Header.css';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
   const { userType } = useContext(AppContext);
+    const user = useSelector((state) => state.user.userDetails)
 
   return (
     <header className="dashboard-header">
@@ -37,7 +39,7 @@ const Header = () => {
             </svg>
           </div>
           <div className="user-info">
-            <span className="user-name">John Doe</span>
+            <span className="user-name"> {`${user.firstName} ${user.lastName}`}</span>
             <span className="user-role">{userType}</span>
           </div>
         </div>

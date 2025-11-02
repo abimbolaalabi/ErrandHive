@@ -82,10 +82,11 @@
   border-radius: 8px;
   transition: background-color 0.2s;
   cursor: pointer;
+  background-color: #8133F1;
 }
 
 .user-profile:hover {
-  background: #f8fafc;
+  /* background: #f8fafc; */
 }
 
 .user-avatar {
@@ -109,6 +110,7 @@
   color: #1e293b;
   font-size: 0.875rem;
   line-height: 1.2;
+   color: #64748b;
 }
 
 .user-role {

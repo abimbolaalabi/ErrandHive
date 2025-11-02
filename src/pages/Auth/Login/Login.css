@@ -1,7 +1,6 @@
 .login-container {
   width: 100%;
- min-height: 100vh;
- height: auto;
+  height: 100vh;
   display: flex;
   justify-content: center;
   gap: 0.2rem;
@@ -10,23 +9,23 @@
 
 .login-left {
   width: 50%;
-  height: 100vh;
+  /* height: 100vh; */
 }
-.login-left-header{
- display: flex;
- gap: 0.2rem;
- align-items: center;
- margin-left: 1rem;
- margin-top: 1rem;
+.login-left-header {
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
+  margin-left: 1rem;
+  margin-top: 1rem;
 }
-.login-right{
+.login-right {
   width: 40%;
-   min-height: 100vh;
+  /* min-height: 100vh; */
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
-   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  /* overflow: hidden; */
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .login-right-form {
   width: 100%;
@@ -35,7 +34,7 @@
   padding-inline: 2rem;
   box-sizing: border-box;
   padding: 1.5rem;
-display: flex;
+  display: flex;
   flex-direction: column;
   gap: 2rem;
   /* background-color:black; */
@@ -158,21 +157,19 @@ display: flex;
 
 .login-right-or {
   width: 95%;
-display: flex;
-justify-content: center;
-align-items: center;
-gap: 0.5rem;
-margin-top: 1rem;
-margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .line {
-  flex: 1;            
-  height: 1px;         
+  flex: 1;
+  height: 1px;
   background-color: #8133f1;
 }
-
-
 
 .or {
   white-space: nowrap;
@@ -183,10 +180,10 @@ margin-bottom: 1rem;
 }
 
 .continue-with-google {
-   width: 95%;
- height: 3rem;
- border-radius: 0.5rem;
- cursor: pointer;
+  width: 95%;
+  height: 3rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
   color: #212121;
   background-color: #f2ebfe;
   border: none;
@@ -267,7 +264,6 @@ margin-bottom: 1rem;
   }
 }
 
-
 @media screen and (max-width: 780px) {
   .login-container {
     flex-direction: column;
@@ -293,7 +289,6 @@ margin-bottom: 1rem;
     padding: 1.5rem;
   }
 }
-
 
 @media screen and (min-width: 401px) and (max-width: 480px) {
   .login-container {
