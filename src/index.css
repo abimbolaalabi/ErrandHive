@@ -1,6 +1,10 @@
-/* :root{ */
-    /* --main_color : red */
-/* } */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: poppins;
+  /* overflow: hidden; */
+}
 .link{
     text-decoration: none;
     color: inherit;

@@ -24,7 +24,7 @@ const LandingPage = () => {
           <MoreHero />
           <DownHero />
           <Footer/>
-          {/* <Footer /> */}
+      
 </main>
   )
 }

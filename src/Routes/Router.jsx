@@ -27,32 +27,30 @@ const Router = () => {
       <Routes>
         <Route path='*' element={<PageNotFound />} />
         <Route path='/' element={<LandingPage />} />
-           <Route path='/clientvsrunner' element={<ClientVsRunner/>}/>
+        <Route path='/clientvsrunner' element={<ClientVsRunner />} />
         <Route path='/signup/:role' element={<SignUp />} />
         {/* <Route path='/signup/:role' element={<SignUpRunner/>}/> */}
         <Route path='/login' element={<Login />} />
         <Route path='/verifyemail' element={<VerifyEmail />} />
         <Route path='/forgot' element={<ForgotPassword />} />
         <Route path='/reset' element={<ResetPassword />} />
-           <Route path='/reset-otp' element={<ResetOtp />} />
+        {/* <Route path='/reset-otp' element={<ResetPasswordOtp />} /> */}
         {/* Dashboard Routes */}
         <Route path='/dashboard' element={<DashboardLayout />}>
-          <Route index element={<DashboardPage/>} />
+          <Route index element={<DashboardPage />} />
           <Route path='my-errands' element={<MyErrandsPage />} />
-          <Route path='active-jobs' element={<MyErrandsPage />} />
           <Route path='payments' element={<PaymentsPage />} />
-          <Route path='my-earnings' element={<PaymentsPage />} />
           <Route path='messages' element={<MessagesPage />} />
           <Route path='profile' element={<ProfilePage />} />
         </Route>
 
-         <Route path='/runnerlayout' element={<RunnerLayout />}>
-        <Route index element={<RunnerDashboard />} />
-         <Route path='runneractive' element={<ActiveJob />} />
-         <Route path='runnerearning' element={<RunnerEarning  />} />
-          <Route path='runnermessage' element={<RunnerMessage  />} />
-           <Route path='runnerprofile' element={<RunnerProfile />} />
-         </Route>
+        <Route path='/runnerlayout' element={<RunnerLayout />}>
+          <Route index element={<RunnerDashboard />} />
+          <Route path='runneractive' element={<ActiveJob />} />
+          <Route path='runnerearning' element={<RunnerEarning />} />
+          <Route path='runnermessage' element={<RunnerMessage />} />
+          <Route path='runnerprofile' element={<RunnerProfile />} />
+        </Route>
       </Routes>
 
     </BrowserRouter>
