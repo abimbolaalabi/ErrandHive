@@ -98,7 +98,6 @@ const VerifyEmail = () => {
     }
   };
 
-
   return (
     <main className="verify-section">
       <ToastContainer />

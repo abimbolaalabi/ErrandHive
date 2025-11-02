@@ -15,7 +15,7 @@
 
 .morehero-title {
   font-size: 32px;
-  font-weight: 700;
+  font-weight: 500;
   margin-bottom: 8px;
 }
 
@@ -23,6 +23,7 @@
   font-size: 16px;
   opacity: 0.8;
   margin-bottom: 40px;
+  font-weight: 300;
 }
 
 .feedback-container {
@@ -97,9 +98,6 @@
   font-size: 14px;
 }
 
-/* ---------------- RESPONSIVE DESIGN ---------------- */
-
-/* 🖥️ Large Laptops and Desktops */
 @media (max-width: 1440px) {
   .morehero {
     padding: 50px;
@@ -114,7 +112,6 @@
   }
 }
 
-/* 💻 Tablets (Landscape & small laptops) */
 @media (max-width: 1024px) {
   .feedback-container {
     flex-wrap: wrap;
@@ -139,7 +136,6 @@
   }
 }
 
-/* 📱 Tablets (Portrait) and Medium Phones */
 @media (max-width: 768px) {
   .morehero {
     padding: 40px 25px;
@@ -164,7 +160,6 @@
   }
 }
 
-/* 📲 Small Phones (iPhone 6 and below) */
 @media (max-width: 480px) {
   .morehero {
     padding: 30px 20px;
