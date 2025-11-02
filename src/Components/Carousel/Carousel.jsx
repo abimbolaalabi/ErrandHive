@@ -41,7 +41,7 @@ const Carousel = () => {
   return (
     <div className="carousel-wrapper">
       <div className="carousel-right">
-        <aside className="logo" onClick={()=> navigate("/")}>
+        <aside className="carousel-logo" onClick={()=> navigate("/")}>
           <div className="errandlogo" >
                     <img src="https://res.cloudinary.com/dwzomhflw/image/upload/v1761056644/IMG-20251021-WA0052_lf7sms.jpg" alt="" />
           </div>

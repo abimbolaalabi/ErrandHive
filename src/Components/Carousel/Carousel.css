@@ -19,13 +19,13 @@
   flex-direction: column;
   align-items: center;
 } */
-.logo{
+.carousel-logo{
   display: flex;
   gap: 10px;
   align-items: center;
-  /* margin: 5px; */
+  margin: 8px;
 }
-.logo p {
+.carousel-logo p {
   font-size: 24px;
   font-weight: 700;
   color: #8133f1;
