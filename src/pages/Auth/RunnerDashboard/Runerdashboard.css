@@ -15,6 +15,55 @@
     align-items: center;
     padding-block: 0.5rem;
 }
+.e-grid{
+    display: grid;
+grid-template-columns: repeat(auto-fit, minmax(230px, 4fr));
+gap: 1.5rem;
+ margin-bottom: 2rem;
+}
+.e-card{
+    background: white;
+padding: 1.2rem;
+border-radius: 12px;
+box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+display: flex;
+align-items: center;
+justify-content: space-between;
+transition: all 0.2s;
+height: 9rem;
+}
+.e-card:hover{
+     transform: translateY(-2px);
+ box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.e-content{
+flex: 1;
+}
+.e-title{
+font-size: 0.875rem;
+font-weight: 500;
+color: #64748b;
+margin: 0 0 0.5rem 0;
+text-transform: uppercase;
+letter-spacing: 0.05em;
+}
+.e-value{
+font-size: 2rem;
+font-weight: 700;
+color: #1e293b;
+margin: 0;
+line-height: 1;
+}
+.e-icon{
+     width: 48px;
+ height: 48px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ border-radius: 8px;
+ background: rgba(129, 51, 241, 0.1);
+
+}
 .cube-holder{
     width: 12%;
     height: 50%;

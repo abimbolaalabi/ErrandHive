@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import DashboardLayout from '../Components/Dashboard/DashboardLayout'
 import RunnerLayout from '../Components/RunerDashboardLayout/RunnerLayout'
 import RunnerDashboard from '../pages/Auth/RunnerDashboard/RunnerDashboard'
+import KycModal from '../Components/KycModal/KycModal'
 import RunnerEarning from '../pages/Auth/RunnerDashboard/RunnerEarning'
 import ActiveJob from '../pages/Auth/RunnerDashboard/ActiveJob'
 import RunnerProfile from '../pages/Auth/RunnerDashboard/RunnerProfile'
@@ -28,6 +29,7 @@ const Router = () => {
         <Route path='*' element={<PageNotFound />} />
         <Route path='/' element={<LandingPage />} />
            <Route path='/clientvsrunner' element={<ClientVsRunner/>}/>
+            <Route path='/kycmodal' element={<KycModal/>}/>
         <Route path='/signup/:role' element={<SignUp />} />
         {/* <Route path='/signup/:role' element={<SignUpRunner/>}/> */}
         <Route path='/login' element={<Login />} />

@@ -1,6 +1,6 @@
 .runner-layout-style {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -83,7 +83,7 @@ align-items: center;
   display: flex;
   gap: 1rem;
   cursor: pointer;
-  margin-left:2rem;
+  /* margin-left:2rem; */
 }
 
 .header {
