@@ -61,7 +61,7 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="sidebar-header">
-        <div className="logo">
+        <div className="logoo">
           <img
             src="https://res.cloudinary.com/dwzomhflw/image/upload/v1761056644/IMG-20251021-WA0052_lf7sms.jpg"
             alt="ErrandHive"
