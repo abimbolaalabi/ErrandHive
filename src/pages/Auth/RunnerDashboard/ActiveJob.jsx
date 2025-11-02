@@ -2,7 +2,7 @@ import React from 'react';
 import "./ActiveJob.css"
 import { CiLocationOn,CiClock2  } from "react-icons/ci";
 const ActiveJobs = () => {
-    const stats = [
+    const data = [
         { label: "Active Jobs", value: 1, icon: "📦" },
         { label: "Est Total Time", value: "20 Mins", icon: "⏱️" },
         { label: "Total Distance", value: "7 miles", icon: "📍" },
@@ -12,7 +12,7 @@ const ActiveJobs = () => {
     return (
         <div className="card-container-wrapper">
             <div className="card-grid">
-                {stats.map((stat, index) => (
+                {data.map((stat, index) => (
                     <div key={index} className="stat-card">
                         <div className="stat-header">
                             <p className="stat-label">{stat.label}</p>

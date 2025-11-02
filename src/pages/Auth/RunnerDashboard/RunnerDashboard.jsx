@@ -4,7 +4,7 @@ import cube from "../../../assets/cube.png"
 
 const RunnerDashboard = () => {
 
-     const stats = [
+     const data = [
    {
      title: 'Total Request',
      value: '0',
@@ -59,7 +59,7 @@ const RunnerDashboard = () => {
 
       
       <div className="e-grid">
-        {stats.map((e, index) => (
+        {data.map((e, index) => (
           <div key={index} className="e-card">
             <div className="e-content">
               <h3 className="e-title">{e.title}</h3>

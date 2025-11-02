@@ -14,6 +14,7 @@
     flex-direction: column;
     align-items: center;
     padding-block: 0.5rem;
+    margin-bottom: 2rem;
 }
 .e-grid{
     display: grid;
@@ -35,22 +36,26 @@ height: 9rem;
 .e-card:hover{
      transform: translateY(-2px);
  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+ cursor: pointer;
 }
 .e-content{
 flex: 1;
 }
 .e-title{
-font-size: 0.875rem;
-font-weight: 500;
-color: #64748b;
+font-size: 1rem;
+font-weight: 600;
+font-family: Poppins;
+font-style: SemiBold;
+color: #212121;
 margin: 0 0 0.5rem 0;
 text-transform: uppercase;
 letter-spacing: 0.05em;
 }
 .e-value{
-font-size: 2rem;
+font-size: 25px;
 font-weight: 700;
-color: #1e293b;
+color: #212121;
+font-style: Bold;
 margin: 0;
 line-height: 1;
 }
@@ -61,6 +66,7 @@ line-height: 1;
  align-items: center;
  justify-content: center;
  border-radius: 8px;
+ margin-left: 0.08rem;
  background: rgba(129, 51, 241, 0.1);
 
 }
@@ -74,7 +80,6 @@ line-height: 1;
 }
 .remainder-holder{
     width: 100%;
-    /* height: max-content; */
 }
 .kyc-reminder{
     font-size: 25px;
