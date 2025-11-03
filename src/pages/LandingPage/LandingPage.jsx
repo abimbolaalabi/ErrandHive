@@ -1,4 +1,3 @@
-import React from 'react'
 import "./LandingPage.css"
 import Header from "../../Components/Header/Header"
 import SubHeaderHero from "../../Components/SubHeaderhero/SubHeaderHero"
@@ -8,8 +7,6 @@ import NewHero from '../../Components/Newhero/NewHero'
 import MoreHero from '../../Components/Morehero/MoreHero'
 import DownHero from '../../Components/DownHero/DownHero'
 import Footer from '../../Components/Footer/Footer'
-
-
 
 
 

@@ -1,0 +1,161 @@
+
+.card-container-wrapper {
+    max-width: 1200px; 
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card-grid {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.card-title {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+
+.stat-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1; 
+    min-width: 150px;
+}
+
+.stat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.stat-label {
+    font-size: 0.9em;
+    color: #666;
+    margin: 0;
+    font-weight: 500;
+}
+
+.stat-value {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #333;
+    margin: 10px 0 0;
+}
+
+.stat-icon {
+    background-color: #8A2BE21A; 
+    color: #8A2BE2; 
+    padding: 5px 8px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    line-height: 1;
+}
+
+.stat-icon.rating-star {
+    background-color: transparent;
+    color: #FFC107; 
+    padding: 0;
+}
+
+
+
+.document-card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+.document-details-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 0 30px;
+}
+
+.location-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 150px;
+}
+
+.location-item.right-align {
+    /* Aligns content to the right edge */
+    align-items: flex-end;
+    text-align: right;
+}
+
+.location-label {
+    font-size: 0.85em;
+    color: #666;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center; /* Aligns icon and text horizontally */
+}
+
+.location-address {
+    font-size: 1em;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.detail-icon {
+    font-size: 1em;
+    color: #8A2BE2; 
+    margin-right: 5px;
+}
+
+/* Flexbox for footer alignment */
+.bottom-info-row {
+    display: flex;
+    justify-content: space-between; /* Pushes price/time to the left, button to the right */
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.price-time-info {
+    display: flex; /* Aligns the time and price details horizontally */
+    align-items: center;
+    font-size: 1em;
+    font-weight: 600;
+    color: #333;
+}
+
+.price-time-info .detail-icon {
+    color: #999; 
+    margin-right: 5px;
+}
+
+.price-time-info .naira-symbol {
+    color: #999;
+    margin-left: 15px; 
+    margin-right: 2px;
+}
+
+.negotiation-button {
+    background-color: #8A2BE2; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.negotiation-button:hover {
+    background-color: #6b20b8; 
+}

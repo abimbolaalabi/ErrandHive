@@ -1,9 +1,10 @@
 import React from 'react'
 import "./Runerdashboard.css"
-
+import cube from "../../../assets/cube.png"
+import { Link } from 'react-router-dom'
 const RunnerDashboard = () => {
 
-     const stats = [
+     const data = [
    {
      title: 'Total Request',
      value: '0',
@@ -53,25 +54,35 @@ const RunnerDashboard = () => {
     <main className='runner-dashboard-layout'>
       <div className='title-dashboard-runner'>
         <h1>Welcome to your Dashboard 👋</h1>
-        {/* <div>victory</div> ddd*/}
+
       </div>
 
       
-      <div className="stats-grid">
-        {stats.map((stat, index) => (
-          <div key={index} className="stat-card">
-            <div className="stat-content">
-              <h3 className="stat-title">{stat.title}</h3>
-              <p className="stat-value">{stat.value}</p>
+      <div className="e-grid">
+        {data.map((e, index) => (
+          <div key={index} className="e-card">
+            <div className="e-content">
+              <h3 className="e-title">{e.title}</h3>
+              <p className="e-value">{e.value}</p>
             </div>
-            <div className="stat-icon" style={{ color: stat.color }}>
-              {stat.icon}
+            <div className="e-icon" style={{ color: e.color }}>
+              {e.icon}
             </div>
           </div>
         ))}
       </div>
       <div className='dashboard-kyc'>
-
+        <div className='cube-holder'>
+        <img src= {cube} alt="" />
+        {/* <div className='reminder-holder'><p className='kyc-reminder'>You have no active job yet</p></div> */}
+        </div>
+        <div className='reminder-holder'><p className='kyc-reminder'>You have no active job yet</p></div>
+        <p className='complete-kyc'>complete KYC to get available jobs</p>
+        <div className='kyc-btn-holder'>
+          <Link to={"runnerprofile"}>
+            <button type='submit' className='kyc-btn'>Complete Kyc</button>
+            </Link>
+        </div>
       </div>
     </main>
   )
