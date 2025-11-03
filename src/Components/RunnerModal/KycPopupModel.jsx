@@ -1,13 +1,23 @@
-import React from 'react'
-import "./Kycpopup.css"
+import React from 'react';
+import "./KycPopup.css";
+
 const KycPopupModel = ({close}) => {
   return (
-    <div className='Kyc-modal-wrapper'>
+    <div className='kyc-modal-wrapper'>
       <div className='kyc-modal'>
-     <button onClick={()=> close(false)}>X</button>
+        <div className='kyc-header-wrapper'>
+          <div className='kyc-text'>
+          <h1>Kyc Verification </h1>
+                    <p>Upload the required document to verify your identity </p>
+                    </div>
+          <button className = "btn-kyc-modal"onClick={()=> close(false)}>X</button>
+        </div>
+        <div className='body-verify-input'>
+
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default KycPopupModel
+export default KycPopupModel;

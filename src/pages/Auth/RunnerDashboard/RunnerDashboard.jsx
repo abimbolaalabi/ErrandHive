@@ -50,10 +50,15 @@ const RunnerDashboard = () => {
      color: '#F97316'
    }
  ];
+
+ 
+   const storedUser = JSON.parse(localStorage.getItem("userDetails")) || {};
+     const fullName = `${storedUser?.firstName || ""} ${storedUser?.lastName || ""}`.trim();
+
   return (
     <main className='runner-dashboard-layout'>
       <div className='title-dashboard-runner'>
-        <h1>Welcome to your Dashboard 👋</h1>
+        <h1>Welcome to your dashboard {fullName || "User"}! 👋</h1>
 
       </div>
 
