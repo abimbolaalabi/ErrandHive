@@ -16,6 +16,16 @@ const RunnerProfile = () => {
     }
   };
 
+   const storedUser = JSON.parse(localStorage.getItem("userDetails"));
+ const fullName = `${storedUser?.firstName || ""} ${storedUser?.lastName || ""}`.trim();
+ const email = storedUser?.email || "No email found";
+const getInitials = (name) => {
+    if (!name) return "U";
+    const parts = name.split(" ");
+    const first = parts[0]?.charAt(0).toUpperCase();
+    const last = parts[1]?.charAt(0).toUpperCase();
+    return `${first || ""}${last || ""}`;
+}
   return (
     <div className="runnerProfile-container">
   
@@ -56,9 +66,9 @@ const RunnerProfile = () => {
 
           <div className="runnerProfile-info">
             <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-              <h2>Runner Name</h2>
+              <h2>{fullName}</h2>
               <p className="runnerProfile-email">
-                <FaEnvelope /> runner@mail.com
+                <FaEnvelope /> {email}
               </p>
             </div>
             <div className="runnerProfile-right">

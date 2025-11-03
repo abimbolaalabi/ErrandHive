@@ -24,6 +24,9 @@ const RunnerLayout = () => {
     { label: "Profile", icon: <IoMdPerson />, path: "/runnerlayout/runnerprofile" },
   ];
 
+
+  const user = JSON.parse(localStorage.getItem("userDetails"))||{}
+  const fullName = `${user?.fullName || ""} ${user?.lastName || ""}`.trim()
   return (
     <div className="runner-layout-style">
       <aside className="sidebar-runner">
@@ -89,7 +92,7 @@ const RunnerLayout = () => {
                 </div>
               </div>
               <div className="Profile-name-user-holder">
-                <h1 className="profile-h1-runner">John Doe</h1>
+                <h1 className="profile-h1-runner">{fullName || "guest"}</h1>
                 <p className="profile-p-runner">runner</p>
               </div>
             </article>
