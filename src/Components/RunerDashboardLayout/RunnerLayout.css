@@ -1,20 +1,23 @@
 .runner-layout-style {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   font-family: 'Poppins', sans-serif;
+  background-color: #e5e7eb;
 }
 
 .sidebar-runner {
   width: 250px;
-  height: 100%;
-  position: sticky;
-  left: 0;
+  height: 90vh;
+   position: sticky;
   top: 0;
+   left: 0;
+   background-color: #fff;
 }
 .sidebar-header{
   width: 100%;
   height: 15%;
   border-bottom: 1px solid #21212166;
+
 }
 .sidebar-header-title{
   display: flex;
@@ -65,10 +68,11 @@ align-items: center;
   flex-direction: column;
 }
 .log-out-box{
-
+/* background-color: green; */
   height: 9%;
   display: flex;
   flex-direction: column;
+  padding-inline: 2rem;
   justify-content: center;
 }
 .log-out-btn{
@@ -82,7 +86,7 @@ align-items: center;
   display: flex;
   gap: 1rem;
   cursor: pointer;
-  margin-left:2rem;
+  /* margin-left:2rem; */
 }
 
 .header {
@@ -92,11 +96,14 @@ align-items: center;
   padding: 10px 20px;
   background-color: #FFFFFF;
   height: 70px;
+  position: sticky;
+  top: 0;
+ left: 0;
 }
 
 .input-holder {
   position: relative;
-  width: 25%;
+  width: 30%;
   height: 30px;
 }
 .input{
@@ -110,9 +117,15 @@ align-items: center;
     font-weight: 250;
     font-style: Thin;
     font-size: 1rem;
-    background-color: #FFFFFF;
+    background-color:#F2EBFE66;
+    border: none;
+    border-radius: 20px;
 }
-
+.input::placeholder {
+  color: #212121;
+  font-weight: 250; 
+  font-style: Poppins;
+}
 .search-icons-runner{
   position: absolute;
   bottom: 7px;
@@ -168,8 +181,6 @@ right: 8px;
   display: flex;
 justify-content: center;
 align-items: center;
-
-
 }
 .Profile-name-user-holder{
  width: 30%;
