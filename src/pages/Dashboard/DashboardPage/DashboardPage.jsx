@@ -16,7 +16,7 @@ const DashboardPage = () => {
   const stats = [
     {
       title: "Total Request",
-      value: "1",
+      value: "0",
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
@@ -27,7 +27,7 @@ const DashboardPage = () => {
     },
     {
       title: "Completed",
-      value: "1",
+      value: "0",
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
@@ -38,7 +38,7 @@ const DashboardPage = () => {
     },
     {
       title: "Active",
-      value: "1",
+      value: "0",
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <circle cx="12" cy="12" r="10" />
@@ -49,7 +49,7 @@ const DashboardPage = () => {
     },
     {
       title: "Total Spent",
-      value: "3000",
+      value: "0",
       icon: (
         <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
           <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
