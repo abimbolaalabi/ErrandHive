@@ -2,7 +2,7 @@
   display: flex;
   min-height: 100vh;
   font-family: 'Poppins', sans-serif;
-  
+  background-color: #e5e7eb;
 }
 
 .sidebar-runner {
@@ -11,6 +11,7 @@
    position: sticky;
   top: 0;
    left: 0;
+   background-color: #fff;
 }
 .sidebar-header{
   width: 100%;

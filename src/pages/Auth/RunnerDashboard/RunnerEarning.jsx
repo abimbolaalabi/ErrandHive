@@ -1,137 +1,138 @@
 import React from 'react';
-import './RunerEarning.css';
+import './RunerEarning.css'; 
+import {ArrowDownLeft} from "lucide-react"
+import { FaWallet } from "react-icons/fa";
 
-// --- Icons (represented by placeholders) ---
-const EyeIcon = () => <span className="icon-placeholder">👁️</span>;
-const WalletIcon = () => <span className="icon-placeholder">💳</span>;
-const ClockIcon = () => <span className="icon-placeholder">⏳</span>;
-const ChartIcon = () => <span className="icon-placeholder">📈</span>;
-const BankIcon = () => <span className="icon-placeholder">🏦</span>;
-const PackageIcon = () => <span className="icon-placeholder">📦</span>;
-
-// --- Mock Data ---
-
-// Data for the three distinct top cards
-const statsCardsData = [
-  {
-    id: 'available',
-    title: 'Available Balance',
-    amount: '₦12,750',
-    icon: <WalletIcon />,
-    class: 'available-balance-card',
-    details: 'RH-9472836', // Unique detail for this card
-  },
-  {
-    id: 'pending',
-    title: 'Pending Earnings',
-    amount: '₦12,750',
-    icon: <ClockIcon />,
-    class: 'pending-earnings-card',
-    statusText: 'Being verified',
-  },
-  {
-    id: 'total',
-    title: 'Total Earnings',
-    amount: '₦12,750',
-    icon: <ChartIcon />,
-    class: 'total-earnings-card',
-    statusText: 'All time',
-  }
-];
-
-// Data for the Transaction History (remains mapped)
-const transactionsData = [
-  { id: 1, name: "Package Pickup", type: "Errand Payment", date: "2025-10-20 at 4:45 PM", amount: "+₦3000.00", status: "Pending", iconType: "PackageIcon" },
-  { id: 2, name: "Withdrawal to Access Bank", type: "Withdrawal", date: "2025-10-21 at 10:15 AM", amount: "-₦2000.00", status: "Completed", iconType: "BankIcon" },
-  { id: 3, name: "Package Pickup", type: "Errand Payment", date: "2025-10-20 at 4:45 PM", amount: "+₦3000.00", status: "Completed", iconType: "PackageIcon" },
-  { id: 4, name: "Package Pickup", type: "Errand Payment", date: "2025-10-20 at 4:45 PM", amount: "+₦3000.00", status: "Completed", iconType: "PackageIcon" }
-];
-
-
-const RunnerEarning= () => {
+const RunnerEarning = () => {
   return (
-    <div className="wallet-dashboard">
-      {/* Header */}
-      <h1 className="header-title">My Wallet</h1>
-      <p className="header-subtitle">Manage your earnings and withdrawals</p>
+    <div className="wallet-page-container">
+      {/* Header Section */}
+      <header className="wallet-page-header">
+        <h2>My Wallet</h2>
+        <p>Manage your earnings and withdrawals</p>
+      </header>
 
-      {/* --- Stats Cards Section (Dynamically Mapped for Distinction) --- */}
-      <div className="stats-cards-container">
-        {statsCardsData.map(card => (
-          <div key={card.id} className={`stat-card ${card.class}`}>
-            
-            {/* Conditional structure for the Available Balance Card (Unique Layout) */}
-            {card.id === 'available' ? (
-              <>
-                <div className="card-header">
-                  <div className="card-title-group">
-                    {card.icon}
-                    <p className="card-title">{card.title}</p>
-                  </div>
-                  <EyeIcon />
-                </div>
-                <p className="card-amount">{card.amount}</p>
-                <div className="wallet-info">
-                  <p className="wallet-id-label">Wallet ID</p>
-                  <span className="wallet-id-value">{card.details}</span>
-                  <WalletIcon />
-                </div>
-                <button className="withdraw-button">Withdraw</button>
-              </>
-            ) : (
-              // Standard structure for Pending and Total Earnings Cards
-              <>
-                <div className="card-header">
-                  {card.icon}
-                  <p className="card-title">{card.title}</p>
-                </div>
-                <p className="card-amount">{card.amount}</p>
-                <p className="card-status">{card.statusText}</p>
-              </>
-            )}
+      {/* Wallet Summary Cards Section */}
+      <section className="summary-cards-container">
+        
+        {/* Available Balance Card (Purple) */}
+        <div className="summary-card available-balance-card">
+          <div className="card-icon-title-row">
+            <div className="card-icon-placeholder"><FaWallet style={{fontSize:"1.5rem"}}/></div> 
+            <h4>Available Balance</h4>
+            <div className="eye-icon-placeholder"></div> 
           </div>
-        ))}
-      </div>
-
-      {/* --- Transaction History Section (Mapped) --- */}
-      <div className="transaction-history-section">
-        <h2>Transaction History</h2>
-
-        <div className="transaction-list">
-          {transactionsData.map(transaction => (
-            <div 
-              key={transaction.id} 
-              className={`transaction-item ${transaction.status.toLowerCase()}`}
-            >
-              
-              {/* Icon Container using Conditional Rendering (No Switch) */}
-              <div 
-                className={`transaction-icon-container ${transaction.iconType === 'PackageIcon' ? 'package-icon' : 'withdrawal-icon'}`}
-              >
-                {/* Conditional component rendering */}
-                {transaction.iconType === 'PackageIcon' ? <PackageIcon /> : <BankIcon />}
-              </div>
-              
-              {/* Transaction Details */}
-              <div className="transaction-details">
-                <p className="transaction-name">{transaction.name}</p>
-                <span className="transaction-type">{transaction.type}</span>
-                <p className="transaction-status-date">Errand completed • {transaction.date}</p>
-              </div>
-              
-              {/* Transaction Amount */}
-              <div className="transaction-amount-container">
-                <p className={`transaction-status ${transaction.status.toLowerCase()}-text`}>
-                  {transaction.status}
-                </p>
-                <p className={`transaction-amount ${transaction.amount.startsWith('+') ? 'positive-amount' : 'negative-amount'}`}>
-                  {transaction.amount}
-                </p>
-              </div>
-            </div>
-          ))}
+          <p className="card-main-value">₦12,750</p>
+          <div className="wallet-id-row">
+            <p className="wallet-id-text">Wallet ID:</p>
+            <p className="wallet-id-number">RH-9472836</p>
+            <div className="copy-icon-placeholder"></div>
+          </div>
+          <button className="withdraw-button"><ArrowDownLeft style={{fontSize:"1.5rem"}}/>
+     Withdraw</button>
         </div>
-      </div>
+
+        {/* Pending Earnings Card (Yellow) */}
+        <div className="summary-card pending-earnings-card">
+          <div className="card-icon-title-row">
+            <div className="card-icon-placeholder"></div> {/* Icon Placeholder */}
+            <h4>Pending Earnings</h4>
+          </div>
+          <p className="card-main-value">₦12,750</p>
+          <p className="card-sub-text">Being verified</p>
+        </div>
+
+        {/* Total Earnings Card (Grey/Purple) */}
+        <div className="summary-card total-earnings-card">
+          <div className="card-icon-title-row">
+            <div className="card-icon-placeholder"></div> {/* Icon Placeholder */}
+            <h4>Total Earnings</h4>
+          </div>
+          <p className="card-main-value">₦12,750</p>
+          <p className="card-sub-text">All time</p>
+        </div>
+      </section>
+
+      {/* Transaction History Section */}
+      <section className="transaction-history-section">
+        <h3>Transaction History</h3>
+
+        {/* Transaction 1: Pending Package Pickup */}
+        <div className="transaction-item">
+          <div className="transaction-icon-placeholder green-icon"></div>
+          <div className="transaction-details">
+            <p className="transaction-title">Package Pickup</p>
+            <span className="transaction-type">Errand Payment</span>
+            <p className="transaction-info">Errand completed • 2025-10-20 at 4:45 PM</p>
+          </div>
+          <div className="transaction-amount pending-amount">
+            <p>Pending</p>
+            <p className="amount-value">+₦3000.00</p>
+          </div>
+        </div>
+        
+        {/* Transaction 2: Withdrawal (Red) */}
+        <div className="transaction-item">
+          <div className="transaction-icon-placeholder blue-icon"></div>
+          <div className="transaction-details">
+            <p className="transaction-title">Withdrawal to Access Bank</p>
+            <span className="transaction-type">Bank transfer</span>
+            <p className="transaction-info">2025-10-21 at 10:35 AM</p>
+          </div>
+          <div className="transaction-amount completed-amount">
+            <p>Completed</p>
+            <p className="amount-value negative-value">-₦2000.00</p>
+          </div>
+        </div>
+
+        {/* Transaction 3: Completed Package Pickup (Green) */}
+        <div className="transaction-item">
+          <div className="transaction-icon-placeholder green-icon"></div>
+          <div className="transaction-details">
+            <p className="transaction-title">Package Pickup</p>
+            <span className="transaction-type">Errand Payment</span>
+            <p className="transaction-info">Errand completed • 2025-10-20 at 4:45 PM</p>
+          </div>
+          <div className="transaction-amount completed-amount">
+            <p>Completed</p>
+            <p className="amount-value positive-value">+₦3000.00</p>
+          </div>
+        </div>
+        
+        {/* Transaction 4: Completed Package Pickup (Green) */}
+        <div className="transaction-item">
+          <div className="transaction-icon-placeholder green-icon"></div>
+          <div className="transaction-details">
+            <p className="transaction-title">Package Pickup</p>
+            <span className="transaction-type">Errand Payment</span>
+            <p className="transaction-info">Errand completed • 2025-10-20 at 4:45 PM</p>
+          </div>
+          <div className="transaction-amount completed-amount">
+            <p>Completed</p>
+            <p className="amount-value positive-value">+₦3000.00</p>
+          </div>
+        </div>
+
+        {/* Transaction 5: Completed Package Pickup (Green) */}
+        <div className="transaction-item">
+          <div className="transaction-icon-placeholder green-icon"></div>
+          <div className="transaction-details">
+            <p className="transaction-title">Package Pickup</p>
+            <span className="transaction-type">Errand Payment</span>
+            <p className="transaction-info">Errand completed • 2025-10-20 at 4:45 PM</p>
+          </div>
+          <div className="transaction-amount completed-amount">
+            <p>Completed</p>
+            <p className="amount-value positive-value">+₦3000.00</p>
+          </div>
+        </div>
+        
+      </section>
+
+       
+    
+      
+
     </div>
   );
 };

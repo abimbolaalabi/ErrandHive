@@ -21,8 +21,20 @@ const VerifyEmail = () => {
   const navigate = useNavigate();
 
   const BaseURL = import.meta.env.VITE_BASE_URL;
-  const userEmail = JSON.parse(localStorage.getItem("email"));
 
+
+  const userEmail =
+    localStorage.getItem("resetEmail") || localStorage.getItem("email");
+
+  const isResetFlow = localStorage.getItem("isReset");
+
+
+  useEffect(() => {
+    if (!userEmail) {
+      toast.error("No email found. Please restart verification.");
+      navigate("/forgotpassword");
+    }
+  }, [userEmail, navigate]);
 
   const handleChange = (e, index) => {
     const value = e.target.value.replace(/[^0-9]/g, "");
@@ -38,13 +50,11 @@ const VerifyEmail = () => {
     }
   };
 
-
   const handleKeyDown = (e, index) => {
     if (e.key === "Backspace" && !codes[index] && index > 0) {
       inputRefs.current[index - 1]?.focus();
     }
   };
-
 
   useEffect(() => {
     if (timer > 0) {
@@ -67,7 +77,6 @@ const VerifyEmail = () => {
     }
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const otpCode = codes.join("");
@@ -88,9 +97,14 @@ const VerifyEmail = () => {
       setCodes(["", "", "", "", "", ""]);
 
       setTimeout(() => {
-        navigate("/login");
+    
+        if (isResetFlow) {
+          navigate("/reset");
+        } else {
+          navigate("/login");
+        }
       }, 2000);
-    } catch (error) { 
+    } catch (error) {
       console.log(error);
       toast.error(error?.response?.data?.message || "Invalid verification code");
     } finally {

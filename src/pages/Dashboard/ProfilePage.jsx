@@ -9,11 +9,22 @@ const ProfilePage = () => {
   const [modaldash, setModalDash] = useState(false);
   const [image, setImage] = useState(null);
 
+  const storedUser = JSON.parse(localStorage.getItem("userDetails"));
+
+  const fullName = `${storedUser?.firstName || ""} ${storedUser?.lastName || ""}`.trim();
+  const email = storedUser?.email || "No email found";
+
+  const getInitials = (name) => {
+    if (!name) return "U";
+    const parts = name.split(" ");
+    const first = parts[0]?.charAt(0).toUpperCase();
+    const last = parts[1]?.charAt(0).toUpperCase();
+    return `${first || ""}${last || ""}`;
+  };
+
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      setImage(URL.createObjectURL(file));
-    }
+    if (file) setImage(URL.createObjectURL(file));
   };
 
   return (
@@ -32,7 +43,7 @@ const ProfilePage = () => {
               {image ? (
                 <img src={image} alt="profile" className="avatar-img" />
               ) : (
-                "JD"
+                getInitials(fullName)
               )}
             </div>
 
@@ -58,9 +69,9 @@ const ProfilePage = () => {
 
           <div className="profile-info">
             <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-              <h2>John Doe</h2>
+              <h2>{fullName}</h2>
               <p className="email">
-                <FaEnvelope /> Johndoe@gmail.com
+                <FaEnvelope /> {email}
               </p>
             </div>
             <div className="profile-right">
