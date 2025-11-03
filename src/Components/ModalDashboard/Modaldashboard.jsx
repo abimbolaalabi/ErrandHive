@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { X, CheckCircle, Home, CreditCard, Camera } from 'lucide-react';
+import React, { useState } from "react";
+import axios from "axios";
+import { X, CheckCircle, Home, CreditCard, Camera } from "lucide-react";
+import { toast } from "react-toastify";
 
 const Modaldashboard = ({ close }) => {
   const [files, setFiles] = useState({
@@ -8,6 +10,8 @@ const Modaldashboard = ({ close }) => {
     selfie: null,
   });
 
+  const [loading, setLoading] = useState(false);
+
   const handleFileChange = (e, type) => {
     const file = e.target.files[0];
     if (file) {
@@ -15,17 +19,55 @@ const Modaldashboard = ({ close }) => {
     }
   };
 
-  const completedSteps = [
-    !!files.id,
-    !!files.address,
-    !!files.selfie,
-  ];
-
+  const completedSteps = [!!files.id, !!files.address, !!files.selfie];
   const isSubmitEnabled = completedSteps.every(Boolean);
+
+  const handleSubmit = async () => {
+    if (!isSubmitEnabled) return;
+
+    try {
+      setLoading(true);
+
+      const user = JSON.parse(localStorage.getItem("userDetails"));
+      const token = localStorage.getItem("userToken");
+
+      if (!user || !token) {
+        toast.error("User not logged in");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("governmentIdCard", files.id);
+      formData.append("proofOfAddressImage", files.address);
+      formData.append("selfieWithIdCard", files.selfie);
+
+      const res = await axios.post(
+        "https://errandhive-project.onrender.com/api/v1/kyc/submit",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      toast.success(res?.data?.message || "KYC submitted successfully!");
+
+      // Save KYC status locally
+      localStorage.setItem("userKyc", "true");
+
+      setTimeout(() => close(false), 800);
+    } catch (err) {
+      console.log("KYC Submit Error:", err.response?.data || err.message);
+      toast.error(err?.response?.data?.message || "Failed to submit KYC");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="modaldash-container">
-      
       <style>{`
         .modaldash-container {
           position: fixed;
@@ -77,7 +119,6 @@ const Modaldashboard = ({ close }) => {
           color: #666;
         }
 
-     
         .progress-steps {
           display: flex;
           justify-content: space-between;
@@ -139,7 +180,6 @@ const Modaldashboard = ({ close }) => {
           color: #666;
         }
 
-    
         .modal-content {
           flex: 1;
           overflow-y: auto;
@@ -188,7 +228,6 @@ const Modaldashboard = ({ close }) => {
 
         .file-input { display: none; }
 
-      
         .guidelines-box {
           background: #f5f3ff;
           border-radius: 8px;
@@ -209,7 +248,6 @@ const Modaldashboard = ({ close }) => {
           margin-bottom: 6px;
         }
 
-   
         .modal-footer {
           padding: 20px;
           border-top: 1px solid #f0f0f0;
@@ -236,8 +274,6 @@ const Modaldashboard = ({ close }) => {
       `}</style>
 
       <div className="modaldash-child">
-        
-    
         <div className="modal-header">
           <button className="close-button" onClick={() => close(false)}>
             <X size={22} />
@@ -246,7 +282,6 @@ const Modaldashboard = ({ close }) => {
           <p className="modal-subtitle">Upload the required documents to verify your identity</p>
         </div>
 
-       
         <div className="progress-steps">
           {["ID", "Address", "Selfie"].map((label, index) => (
             <div className="step" key={index}>
@@ -258,7 +293,6 @@ const Modaldashboard = ({ close }) => {
           ))}
         </div>
 
-      
         <div className="modal-content">
 
           {/* ID Upload */}
@@ -278,7 +312,7 @@ const Modaldashboard = ({ close }) => {
             </label>
           </div>
 
-      
+          {/* Address Proof */}
           <div className="upload-section">
             <div className="section-header">
               <div className="section-icon"><Home size={20} /></div>
@@ -295,7 +329,7 @@ const Modaldashboard = ({ close }) => {
             </label>
           </div>
 
-       
+          {/* Selfie */}
           <div className="upload-section">
             <div className="section-header">
               <div className="section-icon"><Camera size={20} /></div>
@@ -312,7 +346,6 @@ const Modaldashboard = ({ close }) => {
             </label>
           </div>
 
-      
           <div className="guidelines-box">
             <div className="guidelines-title"> ℹ️ Important Guidelines:</div>
             <ul className="guidelines-list">
@@ -322,16 +355,17 @@ const Modaldashboard = ({ close }) => {
               <li>File size should not exceed 10MB</li>
             </ul>
           </div>
-
         </div>
 
-      
         <div className="modal-footer">
-          <button className="submit-button" disabled={!isSubmitEnabled}>
-            {isSubmitEnabled ? "Submit for Verification" : "Upload All Required Documents"}
+          <button
+            className="submit-button"
+            disabled={!isSubmitEnabled || loading}
+            onClick={handleSubmit}
+          >
+            {loading ? "Submitting..." : isSubmitEnabled ? "Submit for Verification" : "Upload All Required Documents"}
           </button>
         </div>
-
       </div>
     </div>
   );
