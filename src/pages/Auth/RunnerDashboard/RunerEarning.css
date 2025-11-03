@@ -16,7 +16,6 @@
     color: #333;
     margin-bottom: 5px;
 }
-
 .wallet-page-header p {
     font-size: 0.9em;
     color: #666;
@@ -62,7 +61,7 @@
     width: 24px;
     height: 24px;
     border-radius: 4px;
-    background-color: rgba(255, 255, 255, 0.3); /* Light placeholder for icons */
+    background-color: rgba(255, 255, 255, 0.3); 
 }
 
 .available-balance-card .card-icon-placeholder {
@@ -70,19 +69,21 @@
 }
 
 .pending-earnings-card .card-icon-placeholder {
-    background-color: #ffcc00; /* Yellow placeholder */
+    background-color: #ffcc00; 
 }
 
 .total-earnings-card .card-icon-placeholder {
-    background-color: #9370db; /* Purple placeholder */
+    background-color: #9370db; 
 }
 
 .eye-icon-placeholder {
     width: 20px;
     height: 20px;
-    background-color: rgba(255, 255, 255, 0.3);
-    margin-left: auto; /* Push to the right */
+    margin-left: auto; 
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .summary-card h4 {
@@ -92,8 +93,10 @@
 }
 
 .card-main-value {
-    font-size: 1.8em;
-    font-weight: bold;
+    font-size: 30px;
+    font-weight: 400;
+    font-style: Regular;
+    font-family: Arial;
     margin: 0 0 15px 0;
 }
 
@@ -103,7 +106,7 @@
     margin: 0;
 }
 
-/* Specific styles for Purple Card */
+
 .available-balance-card h4 {
     color: white;
 }
@@ -191,11 +194,11 @@
 }
 
 .green-icon {
-    background-color: #e6f7e6; /* Light green background */
+    background-color: #e6f7e6;
 }
 
 .blue-icon {
-    background-color: #e0f2ff; /* Light blue background */
+    background-color: #e0f2ff; 
 }
 
 .transaction-details {
@@ -253,13 +256,13 @@
 }
 
 .negative-value {
-    color: #FF5252; /* Red text for expense/withdrawal */
+    color: #FF5252; 
 }
 
-/* --- Floating Viewer Comment Box (Not part of main layout flow) --- */
+
 
 .floating-viewer-comment-box {
-    position: fixed; /* Fixed position based on screenshot */
+    position: fixed; 
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);

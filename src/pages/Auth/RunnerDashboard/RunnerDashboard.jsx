@@ -1,7 +1,7 @@
 import React from 'react'
 import "./Runerdashboard.css"
 import cube from "../../../assets/cube.png"
-
+import { Link } from 'react-router-dom'
 const RunnerDashboard = () => {
 
      const data = [
@@ -79,7 +79,9 @@ const RunnerDashboard = () => {
         <div className='reminder-holder'><p className='kyc-reminder'>You have no active job yet</p></div>
         <p className='complete-kyc'>complete KYC to get available jobs</p>
         <div className='kyc-btn-holder'>
+          <Link to={"runnerprofile"}>
             <button type='submit' className='kyc-btn'>Complete Kyc</button>
+            </Link>
         </div>
       </div>
     </main>

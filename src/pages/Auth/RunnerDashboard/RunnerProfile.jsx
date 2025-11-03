@@ -3,9 +3,11 @@ import "./RunnerProfile.css";
 import { FaEnvelope } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 import { IoShieldCheckmarkOutline } from "react-icons/io5";
+import KycPopupModel from "../../../Components/RunnerModal/KycPopupModel";
 
 const RunnerProfile = () => {
   const [image, setImage] = useState(null);
+  const [kycModal, setKycModal] = useState(false)
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -101,13 +103,16 @@ const RunnerProfile = () => {
         <div className="runnerProfile-kycRight">
           <button
             className="runnerProfile-verifyBtn"
-            onClick={() => setModalDash(true)}
+            onClick={() => setKycModal(true)}
           >
             Start Verification
           </button>
         </div>
       </div>
-      
+      {
+        kycModal &&  <KycPopupModel close={setKycModal} />
+      }
+     
     </div>
   );
 };

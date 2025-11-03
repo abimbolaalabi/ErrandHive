@@ -71,7 +71,7 @@ const RunnerLayout = () => {
         <header className="header">
           <div className="input-holder">
             <IoIosSearch className="search-icons-runner" />
-            <input type="text" placeholder=" 🔎 Search errands, runner" className="input" />
+            <input type="text" placeholder=" Search errands, runner" className="input" />
           </div>
           <div className="wrapper-notification-profile">
             <div className="profile-notification-box">

@@ -11,6 +11,7 @@ const ActiveJobs = () => {
 
     return (
         <div className="card-container-wrapper">
+            <h1 style={{marginBottom:"1.5rem",fontFamily:"Poppins", fontSize:"2rem"}}>Active Jobs</h1>
             <div className="card-grid">
                 {data.map((stat, index) => (
                     <div key={index} className="stat-card">
@@ -31,14 +32,14 @@ const ActiveJobs = () => {
                 <div className="document-details-row">
                     <div className="location-item"> 
                         <p className="location-label">
-                            <span className="detail-icon"><CiLocationOn/></span> Pickup
+                            <span className="detail-icon"><CiLocationOn style={{color:"black",fontSize:"1rem"}}/></span> Pickup
                         </p>
                         <p className="location-address">40 Muyibi street</p>
                     </div>
 
                     <div className="location-item right-align">
                         <p className="location-label">
-                            Delivery <span className="detail-icon"></span>
+                          <CiLocationOn style={{color:"black",fontSize:"1rem"}}/>  Delivery <span className="detail-icon"></span>
                         </p>
                         <p className="location-address">50 Kirikiri road</p>
                     </div>

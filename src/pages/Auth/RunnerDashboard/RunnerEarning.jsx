@@ -2,47 +2,48 @@ import React from 'react';
 import './RunerEarning.css'; 
 import {ArrowDownLeft} from "lucide-react"
 import { FaWallet } from "react-icons/fa";
-
+import { IoCopyOutline } from "react-icons/io5";
+import { RxEyeOpen } from "react-icons/rx";
 const RunnerEarning = () => {
   return (
     <div className="wallet-page-container">
-      {/* Header Section */}
+     
       <header className="wallet-page-header">
         <h2>My Wallet</h2>
         <p>Manage your earnings and withdrawals</p>
       </header>
 
-      {/* Wallet Summary Cards Section */}
+      
       <section className="summary-cards-container">
         
-        {/* Available Balance Card (Purple) */}
+   
         <div className="summary-card available-balance-card">
           <div className="card-icon-title-row">
             <div className="card-icon-placeholder"><FaWallet style={{fontSize:"1.5rem"}}/></div> 
             <h4>Available Balance</h4>
-            <div className="eye-icon-placeholder"></div> 
+            <div className="eye-icon-placeholder"><RxEyeOpen style={{fontSize:"1.5rem", cursor:"pointer"}} /></div> 
           </div>
           <p className="card-main-value">₦12,750</p>
           <div className="wallet-id-row">
             <p className="wallet-id-text">Wallet ID:</p>
-            <p className="wallet-id-number">RH-9472836</p>
-            <div className="copy-icon-placeholder"></div>
+            <p className="wallet-id-number">RH-9472836 </p>
+            <div className="copy-icon-placeholder"><IoCopyOutline style={{fontSize:"1rem",cursor:"pointer"}}/></div>
           </div>
           <button className="withdraw-button"><ArrowDownLeft style={{fontSize:"1.5rem"}}/>
-     Withdraw</button>
+      Withdraw</button>
         </div>
 
-        {/* Pending Earnings Card (Yellow) */}
+
         <div className="summary-card pending-earnings-card">
           <div className="card-icon-title-row">
-            <div className="card-icon-placeholder"></div> {/* Icon Placeholder */}
+            <div className="card-icon-placeholder"></div> 
             <h4>Pending Earnings</h4>
           </div>
           <p className="card-main-value">₦12,750</p>
           <p className="card-sub-text">Being verified</p>
         </div>
 
-        {/* Total Earnings Card (Grey/Purple) */}
+        
         <div className="summary-card total-earnings-card">
           <div className="card-icon-title-row">
             <div className="card-icon-placeholder"></div> {/* Icon Placeholder */}
@@ -53,11 +54,11 @@ const RunnerEarning = () => {
         </div>
       </section>
 
-      {/* Transaction History Section */}
+      
       <section className="transaction-history-section">
         <h3>Transaction History</h3>
 
-        {/* Transaction 1: Pending Package Pickup */}
+       
         <div className="transaction-item">
           <div className="transaction-icon-placeholder green-icon"></div>
           <div className="transaction-details">
@@ -71,7 +72,7 @@ const RunnerEarning = () => {
           </div>
         </div>
         
-        {/* Transaction 2: Withdrawal (Red) */}
+        
         <div className="transaction-item">
           <div className="transaction-icon-placeholder blue-icon"></div>
           <div className="transaction-details">
@@ -85,7 +86,7 @@ const RunnerEarning = () => {
           </div>
         </div>
 
-        {/* Transaction 3: Completed Package Pickup (Green) */}
+
         <div className="transaction-item">
           <div className="transaction-icon-placeholder green-icon"></div>
           <div className="transaction-details">
