@@ -1,5 +1,5 @@
 import React from 'react';
-import "./KycPopup.css";
+import "./Kycpopup.css";
 
 const KycPopupModel = ({close}) => {
   return (
