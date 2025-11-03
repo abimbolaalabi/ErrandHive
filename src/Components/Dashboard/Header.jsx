@@ -36,7 +36,7 @@ const Header = () => {
 
         <div className="user-profile">
           <div className="user-info">
-            <span className="user-name">{fullName || "Unknown User"}</span>
+            <span className="user-name">{fullName || "Guest"}</span>
             <span className="user-role">{userType || storedUser?.role || "No Role"}</span>
           </div>
         </div>
