@@ -20,7 +20,7 @@ const Forget = () => {
 
   const navigate = useNavigate();
   const navigatetoverify = () => {
-    navigate("/verifyemail");
+    navigate("/reset-otp");
   };
 
   const handleSubmit = async (e) => {

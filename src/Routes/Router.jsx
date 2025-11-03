@@ -19,6 +19,7 @@ import ProfilePage from '../pages/Dashboard/ProfilePage'
 import LandingPage from '../pages/LandingPage/LandingPage'
 import PageNotFound from '../pages/PageNotFound'
 import ClientVsRunner from '../pages/ClientVsRunner/ClientVsRunner'
+import ResetOtp from '../pages/Auth/ResetOtp/ResetOtp'
 
 const Router = () => {
   return (
@@ -33,7 +34,7 @@ const Router = () => {
         <Route path='/verifyemail' element={<VerifyEmail />} />
         <Route path='/forgot' element={<ForgotPassword />} />
         <Route path='/reset' element={<ResetPassword />} />
-        {/* <Route path='/reset-otp' element={<ResetPasswordOtp />} /> */}
+        <Route path='/reset-otp' element={<ResetOtp />} />
         {/* Dashboard Routes */}
         <Route path='/dashboard' element={<DashboardLayout />}>
           <Route index element={<DashboardPage />} />
