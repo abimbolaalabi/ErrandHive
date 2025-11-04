@@ -3,7 +3,7 @@ import axios from "axios";
 import { X, CheckCircle, Home, CreditCard, Camera } from "lucide-react";
 import { LuDownload } from "react-icons/lu";
 import { toast } from "react-toastify";
-import "./Modaldashboard.css";
+import "./ModalDashboard.css";
 
 const Modaldashboard = ({ close }) => {
   const [files, setFiles] = useState({
@@ -134,7 +134,7 @@ const Modaldashboard = ({ close }) => {
             </label>
           </div>
 
-          {/* Selfie */}
+    
           <div className="kyc-upload-card">
             <div className="kyc-card-top">
               <div className="kyc-card-icon"><Camera size={22} /></div>
@@ -155,7 +155,6 @@ const Modaldashboard = ({ close }) => {
             </label>
           </div>
 
-          {/* Guidelines */}
           <div className="kyc-guidelines">
             <h4>ℹ️ Important Guidelines:</h4>
             <ul>
