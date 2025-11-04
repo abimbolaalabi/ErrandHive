@@ -1,13 +1,13 @@
-.welcome-section {
+.welcome-seection {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.welcome-section button {
+.welcome-seection button {
   width: 12%;
   height: 40px;
   background-color: #8133f1;
-  gap: 20px;
+  gap: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
