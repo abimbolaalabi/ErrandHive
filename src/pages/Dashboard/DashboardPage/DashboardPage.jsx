@@ -1,24 +1,53 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../DashboardPage/DashboardPage.css";
-import { AppContext } from "../../../Context/App";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import ModalErrand from "../../../Components/ModalErrand/ModalErrand";
+import { CiLocationOn } from "react-icons/ci";
+import { BsClock } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const DashboardPage = () => {
-  const { userType } = useContext(AppContext);
-  const [errandMod, setErrandMod] = useState(false)
+  const [errandMod, setErrandMod] = useState(false);
+
+
+  const [errands, setErrands] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const navigate = useNavigate();
   const storedUser = JSON.parse(localStorage.getItem("userDetails")) || {};
-
-
   const userKyc = localStorage.getItem("userKyc") === "true";
-  console.log(userKyc)
+  const BaseUrl = import.meta.env.VITE_BASE_URL;
+
   const fullName = `${storedUser?.firstName || ""} ${storedUser?.lastName || ""}`.trim();
 
-  const stats = [
+
+  const formatDate = (iso) => {
+    if (!iso) return "";
+    const d = new Date(iso);
+    return `${String(d.getDate()).padStart(2, "0")}/${String(d.getMonth() + 1).padStart(2, "0")}/${d.getFullYear()}`;
+  };
+
+  const fetchErrands = async () => {
+    try {
+      const res = await axios.get(`${BaseUrl}/errand/getall`);
+      setErrands(Array.isArray(res?.data?.data) ? res.data.data : []);
+    } catch (err) {
+      console.log("Fetch errands error:", err);
+      setErrands([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchErrands();
+  }, []);
+
+           const stats = [
     {
       title: "Total Request",
-      value: "0",
+      value: errands.length,
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
@@ -29,7 +58,7 @@ const DashboardPage = () => {
     },
     {
       title: "Completed",
-      value: "1",
+      value: "0",
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
@@ -40,7 +69,7 @@ const DashboardPage = () => {
     },
     {
       title: "Active",
-      value: "1",
+      value: "0",
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <circle cx="12" cy="12" r="10" />
@@ -51,7 +80,7 @@ const DashboardPage = () => {
     },
     {
       title: "Total Spent",
-      value: "3000",
+      value: "0",
       icon: (
         <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
           <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
@@ -66,25 +95,22 @@ const DashboardPage = () => {
       ),
       color: "#F97316",
     },
-  ];
+  ]; 
 
   return (
     <div className="dashboard-page">
-      <div style={{display: "flex", justifyContent: "space-between"}}>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div className="welcome-section">
-          <h1 className="welcome-title">Welcome back, {fullName || "User"}! 👋</h1>
+          <h1 className="welcome-title">Welcome back, {fullName || "Guest"}! 👋</h1>
           <p className="welcome-subtitle">Manage your errands today.</p>
         </div>
-         {userKyc && (
-        <button className="post-errand-btn" onClick={() => setErrandMod(true)}>
-          + <span>Post New Errand</span>
-        </button>
-      )}
+
+        {userKyc && (
+          <button className="post-errand-btn" onClick={() => setErrandMod(true)}>
+            + <span>Post New Errand</span>
+          </button>
+        )}
       </div>
-
-
-
-     
 
       <div className="statts-grid">
         {stats.map((stat, index) => (
@@ -100,35 +126,79 @@ const DashboardPage = () => {
         ))}
       </div>
 
-      <div className="no-errands-section">
-        <div className="no-errands-content">
-          <div className="no-errands-icon">
-            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinejoin="round">
-              <polygon points="12 3 4 8 12 13 20 8" />
-              <polygon points="4 8 4 16 12 21 12 13" />
-              <polygon points="20 8 20 16 12 21 12 13" />
-              <rect x="9" y="9" width="6" height="6" fill="currentColor" stroke="none" />
-            </svg>
+      {loading && (
+        <p style={{ textAlign: "center", marginTop: 24 }}>Loading errands...</p>
+      )}
+
+ 
+      {!loading && errands.length === 0 && (
+        <div className="no-errands-section">
+          <div className="no-errands-content">
+            <div className="no-errands-icon">
+              <svg width="80" height="80" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" strokeWidth="1" strokeLinejoin="round">
+                <polygon points="12 3 4 8 12 13 20 8" />
+                <polygon points="4 8 4 16 12 21 12 13" />
+                <polygon points="20 8 20 16 12 21 12 13" />
+                <rect x="9" y="9" width="6" height="6" fill="currentColor" stroke="none" />
+              </svg>
+            </div>
+
+            <h2 className="no-errands-title">No errands yet</h2>
+            <p className="no-errands-subtitle">
+              {userKyc ? "Create your first errand to get started" : "Complete KYC to get started"}
+            </p>
+
+            {!userKyc && (
+              <button onClick={() => navigate("/dashboard/profile")} className="kyc-button">
+                Complete KYC
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+
+  
+      {!loading && errands.length > 0 && errands.map((item) => (
+        <div key={item.id} className="recent-card">
+          <div className="recent-header">
+            <h4>{item.title}</h4>
+            <span className="status-badge">{item?.status}</span>
           </div>
 
-          <h2 className="no-errands-title">No errands yet</h2>
+          <div className="pickup-delivery-row">
+            <div className="pickup-section">
+              <p className="icon-text">
+                <CiLocationOn size={18} /> <span className="label">Pickup</span>
+              </p>
+              <p className="address">{item?.pickupAddress}</p>
+            </div>
 
-          <p className="no-errands-subtitle">
-            {userKyc ? "Create your first errand to get started" : "Complete KYC to get started"}
-          </p>
+            <div className="delivery-section">
+              <p className="icon-text">
+                <CiLocationOn size={18} /> <span className="label">Delivery</span>
+              </p>
+              <p className="address">{item?.deliveryAddress}</p>
+            </div>
+          </div>
 
+          <div className="recent-footer">
+            <p className="date">
+              <BsClock size={17} /> {formatDate(item.createdAt)}
+            </p>
+            <p className="price">₦{Number(item.price ?? 0).toLocaleString()}</p>
 
-          {!userKyc && (
-            <button onClick={() => navigate("/dashboard/profile")} className="kyc-button">
-              Complete KYC
+            <button className="details-btn">
+              <Link className="link" to={`/dashboard/my-errands/${item.id}`}>
+                View Details
+              </Link>
             </button>
-          )}
+          </div>
         </div>
-      </div>
-      {
-        errandMod &&( <ModalErrand toclose={setErrandMod}/>)
-      }
-     
+      ))}
+
+   
+      {errandMod && <ModalErrand toclose={setErrandMod} />}
     </div>
   );
 };

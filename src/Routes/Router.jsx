@@ -39,7 +39,7 @@ const Router = () => {
         <Route path="/reset" element={<ResetPassword />} />
 
         {/*  Client Dashboard */}
-        <Route element={<PrivateRoute allowedRole="Client" />}>
+        {/* <Route element={<PrivateRoute allowedRole="Client" />}> */}
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route index element={<DashboardPage />} />
             <Route path="my-errands" element={<MyErrandsPage />} />
@@ -48,7 +48,7 @@ const Router = () => {
             <Route path="messages" element={<MessagesPage />} />
             <Route path="profile" element={<ProfilePage />} />
           </Route>
-        </Route>
+        {/* </Route> */}
 
         {/*  Runner Dashboard */}
         <Route element={<PrivateRoute allowedRole="Runner" />}>
