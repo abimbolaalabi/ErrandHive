@@ -6,10 +6,9 @@ const AppContext = createContext(null);
 
 const AppProvider=({ children}) => {
     const [user,setUser] = useState(null)
-    const [userType, setUserType] = useState('Client') // Default to Client, can be 'Client' or 'Runner'
 
     return(
-        <AppContext.Provider value={{user, setUser, userType, setUserType}}  >
+        <AppContext.Provider value={{user, setUser}}  >
             {children}
         </AppContext.Provider >
     )
