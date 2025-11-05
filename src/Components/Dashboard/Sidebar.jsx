@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { AppContext } from '../../Context/App';
 import './Sidebar.css';
 import { FaRunning } from "react-icons/fa";
+import { toast } from "react-toastify"; 
+
 const Sidebar = () => {
   const { userType } = useContext(AppContext);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const menuItems = [
     {
@@ -23,9 +26,7 @@ const Sidebar = () => {
     {
       path: '/dashboard/my-errands',
       label: 'My Errands',
-      icon: (
-       <FaRunning/>
-      )
+      icon: <FaRunning />
     },
     {
       path: '/dashboard/payments',
@@ -58,6 +59,14 @@ const Sidebar = () => {
     }
   ];
 
+  const handleLogout = () => {
+    localStorage.removeItem("userToken");
+    localStorage.removeItem("userDetails");
+    localStorage.removeItem("userKyc");
+
+    navigate("/");
+  };
+
   return (
     <div className="sidebar">
       <div className="sidebar-header">
@@ -89,7 +98,8 @@ const Sidebar = () => {
           );
         })}
 
-        <NavLink to="/logout" className="nav-item logout">
+     
+        <div className="nav-item logout" onClick={handleLogout}>
           <span className="nav-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
@@ -98,7 +108,7 @@ const Sidebar = () => {
             </svg>
           </span>
           <span className="nav-label">Logout</span>
-        </NavLink>
+        </div>
       </nav>
     </div>
   );

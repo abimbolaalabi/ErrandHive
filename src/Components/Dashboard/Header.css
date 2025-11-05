@@ -82,7 +82,7 @@
   border-radius: 8px;
   transition: background-color 0.2s;
   cursor: pointer;
-  background-color: #8133F1;
+
 }
 
 .user-profile:hover {
@@ -105,9 +105,9 @@
   flex-direction: column;
 }
 
-.user-name {
+.user-namee {
   font-weight: 600;
-  color: #1e293b;
+  color: black;
   font-size: 0.875rem;
   line-height: 1.2;
    color: #64748b;

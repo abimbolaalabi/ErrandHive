@@ -20,38 +20,50 @@ import ProfilePage from '../pages/Dashboard/ProfilePage'
 import LandingPage from '../pages/LandingPage/LandingPage'
 import PageNotFound from '../pages/PageNotFound'
 import ClientVsRunner from '../pages/ClientVsRunner/ClientVsRunner'
+import PrivateRoute from './PrivateRoute'
+import MyErrandsDetails from '../pages/Dashboard/MyErrandsDetails'
+import AdminDashboard from '../pages/AdminDashboard/AdminDashboard'
 
 const Router = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path='*' element={<PageNotFound />} />
-        <Route path='/' element={<LandingPage />} />
-        <Route path='/clientvsrunner' element={<ClientVsRunner />} />
-        <Route path='/signup/:role' element={<SignUp />} />
-        {/* <Route path='/signup/:role' element={<SignUpRunner/>}/> */}
-        <Route path='/login' element={<Login />} />
-        <Route path='/verifyemail' element={<VerifyEmail />} />
-        <Route path='/forgot' element={<ForgotPassword />} />
-        <Route path='/reset' element={<ResetPassword />} />
-         <Route path='/kyc' element={<KycModal />} />
+  <Routes>
+        {/* Public routes */}
+        <Route path="*" element={<PageNotFound />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/clientvsrunner" element={<ClientVsRunner />} />
+        <Route path="/signup/:role" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/verifyemail" element={<VerifyEmail />} />
+        <Route path="/forgot" element={<ForgotPassword />} />
+        <Route path="/reset" element={<ResetPassword />} />
 
-        {/* <Route path='/reset-otp' element={<ResetOtp />} /> */}
-        {/* Dashboard Routes */}
-        <Route path='/dashboard' element={<DashboardLayout />}>
-          <Route index element={<DashboardPage />} />
-          <Route path='my-errands' element={<MyErrandsPage />} />
-          <Route path='payments' element={<PaymentsPage />} />
-          <Route path='messages' element={<MessagesPage />} />
-          <Route path='profile' element={<ProfilePage />} />
+        {/*  Client Dashboard */}
+        <Route element={<PrivateRoute allowedRole="Client" />}>
+          <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route index element={<DashboardPage />} />
+            <Route path="my-errands" element={<MyErrandsPage />} />
+            <Route path="my-errands/:errandId" element={<MyErrandsDetails />} />
+            <Route path="payments" element={<PaymentsPage />} />
+            <Route path="messages" element={<MessagesPage />} />
+            <Route path="profile" element={<ProfilePage />} />
+          </Route>
         </Route>
 
-        <Route path='/runnerlayout' element={<RunnerLayout />}>
-          <Route index element={<RunnerDashboard />} />
-          <Route path='runneractive' element={<ActiveJob />} />
-          <Route path='runnerearning' element={<RunnerEarning />} />
-          <Route path='runnermessage' element={<RunnerMessage />} />
-          <Route path='runnerprofile' element={<RunnerProfile />} />
+        {/*  Runner Dashboard */}
+        <Route element={<PrivateRoute allowedRole="Runner" />}>
+          <Route path="/runnerlayout" element={<RunnerLayout />}>
+            <Route index element={<RunnerDashboard />} />
+            <Route path="runneractive" element={<ActiveJob />} />
+            <Route path="runnerearning" element={<RunnerEarning />} />
+            <Route path="runnermessage" element={<RunnerMessage />} />
+            <Route path="runnerprofile" element={<RunnerProfile />} />
+          </Route>
+        </Route>
+
+        {/* Admin dashboard */}
+        <Route path='/admindash' element={<AdminDashboard/>}> 
+          
         </Route>
       </Routes>
 

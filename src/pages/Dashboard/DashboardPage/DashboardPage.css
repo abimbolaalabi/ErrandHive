@@ -8,6 +8,18 @@
   margin-bottom: 2rem;
 }
 
+.post-errand-btn{
+    width: 12%;
+  height: 40px;
+  background-color: #8133f1;
+  gap: 3rem;
+
+  color: #fff;
+  border-radius: 7px;
+  border: none;
+  padding: 10px;
+}
+
 .welcome-title {
   font-size: 2rem;
   font-weight: 700;
@@ -23,7 +35,7 @@
   font-weight: 400;
 }
 
-.stats-grid {
+.statts-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 4fr));
   gap: 1.5rem;
@@ -31,7 +43,7 @@
  
 }
 
-.stat-card {
+.statt-card {
   background: white;
   padding: 1.2rem;
   border-radius: 12px;
@@ -42,16 +54,16 @@
   transition: all 0.2s;
 }
 
-.stat-card:hover {
+.statt-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.stat-content {
+.statt-content {
   flex: 1;
 }
 
-.stat-title {
+.statt-title {
   font-size: 0.875rem;
   font-weight: 500;
   color: #64748b;
@@ -60,7 +72,7 @@
   letter-spacing: 0.05em;
 }
 
-.stat-value {
+.statt-value {
   font-size: 2rem;
   font-weight: 700;
   color: #1e293b;
@@ -68,7 +80,7 @@
   line-height: 1;
 }
 
-.stat-icon {
+.statt-icon {
   width: 48px;
   height: 48px;
   display: flex;
@@ -78,7 +90,7 @@
   background: rgba(129, 51, 241, 0.1);
 }
 
-.stat-icon svg {
+.statt-icon svg {
   width: 24px;
   height: 24px;
 }

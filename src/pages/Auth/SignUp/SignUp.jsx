@@ -5,7 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const SignUp = () => {
   const BaseUrl = import.meta.env.VITE_BASE_URL;
@@ -243,11 +243,15 @@ const validateForm = () => {
               <div className="text-or">or</div>
               <div className="firstline"></div>
             </article>
-
+             <Link style={{display: "flex", gap: "10px", textDecoration: "none"}} to={`https://errandhive-project.onrender.com/api/v1/google`}>
             <button className="google" type="button" disabled={loading}>
-              <FcGoogle />
+              
+               <FcGoogle />
               <p>Continue with Google</p>
+             
+             
             </button>
+             </Link>
 
             <aside className="account-text">
               <p>
