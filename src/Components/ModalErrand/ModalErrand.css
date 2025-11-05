@@ -14,17 +14,20 @@
 
 .modalerrand-child {
   background-color: #fff;
-  width: 40%; /* Adjusted for a desktop-like view */
-/* Min size for smaller screens */
+  width: 40%;
   height: 90%;
-  max-height: 750px; /* Prevent it from getting too tall */
+  max-height: 750px;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
   box-shadow: 0px 4px 20px rgba(0,0,0,0.15);
   z-index: 1001;
-  padding: 0; /* Remove default padding for controlled layout */
-  overflow: hidden; /* Contains the children */
+  padding: 0;
+  overflow-y: auto;     
+  overflow-x: hidden;
+}
+.modalerrand-child::-webkit-scrollbar {
+  display: none; 
 }
 
 .top-note-container {
@@ -56,7 +59,6 @@
     padding: 0 5px;
 }
 
-/* Header/Subheader */
 .post-errand-header {
     text-align: center;
     font-size: 18px;
@@ -73,11 +75,11 @@
     margin: 0 0 20px 0;
 }
 
-/* --- Form Specific Styles --- */
+
 .form-content {
     padding: 0 20px;
-    overflow-y: auto; /* Allows scrolling for the form fields */
-    flex-grow: 1; /* Takes up available space */
+ 
+    flex-grow: 1; 
 }
 
 .input-group {
@@ -96,7 +98,7 @@
 
 .label-with-icon svg {
     margin-right: 8px;
-    color: #999; /* Icon color */
+    color: #999;
     font-size: 1rem;
 }
 
@@ -135,7 +137,7 @@
 }
 
 
-/* --- Attachments Section --- */
+
 .attachments-section {
     margin-top: 10px;
     margin-bottom: 30px;
@@ -149,7 +151,7 @@
     padding: 20px;
     /* border: 2px dashed #a052ff;  */
     border-radius: 8px;
-    background-color: #f9f0ff; /* Very light background for the box */
+    background-color: #f9f0ff; 
     text-align: center;
     cursor: pointer;
 }
@@ -171,13 +173,13 @@
     color: #777;
 }
 
-/* --- Action Buttons --- */
+
 .action-buttons {
     display: flex;
     justify-content: space-between;
     padding: 20px;
     gap: 15px;
-    border-top: 1px solid #eee; /* Separator line */
+    border-top: 1px solid #eee; 
 }
 
 .btn {
@@ -193,8 +195,8 @@
 
 .cancel-btn {
     background-color: #fff;
-    color: #a052ff; /* Primary color text */
-    border: 2px solid #a052ff; /* Primary color outline */
+    color: #a052ff;
+    border: 2px solid #a052ff; 
 }
 
 .cancel-btn:hover {
@@ -202,16 +204,16 @@
 }
 
 .post-btn {
-    background-color: #a052ff; /* Primary action color */
+    background-color: #a052ff;
     color: #fff;
-    border: 2px solid #a052ff; /* Consistent border */
+    border: 2px solid #a052ff;/
 }
 
 .post-btn:hover {
-    background-color: #8c42e5; /* Slightly darker hover */
+    background-color: #8c42e5; 
 }
 
-/* --- Media Query for Mobile Responsiveness --- */
+
 @media (max-width: 600px) {
     .modalerrand-child {
         width: 90%;

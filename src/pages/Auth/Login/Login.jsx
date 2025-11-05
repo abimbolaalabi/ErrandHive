@@ -56,6 +56,7 @@ const Login = () => {
     return isValid;
   };
 
+  
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({ ...formData, [name]: type === "checkbox" ? checked : value });

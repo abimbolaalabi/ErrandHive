@@ -11,7 +11,7 @@ const ModalErrand = ({ toclose }) => {
     <div className='modalerrand-container'>
       <div className='modalerrand-child'>
 
-        {/* Top Note and Close Button */}
+      
         <div className='top-note-container'>
           <p className='top-note'>
             Note!! Do not place items above **₦100,000** For pickup
@@ -19,16 +19,15 @@ const ModalErrand = ({ toclose }) => {
           <span onClick={() => toclose(false)} className='close-button'>X</span>
         </div>
 
-        {/* Header */}
+       
         <h2 className='post-errand-header'>Post New Errand</h2>
         <p className='post-errand-subheader'>
           Fill in the details for your errand. All fields are required.
         </p>
 
-        {/* Form Container */}
         <div className='form-content'>
 
-          {/* Errand Title */}
+  
           <div className='input-group'>
             <p className='label-with-icon'><FaBook /> Errand Title</p>
             <input
@@ -38,7 +37,7 @@ const ModalErrand = ({ toclose }) => {
             />
           </div>
 
-          {/* Pickup Address */}
+        
           <div className='input-group'>
             <p className='label-with-icon'><FaLocationDot /> Pickup Address</p>
             <input
@@ -48,7 +47,7 @@ const ModalErrand = ({ toclose }) => {
             />
           </div>
 
-          {/* Pickup Contact Phone */}
+      
           <div className='input-group'>
             <p className='label-with-icon'><FaPhone /> Pickup Contact Phone</p>
             <input
@@ -58,7 +57,7 @@ const ModalErrand = ({ toclose }) => {
             />
           </div>
 
-          {/* Delivery Address */}
+         
           <div className='input-group'>
             <p className='label-with-icon'><FaLocationDot /> Delivery Address</p>
             <input
@@ -68,17 +67,17 @@ const ModalErrand = ({ toclose }) => {
             />
           </div>
 
-          {/* Price */}
-          {/* <div className='input-group'>
+      
+          <div className='input-group'>
                 <p className='label-with-icon'><FaNairaSign /> Price</p>
                 <input 
                     type='text' 
                     placeholder='e.g. ₦5,000' 
                     className='form-input'
                 />
-            </div> */}
+            </div>
 
-          {/* Description & Instructions */}
+
           <div className='input-group'>
             <p className='label-text'>Description & Instructions</p>
             <textarea
@@ -87,7 +86,7 @@ const ModalErrand = ({ toclose }) => {
             ></textarea>
           </div>
 
-          {/* Attachments (Optional) */}
+       
           <div className='attachments-section'>
             <p className='label-text'>Attachments (Optional)</p>
             <label htmlFor='file-upload' className='attachment-box'>
@@ -105,7 +104,7 @@ const ModalErrand = ({ toclose }) => {
           </div>
         </div>
 
-        {/* Action Buttons */}
+
         <div className='action-buttons'>
           <button className='btn cancel-btn' onClick={() => toclose(false)}>
             Cancel
