@@ -26,7 +26,7 @@ const VerifyEmail = () => {
   const userEmail =
     JSON.parse(localStorage.getItem("resetEmail") || localStorage.getItem("email"));
 
-  const isResetFlow = localStorage.getItem("isReset");
+  const isResetFlow = JSON.parse(localStorage.getItem("isReset"));
 
   useEffect(() => {
     if (!userEmail) {
