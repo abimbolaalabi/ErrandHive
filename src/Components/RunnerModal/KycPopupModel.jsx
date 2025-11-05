@@ -6,7 +6,7 @@ import { FaRegIdCard } from "react-icons/fa";
 import { MdHome, MdOutlineCameraAlt } from "react-icons/md";
 import { IoInformationCircleOutline } from "react-icons/io5";
 import { LuDownload } from "react-icons/lu";
-
+import { toast } from "react-toastify";
 const KycPopupModel = ({ close }) => {
   const [idFile, setIdFile] = useState(null);
   const [addressFile, setAddressFile] = useState(null);
@@ -20,12 +20,12 @@ const KycPopupModel = ({ close }) => {
     if (!file) return;
 
     if (!file.type.startsWith("image/")) {
-      alert("Only image files are allowed (jpg, png, jpeg).");
+      toast.error("Only image files are allowed (jpg, png, jpeg).");
       return;
     }
 
     if (file.size > 10 * 1024 * 1024) {
-      alert("File size should not exceed 10MB.");
+     toast.error("File size should not exceed 10MB.");
       return;
     }
 
@@ -40,9 +40,10 @@ const KycPopupModel = ({ close }) => {
     if (!allUploaded) return;
 
     const formData = new FormData();
-    formData.append("id", idFile);
-    formData.append("address", addressFile);
-    formData.append("selfie", selfieFile);
+    formData.append("governmentIdCard", idFile); 
+formData.append("proofOfAddress", addressFile);  
+formData.append("selfieWithId", selfieFile);     
+
 
     try {
       setLoading(true);
@@ -55,21 +56,23 @@ const KycPopupModel = ({ close }) => {
             "Content-Type": "multipart/form-data",
              Authorization: `Bearer ${token}`,
           },
+
         }
    
       );
           console.log(formData) 
-          
-
-      // close(false); 
+          console.log(res)
+      toast.success(res?.data?.message)
+        
     } catch (error) {
       console.error(error);
       console.log("err", error)
-      toast.error("res")
+      toast.error(error?.res?.data?.message)
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="kyc-popup-wrapper">
@@ -125,7 +128,7 @@ const KycPopupModel = ({ close }) => {
           {/* Address Upload */}
           <div className="kyc-popup-section">
             <div className="kyc-popup-section-header">
-              <MdHome className="kyc-popup-icon" />
+              {/* <MdHome className="kyc-popup-icon" /> */}
               <div>
                 <h4>Proof of Address</h4>
                 <p>Utility bill, bank statement, or lease (max 3 months old)</p>
@@ -146,7 +149,7 @@ const KycPopupModel = ({ close }) => {
           {/* Selfie Upload */}
           <div className="kyc-popup-section">
             <div className="kyc-popup-section-header">
-              <MdOutlineCameraAlt className="kyc-popup-icon" />
+              {/* <MdOutlineCameraAlt className="kyc-popup-icon" /> */}
               <div>
                 <h4>Upload selfie with ID</h4>
                 <p>Take a photo holding your ID next to your face</p>

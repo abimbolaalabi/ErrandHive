@@ -34,10 +34,10 @@ const RunnerProfile = () => {
     <div className="runnerProfile-container">
       {/* Header */}
       <div className="runnerProfile-header">
-        <h1>{isEditing ? "Edit Profile" : "Runner Profile"}</h1>
+        <h1>{isEditing ? "" : "Runner Profile"}</h1>
         <p>
           {isEditing
-            ? "Update your personal information"
+            ? ""
             : "Manage your runner details and verification status"}
         </p>
       </div>
@@ -46,123 +46,30 @@ const RunnerProfile = () => {
       {isEditing ? (
         <div className="edit-profile-settings">
           <div className="edit-header">
-            <h1>Profile & Settings</h1>
-            <p>Manage your account information and preferences</p>
+            <h1 className="edit-h1">Profile & Settings</h1>
+            <p>Manage your account and information preference</p>
           </div>
+          <form className="input-wrapper-edit">
+             <div className="input-wrapper-edit-holde">
+              <div>
+            <label>Firstname</label>
+              <div className="edit-input-text-holder-edit">
+                <input type="text" placeholder="firstname" className="input-edit" />
+              </div>
+                 </div>
+                 <div>
+                  
+                  <label className="">firstname</label>
+           <div className="edit-input-text-holder-edit">
+       <input type="text" placeholder="firstname" className="input-edit" />
+              </div>
+         </div>
+             </div>
+          </form>
+           <form className="input-wrapper-edit">
 
-          <div className="edit-form-container">
-            <div className="edit-field">
-              <label className="edit-label">First Name</label>
-              <input
-                type="text"
-                className="edit-input"
-                placeholder="Enter your first name"
-                defaultValue={storedUser.firstName || ""}
-              />
-            </div>
-
-            <div className="edit-field">
-              <label className="edit-label">Last Name</label>
-              <input
-                type="text"
-                className="edit-input"
-                placeholder="Enter your last name"
-                defaultValue={storedUser.lastName || ""}
-              />
-            </div>
-
-            <div className="edit-field">
-              <label className="edit-label">Email Address</label>
-              <input
-                type="email"
-                className="edit-input"
-                placeholder="Enter your email address"
-                defaultValue={email}
-              />
-            </div>
-
-            <div className="edit-field">
-              <label className="edit-label">About Me</label>
-              <textarea
-                className="edit-textarea"
-                placeholder="Note about yourself"
-                defaultValue={storedUser.bio || ""}
-                rows="4"
-              />
-            </div>
+           </form>
           </div>
-
-          {/* === 2. NEW PASSWORD SECTION (FROM IMAGE) === */}
-          <div className="password-section">
-            <h3 className="password-title">Update Password?</h3>
-
-            {/* Current Password */}
-            <div className="password-field">
-              <label className="password-label">Current Password</label>
-              <div className="password-wrapper">
-                <input
-                  type={showCurrent ? "text" : "password"}
-                  className="password-input"
-                  placeholder="••••••••"
-                />
-                <button
-                  type="button"
-                  className="toggle-eye"
-                  onClick={() => setShowCurrent(!showCurrent)}
-                >
-                  {showCurrent ? <FaEyeSlash /> : <FaEye />}
-                </button>
-              </div>
-            </div>
-
-            {/* New Password */}
-            <div className="password-field">
-              <label className="password-label">New Password</label>
-              <div className="password-wrapper">
-                <input
-                  type={showNew ? "text" : "password"}
-                  className="password-input"
-                  placeholder="••••••••"
-                />
-                <button
-                  type="button"
-                  className="toggle-eye"
-                  onClick={() => setShowNew(!showNew)}
-                >
-                  {showNew ? <FaEyeSlash /> : <FaEye />}
-                </button>
-              </div>
-            </div>
-
-            {/* Confirm Password */}
-            <div className="password-field">
-              <label className="password-label">Confirm Password</label>
-              <div className="password-wrapper">
-                <input
-                  type={showConfirm ? "text" : "password"}
-                  className="password-input"
-                  placeholder="••••••••"
-                />
-                <button
-                  type="button"
-                  className="toggle-eye"
-                  onClick={() => setShowConfirm(!showConfirm)}
-                >
-                  {showConfirm ? <FaEyeSlash /> : <FaEye />}
-                </button>
-              </div>
-            </div>
-
-            {/* Update Password Button */}
-            <button className="update-password-btn">Update password</button>
-
-            {/* Save Changes Buttons */}
-            <div className="save-actions">
-              <button className="save-outline-btn">Save changes</button>
-              <button className="save-filled-btn">Save changes</button>
-            </div>
-          </div>
-        </div>
       ) : (
         
         <>

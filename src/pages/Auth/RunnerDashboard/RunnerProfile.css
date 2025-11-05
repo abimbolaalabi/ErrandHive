@@ -198,17 +198,11 @@
   background-color: #AB76F6;
 }
 
-.edit-some-shit{
-  width: 100%;
-  height: 100%;
-}
+
 .edit-profile-settings {
-  margin-top: 25px;
-  border-radius: 16px;
-  padding: 32px;
   max-width: 1000px;
   width: 100%;
-  margin-bottom: 3rem;
+  min-height: 100vh;
 }
 
 .edit-header h1 {
@@ -224,20 +218,41 @@
   margin: 0;
 }
 
-.edit-form-container {
-  margin-top: 20px;
-  display: flex;
-  border-radius: 0.5rem;
-  flex-direction: column;
-  width: 100%;
-  background: white;
-  gap: 20px;
-
+.input-wrapper-edit {
+width: auto;
+max-width: 1000px;
+background-color: #fff;
+height: 400px;
+margin-top: 2rem;
+border-radius: 1rem;
+padding-inline: 2rem;
+padding-block: 2rem;
+gap: 0.05rem;
+display:flex;
+justify-content: center;
 }
-
-.edit-field {
-  display: flex;
-  flex-direction: column;
+.input-wrapper-edit-holde{
+ width:100%;
+ height:100%;
+display: flex;
+flex-direction: column;
+gap: 2rem;
+}
+.edit-input-text-holder-edit{
+  width: 100%;
+  background-color:red;
+  height: 3rem;
+   border-radius: 0.5rem;
+   border: 1px solid black;
+}
+.edit-input-text-holder-edit input{
+  outline:none;
+  border: none;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  
 }
 
 .edit-label {
