@@ -63,14 +63,14 @@ const RunnerDashboard = () => {
       </div>
 
       
-      <div className="e-grid">
+      <div className="e-grid-t">
         {data.map((e, index) => (
-          <div key={index} className="e-card">
-            <div className="e-content">
-              <h3 className="e-title">{e.title}</h3>
-              <p className="e-value">{e.value}</p>
+          <div key={index} className="e-card-t">
+            <div className="e-content-t">
+              <h3 className="e-title-t">{e.title}</h3>
+              <p className="e-value-t">{e.value}</p>
             </div>
-            <div className="e-icon" style={{ color: e.color }}>
+            <div className="e-icon-t" style={{ color: e.color }}>
               {e.icon}
             </div>
           </div>

@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import DashboardLayout from '../Components/Dashboard/DashboardLayout'
 import RunnerLayout from '../Components/RunerDashboardLayout/RunnerLayout'
 import RunnerDashboard from '../pages/Auth/RunnerDashboard/RunnerDashboard'
-import KycModal from  "../Components/RunnerModal/VerifyPickupCode"
+import KycModal from  "../Components/RunnerModal/KycVerifiedStatus"
 import RunnerEarning from '../pages/Auth/RunnerDashboard/RunnerEarning'
 import ActiveJob from '../pages/Auth/RunnerDashboard/ActiveJob'
 import RunnerProfile from '../pages/Auth/RunnerDashboard/RunnerProfile'
@@ -34,6 +34,8 @@ const Router = () => {
         <Route path='/verifyemail' element={<VerifyEmail />} />
         <Route path='/forgot' element={<ForgotPassword />} />
         <Route path='/reset' element={<ResetPassword />} />
+         <Route path='/kyc' element={<KycModal />} />
+
         {/* <Route path='/reset-otp' element={<ResetOtp />} /> */}
         {/* Dashboard Routes */}
         <Route path='/dashboard' element={<DashboardLayout />}>

@@ -3,10 +3,10 @@ import "./ActiveJob.css"
 import { CiLocationOn,CiClock2  } from "react-icons/ci";
 const ActiveJobs = () => {
     const data = [
-        { label: "Active Jobs", value: 1, icon: "📦" },
-        { label: "Est Total Time", value: "20 Mins", icon: "⏱️" },
-        { label: "Total Distance", value: "7 miles", icon: "📍" },
-        { label: "Average Ratings", value: 4.7, icon: "⭐" },
+        { label: "Active Jobs", value: 1, icon: "" },
+        { label: "Est Total Time", value: "20 Mins", icon: "" },
+        { label: "Total Distance", value: "7 miles", icon: "" },
+        { label: "Average Ratings", value: 4.7, icon: "" },
     ];
 
     return (

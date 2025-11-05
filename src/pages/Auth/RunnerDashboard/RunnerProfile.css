@@ -197,3 +197,254 @@
 .runnerProfile-verifyBtn:hover {
   background-color: #AB76F6;
 }
+
+.edit-some-shit{
+  width: 100%;
+  height: 100%;
+}
+.edit-profile-settings {
+  margin-top: 25px;
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 1000px;
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+.edit-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 6px 0;
+}
+
+.edit-header p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+.edit-form-container {
+  margin-top: 20px;
+  display: flex;
+  border-radius: 0.5rem;
+  flex-direction: column;
+  width: 100%;
+  background: white;
+  gap: 20px;
+
+}
+
+.edit-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  margin-left: 1rem;
+}
+
+.edit-input,
+.edit-textarea {
+  padding: 14px 16px;
+  font-size: 15px;
+  color: #1a1a1a;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  outline: none;
+  transition: border 0.2s ease;
+}
+
+.edit-input:focus,
+.edit-textarea:focus {
+  border-color: #AB76F6;
+  box-shadow: 0 0 0 3px rgba(171, 118, 246, 0.1);
+}
+
+.edit-textarea {
+  resize: vertical;
+  min-height: 100px;
+  font-family: inherit;
+}
+
+.edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.edit-cancel-btn,
+.edit-save-btn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.edit-cancel-btn {
+  background: #f5f5f5;
+  color: #555;
+  border: 1px solid #ddd;
+}
+
+.edit-cancel-btn:hover {
+  background: #eaeaea;
+}
+
+.edit-save-btn {
+  background: #AB76F6;
+  color: white;
+  border: none;
+}
+
+.edit-save-btn:hover {
+  background: #9d63e6;
+}
+
+
+.password-change-wrapper{
+   margin-top: 25px;
+background: #fff;
+border-radius: 16px;
+padding: 32px;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+/* max-width: 1000px; */
+width: 100%;
+}
+.password-section {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid #eee;
+  background: white;
+}
+
+.password-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 20px 0;
+}
+
+.password-field {
+  margin-bottom: 20px;
+}
+
+.password-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  margin-left: 1rem;
+}
+
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input {
+  width: 100%;
+  padding: 14px 50px 14px 16px;
+  font-size: 15px;
+  color: #555;
+  background: #f8f5ff;
+  border: 1px solid #e6d9ff;
+  border-radius: 12px;
+  outline: none;
+}
+
+.password-input::placeholder {
+  color: #bbb;
+}
+
+.password-input:focus {
+  border-color: #AB76F6;
+  box-shadow: 0 0 0 3px rgba(171,118,246,.1);
+}
+
+.toggle-eye {
+  position: absolute;
+  right: 14px;
+  background: none;
+  border: none;
+  color: #AB76F6;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.toggle-eye:hover {
+  color: #9d63e6;
+}
+
+.update-password-btn {
+  margin-top: 16px;
+  width: 30%;
+  background: #AB76F6;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.update-password-btn:hover {
+  background: #9d63e6;
+}
+
+.save-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 15px;
+  margin-bottom: 0.5rem;
+  justify-content: space-between;
+}
+
+.save-outline-btn,
+.save-filled-btn {
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  min-width: 120px;
+}
+
+.save-outline-btn {
+  background: transparent;
+  color: #AB76F6;
+  border: 1.5px solid #AB76F6;
+}
+
+.save-outline-btn:hover {
+  background: #f8f5ff;
+}
+
+.save-filled-btn {
+  background: #AB76F6;
+  color: #fff;
+  border: none;
+}
+
+.save-filled-btn:hover {
+  background: #9d63e6;
+}
+
+/* ============================================================= */
+/* ====================== RESPONSIVE =========================== */
+/* ============================================================= */

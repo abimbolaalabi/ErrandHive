@@ -15,6 +15,7 @@ import { Outlet, useNavigate, useLocation } from "react-router-dom";
 
 const RunnerLayout = () => {
   const navigate = useNavigate();
+  const location = useLocation()
   
   const menuItems = [
     { label: "Dashboard", icon: <MdOutlineDashboard />, path: "/runnerlayout" },
@@ -64,10 +65,13 @@ const RunnerLayout = () => {
         </div>
 
         <div className="log-out-box">
-          <button type="submit" className="log-out-btn">
-            <IoIosLogOut style={{ fontSize: "1.5rem" }} />Log out
+          <button type="submit" className="log-out-btn"
+          //  onClick={() => navigate("/")}
+          >
+            
+            <IoIosLogOut style={{ fontSize: "1.5rem" }} /> Log out
           </button>
-        </div>
+        </div> 
       </aside>
 
       <div className="main-section">

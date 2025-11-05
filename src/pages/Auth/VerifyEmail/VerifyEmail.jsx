@@ -24,7 +24,7 @@ const VerifyEmail = () => {
 
 
   const userEmail =
-    JSON.parse(localStorage.getItem("resetEmail") || localStorage.getItem("email"));
+    (localStorage.getItem("resetEmail") || localStorage.getItem("email"));
 
   const isResetFlow = localStorage.getItem("isReset");
 
