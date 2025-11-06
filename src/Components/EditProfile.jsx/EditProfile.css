@@ -1,0 +1,148 @@
+.edit-profile-settings {
+  max-width: 1000px;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.edit-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 6px 0;
+}
+
+.edit-header p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+.input-wrapper-edit {
+width: auto;
+max-width: 1000px;
+background-color: #fff;
+height: 500px;
+margin-top: 2rem;
+border-radius: 1rem;
+padding-inline: 2rem;
+padding-block: 2rem;
+gap: 0.05rem;
+display:flex;
+justify-content: center;
+}
+.input-wrapper-edit-holde{
+ width:100%;
+ height:100%;
+display: flex;
+flex-direction: column;
+ gap: 1.7rem;
+}
+.edit-input-text-holder-edit{
+  width: 100%;
+  background-color:red;
+  height: 3rem;
+   border-radius: 0.5rem;
+   border: 1px solid black;
+}
+.edit-input-text-holder-edit input{
+  outline:none;
+  border: none;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  padding-left: 1rem;
+}
+
+.edit-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  margin-left: 1rem;
+}
+.text-area-label{
+  width: 100%;
+  height: 6rem;
+  border: 1px solid black;
+}
+.text-area-title{
+  padding-left: 1rem;
+}
+
+.section-password {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: #fff;
+  width: 100%;
+  max-width: 1000px;
+  padding: 2rem;
+  border-radius: 1rem;
+  margin-top: 2rem;
+}
+
+.password-holder-edit-wrapper {
+  width: 100%;
+  height: 3rem;
+  border-radius: 0.5rem;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+}
+
+.input-password-edit-page {
+  outline: none;
+  border: none;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+  padding-left: 1rem;
+  font-size: 1rem;
+  background: #f2ebfe66;
+  font-weight: 275;
+  color: #212121;
+}
+
+.update-btn-edit-password {
+  font-size: 1rem;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #8133F1;
+  color: white;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+.update-text-edit{
+  font-size: 1rem;
+}
+.save-change-edit{
+  width: 100%;
+  display: flex;
+    justify-content: space-between;
+    height: max-content;
+}
+.btn-edit-save-change{
+ background-color:  transparent;
+ border: none;
+ color: white;
+ width: 200px;
+ height: 40px;
+ font-size: 1rem;
+ border: 1px solid #8133F1;
+}
+.btn-edit-save-change:hover{
+  background-color:#8133F1 ;
+  color: white;
+  cursor: pointer;
+}
+.btn-edit-save-changes{
+   background-color:  #8133F1 ;
+ border: none;
+ color: white;
+ width: 200px;
+ height: 40px;
+ font-size: 1rem;
+ border: 1px solid #8133F1;
+}

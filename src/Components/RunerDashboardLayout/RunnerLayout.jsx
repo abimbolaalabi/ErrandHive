@@ -16,6 +16,7 @@ import { Outlet, useNavigate, useLocation } from "react-router-dom";
 const RunnerLayout = () => {
   const navigate = useNavigate();
   const location = useLocation()
+  
   const handleLogoutRunner = () => {
   localStorage.removeItem("userToken");
   localStorage.removeItem("userDetails");

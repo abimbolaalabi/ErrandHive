@@ -31,55 +31,53 @@ const SignUp = () => {
     setFormErrors({ ...formErrors, [e.target.name]: "" }); // clear error for this field
   };
 
-const validateForm = () => {
-  const { firstName, lastName, email, password, confirmPassword } = formData;
-  const newErrors = {};
+  const validateForm = () => {
+    const { firstName, lastName, email, password, confirmPassword } = formData;
+    const newErrors = {};
 
-  if (!firstName.trim()) {
-    newErrors.firstName = "First name is required";
-  } else if (!/^[A-Za-z]+$/.test(firstName)) {
-    newErrors.firstName = "First name should only contain letters.";
-  }
+    if (!firstName.trim()) {
+      newErrors.firstName = "First name is required";
+    } else if (!/^[A-Za-z]+$/.test(firstName)) {
+      newErrors.firstName = "First name should only contain letters.";
+    }
 
-  if (!lastName.trim()) {
-    newErrors.lastName = "Last name is required";
-  } else if (!/^[A-Za-z]+$/.test(lastName)) {
-    newErrors.lastName = "Last name should only contain letters.";
-  }
+    if (!lastName.trim()) {
+      newErrors.lastName = "Last name is required";
+    } else if (!/^[A-Za-z]+$/.test(lastName)) {
+      newErrors.lastName = "Last name should only contain letters.";
+    }
 
-  if (email === "") {
-    newErrors.email = "Email is required";
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    newErrors.email = "Invalid Email Format";
-  }
+    if (email === "") {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      newErrors.email = "Invalid Email Format";
+    }
 
- 
-  if (!password) {
-    newErrors.password = "Password is required";
-  } else if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(password)) {
-    newErrors.password =
-      "Password must contain at least one letter, one number, one special character, and be 8 characters long";
-  }
+    if (!password) {
+      newErrors.password = "Password is required";
+    } else if (
+      !/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(
+        password
+      )
+    ) {
+      newErrors.password =
+        "Password must contain at least one letter, one number, one special character, and be 8 characters long";
+    }
 
+    if (!confirmPassword) {
+      newErrors.confirmPassword = "Please confirm your password";
+    } else if (password !== confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match";
+    }
 
-  if (!confirmPassword) {
-    newErrors.confirmPassword = "Please confirm your password";
-  } else if (password !== confirmPassword) {
-    newErrors.confirmPassword = "Passwords do not match";
-  }
+    setFormErrors(newErrors);
 
-  setFormErrors(newErrors);
-
-  if (Object.keys(newErrors).length > 0) {
-    const firstError = Object.values(newErrors)[0];
-    toast.error(firstError);
-    return false;
-  }
-  return true;
-};
-
-  const navigatetoverify = () => {
-    navigate("/verifyemail");
+    if (Object.keys(newErrors).length > 0) {
+      const firstError = Object.values(newErrors)[0];
+      toast.error(firstError);
+      return false;
+    }
+    return true;
   };
 
   const handleSubmit = async (e) => {
@@ -107,7 +105,7 @@ const validateForm = () => {
       navigate("/verifyemail");
     } catch (error) {
       console.log("Signup error:", error);
-      toast.error(response?.data?.message || "Registration failed");
+      toast.error(error.response?.data?.message || error.message || "Registration failed");
     } finally {
       setLoading(false);
     }
@@ -221,7 +219,9 @@ const validateForm = () => {
                 )}
               </div>
               {formErrors.confirmPassword && (
-                <span className="error-text">{formErrors.confirmPassword}</span>
+                <span className="error-text">
+                  {formErrors.confirmPassword}
+                </span>
               )}
             </div>
 
@@ -243,15 +243,16 @@ const validateForm = () => {
               <div className="text-or">or</div>
               <div className="firstline"></div>
             </article>
-             <Link style={{display: "flex", gap: "10px", textDecoration: "none"}} to={`https://errandhive-project.onrender.com/api/v1/google`}>
-            <button className="google" type="button" disabled={loading}>
-              
-               <FcGoogle />
-              <p>Continue with Google</p>
-             
-             
-            </button>
-             </Link>
+
+            <Link
+              style={{ display: "flex", gap: "10px", textDecoration: "none" }}
+              to={`https://errandhive-project.onrender.com/api/v1/google`}
+            >
+              <button className="google" type="button" disabled={loading}>
+                <FcGoogle />
+                <p>Continue with Google</p>
+              </button>
+            </Link>
 
             <aside className="account-text">
               <p>

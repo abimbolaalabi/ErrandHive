@@ -1,0 +1,135 @@
+.negotiate-wrapper{
+    position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  font-family: "Poppins", sans-serif;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.negotiate-wrapper-box{
+    max-width: 700px;
+    width: 500px;
+    height: 500px;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    background: red;
+    overflow-y: scroll;
+    background: white;
+     scrollbar-width: thin; 
+    
+}
+.btn-negotiate-wrapper{
+    width: 100%;
+    height: 3rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+     margin-top: 2rem;
+    
+}
+.x-negotiate{
+    background-color: transparent;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+}
+.negotiate-text-holder{
+   width: 100%;
+   height: 3rem;
+   margin-top: 0.5rem;
+   margin-bottom: 2rem;
+   padding-left: 1rem;
+}
+.review-errand-negotiate-text-header{
+    font-size: 1rem;
+    color: black;
+    font-weight: bolder
+}
+.review-errand-negotiate-p{
+ font-size: 0.9rem;
+}
+.box-negotiate-holder{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 0.5rem;
+}
+.div-section-negotiate{
+    width: 90%;
+    height: 6rem;
+    background-color: #F9FAFB;
+    gap: 0.3rem;
+    display: flex;
+    border-radius: 10px;
+    flex-direction: column;
+   background: #E5E7EB;
+}
+.div-section-long-negotiate{
+    width: 90%;
+height: 7rem;
+background-color: #fff;
+gap: 0.3rem;
+  border-radius: 10px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+background: #8133F11A;
+}
+.input-negotiate-wrapper{
+    width: 100%;
+    height: 2rem;
+    padding-left: 1rem;
+}
+.prpose-stuuf-shit{
+    padding-left: 1.5rem;
+}
+.propose-section-propose-stuff{
+    margin-top: 2rem;
+}
+.text-input-negotiate{
+    width: 98%;
+    height: 100%;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background: #E5E7EB;
+    padding-left:1rem;
+}
+.section-propose-prce{
+    margin-top: 3rem;
+    margin-left: 1rem;
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin-bottom: 1rem;
+}
+.propose-button-shit{
+    width: 200px;
+    height: 3rem;
+   border: none;
+    border-radius: 0.5rem;
+    color: white;
+     font-size: 1rem;
+}
+.accept-button-shit{
+     width: 200px;
+ height: 3rem;
+  border: none;
+ background:#8133F1;
+ color: white;
+ border-radius: 0.5rem;
+ cursor: pointer;
+ font-size: 1rem;
+}
+.propose-button-shit:hover{
+     background:#8133F1;
+     cursor: pointer;
+}

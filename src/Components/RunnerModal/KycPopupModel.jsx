@@ -7,6 +7,7 @@ import { MdHome, MdOutlineCameraAlt } from "react-icons/md";
 import { IoInformationCircleOutline } from "react-icons/io5";
 import { LuDownload } from "react-icons/lu";
 import { toast } from "react-toastify";
+
 const KycPopupModel = ({ close }) => {
   const [idFile, setIdFile] = useState(null);
   const [addressFile, setAddressFile] = useState(null);
@@ -15,6 +16,7 @@ const KycPopupModel = ({ close }) => {
 
   const BaseURL = import.meta.env.VITE_BASE_URL;
   const token = localStorage.getItem("userToken");
+
   const handleFileChange = (e, type) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -41,15 +43,15 @@ const KycPopupModel = ({ close }) => {
 
     const formData = new FormData();
     formData.append("governmentIdCard", idFile); 
-formData.append("proofOfAddress", addressFile);  
-formData.append("selfieWithId", selfieFile);     
+formData.append("proofOfAddressImage", addressFile);  
+formData.append("selfieWithIdCard", selfieFile);     
 
 
     try {
       setLoading(true);
 
       const res= await axios.post(
-       `${BaseURL}/Kyc/submit`,
+       `${BaseURL}/kyc/submit`,
         formData,
         {
           headers: {
@@ -181,7 +183,7 @@ formData.append("selfieWithId", selfieFile);
             </ul>
           </div>
 
-          {/* Submit Button */}
+      
           <div className="btn-kyc-wrapper-hold">
             <button
               type="button"
