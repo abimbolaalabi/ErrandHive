@@ -6,6 +6,7 @@ import ModalErrand from "../../../Components/ModalErrand/ModalErrand";
 import { CiLocationOn } from "react-icons/ci";
 import { BsClock } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import cube from "../../../assets/cube.png"
 
 const DashboardPage = () => {
   const [errandMod, setErrandMod] = useState(false);
@@ -28,17 +29,34 @@ const DashboardPage = () => {
     return `${String(d.getDate()).padStart(2, "0")}/${String(d.getMonth() + 1).padStart(2, "0")}/${d.getFullYear()}`;
   };
 
-  const fetchErrands = async () => {
-    try {
-      const res = await axios.get(`${BaseUrl}/errand/getall`);
-      setErrands(Array.isArray(res?.data?.data) ? res.data.data : []);
-    } catch (err) {
-      console.log("Fetch errands error:", err);
+    const fetchErrands = async () => {
+  try {
+    setLoading(true);
+
+    const token = localStorage.getItem("userToken");
+    if (!token) {
+      console.log("No token found");
       setErrands([]);
-    } finally {
-      setLoading(false);
+      return;
     }
-  };
+
+    const res = await axios.get(
+      `${BaseUrl}/errand/my-errands`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    setErrands(res?.data?.data || []);
+  } catch (err) {
+    console.log("Fetch errands error:", err.response?.data || err.message);
+    setErrands([]);
+  } finally {
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
     fetchErrands();
@@ -135,13 +153,7 @@ const DashboardPage = () => {
         <div className="no-errands-section">
           <div className="no-errands-content">
             <div className="no-errands-icon">
-              <svg width="80" height="80" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="1" strokeLinejoin="round">
-                <polygon points="12 3 4 8 12 13 20 8" />
-                <polygon points="4 8 4 16 12 21 12 13" />
-                <polygon points="20 8 20 16 12 21 12 13" />
-                <rect x="9" y="9" width="6" height="6" fill="currentColor" stroke="none" />
-              </svg>
+             <img src={cube} alt="" />
             </div>
 
             <h2 className="no-errands-title">No errands yet</h2>

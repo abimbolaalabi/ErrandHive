@@ -92,7 +92,6 @@ const Modaldashboard = ({ close }) => {
 
         <div className="kyc-body">
 
-          {/* Government ID */}
           <div className="kyc-upload-card">
             <div className="kyc-card-top">
               <div className="kyc-card-icon"><CreditCard size={22} /></div>
@@ -113,7 +112,7 @@ const Modaldashboard = ({ close }) => {
             </label>
           </div>
 
-          {/* Proof of Address */}
+     
           <div className="kyc-upload-card">
             <div className="kyc-card-top">
               <div className="kyc-card-icon"><Home size={22} /></div>

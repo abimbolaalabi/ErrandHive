@@ -22,16 +22,33 @@ const BaseUrl = import.meta.env.VITE_BASE_URL
   };
 
   const fetchErrands = async () => {
-    try {
-      const res = await axios.get(`${BaseUrl}/errand/getall`);
-      setErrands(Array.isArray(res?.data?.data) ? res.data.data : []);
-    } catch (err) {
-      console.log('Fetch errands error:', err);
+  try {
+    setLoading(true);
+
+    const token = localStorage.getItem("userToken");
+    if (!token) {
+      console.log("No token found");
       setErrands([]);
-    } finally {
-      setLoading(false);
+      return;
     }
-  };
+
+    const res = await axios.get(
+      `${BaseUrl}/errand/my-errands`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    setErrands(res?.data?.data || []);
+  } catch (err) {
+    console.log("Fetch errands error:", err.response?.data || err.message);
+    setErrands([]);
+  } finally {
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
     fetchErrands();
@@ -49,12 +66,12 @@ const BaseUrl = import.meta.env.VITE_BASE_URL
         <button onClick={() => setErrandMod(true)}> <span>+  New Errand</span></button>
       </div>
 
-     
+      {/* Loading state */}
       {loading && (
         <p style={{ textAlign: 'center', marginTop: 24 }}>Loading errands...</p>
       )}
 
- 
+      {/* Empty state */}
       {!loading && errands.length === 0 && (
         <div className="no-errands-section">
           <div className="no-errands-content">
@@ -81,7 +98,7 @@ const BaseUrl = import.meta.env.VITE_BASE_URL
         <div key={item.id} className="recent-card">
           <div className="recent-header">
             <h4>{item.title}</h4>
-            <span className="status-badge">{item?.status}</span>
+            <span className="status-badge">{item.status || 'Open'}</span>
           </div>
 
           <div className="pickup-delivery-row">
@@ -96,7 +113,7 @@ const BaseUrl = import.meta.env.VITE_BASE_URL
               <p className="icon-text">
                 <CiLocationOn size={18} /> <span className="label">Delivery</span>
               </p>
-              <p className="address">{item?.deliveryAddress}</p>
+              <p className="address">{item?.delivery}</p>
             </div>
           </div>
 
