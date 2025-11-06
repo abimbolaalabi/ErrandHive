@@ -58,10 +58,12 @@
 }
 
 .card-icon-placeholder {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     border-radius: 4px;
-    background-color: rgba(255, 255, 255, 0.3); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .available-balance-card .card-icon-placeholder {
@@ -69,7 +71,7 @@
 }
 
 .pending-earnings-card .card-icon-placeholder {
-    background-color: #ffcc00; 
+    background-color: #FACC151A; 
 }
 
 .total-earnings-card .card-icon-placeholder {

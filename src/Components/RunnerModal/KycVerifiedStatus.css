@@ -1,0 +1,113 @@
+/* KycVerifiedStatus.css */
+.kyc-verified-container {
+  max-width: 800px;
+  margin: 24px auto;
+  padding: 0 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Main Status */
+.kyc-main-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+}
+
+.kyc-icon {
+  background: #dcfce7;
+  color: #22c55e;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.kyc-text h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #166534;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.verified-badge {
+  background: #22c55e;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 2px 10px;
+  border-radius: 999px;
+}
+
+.kyc-text p {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: #16a34a;
+}
+
+/* Sub-statuses */
+.kyc-sub-statuses {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.kyc-sub-item {
+  flex: 1;
+  min-width: 220px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.kyc-check-icon {
+  background: #22c55e;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.kyc-sub-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.kyc-sub-text strong {
+  font-size: 14px;
+  font-weight: 600;
+  color: #166534;
+}
+
+.kyc-sub-text p {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: #16a34a;
+}
+
+
+
+
+
+
+
