@@ -10,12 +10,14 @@ import {
 } from "react-icons/io5";
 import Modaldashboard from "../../Components/ModalDashboard/Modaldashboard";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
   const [modaldash, setModalDash] = useState(false);
   const [image, setImage] = useState(null);
   const [kycStatus, setKycStatus] = useState(null);
   const [kycReason, setKycReason] = useState("");
+  const navigate = useNavigate()
 
   const BaseUrl = import.meta.env.VITE_BASE_URL;
   const token = localStorage.getItem("userToken");
@@ -101,7 +103,7 @@ const ProfilePage = () => {
                 <FaEnvelope /> {email}
               </p>
             </div>
-            <div className="profile-right">
+            <div onClick={()=>navigate("/dashboard/profile/profileId")} className="profile-right">
               <button className="edit-btn">
                 <MdEdit /> Edit Profile
               </button>

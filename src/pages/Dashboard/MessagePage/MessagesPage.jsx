@@ -1,5 +1,5 @@
 import  { useState } from "react";
-import "./MessagesPage.css";
+import "../MessagePage/MessagesPage.css";
 
 const MessagesPage = () => {
   const [message, setMessage] = useState("");

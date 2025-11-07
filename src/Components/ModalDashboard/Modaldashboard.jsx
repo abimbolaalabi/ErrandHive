@@ -11,7 +11,7 @@ const Modaldashboard = ({ close }) => {
     address: null,
     selfie: null,
   });
-
+   const BaseUrl = import.meta.env.VITE_BASE_URL
   const [loading, setLoading] = useState(false);
 
   const handleFileChange = (e, type) => {
@@ -44,7 +44,7 @@ const Modaldashboard = ({ close }) => {
       formData.append("selfieWithIdCard", files.selfie);
 
       const res = await axios.post(
-        "https://errandhive-project.onrender.com/api/v1/kyc/submit",
+        `${BaseUrl}/kyc/submit`,
         formData,
         {
           headers: {

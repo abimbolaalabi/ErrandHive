@@ -62,7 +62,7 @@ const ModalErrand = ({ toclose }) => {
     setLoading(true);
 
     try {
-     
+
       const formDataToSend = new FormData();
       formDataToSend.append("title", formData.title);
       formDataToSend.append("pickupAddress", formData.pickupAddress);
@@ -72,7 +72,7 @@ const ModalErrand = ({ toclose }) => {
       formDataToSend.append("description", formData.description);
 
       if (file) {
-        formDataToSend.append("attachments", file); 
+        formDataToSend.append("attachments", file);
       }
 
       const res = await axios.post(
@@ -81,7 +81,7 @@ const ModalErrand = ({ toclose }) => {
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data", 
+            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -213,10 +213,10 @@ const ModalErrand = ({ toclose }) => {
               <input
                 id="file-upload"
                 type="file"
-                accept=".pdf,.doc,.docx,.xls,.xlsx"
+                accept="image/*"
                 className="file-input"
                 style={{ display: "none" }}
-                onChange={(e) => setFile(e.target.files[0])} 
+                onChange={(e) => setFile(e.target.files[0])}
               />
             </label>
           </div>
