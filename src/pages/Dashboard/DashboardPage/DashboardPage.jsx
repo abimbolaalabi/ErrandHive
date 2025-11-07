@@ -14,6 +14,7 @@ const DashboardPage = () => {
 
   const [errands, setErrands] = useState([]);
   const [loading, setLoading] = useState(true);
+  // const[userId, setUserId]
 
   const navigate = useNavigate();
   const storedUser = JSON.parse(localStorage.getItem("userDetails")) || {};
@@ -57,6 +58,8 @@ const DashboardPage = () => {
     setLoading(false);
   }
 };
+
+
 
   useEffect(() => {
     fetchErrands();
