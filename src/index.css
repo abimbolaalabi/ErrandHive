@@ -15,3 +15,22 @@
     padding: 0;
     box-sizing: border-box;
 }
+html {
+  scroll-behavior: smooth;
+}
+/* ==== GLOBAL SCROLL FIX ==== */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden; /* 🚫 Removes horizontal scroll */
+  box-sizing: border-box;
+}
+
+/* Optional: Ensure child elements don’t push beyond the screen */
+* {
+  box-sizing: inherit;
+  max-width: 100%;
+}
+
