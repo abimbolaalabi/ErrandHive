@@ -1,46 +1,95 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BsClock } from 'react-icons/bs'
 import { CiLocationOn } from 'react-icons/ci'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import "./MyErrandDetails.css"
+import axios from 'axios'
+import ModalProposal from '../../Components/ModalProposal/ModalProposal'
+import ReviewModal from '../../Components/ReviewPropModal/ReviewModal'
+
 
 const MyErrandsDetails = () => {
     const { errandId } = useParams()
+    const [errand, setErrand] = useState(
+        {}
+    )
+    const [allerrand, setAllErrand] = useState([])
+    const [loading, setLoading] = useState(true);
+    const [modalProp, setModProp] = useState(false)
+    const [review, setReview] = useState(false)
+    const [info, setInfo] = useState({
+        errandId: "",
+        runnerId: ""
+    })
+    console.log("first", review)
 
-    const runners = [
-        {
-            name: "John Doe",
-            rating: 4.8,
-            jobs: 100,
-            bio: "Hi! I'm John Doe and I'd love to help with your delivery. I have 100 completed jobs with a 4.8 rating.",
-            amount: "₦4,000"
-        },
-        {
-            name: "Emeka Wilson",
-            rating: 4.9,
-            jobs: 120,
-            bio: "Hi! I'm Emeka Wilson and I'd love to help with your delivery. I have 120 completed jobs with a 4.9 rating.",
-            amount: "₦3,000"
-        },
-        {
-            name: "Dara Simi",
-            rating: 4.7,
-            jobs: 108,
-            bio: "Hi! I'm Dara Simi and I'd love to help with your delivery. I have 108 completed jobs with a 4.7 rating.",
-            amount: "₦3,000"
-        },
-    ]
+
+    const BaseUrl = import.meta.env.VITE_BASE_URL
+    const navigate = useNavigate()
+
+    const formatDate = (iso) => {
+        if (!iso) return '';
+        const d = new Date(iso);
+        const dd = String(d.getDate()).padStart(2, '0');
+        const mm = String(d.getMonth() + 1).padStart(2, '0');
+        const yyyy = d.getFullYear();
+        return `${dd}/${mm}/${yyyy}`;
+    };
+
+  
+    const getErrandById = async () => {
+        try {
+            const response = await axios.get(`${BaseUrl}/errand/get/${errandId}`)
+            setErrand(response?.data?.data)
+            // console.log(response.data)
+        } catch (error) {
+            console.log("This is the errand error", error)
+        }
+    }
+
+    const getAllErrands = async () => {
+        try {
+
+            setLoading(true);
+
+            const token = localStorage.getItem("userToken");
+            if (!token) {
+                console.log("No token found");
+                setAllErrand([]);
+                return;
+            }
+
+            const response = await axios.get(`${BaseUrl}/errand/${errandId}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            )
+            setAllErrand(response?.data?.data)
+            console.log(response.data.data)
+        } catch (error) {
+            console.log("This is the errand error", error)
+        } finally {
+            setLoading(false);
+        }
+    }
+    useEffect(() => {
+        getErrandById()
+        getAllErrands()
+    }, [])
+
+
 
     return (
         <div className='my-errand-detail'>
-            <p className="back-link">← Back to my errands</p>
-            {errandId}
-        
+            <p className="back-link" onClick={()=> navigate("/dashboard/my-errands")}>← Back to my errands</p>
+
             {/* Errand Card */}
             <div className="recents-card">
                 <div className="recents-header">
-                    <h4>Pickup Document</h4>
-                    <span className="statuss-badge">Pending</span>
+                    <h4>{errand.title}</h4>
+                    <span className="statuss-badge">{errand.status}</span>
                 </div>
 
                 <div className="pickups-delivery-row">
@@ -48,22 +97,22 @@ const MyErrandsDetails = () => {
                         <p className="icons-text">
                             <CiLocationOn size={18} /> <span className="label">Pickup location</span>
                         </p>
-                        <p className="addresss">40 Muyibi street<br />Contact: 090878654321</p>
+                        <p className="addresss">{errand?.pickupAddress}<br />Contact: {errand?.pickupContact}</p>
                     </div>
 
                     <div className="deliverys-section">
                         <p className="icons-text">
                             <CiLocationOn size={18} /> <span className="label">Delivery location</span>
                         </p>
-                        <p className="addresss">50 Kirikiri road</p>
+                        <p className="addresss">{errand?.deliveryAddress}</p>
                     </div>
                 </div>
 
                 <div className="recents-footer">
                     <p className="dates">
-                        <BsClock size={17} /> 20/10/2025
+                        <BsClock size={17} />  {formatDate(errand?.createdAt)}
                     </p>
-                    <p className="prices">₦3,000</p>
+                    <p className="prices">₦{Number(errand?.price ?? 0).toLocaleString()}</p>
                 </div>
             </div>
 
@@ -72,38 +121,71 @@ const MyErrandsDetails = () => {
                 <h3>Runner Applications</h3>
                 <p className="runner-subtitle">Review and select a runner for your request</p>
 
-                {runners.map((runner, index) => (
-                    <div className="runner-card" key={index}>
-
-                        <div className="initials-circle">
-                            {runner.name.split(" ").map(n => n[0]).join("")}
-                        </div>
-
-                        <div className="runner-info">
-
-                            <div className="top-row">
-                                <h4 className="runner-name">{runner.name}</h4>
-                                <button className="view-btn">View application</button>
+                {allerrand && allerrand.length > 0 ? (
+                    allerrand.map((item, id) => (
+                        <div className="runner-card" key={id}>
+                            <div className="initials-circle">
+                                {item?.runner?.firstName?.charAt(0).toUpperCase() + item?.runner?.lastName?.charAt(0).toUpperCase()}
                             </div>
 
-                            <p className="runner-rating">
-                                ⭐ {runner.rating} • {runner.jobs} jobs
-                            </p>
+                            <div className="runner-info">
+                                <div className="top-row">
+                                    <h4 className="runner-name">{item?.runner?.firstName} {item?.runner?.lastName}  </h4>
+                                    <button className="view-btn" onClick={() => {setModProp(true); setInfo({errandId: item?.errandId, runnerId: item?.runnerId})}}>View application</button>
+                                </div>
 
-                            <p className="runner-bio">{runner.bio}</p>
+                                <p className="runner-rating">
+                                    ⭐ {item.rating} • {item?.runner?.totalJobs} jobs
+                                </p>
 
-                            <p className="runner-price">{runner.amount}</p>
+                                <p className="runner-bio">{item?.runner?.bio}</p>
+
+                                <p className="runner-price"> ₦{item?.bidPrice}</p>
+                            </div>
                         </div>
-
-                    </div>
-                ))}
-
-
-
+                    ))
+                ) : (
+                    <p>No Application Yet</p>
+                )}
             </div>
 
-        </div>
+            {
+                modalProp && (<ModalProposal toclose={setModProp} setReview={setReview} info={info}/>)
+            }
+
+              {
+                review && (<ReviewModal close={setReview} />)
+            }
+
+        </div >
     )
 }
 
 export default MyErrandsDetails
+
+
+// {runners.map((runner, index) => (
+//     <div className="runner-card" key={index}>
+
+//         <div className="initials-circle">
+//             {runner.name.split(" ").map(n => n[0]).join("")}
+//         </div>
+
+//         <div className="runner-info">
+
+//             <div className="top-row">
+//                 <h4 className="runner-name">{runner.name}</h4>
+//                 <button className="view-btn" onClick={() =>setModProp(true)}>View application</button>
+//             </div>
+
+//             <p className="runner-rating">
+//                 ⭐ {runner.rating} • {runner.jobs} jobs
+//             </p>
+
+//             <p className="runner-bio">{runner.bio}</p>
+
+//             <p className="runner-price">{runner.amount}</p>
+//         </div>
+
+//     </div>
+// ))}

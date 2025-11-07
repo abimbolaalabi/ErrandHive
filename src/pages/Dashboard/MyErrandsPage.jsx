@@ -113,7 +113,7 @@ const BaseUrl = import.meta.env.VITE_BASE_URL
               <p className="icon-text">
                 <CiLocationOn size={18} /> <span className="label">Delivery</span>
               </p>
-              <p className="address">{item?.delivery}</p>
+              <p className="address">{item?.deliveryAddress}</p>
             </div>
           </div>
 

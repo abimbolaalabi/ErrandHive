@@ -15,7 +15,7 @@ import ResetPassword from "../pages/Auth/Reset/ResetPassword"
 import SignUp from '../pages/Auth/SignUp/SignUp'
 import VerifyEmail from '../pages/Auth/VerifyEmail/VerifyEmail'
 import DashboardPage from '../pages/Dashboard/DashboardPage/DashboardPage'
-import MessagesPage from '../pages/Dashboard/MessagesPage'
+import MessagesPage from '../pages/Dashboard/MessagePage/MessagesPage'
 import MyErrandsPage from '../pages/Dashboard/MyErrandsPage'
 import PaymentsPage from '../pages/Dashboard/PaymentsPage'
 import ProfilePage from '../pages/Dashboard/ProfilePage'
@@ -25,6 +25,8 @@ import ClientVsRunner from '../pages/ClientVsRunner/ClientVsRunner'
 import PrivateRoute from './PrivateRoute'
 import MyErrandsDetails from '../pages/Dashboard/MyErrandsDetails'
 import AdminDashboard from '../pages/AdminDashboard/AdminDashboard'
+import ProfileDetailSetting from '../pages/Dashboard/ProfileDetailSetting'
+import ErrandDeliveryTrack from '../pages/Dashboard/ErrandDeliveryTrack'
 import Negotiation from '../Components/RunnerModal/Negotiation'
 
 const Router = () => {
@@ -43,15 +45,18 @@ const Router = () => {
          <Route path="/reset-otp" element={<ResetOtp />} />
             <Route path="/Negotiation" element={<Negotiation />} />
         {/*  Client Dashboard */}
-        {/* <Route element={<PrivateRoute allowedRole="Client" />}> */}
+        <Route element={<PrivateRoute allowedRole="Client" />}>
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route index element={<DashboardPage />} />
             <Route path="my-errands" element={<MyErrandsPage />} />
             <Route path="my-errands/:errandId" element={<MyErrandsDetails />} />
+            <Route path="my-errands/:errandId/:errandTrack" element={<ErrandDeliveryTrack />} />
             <Route path="payments" element={<PaymentsPage />} />
             <Route path="messages" element={<MessagesPage />} />
+            <Route path="profile" element={<ProfilePage />} />
+            <Route path="profile/:profileId" element={<ProfileDetailSetting />} />
           </Route>
-        {/* </Route> */}
+        </Route>
 
         {/*  Runner Dashboard */}
         <Route element={<PrivateRoute allowedRole="Runner" />}>
