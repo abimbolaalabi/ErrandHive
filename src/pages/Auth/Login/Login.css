@@ -6,7 +6,6 @@
   gap: 0.2rem;
 }
 
-/* LEFT SIDE (carousel) */
 .login-left {
   width: 60%;
 }
@@ -19,13 +18,12 @@
   margin-top: 1rem;
 }
 
-/* RIGHT SIDE (form) */
 .login-right {
   width: 40%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: white; /* ✅ removed box shadow */
+  background: white; 
 }
 
 .login-right-form {
@@ -38,10 +36,8 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  /* ✅ removed box shadow */
 }
 
-/* TEXT AREA */
 .login-text-layout {
   display: flex;
   flex-direction: column;
@@ -55,7 +51,6 @@
   font-weight: 700;
 }
 
-/* EMAIL */
 .email-container {
   display: flex;
   flex-direction: column;
@@ -88,7 +83,6 @@
   font-family: sans-serif;
 }
 
-/* PASSWORD */
 .password-container {
   display: flex;
   flex-direction: column;
@@ -123,7 +117,6 @@
   cursor: pointer;
 }
 
-/* CHECKBOX */
 .checkbox-login-form {
   padding-block: 2rem;
   display: flex;
@@ -144,7 +137,6 @@
   color: #212121;
 }
 
-/* BUTTONS */
 .login-btn {
   width: 95%;
   height: 3rem;
@@ -201,7 +193,6 @@
   font-weight: 600;
 }
 
-/* LINKS */
 .forgot-password-form {
   margin-top: 1.5rem;
   color: #8133f1;
@@ -222,10 +213,7 @@
   color: red;
 }
 
-/* ✅ MOBILE VIEW (480px and below) */
 @media screen and (max-width: 480px) {
-  
-  /* Hide left-side carousel */
   .login-left,
   .img-box-wrapper,
   .carousel,
@@ -237,12 +225,10 @@
     display: none !important;
   }
 
-  /* ✅ Hide login heading */
   .login-right-text {
     display: none !important;
   }
 
-  /* Full width form */
   .login-right {
     width: 100%;
     height: auto;

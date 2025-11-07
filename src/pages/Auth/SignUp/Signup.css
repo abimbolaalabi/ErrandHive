@@ -184,15 +184,11 @@ form h1 {
   color: #8133f1;
 }
 
-/* ✅ MOBILE/TABLET — Show only form, hide carousel */
 @media screen and (max-width: 768px) {
-
-  /* Hide carousel / left section */
   .signup-left {
     display: none !important;
   }
 
-  /* Expand the form to full width */
   .signup-right {
     width: 100% !important;
     margin-left: 0 !important;
@@ -200,7 +196,6 @@ form h1 {
     height: auto;
   }
 
-  /* Form container full width, remove heavy shadow */
   .signup-right-cont {
     width: 100% !important;
     margin: 0 auto;
@@ -209,7 +204,6 @@ form h1 {
   }
 }
 
-/* ✅ SMALL PHONES — full form view */
 @media screen and (max-width: 480px) {
 
   .signup-left {

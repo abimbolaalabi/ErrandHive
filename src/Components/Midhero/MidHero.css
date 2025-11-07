@@ -40,7 +40,6 @@
 }
 
 .card:hover {
-  /* transform: translateY(-8px); */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
@@ -83,14 +82,13 @@
   line-height: 1.5;
 }
 
-/* ============ 💻 LAPTOP (1024px and below) ============ */
 @media (max-width: 1024px) {
   .cards-container {
     gap: 25px;
   }
 
   .card {
-    width: 45%; /* ✅ two cards per row */
+    width: 45%;
   }
 
   .title {
@@ -102,14 +100,13 @@
   }
 }
 
-/* ============ 📱 TABLET (768px and below) ============ */
 @media (max-width: 768px) {
   .midhero-section {
     padding: 60px 0;
   }
 
   .card {
-    width: 80%; /* ✅ one card per row */
+    width: 80%;
     margin-bottom: 30px;
   }
 
@@ -123,7 +120,6 @@
   }
 }
 
-/* ============ 📱 SMALL MOBILE (480px and below) ============ */
 @media (max-width: 480px) {
   .midhero-section {
     padding: 50px 0;

@@ -98,7 +98,6 @@
   font-size: 14px;
 }
 
-/* ✅ Updated (≤1440px) */
 @media (max-width: 1440px) {
   .morehero {
     padding: 50px;
@@ -117,7 +116,6 @@
   }
 }
 
-/* ✅ Updated (≤1024px) */
 @media (max-width: 1024px) {
   .feedback-container {
     flex-wrap: wrap;
@@ -159,7 +157,6 @@
   }
 }
 
-/* ✅ Updated (≤768px) */
 @media (max-width: 768px) {
   .morehero {
     padding: 40px 25px;
@@ -230,25 +227,25 @@
     width: 100%;
     padding: 25px 20px;
     border-radius: 16px;
-    background: rgba(255, 255, 255, 0.18);  /* 🔥 closer to screenshot */
+    background: rgba(255, 255, 255, 0.18);
     border: 1px solid rgba(255, 255, 255, 0.25);
   }
 
   .quote {
-    font-size: 55px; /* 🔥 same size as screenshot */
+    font-size: 55px;
     margin-bottom: 10px;
     line-height: 0.7;
   }
 
   .feedback-card p {
-    font-size: 15px;   /* 🔥 slightly bigger */
+    font-size: 15px; 
     line-height: 1.65;
     margin-bottom: 25px;
-    text-align: left;  /* 🔥 match screenshot */
+    text-align: left; 
   }
 
   .user-row {
-    justify-content: flex-start; /* 🔥 align left */
+    justify-content: flex-start; 
     gap: 8px;
   }
 
@@ -258,10 +255,9 @@
   }
 
   .user-name {
-    font-size: 15px;  /* 🔥 bigger like screenshot */
+    font-size: 15px;
   }
-
   .star {
-    font-size: 17px;  /* 🔥 match screenshot */
+    font-size: 17px;
   }
 }

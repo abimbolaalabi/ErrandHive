@@ -6,12 +6,11 @@ import { useState } from "react";
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Smooth scroll handler
   const handleScroll = (id) => {
     const section = document.getElementById(id);
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
-      setMenuOpen(false); // close mobile dropdown
+      setMenuOpen(false);
     }
   };
 

@@ -11,6 +11,7 @@
   display: flex;
   flex-direction: column;
 }
+
 .client-left {
   width: 45%;
   height: 100vh;
@@ -88,15 +89,11 @@
   border-radius: 6px;
 }
 
-/* ✅ MOBILE/TABLET — Hide carousel, show only the form side */
 @media screen and (max-width: 1024px) {
-
-  /* Hide the carousel section */
   .client-right {
     display: none !important;
   }
 
-  /* Expand the left section to full width */
   .client-left {
     width: 100% !important;
     margin: 0 auto;
@@ -105,12 +102,11 @@
 
   .client-left-wrapper {
     width: 100% !important;
-    box-shadow: none !important; /* optional: remove shadow on mobile */
+    box-shadow: none !important;
     padding: 20px;
   }
 }
 
-/* ✅ SMALLER MOBILE — full width + cleaner spacing */
 @media screen and (max-width: 600px) {
 
   .client-right {
