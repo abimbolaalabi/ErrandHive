@@ -2,7 +2,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import DashboardLayout from '../Components/Dashboard/DashboardLayout'
 import RunnerLayout from '../Components/RunerDashboardLayout/RunnerLayout'
 import RunnerDashboard from '../pages/Auth/RunnerDashboard/RunnerDashboard'
-import KycModal from  "../Components/RunnerModal/VerifyPickupCode"
+import ResetOtp from "../pages/Auth/ResetOtp/ResetOtp"
+import EditProfile from '../Components/EditProfile.jsx/EditProfile'
+import KycModal from  "../Components/RunnerModal/KycVerifiedStatus"
 import RunnerEarning from '../pages/Auth/RunnerDashboard/RunnerEarning'
 import ActiveJob from '../pages/Auth/RunnerDashboard/ActiveJob'
 import RunnerProfile from '../pages/Auth/RunnerDashboard/RunnerProfile'
@@ -25,6 +27,7 @@ import MyErrandsDetails from '../pages/Dashboard/MyErrandsDetails'
 import AdminDashboard from '../pages/AdminDashboard/AdminDashboard'
 import ProfileDetailSetting from '../pages/Dashboard/ProfileDetailSetting'
 import ErrandDeliveryTrack from '../pages/Dashboard/ErrandDeliveryTrack'
+import Negotiation from '../Components/RunnerModal/Negotiation'
 
 const Router = () => {
   return (
@@ -39,7 +42,8 @@ const Router = () => {
         <Route path="/verifyemail" element={<VerifyEmail />} />
         <Route path="/forgot" element={<ForgotPassword />} />
         <Route path="/reset" element={<ResetPassword />} />
-
+         <Route path="/reset-otp" element={<ResetOtp />} />
+            <Route path="/Negotiation" element={<Negotiation />} />
         {/*  Client Dashboard */}
         <Route element={<PrivateRoute allowedRole="Client" />}>
           <Route path="/dashboard" element={<DashboardLayout />}>
@@ -62,6 +66,7 @@ const Router = () => {
             <Route path="runnerearning" element={<RunnerEarning />} />
             <Route path="runnermessage" element={<RunnerMessage />} />
             <Route path="runnerprofile" element={<RunnerProfile />} />
+            <Route path="/runnerlayout/runnerprofile/runnerprofile/id" element={<EditProfile/>} />
           </Route>
         </Route>
 

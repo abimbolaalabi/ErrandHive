@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const WithdrawBank = () => {
+const WithdrawBank = ({close}) => {
   const [availableBalance] = useState(12750);
   const [withdrawAmount, setWithdrawAmount] = useState(""); 
 
