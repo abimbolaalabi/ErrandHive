@@ -16,13 +16,13 @@
     padding-block: 0.5rem;
     margin-bottom: 2rem;
 }
-.e-grid{
+.e-grid-t{
     display: grid;
-grid-template-columns: repeat(auto-fit, minmax(230px, 4fr));
+grid-template-columns: repeat(auto-fit, minmax(220px, 4fr));
 gap: 1.5rem;
  margin-bottom: 2rem;
 }
-.e-card{
+.e-card-t{
     background: white;
 padding: 1.2rem;
 border-radius: 12px;
@@ -33,15 +33,15 @@ justify-content: space-between;
 transition: all 0.2s;
 height: 9rem;
 }
-.e-card:hover{
+.e-card-t:hover{
      transform: translateY(-2px);
  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
  cursor: pointer;
 }
-.e-content{
+.e-content-t{
 flex: 1;
 }
-.e-title{
+.e-title-t{
 font-size: 1rem;
 font-weight: 600;
 font-family: Poppins;
@@ -51,7 +51,7 @@ margin: 0 0 0.5rem 0;
 text-transform: uppercase;
 letter-spacing: 0.05em;
 }
-.e-value{
+.e-value-t{
 font-size: 25px;
 font-weight: 700;
 color: #212121;
@@ -59,7 +59,7 @@ font-style: Bold;
 margin: 0;
 line-height: 1;
 }
-.e-icon{
+.e-icon-t{
      width: 48px;
  height: 48px;
  display: flex;
@@ -107,4 +107,17 @@ line-height: 1;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
+}
+.kyc-btn-browse-btn {
+   height: 30px;
+width: 150px;
+border: none;
+background-color:#8133F1;
+color: white;
+border-radius: 8px;
+font-family: Poppins;
+font-style: SemiBold;
+font-size: 1rem;
+font-weight: 600;
+cursor: pointer;
 }

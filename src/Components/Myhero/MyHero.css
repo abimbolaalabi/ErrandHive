@@ -47,6 +47,7 @@
   align-items: flex-start;
   margin-bottom: 25px;
   line-height: 1.5;
+  text-align: left;
 }
 
 .step-number {
@@ -60,15 +61,21 @@
   align-items: center;
   font-size: 0.9rem;
   margin-right: 12px;
+  flex-shrink: 0;
 }
 
 .step-number.yellow {
   background: #F1BA2A;
 }
 
+.step-content {
+  flex: 1;
+}
+
 .step h4 {
   margin-bottom: 3px;
   font-size: 1rem;
+  font-weight: 600;
 }
 
 .step p {
@@ -76,100 +83,46 @@
   color: #444;
 }
 
-@media (max-width: 1440px) {
-  .myhero-section {
-    width: 85%;
-  }
-
-  .myhero-title {
-    font-size: 2rem;
-  }
-
-  .box-title {
-    font-size: 1.2rem;
-  }
-}
-
-@media (max-width: 1024px) {
-  .myhero-section {
-    width: 90%;
-  }
-
-  .myhero-container {
-    gap: 30px;
-  }
-
-  .myhero-title {
-    font-size: 1.9rem;
-  }
-
-  .box-title {
-    font-size: 1.1rem;
-  }
-}
-
 @media (max-width: 768px) {
   .myhero-container {
     flex-direction: column;
     align-items: center;
-    text-align: center;
+    gap: 40px;
   }
 
   .myhero-box {
-    text-align: center;
+    width: 100%;
+    max-width: 400px;
   }
 
+  /* ✅ SIDE-BY-SIDE ON MOBILE */
   .step {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+    gap: 12px;
+    margin-bottom: 25px;
   }
 
   .step-number {
-    margin: 0 0 8px 0;
-  }
-
-  .myhero-title {
-    font-size: 1.7rem;
-  }
-
-  .box-title {
-    font-size: 1.05rem;
-  }
-
-  .step p {
-    font-size: 0.8rem;
-  }
-}
-
-
-@media (max-width: 480px) {
-  .myhero-section {
-    width: 95%;
-    margin: 50px auto;
-  }
-
-  .myhero-title {
-    font-size: 1.5rem;
-  }
-
-  .myhero-subtitle {
+    margin: 0;
+    width: 28px;
+    height: 28px;
     font-size: 0.9rem;
-    margin-bottom: 30px;
+    flex-shrink: 0;
   }
 
-  .myhero-container {
-    gap: 25px;
+  .step-content {
+    flex: 1;
   }
 
-  .box-title {
+  .step-content h4 {
     font-size: 1rem;
+    margin-bottom: 4px;
   }
 
-  .step h4 {
-    font-size: 0.9rem;
-  }
-
-  .step p {
-    font-size: 0.75rem;
+  .step-content p {
+    font-size: 0.83rem;
+    line-height: 1.45;
   }
 }

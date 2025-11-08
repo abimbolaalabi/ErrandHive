@@ -21,12 +21,18 @@ const VerifyEmail = () => {
   const navigate = useNavigate();
 
   const BaseURL = import.meta.env.VITE_BASE_URL;
-
-
-  const userEmail =
-    JSON.parse(localStorage.getItem("resetEmail") || localStorage.getItem("email"));
+  let userEmail = null;
+  try {
+    userEmail =
+      JSON.parse(localStorage.getItem("resetEmail")) ||
+      JSON.parse(localStorage.getItem("email"));
+  } catch {
+    userEmail =
+      localStorage.getItem("resetEmail") || localStorage.getItem("email");
+  }
 
   const isResetFlow = JSON.parse(localStorage.getItem("isReset"));
+  console.log(userEmail);
 
   useEffect(() => {
     if (!userEmail) {
@@ -91,12 +97,11 @@ const VerifyEmail = () => {
         email: userEmail,
         otp: otpCode,
       });
-
+      console.log(userEmail);
       toast.success(res?.data?.message || "Verification successful!");
       setCodes(["", "", "", "", "", ""]);
 
       setTimeout(() => {
-    
         if (isResetFlow) {
           navigate("/reset");
         } else {
@@ -105,7 +110,9 @@ const VerifyEmail = () => {
       }, 2000);
     } catch (error) {
       console.log(error);
-      toast.error(error?.response?.data?.message || "Invalid verification code");
+      toast.error(
+        error?.response?.data?.message || "Invalid verification code"
+      );
     } finally {
       setBtnLoading(false);
     }
@@ -145,7 +152,11 @@ const VerifyEmail = () => {
         <form className="verify-form" onSubmit={handleSubmit}>
           <div className="security-header">
             <div className="security-icon-box">
-              <img src={security} alt="security-icon" className="img-security" />
+              <img
+                src={security}
+                alt="security-icon"
+                className="img-security"
+              />
             </div>
             <h1 className="security-header-h1">Verify Your Email</h1>
             <p className="security-header-p">

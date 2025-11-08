@@ -2,7 +2,7 @@
   width: 100%;
   min-height: 100vh;
   padding: 40px 80px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   color: #1d1d1d;
 }
 
@@ -10,7 +10,7 @@
   font-size: 26px;
   font-weight: 600;
   margin-bottom: 6px;
-  color: #1e1e2f; 
+  color: #1e1e2f;
 }
 
 .runnerProfile-header p {
@@ -28,7 +28,7 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  box-shadow: 0px 2px 6px rgba(0,0,0,0.06);
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.06);
 }
 
 .runnerProfile-left {
@@ -45,7 +45,7 @@
   width: 95px;
   height: 95px;
   border-radius: 50%;
-  background-color: #AB76F6;
+  background-color: #ab76f6;
   color: #fff;
   font-size: 28px;
   font-weight: 600;
@@ -62,7 +62,6 @@
   border-radius: 50%;
 }
 
-
 .runnerProfile-cameraIcon {
   position: absolute;
   bottom: -6px;
@@ -76,7 +75,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   transition: 0.3s;
 }
 
@@ -91,7 +90,6 @@
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  
 }
 
 .runnerProfile-info h2 {
@@ -111,9 +109,9 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  border: 1px solid #AB76F6;
+  border: 1px solid #ab76f6;
   background: #fff;
-  color: #AB76F6;
+  color: #ab76f6;
   border-radius: 6px;
   padding: 6px 14px;
   cursor: pointer;
@@ -121,7 +119,7 @@
 }
 
 .runnerProfile-right .runnerProfile-editBtn:hover {
-  background-color: #AB76F6;
+  background-color: #ab76f6;
   color: white;
 }
 
@@ -144,7 +142,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .runnerProfile-kycLeft {
@@ -154,10 +152,10 @@
 }
 
 .runnerProfile-kycIcon {
-  background-color: #F3F4F6;
+  background-color: #f3f4f6;
   padding: 12px;
   border-radius: 8px;
-  color: #AB76F6;
+  color: #ab76f6;
 }
 
 .runnerProfile-kycInfo h3 {
@@ -184,7 +182,7 @@
 }
 
 .runnerProfile-verifyBtn {
-  background-color: #AB76F6;
+  background-color: #ab76f6;
   color: #fff;
   font-weight: 500;
   border: none;
@@ -195,5 +193,299 @@
 }
 
 .runnerProfile-verifyBtn:hover {
-  background-color: #AB76F6;
+  background-color: #ab76f6;
+}
+
+/* --- Continuation of ActiveJob.css --- */
+
+/* Review Card (In Progress / Pending) */
+.runnerProfile-reviewCard {
+  background: #fff;
+  border-radius: 12px;
+  margin-top: 25px;
+  padding: 24px 30px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
+  border-left: 5px solid #ab76f6; /* Highlight border for attention */
+}
+
+.runnerProfile-reviewDetails {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.runnerProfile-reviewIconbox {
+  background-color: #f0ebfd; /* Lighter purple background */
+  padding: 12px;
+  border-radius: 8px;
+  color: #ab76f6;
+}
+
+.runnerProfile-reviewTexts h3 {
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.runnerProfile-statusLabel {
+  background-color: #e6f7ff; /* Blue/Pending status background */
+  color: #1890ff;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.runnerProfile-reviewTexts p {
+  font-size: 14px;
+  color: #666;
+  margin-top: 4px;
+}
+
+/* Verified KYC Card Styles */
+.runnerProfile-kycVerifiedContainer {
+  background: #fff;
+  border-radius: 12px;
+  margin-top: 25px;
+  padding: 24px 30px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.runnerProfile-kycVerifiedHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+.runnerProfile-kycVerifiedHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.runnerProfile-kycVerifiedIconWrapper {
+  background-color: #e7ffe6; /* Light green background */
+  padding: 12px;
+  border-radius: 8px;
+  color: #52c41a; /* Verified Green color */
+}
+
+.runnerProfile-kycVerifiedTitle {
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.runnerProfile-kycVerifiedStatusLabel {
+  background-color: #e7ffe6; /* Light green */
+  color: #52c41a; /* Verified Green */
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.runnerProfile-kycVerifiedSubtext {
+  font-size: 14px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.runnerProfile-kycVerifiedStepsWrapper {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.runnerProfile-kycVerifiedStepCard {
+  text-align: center;
+  padding: 10px;
+  flex-grow: 1;
+}
+
+.runnerProfile-kycVerifiedStepIcon {
+  color: #52c41a;
+  margin-bottom: 5px;
+}
+
+.runnerProfile-kycVerifiedStepTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 2px;
+}
+
+.runnerProfile-kycVerifiedStepDesc {
+  font-size: 12px;
+  color: #888;
+}
+
+/* Rejected KYC Card Styles */
+.runnerProfile-rejectedWrapper {
+  background: #fff;
+  border-radius: 12px;
+  margin-top: 25px;
+  padding: 24px 30px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
+  border-left: 5px solid #ff4d4f; /* Rejected Red border */
+}
+
+.runnerProfile-rejectedHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.runnerProfile-rejectedHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.runnerProfile-rejectedIconBox {
+  background-color: #fff1f0; /* Light red background */
+  padding: 12px;
+  border-radius: 8px;
+  color: #ff4d4f; /* Rejected Red color */
+}
+
+.runnerProfile-rejectedTitle {
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.runnerProfile-rejectedStatusTag {
+  background-color: #fff1f0; /* Light red */
+  color: #ff4d4f; /* Rejected Red */
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.runnerProfile-rejectedSubtext {
+  font-size: 14px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.runnerProfile-rejectedActionBtn {
+  background-color: #ff4d4f;
+  color: #fff;
+  font-weight: 500;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.runnerProfile-rejectedActionBtn:hover {
+  opacity: 0.9;
+}
+
+.runnerProfile-rejectedReasonBox {
+  background-color: #fff7e6; /* Warning yellow background */
+  border: 1px solid #ffe58f;
+  border-radius: 8px;
+  padding: 15px;
+  margin-top: 15px;
+}
+
+.runnerProfile-rejectedReasonHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #faad14; /* Warning orange color */
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.runnerProfile-rejectedReasonText {
+  font-size: 13px;
+  color: #444;
+}
+
+/* --- Bottom Feature Cards --- */
+
+.runnerProfile-bankCard,
+.runnerProfile-withdrawalCard {
+  background: #fff;
+  border-radius: 12px;
+  margin-top: 25px;
+  padding: 24px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Specific styling for Bank Card (Yellow-themed) */
+.runnerProfile-bankCard {
+  background-color: #fffbf0; /* Light Yellow background */
+  border: 1px solid #ffe58f;
+}
+
+.runnerProfile-bankCard .runnerProfile-kycIcon {
+  /* Reusing kycIcon class but overriding colors */
+  background-color: #faad14;
+  color: #fff;
+}
+
+/* Specific styling for Withdrawal Card (Purple-themed) */
+.runnerProfile-withdrawalCard {
+  background-color: #f9f0ff; /* Light Purple background */
+  border: 1px solid #d9b8ff;
+}
+
+.runnerProfile-withdrawalCard .runnerProfile-kycIcon {
+  background-color: #ab76f6;
+  color: #fff;
+}
+
+.runnerProfile-featureLeft {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.runnerProfile-featureInfo h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.runnerProfile-featureInfo p {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Reusable Button Style for feature cards */
+.runnerProfile-actionBtn {
+  background-color: #ab76f6;
+  color: #fff;
+  font-weight: 500;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.runnerProfile-actionBtn:hover {
+  background-color: #9a65e0;
 }
