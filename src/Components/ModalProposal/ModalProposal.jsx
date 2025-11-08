@@ -10,7 +10,7 @@ import { LucideAlertTriangle } from 'lucide-react';
 import { MdOutlineCancelPresentation } from "react-icons/md";
 import axios from 'axios';
 
-const ModalProposal = ({ toclose, setReview, info }) => {
+const ModalProposal = ({ toclose, setReview, info, setInfo }) => {
 
     const firstName = "John";
     const lastName = "Doe";
@@ -61,7 +61,7 @@ const ModalProposal = ({ toclose, setReview, info }) => {
             {
                 ErrandId?.map((item) => (
 
-                    <div className="rb-modal" key ={item.id}>
+                    <div className="rb-modal" key={item.id}>
 
 
                         <button className="rb-close" onClick={() => toclose(false)}>
@@ -101,7 +101,7 @@ const ModalProposal = ({ toclose, setReview, info }) => {
 
                             </p>
                             <p className="rb-message-text">
-                               {item?.runner?.bio}
+                                {item?.runner?.bio}
                             </p>
                         </div>
 
@@ -116,9 +116,15 @@ const ModalProposal = ({ toclose, setReview, info }) => {
 
                             <button className="rb-reject">  < MdOutlineCancelPresentation />Reject</button>
                             <button className="rb-accept" onClick={() => {
-                                console.log("first")
+
                                 setReview(true);
                                 toclose(false)
+                                setInfo((prev) => ({
+                                    ...prev,
+                                    applicationId: item?.id,
+                                    bidPrice: item?.bidPrice,
+                                    runnerName: `${item?.runner?.firstName} ${item?.runner?.lastName}`,
+                                }));
 
                             }}>✔ ₦{item?.bidPrice}</button>
                         </div>
