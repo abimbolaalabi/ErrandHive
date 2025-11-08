@@ -5,7 +5,9 @@ import { useNavigate, useParams } from 'react-router-dom'
 import "./MyErrandDetails.css"
 import axios from 'axios'
 import ModalProposal from '../../Components/ModalProposal/ModalProposal'
-import ReviewModal from '../../Components/ReviewPropModal/ReviewModal'
+import ReviewModal from '../../Components/ReviewPropModal/ModalProposalRev'
+import ModalProposalRev from '../../Components/ReviewPropModal/ModalProposalRev'
+import ErrandPayMod from '../../Components/ErrandPayModal/ErrandPayMod'
 
 
 const MyErrandsDetails = () => {
@@ -17,11 +19,12 @@ const MyErrandsDetails = () => {
     const [loading, setLoading] = useState(true);
     const [modalProp, setModProp] = useState(false)
     const [review, setReview] = useState(false)
+    const [errandpay, setErrandPay] = useState(false)
     const [info, setInfo] = useState({
         errandId: "",
         runnerId: ""
     })
-    console.log("first", review)
+    const [show, setShow] = useState(false)
 
 
     const BaseUrl = import.meta.env.VITE_BASE_URL
@@ -36,7 +39,7 @@ const MyErrandsDetails = () => {
         return `${dd}/${mm}/${yyyy}`;
     };
 
-  
+
     const getErrandById = async () => {
         try {
             const response = await axios.get(`${BaseUrl}/errand/get/${errandId}`)
@@ -83,7 +86,7 @@ const MyErrandsDetails = () => {
 
     return (
         <div className='my-errand-detail'>
-            <p className="back-link" onClick={()=> navigate("/dashboard/my-errands")}>← Back to my errands</p>
+            <p className="back-link" onClick={() => navigate("/dashboard/my-errands")}>← Back to my errands</p>
 
             {/* Errand Card */}
             <div className="recents-card">
@@ -131,7 +134,7 @@ const MyErrandsDetails = () => {
                             <div className="runner-info">
                                 <div className="top-row">
                                     <h4 className="runner-name">{item?.runner?.firstName} {item?.runner?.lastName}  </h4>
-                                    <button className="view-btn" onClick={() => {setModProp(true); setInfo({errandId: item?.errandId, runnerId: item?.runnerId})}}>View application</button>
+                                    <button className="view-btn" onClick={() => { setModProp(true); setInfo({ errandId: item?.errandId, runnerId: item?.runnerId, title:errand?.title}) }}>View application</button>
                                 </div>
 
                                 <p className="runner-rating">
@@ -140,7 +143,11 @@ const MyErrandsDetails = () => {
 
                                 <p className="runner-bio">{item?.runner?.bio}</p>
 
-                                <p className="runner-price"> ₦{item?.bidPrice}</p>
+                                <p className="runner-price">   {item?.currentPrice > 0 ? (
+                                    <> ₦{Number(item?.currentPrice).toLocaleString()}</>
+                                ) : (
+                                    <> ₦{Number(item?.bidPrice).toLocaleString()}</>
+                                )} </p>
                             </div>
                         </div>
                     ))
@@ -150,12 +157,19 @@ const MyErrandsDetails = () => {
             </div>
 
             {
-                modalProp && (<ModalProposal toclose={setModProp} setReview={setReview} info={info}/>)
+                modalProp && (<ModalProposal toclose={setModProp} setReview={setReview} info={info} setInfo={setInfo}/>)
             }
 
-              {
-                review && (<ReviewModal close={setReview} />)
+            {
+                review && (<ModalProposalRev toclose={setReview} setErrandPay={setErrandPay} info={info} />)
+
             }
+            {
+                errandpay && (<ErrandPayMod toclose={setErrandPay} />)
+
+            }
+
+
 
         </div >
     )
@@ -163,29 +177,3 @@ const MyErrandsDetails = () => {
 
 export default MyErrandsDetails
 
-
-// {runners.map((runner, index) => (
-//     <div className="runner-card" key={index}>
-
-//         <div className="initials-circle">
-//             {runner.name.split(" ").map(n => n[0]).join("")}
-//         </div>
-
-//         <div className="runner-info">
-
-//             <div className="top-row">
-//                 <h4 className="runner-name">{runner.name}</h4>
-//                 <button className="view-btn" onClick={() =>setModProp(true)}>View application</button>
-//             </div>
-
-//             <p className="runner-rating">
-//                 ⭐ {runner.rating} • {runner.jobs} jobs
-//             </p>
-
-//             <p className="runner-bio">{runner.bio}</p>
-
-//             <p className="runner-price">{runner.amount}</p>
-//         </div>
-
-//     </div>
-// ))}
