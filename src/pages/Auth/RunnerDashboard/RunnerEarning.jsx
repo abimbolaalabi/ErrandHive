@@ -1,38 +1,98 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./RunerEarning.css";
 import { ArrowDownLeft } from "lucide-react";
 import { FaWallet } from "react-icons/fa";
 import { IoCopyOutline } from "react-icons/io5";
 import { RxEyeOpen, RxEyeClosed } from "react-icons/rx";
 import WithdrawBank from "../../../Components/RunnerModal/WithdrawBank";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const API_BASE_URL = "https://errandhive-project.onrender.com/api/v1";
 
 const RunnerEarning = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [copied, setCopied] = useState(false);
-  const [withdrawModal, setWithdrawModal] = useState(false)
+  const [withdrawModal, setWithdrawModal] = useState(false);
+  const [walletData, setWalletData] = useState({
+    availableBalance: 0,
+    pendingEarnings: 0,
+    totalEarnings: 0,
+    walletId: "",
+  });
+  const [loading, setLoading] = useState(true);
 
-  const toggleVisibility = () => {
-    setIsVisible((prev) => !prev);
-  };
+  const toggleVisibility = () => setIsVisible((prev) => !prev);
 
   const copyWalletId = () => {
-    const walletId = "RH-9472836"; 
-    navigator.clipboard.writeText(walletId);
-
-   
+    navigator.clipboard.writeText(walletData.walletId);
     setCopied(true);
-    setTimeout(() => setCopied(false), 1500); 
+    setTimeout(() => setCopied(false), 1500);
   };
+
+
+    const fetchWalletData = async () => {
+      try {
+        setLoading(true);
+        const token = localStorage.getItem("userToken");
+
+        if (!token) {
+          toast.error("No token found! Please login again.");
+          return;
+        }
+
+        const response = await axios.get(
+          `${API_BASE_URL}/payment/wallet/balance`, 
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = response.data.data;
+
+        setWalletData({
+          availableBalance: data.availableBalance || 0,
+          pendingEarnings: data.pendingEarnings || 0,
+          totalEarnings: data.totalEarnings || 0,
+          walletId: data.walletId || "N/A",
+        });
+
+        toast.success("Wallet balance loaded successfully!");
+      } catch (err) {
+        console.log("Error fetching wallet balance:", err);
+        toast.error("Failed to load wallet balance.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+   useEffect(()=>{
+    fetchWalletData()
+   },[])
+
+
+  if (loading) {
+    return (
+      <div className="wallet-page-container">
+        <p>Loading wallet data...</p>
+        <ToastContainer position="top-right" autoClose={2000} />
+      </div>
+    );
+  }
 
   return (
     <div className="wallet-page-container">
+      <ToastContainer position="top-right" autoClose={2000} />
       <header className="wallet-page-header">
         <h2>My Wallet</h2>
         <p>Manage your earnings and withdrawals</p>
       </header>
 
       <section className="summary-cards-container">
-        {/* Available Balance / Withdraw Card */}
+        {/* Available Balance */}
         <div className="summary-card available-balance-card">
           <div className="card-icon-title-row">
             <div className="card-icon-placeholder">
@@ -51,10 +111,12 @@ const RunnerEarning = () => {
               )}
             </div>
           </div>
-          <p className="card-main-value">{isVisible ? "₦12,750" : "•••••"}</p>
+          <p className="card-main-value">
+            {isVisible ? `₦${walletData.availableBalance}` : "•••••"}
+          </p>
           <div className="wallet-id-row">
             <p className="wallet-id-text">Wallet ID:</p>
-            <p className="wallet-id-number">RH-9472836 </p>
+            <p className="wallet-id-number">{walletData.walletId}</p>
             <div
               className="copy-icon-placeholder"
               onClick={copyWalletId}
@@ -79,32 +141,45 @@ const RunnerEarning = () => {
               )}
             </div>
           </div>
-          <button className="withdraw-button">
+          <button
+            className="withdraw-button"
+            onClick={() => setWithdrawModal(true)}
+          >
             <ArrowDownLeft style={{ fontSize: "1.5rem" }} />
             Withdraw
           </button>
         </div>
 
-        {/* Pending Earnings Card */}
+        {/* Pending Earnings */}
         <div className="summary-card pending-earnings-card">
           <div className="card-icon-title-row">
-            <div className="card-icon-placeholder"> <svg style ={{color : "#F59E0B"}}width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-   <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-   <polyline points="22,4 12,14.01 9,11.01" />
- </svg></div>
+            <div className="card-icon-placeholder">
+              <svg
+                style={{ color: "#F59E0B" }}
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                <polyline points="22,4 12,14.01 9,11.01" />
+              </svg>
+            </div>
             <h4>Pending Earnings</h4>
           </div>
-          <p className="card-main-value">₦12,750</p>
+          <p className="card-main-value">₦{walletData.pendingEarnings}</p>
           <p className="card-sub-text">Being verified</p>
         </div>
 
-        {/* Total Earnings Card */}
+        {/* Total Earnings */}
         <div className="summary-card total-earnings-card">
           <div className="card-icon-title-row">
             <div className="card-icon-placeholder"></div>
             <h4>Total Earnings</h4>
           </div>
-          <p className="card-main-value">₦12,750</p>
+          <p className="card-main-value">₦{walletData.totalEarnings}</p>
           <p className="card-sub-text">All time</p>
         </div>
       </section>
@@ -112,81 +187,9 @@ const RunnerEarning = () => {
       {/* Transaction History */}
       <section className="transaction-history-section">
         <h3>Transaction History</h3>
-
-        <div className="transaction-item">
-          <div className="transaction-icon-placeholder green-icon"></div>
-          <div className="transaction-details">
-            <p className="transaction-title">Package Pickup</p>
-            <span className="transaction-type">Errand Payment</span>
-            <p className="transaction-info">
-              Errand completed • 2025-10-20 at 4:45 PM
-            </p>
-          </div>
-          <div className="transaction-amount pending-amount">
-            <p>Pending</p>
-            <p className="amount-value">+₦3000.00</p>
-          </div>
-        </div>
-
-        <div className="transaction-item">
-          <div className="transaction-icon-placeholder blue-icon"></div>
-          <div className="transaction-details">
-            <p className="transaction-title">Withdrawal to Access Bank</p>
-            <span className="transaction-type">Bank transfer</span>
-            <p className="transaction-info">2025-10-21 at 10:35 AM</p>
-          </div>
-          <div className="transaction-amount completed-amount">
-            <p>Completed</p>
-            <p className="amount-value negative-value">-₦2000.00</p>
-          </div>
-        </div>
-
-        <div className="transaction-item">
-          <div className="transaction-icon-placeholder green-icon"></div>
-          <div className="transaction-details">
-            <p className="transaction-title">Package Pickup</p>
-            <span className="transaction-type">Errand Payment</span>
-            <p className="transaction-info">
-              Errand completed • 2025-10-20 at 4:45 PM
-            </p>
-          </div>
-          <div className="transaction-amount completed-amount">
-            <p>Completed</p>
-            <p className="amount-value positive-value">+₦3000.00</p>
-          </div>
-        </div>
-
-        <div className="transaction-item">
-          <div className="transaction-icon-placeholder green-icon"></div>
-          <div className="transaction-details">
-            <p className="transaction-title">Package Pickup</p>
-            <span className="transaction-type">Errand Payment</span>
-            <p className="transaction-info">
-              Errand completed • 2025-10-20 at 4:45 PM
-            </p>
-          </div>
-          <div className="transaction-amount completed-amount">
-            <p>Completed</p>
-            <p className="amount-value positive-value">+₦3000.00</p>
-          </div>
-        </div>
-
-        <div className="transaction-item">
-          <div className="transaction-icon-placeholder green-icon"></div>
-          <div className="transaction-details">
-            <p className="transaction-title">Package Pickup</p>
-            <span className="transaction-type">Errand Payment</span>
-            <p className="transaction-info">
-              Errand completed • 2025-10-20 at 4:45 PM
-            </p>
-          </div>
-          <div className="transaction-amount completed-amount">
-            <p>Completed</p>
-            <p className="amount-value positive-value">+₦3000.00</p>
-          </div>
-        </div>
-        {/* {withdrawModal && <WithdrawBank/> close ()} */}
       </section>
+
+      {withdrawModal && <WithdrawBank close={() => setWithdrawModal(false)} />}
     </div>
   );
 };

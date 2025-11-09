@@ -3,6 +3,7 @@ import DashboardLayout from '../Components/Dashboard/DashboardLayout'
 import RunnerLayout from '../Components/RunerDashboardLayout/RunnerLayout'
 import RunnerDashboard from '../pages/Auth/RunnerDashboard/RunnerDashboard'
 import ResetOtp from "../pages/Auth/ResetOtp/ResetOtp"
+import CounterSuccess from "../Components/RunnerModal/CounterSucces"
 import EditProfile from '../Components/EditProfile.jsx/EditProfile'
 import KycModal from  "../Components/RunnerModal/KycVerifiedStatus"
 import RunnerEarning from '../pages/Auth/RunnerDashboard/RunnerEarning'
@@ -28,6 +29,7 @@ import AdminDashboard from '../pages/AdminDashboard/AdminDashboard'
 import ProfileDetailSetting from '../pages/Dashboard/ProfileDetailSetting'
 import ErrandDeliveryTrack from '../pages/Dashboard/ErrandDeliveryTrack'
 import Negotiation from '../Components/RunnerModal/Negotiation'
+import KycPopModel from '../Components/RunnerModal/KycPopupModel'
 
 const Router = () => {
   return (
@@ -43,7 +45,10 @@ const Router = () => {
         <Route path="/forgot" element={<ForgotPassword />} />
         <Route path="/reset" element={<ResetPassword />} />
          <Route path="/reset-otp" element={<ResetOtp />} />
-            <Route path="/Negotiation" element={<Negotiation />} />
+            {/* <Route path="/Negotiation" element={<Negotiation />} /> */}
+             <Route path="KycMod" element={<KycPopModel />} />
+             <Route path="countersucess" element={<CounterSuccess />} />
+             
         {/*  Client Dashboard */}
         <Route element={<PrivateRoute allowedRole="Client" />}>
           <Route path="/dashboard" element={<DashboardLayout />}>
@@ -54,6 +59,7 @@ const Router = () => {
             <Route path="payments" element={<PaymentsPage />} />
             <Route path="messages" element={<MessagesPage />} />
             <Route path="profile" element={<ProfilePage />} />
+
             <Route path="profile/:profileId" element={<ProfileDetailSetting />} />
           </Route>
         </Route>
@@ -66,7 +72,7 @@ const Router = () => {
             <Route path="runnerearning" element={<RunnerEarning />} />
             <Route path="runnermessage" element={<RunnerMessage />} />
             <Route path="runnerprofile" element={<RunnerProfile />} />
-            <Route path="/runnerlayout/runnerprofile/runnerprofile/id" element={<EditProfile/>} />
+            <Route path="/runnerlayout/runnerprofile/runnerprofile/:profileid" element={<EditProfile/>} />
           </Route>
         </Route>
 

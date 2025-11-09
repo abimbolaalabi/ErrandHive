@@ -75,7 +75,10 @@
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 25px; /* 👈 Adds space between each job card */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
 .document-details-row {
     display: flex;
     justify-content: space-between;

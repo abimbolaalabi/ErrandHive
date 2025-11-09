@@ -1,87 +1,220 @@
-import React from 'react'
-import "./EditProfile.css"
-import { useParams } from 'react-router-dom'
+import React, { useState } from 'react';
+import "./EditProfile.css";
+import { Eye, EyeOff } from 'lucide-react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 
 const EditProfile = () => {
-    const { id } = useParams();
-    {id}
+  const storedUser = JSON.parse(localStorage.getItem('userDetails')) || {};
+  const profileId = storedUser.id || storedUser._id;
+  const token = localStorage.getItem("userToken");
+  const BaseUrl = import.meta.env.VITE_BASE_URL;
+
+  const [firstName, setFirstName] = useState(storedUser.firstName || '');
+  const [lastName, setLastName] = useState(storedUser.lastName || '');
+  const [emailAddress, setEmailAddress] = useState(storedUser.email || '');
+  const [aboutMe, setAboutMe] = useState(storedUser.bio || '');
+
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSaveChanges = async (e) => {
+    e.preventDefault();
+
+    if (!firstName || !lastName || !emailAddress) {
+      toast.error("Please fill in all required fields");
+      return;
+    }
+
+    if ((currentPassword || newPassword || confirmPassword)) {
+      if (!currentPassword) {
+        toast.error("Current password is required to update password");
+        return;
+      }
+      if (newPassword.length < 6) {
+        toast.error("New password must be at least 6 characters");
+        return;
+      }
+      if (newPassword !== confirmPassword) {
+        toast.error("New passwords do not match");
+        return;
+      }
+    }
+
+    setLoading(true);
+
+    try {
+      const res = await axios.put(
+        `${BaseUrl}/update/${profileId}`,
+        {
+          firstName,
+          lastName,
+          email: emailAddress,
+          bio: aboutMe,
+          ...(currentPassword && newPassword && { currentPassword, newPassword })
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      if (res.status === 200) {
+        toast.success(res.data.message || "Profile updated successfully!");
+        const updatedUser = res.data.data;
+        localStorage.setItem('userDetails', JSON.stringify({
+          ...storedUser,
+          firstName: updatedUser.firstName,
+          lastName: updatedUser.lastName,
+          email: emailAddress,
+          bio: updatedUser.bio,
+          profileImage: updatedUser.profileImage
+        }));
+        setCurrentPassword('');
+        setNewPassword('');
+        setConfirmPassword('');
+      } else {
+        toast.error(res.data.message || "Update failed");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error(err.response?.data?.message || "Network error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-       
-     <div className="edit-profile-settings">
-      
-   <div className="edit-header">
-     <h1 className="edit-h1">Profile & Settings</h1>
-     <p>Manage your account and information preference</p>
-   </div>
-   <form className="input-wrapper-edit">
-      <div className="input-wrapper-edit-holde">
-       
-       <div>
-     <label className="edit-label">Firstname</label>
-       <div className="edit-input-text-holder-edit">
-         <input type="text" placeholder="firstname" className="input-edit" />
-       </div>
-          </div>
+    <div className="editprofile-root">
+      <div className="editprofile-container">
+        <h2 className="editprofile-title">Profile & Settings</h2>
+        <p className="editprofile-subtitle">Manage your account information and preferences</p>
 
-          <div> 
-   <label className="edit-label">Firstname</label>
-  <div className="edit-input-text-holder-edit">
-  <input type="text" placeholder="firstname" className="input-edit" />
-  </div> 
-     </div>
+        <div className="editprofile-card">
+          <h3 className="editprofile-card-title">Personal Information</h3>
+          <form onSubmit={handleSaveChanges}>
+            <div className="form-group">
+              <label className="form-label">First Name</label>
+              <input
+                type="text"
+                placeholder="Enter your first name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                className="input-field"
+              />
+            </div>
 
+            <div className="form-group">
+              <label className="form-label">Last Name</label>
+              <input
+                type="text"
+                placeholder="Enter your last name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                className="input-field"
+              />
+            </div>
 
-     <div>
- <label className="edit-label">Firstname</label>
- <div className="edit-input-text-holder-edit">
-   <input type="text" placeholder="firstname" className="input-edit" />
+            <div className="form-group">
+              <label className="form-label">Email Address</label>
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                value={emailAddress}
+                onChange={(e) => setEmailAddress(e.target.value)}
+                className="input-field"
+              />
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">About Me</label>
+              <textarea
+                placeholder="Note about yourself"
+                value={aboutMe}
+                onChange={(e) => setAboutMe(e.target.value)}
+                rows={4}
+                className="textarea-field"
+              />
+            </div>
+
+            <h3 className="editprofile-card-title">Security (Update Password)</h3>
+
+            <div className="form-group">
+              <label className="form-label">Current Password</label>
+              <div className="password-field">
+                <input
+                  type={showCurrentPassword ? "text" : "password"}
+                  placeholder="********"
+                  value={currentPassword}
+                  onChange={(e) => setCurrentPassword(e.target.value)}
+                  className="input-field input-with-icon"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                  className="toggle-visibility"
+                  aria-label="Toggle current password visibility"
+                >
+                  {showCurrentPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">New Password</label>
+              <div className="password-field">
+                <input
+                  type={showNewPassword ? "text" : "password"}
+                  placeholder="********"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  className="input-field input-with-icon"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowNewPassword(!showNewPassword)}
+                  className="toggle-visibility"
+                  aria-label="Toggle new password visibility"
+                >
+                  {showNewPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">Confirm Password</label>
+              <div className="password-field">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  placeholder="********"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="input-field input-with-icon"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="toggle-visibility"
+                  aria-label="Toggle confirm password visibility"
+                >
+                  {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
+            </div>
+
+            <button type="submit" className="btn-btn-primary-mt" disabled={loading}>
+              {loading ? "Saving..." : "Save Changes"}
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
-    </div>
-
-     <div>
-  <label className="text-area-title"> About</label>
- <textarea className="text-area-label"></textarea>
-   </div>
-  </div>
-
-
-  </form>
-
-                 <div className="section-password">
-                   <div><h1 className="update-text-edit">Update your password?</h1></div>
-            <div>
-          <label>Current Password</label>
-           <div className="password-holder-edit-wrapper">
-         <input type="password" className="input-password-edit-page"  placeholder="******" />
-          </div>
-         </div>
-
-
-          <div>
- <label>New Password</label>
-  <div className="password-holder-edit-wrapper">
-   <input type="password" className="input-password-edit-page" placeholder="******" />
-  </div>
- </div>
-
-
-  <div>
-   <label>Confirm Password</label>
-   <div className="password-holder-edit-wrapper">
-     <input type="password" className="input-password-edit-page"  placeholder="******"  />
-   </div>
-   <button className="update-btn-edit-password">Update Password</button>
- </div>
-
-
-   <div className="save-change-edit">
-    <button className="btn-edit-save-change">save chnages</button>
-      <button className="btn-edit-save-changes">save chnages</button>
-  </div>
-   </div>
-
-          </div>
-  )
-}
+  );
+};
 
 export default EditProfile;

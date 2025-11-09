@@ -1,180 +1,180 @@
-import "./Kycpopup.css";
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { IoIosCloudUpload } from "react-icons/io";
-import { FaRegIdCard } from "react-icons/fa";
-import { MdHome, MdOutlineCameraAlt } from "react-icons/md";
-import { IoInformationCircleOutline } from "react-icons/io5";
+import { X, CheckCircle, Home, CreditCard, Camera } from "lucide-react";
 import { LuDownload } from "react-icons/lu";
 import { toast } from "react-toastify";
+import "./Kycpopup.css";
 
 const KycPopupModel = ({ close }) => {
-  const [idFile, setIdFile] = useState(null);
-  const [addressFile, setAddressFile] = useState(null);
-  const [selfieFile, setSelfieFile] = useState(null);
+  const [files, setFiles] = useState({
+    id: null,
+    address: null,
+    selfie: null,
+  });
+  const BaseUrl = import.meta.env.VITE_BASE_URL;
   const [loading, setLoading] = useState(false);
-
-  const BaseURL = import.meta.env.VITE_BASE_URL;
-  const token = localStorage.getItem("userToken");
 
   const handleFileChange = (e, type) => {
     const file = e.target.files[0];
-    if (!file) return;
-
-    if (!file.type.startsWith("image/")) {
-      toast.error("Only image files are allowed (jpg, png, jpeg).");
-      return;
+    if (file) {
+      setFiles((prev) => ({ ...prev, [type]: file }));
     }
-
-    if (file.size > 10 * 1024 * 1024) {
-     toast.error("File size should not exceed 10MB.");
-      return;
-    }
-
-    if (type === "id") setIdFile(file);
-    if (type === "address") setAddressFile(file);
-    if (type === "selfie") setSelfieFile(file);
   };
 
-  const allUploaded = idFile && addressFile && selfieFile;
+  const completedSteps = [!!files.id, !!files.address, !!files.selfie];
+  const isSubmitEnabled = completedSteps.every(Boolean);
 
   const handleSubmit = async () => {
-    if (!allUploaded) return;
-
-    const formData = new FormData();
-    formData.append("governmentIdCard", idFile); 
-formData.append("proofOfAddressImage", addressFile);  
-formData.append("selfieWithIdCard", selfieFile);     
-
+    if (!isSubmitEnabled) return;
 
     try {
       setLoading(true);
+      const user = JSON.parse(localStorage.getItem("userDetails"));
+      const token = localStorage.getItem("userToken");
 
-      const res= await axios.post(
-       `${BaseURL}/kyc/submit`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-             Authorization: `Bearer ${token}`,
-          },
+      if (!user || !token) {
+        toast.error("User not logged in");
+        return;
+      }
 
-        }
-   
-      );
-          console.log(formData) 
-          console.log(res)
-      toast.success(res?.data?.message)
-        
-    } catch (error) {
-      console.error(error);
-      console.log("err", error)
-      toast.error(error?.res?.data?.message)
+      const formData = new FormData();
+      formData.append("governmentIdCard", files.id);
+      formData.append("proofOfAddressImage", files.address);
+      formData.append("selfieWithIdCard", files.selfie);
+
+      const res = await axios.post(`${BaseUrl}/kyc/submit`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      toast.success(res?.data?.message || "KYC submitted successfully!");
+      localStorage.setItem("userKyc", "true");
+      setTimeout(() => close(false), 800);
+    } catch (err) {
+      console.log("KYC Submit Error:", err.response?.data || err.message);
+      toast.error(err?.response?.data?.message || "Failed to submit KYC");
     } finally {
       setLoading(false);
     }
   };
-  
 
   return (
-    <div className="kyc-popup-wrapper">
-      <div className="kyc-popup">
-        <div className="kyc-popup-header">
+    <div className="runner-ky-pop-overlay">
+      <div className="runner-ky-pop-modal">
+        <div className="runner-ky-pop-header">
           <h2>KYC Verification</h2>
-          <button className="kyc-popup-close" onClick={() => close(false)}>✕</button>
+          <p>Upload the required documents to verify your identity</p>
+          <button className="runner-ky-pop-close" onClick={() => close(false)}>
+            <X size={22} />
+          </button>
         </div>
 
-        <p className="kyc-popup-subtitle">
-          Upload the required documents to verify your identity
-        </p>
-
-        {/* Steps */}
-        <div className="kyc-popup-steps">
-          <div className={`kyc-popup-step ${idFile ? "active" : ""}`}>
-            <div className="icon-circle">ID</div>
-            <span>ID</span>
-          </div>
-          <div className={`kyc-popup-step ${addressFile ? "active" : ""}`}>
-            <div className="icon-circle">Address</div>
-            <span>Address</span>
-          </div>
-          <div className={`kyc-popup-step ${selfieFile ? "active" : ""}`}>
-            <div className="icon-circle">Selfie</div>
-            <span>Selfie</span>
-          </div>
+        <div className="runner-ky-pop-steps">
+          {["ID", "Address", "Selfie"].map((label, index) => (
+            <div className="runner-ky-pop-step" key={index}>
+              <div
+                className={`runner-ky-pop-step-icon ${
+                  completedSteps[index] ? "done" : ""
+                }`}
+              >
+                <CheckCircle size={16} />
+              </div>
+              <span>{label}</span>
+              {index < 2 && (
+                <div
+                  className={`runner-ky-pop-step-line ${
+                    completedSteps[index] ? "active" : ""
+                  }`}
+                />
+              )}
+            </div>
+          ))}
         </div>
 
-        {/* Body */}
-        <div className="kyc-popup-body">
+        <div className="runner-ky-pop-body">
           {/* ID Upload */}
-          <div className="kyc-popup-section">
-            <div className="kyc-popup-section-header">
-              <FaRegIdCard className="kyc-popup-icon" />
-              <div>
-                <h4>Government-Issued ID</h4>
-                <p>Driver’s license, passport, or national ID card</p>
+          <div className="runner-ky-pop-upload-card">
+            <div className="runner-ky-pop-card-top">
+              <div className="runner-ky-pop-card-icon">
+                <CreditCard size={22} />
+              </div>
+              <div className="runner-ky-pop-card-text">
+                <h3>Government-Issued ID</h3>
+                <p>Driver's license, passport, or national ID card</p>
               </div>
             </div>
-            <label className="kyc-popup-upload">
-              <IoIosCloudUpload className="upload-icon" />
-              <span>{idFile ? idFile.name : "Click to upload"}</span>
+
+            <label className="runner-ky-pop-upload-btn">
               <input
                 type="file"
-                accept="image/*"
+                accept="image/*,application/pdf"
                 onChange={(e) => handleFileChange(e, "id")}
-                hidden
               />
+              <span className="runner-ky-pop-upload-icon">
+                <LuDownload />
+              </span>
+              {files.id ? files.id.name : "Click to upload"}
             </label>
           </div>
 
-          {/* Address Upload */}
-          <div className="kyc-popup-section">
-            <div className="kyc-popup-section-header">
-              {/* <MdHome className="kyc-popup-icon" /> */}
-              <div>
-                <h4>Proof of Address</h4>
-                <p>Utility bill, bank statement, or lease (max 3 months old)</p>
+          {/* Proof of Address */}
+          <div className="runner-ky-pop-upload-card">
+            <div className="runner-ky-pop-card-top">
+              <div className="runner-ky-pop-card-icon">
+                <Home size={22} />
+              </div>
+              <div className="runner-ky-pop-card-text">
+                <h3>Proof of Address</h3>
+                <p>
+                  Utility bill, bank statement, or lease agreement (max 3 months
+                  old)
+                </p>
               </div>
             </div>
-            <label className="kyc-popup-upload">
-              <IoIosCloudUpload className="upload-icon" />
-              <span>{addressFile ? addressFile.name : "Click to upload"}</span>
+
+            <label className="runner-ky-pop-upload-btn">
               <input
                 type="file"
-                accept="image/*"
+                accept="image/*,application/pdf"
                 onChange={(e) => handleFileChange(e, "address")}
-                hidden
               />
+              <span className="runner-ky-pop-upload-icon">
+                <LuDownload />
+              </span>
+              {files.address ? files.address.name : "Click to upload"}
             </label>
           </div>
 
           {/* Selfie Upload */}
-          <div className="kyc-popup-section">
-            <div className="kyc-popup-section-header">
-              {/* <MdOutlineCameraAlt className="kyc-popup-icon" /> */}
-              <div>
-                <h4>Upload selfie with ID</h4>
-                <p>Take a photo holding your ID next to your face</p>
+          <div className="runner-ky-pop-upload-card">
+            <div className="runner-ky-pop-card-top">
+              <div className="runner-ky-pop-card-icon">
+                <Camera size={22} />
+              </div>
+              <div className="runner-ky-pop-card-text">
+                <h3>Selfie with ID</h3>
+                <p>Take a photo of yourself holding your ID next to your face</p>
               </div>
             </div>
-            <label className="kyc-popup-upload">
-              <IoIosCloudUpload className="upload-icon" />
-              <span>{selfieFile ? selfieFile.name : "Click to upload"}</span>
+
+            <label className="runner-ky-pop-upload-btn">
               <input
                 type="file"
                 accept="image/*"
                 onChange={(e) => handleFileChange(e, "selfie")}
-                hidden
               />
+              <span className="runner-ky-pop-upload-icon">
+                <LuDownload />
+              </span>
+              {files.selfie ? files.selfie.name : "Click to upload"}
             </label>
           </div>
 
           {/* Guidelines */}
-          <div className="kyc-popup-guidelines">
-            <div className="kyc-popup-guidelines-header">
-              <IoInformationCircleOutline className="guidelines-icon" />
-              <h4>Important Guidelines:</h4>
-            </div>
+          <div className="runner-ky-pop-guidelines">
+            <h4>ℹ️ Important Guidelines:</h4>
             <ul>
               <li>All documents must be clear and readable</li>
               <li>Ensure your full name and address are visible</li>
@@ -182,24 +182,21 @@ formData.append("selfieWithIdCard", selfieFile);
               <li>File size should not exceed 10MB</li>
             </ul>
           </div>
+        </div>
 
-      
-          <div className="btn-kyc-wrapper-hold">
-            <button
-              type="button"
-              className="upload-btn-pop"
-              style={{
-                background: allUploaded
-                  ? "linear-gradient(135deg, #a78bfa, #8b5cf6)"
-                  : "#ccc",
-                cursor: allUploaded ? "pointer" : "not-allowed",
-              }}
-              disabled={!allUploaded || loading}
-              onClick={handleSubmit}
-            >
-              {loading ? "Uploading..." : <><LuDownload style={{ fontSize: "1rem" }} /> Submit for Verification</>}
-            </button>
-          </div>
+        <div className="runner-ky-pop-footer">
+          <button
+            className="runner-ky-pop-submit-btn"
+            disabled={!isSubmitEnabled || loading}
+            onClick={handleSubmit}
+          >
+            {!loading && (
+              <span className="runner-ky-pop-upload-icon">
+                <LuDownload />
+              </span>
+            )}
+            {loading ? "Submitting..." : "Submit for Verification"}
+          </button>
         </div>
       </div>
     </div>

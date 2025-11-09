@@ -21,7 +21,7 @@ const RunnerLayout = () => {
   localStorage.removeItem("userToken");
   localStorage.removeItem("userDetails");
   localStorage.removeItem("userKyc");
-  navigate("/");
+  navigate("/login");
 };
   
   const menuItems = [
@@ -92,9 +92,9 @@ const RunnerLayout = () => {
               <div className="notification">
                 <IoMdNotificationsOutline className="notify" />
               </div>
-              <div className="red-box">
-                <span style={{ fontFamily: "Poppins", fontSize: "13px", color: "white" }}>3</span>
-              </div>
+              {/* <div className="red-box"> */}
+                {/* <span style={{ fontFamily: "Poppins", fontSize: "13px", color: "white" }}>3</span> */}
+              {/* </div> */}
             </div>
             <article className="wrapper-profile-shit">
               <div className="Profile-layout-box-runner">

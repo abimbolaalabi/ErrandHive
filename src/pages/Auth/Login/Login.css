@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   gap: 0.2rem;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 .login-left {
@@ -29,7 +29,7 @@
 }
 .login-right-form {
   width: 100%;
-  height: 100%;
+  min-height: 95%;
   background-color: white;
   padding-inline: 2rem;
   box-sizing: border-box;
@@ -162,7 +162,7 @@
   align-items: center;
   gap: 0.5rem;
   margin-top: 1rem;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
 }
 
 .line {
@@ -198,7 +198,7 @@
 }
 
 .forgot-password-form {
-  margin-top: 1.5rem;
+  margin-top: 0.3rem;
   color: #8133f1;
   font-weight: 400;
   font-size: 1rem;
@@ -210,7 +210,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 2rem;
 }
 
 .error-message {
@@ -274,6 +273,7 @@
   .login-left {
     width: 100%;
     height: auto;
+         display: none;
   }
 
   .img-box-wrapper {
@@ -283,6 +283,7 @@
   .login-right {
     width: 100%;
     height: auto;
+
   }
 
   .form-wrapper {
@@ -310,12 +311,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: none;
   }
 
   .login-right-form {
     width: 100%;
     padding-inline: 1rem;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   }
 
   .login-right-text {
@@ -380,7 +381,7 @@
 
   .eye {
     right: 1rem;
-    top: 37%;
+    top: 40%;
     transform: translateY(-50%);
   }
 

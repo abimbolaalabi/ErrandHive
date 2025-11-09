@@ -489,3 +489,45 @@
 .runnerProfile-actionBtn:hover {
   background-color: #9a65e0;
 }
+
+
+/* --- Rating --- */
+.runnerProfile-ratingContainer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 8px;
+  max-width: 120px;
+}
+
+.runnerProfile-ratingStar {
+  color: #f5b50a;
+  font-size: 18px;
+}
+
+.runnerProfile-ratingValue {
+  font-size: 16px;
+  color: #333;
+}
+
+.runnerProfile-ratingContainer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  color: #f5b50a; /* gold star */
+  margin-top: 4px;
+}
+
+.runnerProfile-ratingStar {
+  color: #f5b50a;
+}
+
+.runnerProfile-ratingValue {
+  font-size: 14px;
+  color: #333;
+}
+

@@ -1,360 +1,236 @@
-/* -------------------------------------------------
-   KYC POPUP – GLOBAL WRAPPER
-   ------------------------------------------------- */
-.kyc-popup-wrapper {
+.runner-ky-pop-overlay {
   position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.35);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
-  font-family: "Poppins", sans-serif;
-  backdrop-filter: blur(4px);
+  z-index: 2000;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+.runner-ky-pop-modal::-webkit-scrollbar {
+  display: none;
 }
 
-/* -------------------------------------------------
-   MODAL CONTAINER
-   ------------------------------------------------- */
-.kyc-popup {
-  background: #fff;
-  width: min(90%, 700px);
+.runner-ky-pop-modal {
+  width: 100%;
+  max-width: 620px;
   max-height: 90vh;
-  border-radius: 20px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.08);
+  overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  padding: 1.5rem;
-  overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
 }
 
-/* Scrollable body */
-.kyc-popup > .kyc-popup-body {
-  overflow-y: auto;
-  padding-right: 0.5rem;
-  margin-right: -0.5rem;
+.runner-ky-pop-header {
+  padding: 24px;
+  position: relative;
+  border-bottom: 1px solid #eee;
 }
 
-/* Custom scrollbar */
-.kyc-popup-body::-webkit-scrollbar { width: 6px; }
-.kyc-popup-body::-webkit-scrollbar-track { background: transparent; }
-.kyc-popup-body::-webkit-scrollbar-thumb { 
-  background: #c4b5fd; 
-  border-radius: 3px; 
+.runner-ky-pop-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
 }
 
-/* -------------------------------------------------
-   HEADER
-   ------------------------------------------------- */
-.kyc-popup-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-  font-size: 1.25rem;
+.runner-ky-pop-header p {
+  margin-top: 4px;
+  color: #666;
+  font-size: 14px;
 }
 
-.kyc-popup-close {
+.runner-ky-pop-close {
+  position: absolute;
+  top: 22px;
+  right: 22px;
   background: none;
   border: none;
-  font-size: 1.4rem;
   cursor: pointer;
-  color: #777;
-  transition: color 0.2s;
+  color: #444;
+  transition: 0.2s;
 }
 
-.kyc-popup-close:hover,
-.kyc-popup-close:focus-visible {
-  color: #8b5cf6;
-}
-
-/* -------------------------------------------------
-   SUBTITLE
-   ------------------------------------------------- */
-.kyc-popup-subtitle {
-  color: #777;
-  margin-bottom: 1.5rem;
-  font-size: 0.95rem;
-}
-
-/* -------------------------------------------------
-   STEPS
-   ------------------------------------------------- */
-.kyc-popup-steps {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 2rem;
-  gap: 0.5rem;
-}
-
-.kyc-popup-step {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 0.4rem;
-  position: relative;
-}
-
-.kyc-popup-step::after {
-  content: "";
-  position: absolute;
-  top: 35px;
-  left: 50%;
-  width: 100%;
-  height: 2px;
-  background: #e0e0e0;
-  transform: translateX(-50%);
-  z-index: -1;
-}
-
-.kyc-popup-step:last-child::after { 
-  display: none; 
-}
-
-.icon-circle {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: #ccc;
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 600;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-}
-
-.kyc-popup-step.active .icon-circle {
-  background: #2dc26b;
-}
-
-.kyc-popup-step.error .icon-circle {
-  background: #e74c3c;
-}
-
-.kyc-popup-step span {
-  font-size: 0.85rem;
-  color: #555;
-  transition: color 0.3s;
-}
-
-.kyc-popup-step.active span,
-.kyc-popup-step.error span {
-  color: #222;
-  font-weight: 500;
-}
-
-/* -------------------------------------------------
-   SECTION
-   ------------------------------------------------- */
-.kyc-popup-section {
-  background: #f9f9f9;
-  border-radius: 12px;
-  padding: 1rem;
-  transition: border 0.2s;
-}
-
-.kyc-popup-section.error {
-  border: 1px solid #e74c3c;
-}
-
-.kyc-popup-section-header {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  margin-bottom: 0.8rem;
-}
-
-.kyc-popup-icon {
-  font-size: 1.6rem;
-  color: #6a5acd;
-}
-
-/* -------------------------------------------------
-   UPLOAD AREA (no file)
-   ------------------------------------------------- */
-.kyc-popup-upload {
-  border: 2px dashed #bbb;
-  border-radius: 10px;
-  padding: 1.2rem;
-  text-align: center;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  transition: all 0.2s;
-  background: #fff;
-}
-
-.kyc-popup-upload:hover,
-.kyc-popup-upload:focus-visible {
-  border-color: #8b5cf6 !important;
-  background: #f8f5ff;
-}
-
-.upload-icon {
-  font-size: 1.4rem;
-  color: #8b5cf6;
-}
-
-.kyc-popup-upload span {
-  font-size: 0.95rem;
-  color: #555;
-}
-
-/* -------------------------------------------------
-   FILE PREVIEW
-   ------------------------------------------------- */
-.kyc-file-preview {
-  position: relative;
-  margin-top: 0.5rem;
-  border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid #e0e0e0;
-  max-height: 180px;
-}
-
-.kyc-file-preview img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.kyc-remove-file {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: rgba(0, 0, 0, 0.55);
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background 0.2s;
-}
-
-.kyc-remove-file:hover,
-.kyc-remove-file:focus-visible {
-  background: #8b5cf6;
-}
-
-/* -------------------------------------------------
-   ERROR MESSAGE
-   ------------------------------------------------- */
-.kyc-error-text {
-  color: #e74c3c;
-  font-size: 0.82rem;
-  margin-top: 0.4rem;
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-}
-
-/* -------------------------------------------------
-   GUIDELINES
-   ------------------------------------------------- */
-.kyc-popup-guidelines {
-  background: #f4f0ff;
-  border-radius: 10px;
-  padding: 1.2rem;
-  color: #5b36cc;
-}
-
-.kyc-popup-guidelines-header {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 600;
-  margin-bottom: 0.8rem;
-}
-
-.guidelines-icon {
-  font-size: 1.2rem;
-}
-
-.kyc-popup-guidelines ul {
-  margin: 0;
-  padding-left: 1.5rem;
-}
-
-.kyc-popup-guidelines li {
-  margin-bottom: 0.5rem;
-  font-size: 0.9rem;
-  position: relative;
-}
-
-.kyc-popup-guidelines li::before {
-  content: "•";
-  color: #8b5cf6;
-  font-weight: bold;
-  position: absolute;
-  left: -1rem;
-}
-
-/* -------------------------------------------------
-   SUBMIT BUTTON
-   ------------------------------------------------- */
-.btn-kyc-wrapper-hold {
-  display: flex;
-  justify-content: center;
-  margin-top: 1rem;
-}
-
-.upload-btn-pop {
-  width: 100%;
-  background: linear-gradient(135deg, #a78bfa, #8b5cf6);
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #fff;
-  padding: 14px;
-  cursor: pointer;
-  transition: all 0.3s;
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  align-items: center;
-}
-
-.upload-btn-pop:disabled {
-  background: #ccc;
-  cursor: not-allowed;
+.runner-ky-pop-close:hover {
   opacity: 0.7;
 }
 
-.upload-btn-pop:not(:disabled):hover,
-.upload-btn-pop:not(:disabled):focus-visible {
+.runner-ky-pop-steps {
+  display: flex;
+  justify-content: space-between;
+  padding: 22px 36px;
+  gap: 10px;
+}
+
+.runner-ky-pop-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.runner-ky-pop-step-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #888;
+}
+
+.runner-ky-pop-step-icon.done {
+  background: #10b981;
+  color: #fff;
+}
+
+.runner-ky-pop-step-line {
+  width: 50px;
+  height: 3px;
+  background: #e5e7eb;
+  border-radius: 2px;
+}
+
+.runner-ky-pop-step-line.active {
+  background: #10b981;
+}
+
+.runner-ky-pop-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.runner-ky-pop-upload-card {
+  border: 1px solid #e6e6e6;
+  padding: 18px;
+  border-radius: 12px;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.runner-ky-pop-card-top {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.runner-ky-pop-card-icon {
+  background: #f3f3f3;
+  padding: 10px;
+  border-radius: 8px;
+  color: #666;
+}
+
+.runner-ky-pop-card-text h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.runner-ky-pop-card-text p {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: #666;
+  line-height: 1.3;
+}
+
+.runner-ky-pop-upload-btn {
+  width: 100%;
+  height: 48px;
+  border: 1.5px solid #dcdcdc;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 14px;
+  color: #555;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.runner-ky-pop-upload-btn:hover {
+  border-color: #7e33ff;
+  color: #7e33ff;
+}
+
+.runner-ky-pop-upload-btn input {
+  display: none;
+}
+
+.runner-ky-pop-upload-icon {
+  font-size: 18px;
+}
+
+.runner-ky-pop-guidelines {
+  background: #f5e9ff;
+  border-radius: 12px;
+  padding: 18px 20px;
+  width: 100%;
+  margin-top: 6px;
+}
+
+.runner-ky-pop-guidelines h4 {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #7e33ff;
+}
+
+.runner-ky-pop-guidelines ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.runner-ky-pop-guidelines li {
+  font-size: 13px;
+  color: #7e33ff;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.runner-ky-pop-footer {
+  padding: 24px 24px 30px;
+  border-top: 1px solid #eee;
+  background: #fff;
+}
+
+.runner-ky-pop-submit-btn {
+  width: 100%;
+  background: linear-gradient(90deg, #9b5cff 0%, #7e33ff 100%);
+  border: none;
+  padding: 15px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  transition: 0.2s ease-in-out;
+}
+
+.runner-ky-pop-submit-btn:hover:not(:disabled) {
+  opacity: 0.9;
   transform: translateY(-1px);
-  box-shadow: 0 6px 12px rgba(139, 92, 246, 0.3);
 }
 
-.kyc-popup-upload:focus-visible,
-.kyc-remove-file:focus-visible,
-.upload-btn-pop:not(:disabled):focus-visible {
-  outline: 3px solid #8b5cf6;
-  outline-offset: 2px;
-}
-
-.kyc-popup-upload:focus-visible {
-  background: #f8f5ff;
-}
-
-.kyc-popup-close:focus-visible {
-  color: #8b5cf6;
-}
-
-.kyc-remove-file:focus-visible {
-  background: #8b5cf6;
+.runner-ky-pop-submit-btn:disabled {
+  background: #d5d5d5;
+  cursor: not-allowed;
+  opacity: 0.7;
 }

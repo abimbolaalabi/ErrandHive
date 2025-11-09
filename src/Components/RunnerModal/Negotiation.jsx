@@ -8,15 +8,15 @@ const API_BASE_URL = "https://errandhive-project.onrender.com/api/v1";
 const Negotiation = ({ close, errand }) => {
   const [counterPrice, setCounterPrice] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isAccepting, setIsAccepting] = useState(false);
+  const token = localStorage.getItem("userToken");
 
-  const token = localStorage.getItem("userToken"); // assuming you store your auth token here
-
+  // ✅ Handle propose price
   const handlePropose = async () => {
     if (!counterPrice) {
       toast.error("Please enter a proposed price.");
       return;
     }
-
     if (Number(counterPrice) <= Number(errand.price)) {
       toast.error("Your proposed price must be higher than the current offer.");
       return;
@@ -31,82 +31,129 @@ const Negotiation = ({ close, errand }) => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          proposedPrice: counterPrice,
+          bidPrice: Number(counterPrice),
           action: "propose",
         }),
       });
-
-      if (!response.ok) throw new Error("Failed to propose price");
+      console.log(response)
 
       const data = await response.json();
-      console.log("✅ Proposal success:", data);
+
+      if (!response.ok) throw new Error(data.message || "Failed to propose price");
+
       toast.success("Proposal sent successfully!");
       close();
     } catch (error) {
-      console.error("❌ Proposal error:", error);
       toast.error(error.message || "Something went wrong, please try again.");
     } finally {
       setIsLoading(false);
     }
   };
 
+  // ✅ Handle accept current price
+  const handleAccept = async () => {
+    setIsAccepting(true);
+    try {
+      const response = await fetch(`${API_BASE_URL}/apply/${errand.id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          action: "accept",
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) throw new Error(data.message || "Failed to accept errand");
+
+      toast.success("You’ve accepted the current price!");
+      close();
+    } catch (error) {
+      toast.error(error.message || "Something went wrong, please try again.");
+    } finally {
+      setIsAccepting(false);
+    }
+  };
+
   return (
-    <div className="negotiate-wrapper">
+    <div className="negotiation-overlay">
       <ToastContainer position="top-right" autoClose={3000} />
-      <div className="negotiate-wrapper-box">
-        <div className="btn-negotiate-wrapper">
-          <button className="x-negotiate" onClick={close}>
-            X
-          </button>
+      <div className="negotiation-modal">
+        <button className="close-btn" onClick={close}>
+          ×
+        </button>
+
+        <h2 className="modal-title">Review Errand Price</h2>
+        <p className="modal-subtitle">
+          Accept the offer or propose a different price
+        </p>
+
+        <div className="info-card">
+          <h4 className="info-title">Errand Task</h4>
+          <p className="info-content">
+            <strong>{errand.title || "Document Pickup"}</strong>
+          </p>
+          <p className="info-sub">
+            Pickup Contact: {errand.pickupContact || "N/A"}
+          </p>
         </div>
 
-        <div className="negotiate-text-holder">
-          <p className="review-errand-negotiate-text-header">
-            Review Errand Price
+        <div className="info-card">
+          <h4 className="info-title">Errand Locations</h4>
+          <p className="info-content">
+            <strong>Pickup Location:</strong> {errand.pickupAddress || "N/A"}
           </p>
-          <p className="review-errand-negotiate-p">
-            Accept offer or propose a different offer
+          <p className="info-content">
+            <strong>Delivery Location:</strong> {errand.deliveryAddress || "N/A"}
           </p>
         </div>
 
-        <section className="box-negotiate-holder">
-          <div className="div-section-negotiate">
-            <p>Errand Title</p>
-            <p>{errand.title || "No title"}</p>
-            <p>Pickup contact: {errand.pickupContact || "N/A"}</p>
-          </div>
+        <div className="offer-box">
+          <p className="offer-label">Current Offer</p>
+          <h3 className="offer-amount">
+            ₦{errand.price ? errand.price.toLocaleString() : "0"}
+          </h3>
+        </div>
 
-          <div className="div-section-long-negotiate">
-            <p>Current Offer</p>
-            <p>₦{errand.price?.toLocaleString() || "0"}</p>
-          </div>
-        </section>
+        <div className="propose-section">
+          <label className="propose-label">
+            Propose Your Price{" "}
+            <span className="offer-limit-text">(Your Counter Offer 0/2 used)</span>
+          </label>
+          <input
+            type="number"
+            placeholder="₦ 0.00"
+            className="propose-input"
+            value={counterPrice}
+            onChange={(e) => setCounterPrice(e.target.value)}
+          />
+          <p className="helper-text">
+            Suggest a higher price if you believe the offer is too low
+          </p>
+        </div>
 
-        <section className="propose-section-propose-stuff">
-          <p>Propose your price</p>
-          <div className="input-negotiate-wrapper">
-            <input
-              type="number"
-              className="text-input-negotiate"
-              placeholder="0.00"
-              value={counterPrice}
-              onChange={(e) => setCounterPrice(e.target.value)}
-            />
-          </div>
-        </section>
-
-        <section className="section-propose-prce">
+        <div className="button-row">
           <button
-            className="propose-button-shit"
+            className="propose-btn"
             onClick={handlePropose}
             disabled={isLoading}
           >
-            {isLoading ? "Proposing..." : "Propose a price"}
+            {isLoading ? "Proposing..." : "Propose Price"}
           </button>
-          <button className="accept-button-shit" onClick={close}>
-            Accept Job
+
+          <button
+            className="accept-btn"
+            onClick={handleAccept}
+            disabled={isAccepting}
+          >
+            {isAccepting
+              ? "Accepting..."
+              : `Accept ₦${errand.price?.toLocaleString() || "0"}`}
           </button>
-        </section>
+        </div>
       </div>
     </div>
   );

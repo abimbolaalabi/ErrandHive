@@ -1,51 +1,85 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { toast, ToastContainer } from 'react-toastify';
 
-const WithdrawBank = ({close}) => {
+const WithdrawBank = ({ close }) => {
   const [availableBalance] = useState(12750);
-  const [withdrawAmount, setWithdrawAmount] = useState(""); 
+  const [withdrawAmount, setWithdrawAmount] = useState("");
+
+  // Allow only numbers and one optional decimal point
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    const regex = /^\d*\.?\d*$/;
+
+    if (regex.test(value)) {
+      setWithdrawAmount(value);
+    }
+  };
+
+  const handleContinue = () => {
+    const amount = parseFloat(withdrawAmount);
+
+    if (!withdrawAmount) {
+      toast.error("Please enter an amount.");
+    } else if (isNaN(amount)) {
+      toast.error("Invalid amount.");
+    } else if (amount < 1000) {
+      toast.error("Minimum withdrawal is ₦1,000.00.");
+    } else if (amount > availableBalance) {
+      toast.error("Insufficient balance.");
+    } else {
+      toast.success(`You have successfully withdrawn ₦${amount.toLocaleString()}`);
+      // You can handle API withdrawal logic here
+      setWithdrawAmount("");
+    }
+  };
 
   return (
-    <ModalBackdrop>
-      <ModalContent>
-        <ModalHeader>
-          <HeaderTitle>Withdraw to Bank</HeaderTitle>
-          <HeaderSubtitle>
-            Transfer funds from your wallet to your bank account
-          </HeaderSubtitle>
-          <CloseButton>&times;</CloseButton>
-        </ModalHeader>
+    <>
+      <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
+      <ModalBackdrop>
+        <ModalContent>
+          <ModalHeader>
+            <HeaderTitle>Withdraw to Bank</HeaderTitle>
+            <HeaderSubtitle>
+              Transfer funds from your wallet to your bank account
+            </HeaderSubtitle>
+            <CloseButton onClick={() => close(false)}>&times;</CloseButton>
+          </ModalHeader>
 
-        <ModalBody>
-          <BalanceContainer>
-            <BalanceText>Available Balance</BalanceText>
-            <BalanceDisplay>
-              ₦{availableBalance.toLocaleString()}
-              <NairaIcon>₦</NairaIcon>
-            </BalanceDisplay>
-          </BalanceContainer>
+          <ModalBody>
+            <BalanceContainer>
+              <BalanceText>Available Balance</BalanceText>
+              <BalanceDisplay>
+                ₦{availableBalance.toLocaleString()}
+                <NairaIcon>₦</NairaIcon>
+              </BalanceDisplay>
+            </BalanceContainer>
 
-          <WithdrawalInputLabel>Withdrawal Amount</WithdrawalInputLabel>
-          <WithdrawalInput
-            type="text"
-            placeholder="0.00"
-            value={withdrawAmount}
-            onChange={(e) => setWithdrawAmount(e.target.value)}
-          />
+            <WithdrawalInputLabel>Withdrawal Amount</WithdrawalInputLabel>
+            <WithdrawalInput
+              type="text"
+              placeholder="0.00"
+              value={withdrawAmount}
+              onChange={handleInputChange}
+            />
 
-          <WarningNotice>
-            <WarningIcon>!</WarningIcon>
-            Minimum withdrawal is ₦1,000.00.
-          </WarningNotice>
+            <WarningNotice>
+              <WarningIcon>!</WarningIcon>
+              Minimum withdrawal is ₦1,000.00.
+            </WarningNotice>
 
-          <ContinueButton>Continue</ContinueButton>
-        </ModalBody>
-      </ModalContent>
-    </ModalBackdrop>
+            <ContinueButton onClick={handleContinue}>Continue</ContinueButton>
+          </ModalBody>
+        </ModalContent>
+      </ModalBackdrop>
+    </>
   );
 };
 
 export default WithdrawBank;
+
+/* --- Styled Components --- */
 
 const ModalBackdrop = styled.div`
   position: fixed;
@@ -97,7 +131,6 @@ const CloseButton = styled.button`
   font-size: 1.5em;
   color: #999;
   cursor: pointer;
-  padding: 0;
 `;
 
 const ModalBody = styled.div`
@@ -118,7 +151,6 @@ const BalanceContainer = styled.div`
 const BalanceText = styled.p`
   font-size: 0.9em;
   color: #666;
-  margin: 0;
 `;
 
 const BalanceDisplay = styled.div`
@@ -158,8 +190,12 @@ const WithdrawalInput = styled.input`
   border: 1px solid #ccc;
   border-radius: 8px;
   margin-bottom: 20px;
-  box-sizing: border-box;
   text-align: center;
+
+  &:focus {
+    border-color: #8A2BE2;
+    outline: none;
+  }
 `;
 
 const WarningNotice = styled.div`
@@ -193,6 +229,6 @@ const ContinueButton = styled.button`
   transition: background-color 0.2s;
 
   &:hover {
-    background-color: #8A2BE2cc;
+    background-color: #6E1AC8;
   }
 `;
