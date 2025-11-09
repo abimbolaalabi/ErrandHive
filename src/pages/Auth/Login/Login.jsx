@@ -27,6 +27,7 @@ const Login = () => {
   const navigate = useNavigate();
   // const dispatch = useDispatch();
 
+  
 
   const validate = () => {
     const { email, password, remember } = formData;
@@ -82,6 +83,7 @@ const Login = () => {
         // dispatchUser(setUserDetails({ userDetails, userToken }));
         localStorage.setItem("userToken", userToken);
         localStorage.setItem("userDetails", JSON.stringify(userDetails));
+        
           role === "Client"
         ? navigate("/dashboard")
         : role === "Runner"

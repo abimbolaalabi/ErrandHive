@@ -90,7 +90,7 @@ const ModalProposal = ({ toclose, setReview, info, setInfo }) => {
 
                             <div className="rb-price-box">
                                 <p>Proposed Price</p>
-                                <h3>₦{item?.bidPrice}</h3>
+                                <h3>₦{item?.bidPrice || item?.currentPrice}</h3>
                             </div>
                         </div>
 
@@ -101,14 +101,14 @@ const ModalProposal = ({ toclose, setReview, info, setInfo }) => {
 
                             </p>
                             <p className="rb-message-text">
-                                {item?.runner?.bio}
+                                {item?.runner?.bio} 
                             </p>
                         </div>
 
 
                         <div className="rb-warning">
                             <LucideAlertTriangle size={18} />
-                            <span>Runner wants ₦{item?.bidPrice} for the offer</span>
+                            <span>Runner wants ₦{item?.bidPrice || item?.currentPrice}  for the offer</span>
                         </div>
 
 
@@ -126,7 +126,7 @@ const ModalProposal = ({ toclose, setReview, info, setInfo }) => {
                                     runnerName: `${item?.runner?.firstName} ${item?.runner?.lastName}`,
                                 }));
 
-                            }}>✔ ₦{item?.bidPrice}</button>
+                            }}>✔ ₦{item?.bidPrice || item?.currentPrice}</button>
                         </div>
 
                     </div>

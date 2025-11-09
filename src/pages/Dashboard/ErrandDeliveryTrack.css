@@ -1,342 +1,391 @@
-
-.errand-delivery-containerr {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  background-color: #f8f9fa;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  padding: 0;
-  margin: 0;
+/* Root fills available space inside your dashboard content area */
+.med-root {
+  width: 100%;
+  min-height: 100%;
   box-sizing: border-box;
+  padding: 16px 20px 28px;
+  background: #f5f7fa; /* light gray background */
 }
 
-
-.rrunner-card {
-  background: white;
-  border-radius: 16px;
-  padding: 20px;
-  margin: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  flex-shrink: 0;
+/* Back link row */
+.med-back-row {
+  margin-bottom: 12px;
 }
 
-.rrunner-info {
+.med-back-btn {
+  border: none;
+  background: transparent;
+  color: #475569;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Generic card */
+.med-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+  padding: 18px;
+}
+
+/* Top card */
+.med-top-card {
+  margin-bottom: 18px;
+}
+
+/* Runner row */
+.med-top-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 16px;
 }
 
-.rrunner-avatar {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background-color: #7c3aed;
+.med-runner-info {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-right: 16px;
-}
-
-.avatar-initials {
-  color: white;
-  font-weight: 600;
-  font-size: 20px;
-}
-
-.rrunner-details {
-  flex: 1;
-}
-
-.rrunner-name {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 600;
-  color: #1a1a1a;
-}
-
-.rrunner-badge {
-  display: inline-block;
-  background-color: #e6f7f2;
-  color: #0d8b64;
-  font-size: 12px;
-  font-weight: 500;
-  padding: 4px 10px;
-  border-radius: 20px;
-  margin-top: 4px;
-}
-
-.rrunner-stats {
-  display: flex;
   gap: 12px;
-  margin-top: 6px;
-  font-size: 14px;
-  color: #555;
 }
 
-.rrating {
-  color: #f59e0b;
-  font-weight: 600;
+.med-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #e9d5ff;
+  color: #6d28d9;
+  font-weight: 700;
+  font-size: 18px;
 }
 
-.deliverries {
-  color: #666;
-}
-
-.status-badge {
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.status-badge.pending {
-  background-color: #fef3c7;
-  color: #d97706;
-}
-
-
-.locations-container {
+.med-runner-meta {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 6px;
 }
 
-.location {
+.med-runner-line {
   display: flex;
   align-items: center;
-  padding: 12px;
-  border-radius: 12px;
+  gap: 10px;
 }
 
-.location.pickup {
-  background-color: #fffbeb;
-}
-
-.location.delivery {
-  background-color: #f3e8ff;
-}
-
-.location-icon {
+.med-runner-name {
+  margin: 0;
   font-size: 20px;
-  margin-right: 12px;
+  color: #0f172a;
 }
 
-.location-label {
+.med-pill {
   font-size: 12px;
-  color: #666;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.location-address {
-  font-size: 15px;
-  color: #1a1a1a;
-  font-weight: 500;
-  margin-top: 2px;
-}
-
-
-.progress-section {
-  margin-top: 16px;
-}
-
-.progress-label {
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  color: #444;
-  margin-bottom: 8px;
-}
-
-.progress-percent {
+  padding: 6px 10px;
+  border-radius: 999px;
   font-weight: 600;
-  color: #7c3aed;
 }
 
-.progress-bar {
+.med-pill-verified {
+  background: #e9f9ef;
+  color: #15803d;
+  border: 1px solid #c7f0d7;
+}
+
+.med-status-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.med-pill-status {
+  background: #fff8e6;
+  color: #a16207;
+  border: 1px solid #fde68a;
+}
+
+/* Stats under name */
+.med-runner-stats {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #475569;
+  font-size: 14px;
+}
+
+.med-star {
+  color: #f59e0b;
+  margin-right: 2px;
+}
+
+.med-dot {
+  color: #94a3b8;
+}
+
+/* Locations row */
+.med-locations-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 10px 0 14px;
+}
+
+.med-loc-card {
+  background: #fafafa;
+  border-radius: 12px;
+  border: 1px solid #f1f5f9;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.med-pickup {
+  background: #fff8eb;
+}
+
+.med-delivery {
+  background: #f6edff;
+}
+
+.med-loc-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #fff3cd;
+  display: grid;
+  place-items: center;
+  color: #a16207;
+}
+
+.med-loc-icon-purple {
+  background: #efe7ff;
+  color: #6d28d9;
+}
+
+.med-loc-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.med-loc-label {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.med-loc-value {
+  margin: 0;
+  font-size: 14px;
+  color: #0f172a;
+  line-height: 1.25rem;
+}
+
+/* Progress */
+.med-progress-wrap {
+  margin-top: 8px;
+}
+
+.med-progress-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.med-progress-title {
+  font-size: 14px;
+  color: #334155;
+}
+
+.med-progress-val {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.med-progressbar {
+  width: 100%;
   height: 8px;
-  background-color: #e5e7eb;
-  border-radius: 4px;
+  border-radius: 8px;
+  background: #e2e8f0;
   overflow: hidden;
 }
 
-.progress-fill {
+.med-progressbar-fill {
   height: 100%;
-  background-color: #7c3aed;
-  border-radius: 4px;
+  background: #6d28d9;
+  width: 0%;
   transition: width 0.3s ease;
 }
 
-/* Bottom Section */
-.bottom-section {
-  display: flex;
-  flex: 1;
-  background-color: white;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+/* Two-column grid */
+.med-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 18px;
 }
 
-.runner-summary {
-  width: 120px;
-  padding: 20px 16px;
-  border-right: 1px solid #eee;
+/* Left profile card */
+.med-profile-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
+  padding: 18px;
+  gap: 12px;
+  min-height: 260px;
 }
 
-.runner-avatar.small {
-  width: 48px;
-  height: 48px;
-  background-color: #7c3aed;
+.med-profile-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 999px;
+  background: #e9d5ff;
+  color: #6d28d9;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 22px;
 }
 
-.runner-summary .runner-name {
-  font-size: 15px;
-  margin: 12px 0 4px;
+.med-profile-name {
+  font-weight: 700;
+  font-size: 18px;
+  color: #0f172a;
 }
 
-.runner-summary .rating {
-  font-size: 14px;
-  color: #f59e0b;
-  font-weight: 600;
-}
-
-.jobs {
-  font-size: 13px;
-  color: #666;
-  margin-top: 2px;
-}
-
-.chat-button {
-  margin-top: auto;
-  background-color: #f8f9fa;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 10px 12px;
-  font-size: 13px;
-  color: #444;
+.med-profile-meta {
   display: flex;
   align-items: center;
-  gap: 6px;
-  width: 100%;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.chat-button:hover {
-  background-color: #eee;
-}
-
-.chat-icon {
-  font-size: 16px;
-}
-
-/* Delivery Timeline */
-.delivery-timeline {
-  flex: 1;
-  padding: 24px 20px;
-  overflow-y: auto;
-}
-
-.timeline-title {
-  font-size: 16px;
-  font-weight: 600;
-  color: #1a1a1a;
-  margin-bottom: 20px;
-}
-
-.timeline {
-  position: relative;
-  padding-left: 30px;
-}
-
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 11px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background-color: #e5e7eb;
-}
-
-.timeline-item {
-  position: relative;
-  margin-bottom: 32px;
-}
-
-.timeline-item:last-child {
-  margin-bottom: 0;
-}
-
-.timeline-dot {
-  position: absolute;
-  left: -31px;
-  top: 4px;
-  width: 12px;
-  height: 12px;
-  background-color: #e5e7eb;
-  border: 3px solid white;
-  border-radius: 50%;
-  box-shadow: 0 0 0 2px #e5e7eb;
-}
-
-.timeline-dot.completed {
-  background-color: #10b981;
-  box-shadow: 0 0 0 2px #d1fae5;
-}
-
-.timeline-item.completed .timeline-dot {
-  background-color: #10b981;
-  box-shadow: 0 0 0 2px #d1fae5;
-}
-
-.timeline-content {
-  margin-left: 8px;
-}
-
-.timeline-status {
+  gap: 16px;
+  color: #475569;
   font-size: 14px;
-  color: #1a1a1a;
-  font-weight: 500;
 }
 
-.timeline-time {
+.med-profile-rating .med-star {
+  margin-right: 6px;
+}
+
+.med-chat-btn {
+  margin-top: 8px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  color: #0f172a;
+  transition: all 0.2s ease;
+}
+
+.med-chat-btn:hover {
+  background: #f8fafc;
+}
+
+/* Timeline card */
+.med-timeline-card {
+  min-height: 420px;
+  padding: 18px 20px;
+}
+
+.med-timeline-title {
+  margin: 0 0 16px 0;
+  color: #0f172a;
+  font-size: 18px;
+}
+
+/* Timeline */
+.med-timeline {
+  position: relative;
+  padding-left: 28px;
+}
+
+/* ✅ Updated rail so it does NOT touch first circle */
+.med-rail {
+  position: absolute;
+  left: 18px;
+  top: 30px;
+  bottom: 10px;
+  width: 2px;
+  background: #cbd5e1;
+}
+
+/* Timeline rows */
+.med-step-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 0;
+}
+
+/* ✅ Remove gap above first row */
+.med-step-row:first-child {
+  padding-top: 0;
+}
+
+.med-step-icon-wrap {
+  display: grid;
+  place-items: center;
+}
+
+/* ✅ Green done step (updated) */
+.med-step-done {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #22c55e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.med-step-done-inner {
+  color: #22c55e;
+}
+
+/* Idle empty circle */
+.med-step-idle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #cbd5e1;
+  background: #fff;
+}
+
+/* Step text */
+.med-step-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-height: 24px;
+}
+
+.med-step-label {
+  font-size: 14px;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.med-step-time {
   font-size: 12px;
-  color: #888;
-  margin-top: 2px;
+  color: #64748b;
 }
 
+.med-step-placeholder {
+  height: 20px;
+}
 
-@media (max-width: 768px) {
-  .bottom-section {
-    flex-direction: column;
+/* Responsive */
+@media (max-width: 960px) {
+  .med-locations-row {
+    grid-template-columns: 1fr;
   }
-
-  .runner-summary {
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 16px 20px;
-    border-right: none;
-    border-bottom: 1px solid #eee;
+  .med-grid {
+    grid-template-columns: 1fr;
   }
-
-  .chat-button {
-    margin-top: 0;
-    width: auto;
-    padding: 8px 14px;
-  }
-
-  .delivery-timeline {
-    padding: 20px;
+  .med-top-row {
+    align-items: flex-start;
+    gap: 8px;
   }
 }

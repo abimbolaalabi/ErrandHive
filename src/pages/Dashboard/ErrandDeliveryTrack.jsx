@@ -1,86 +1,161 @@
-import React from 'react';
-import './ErrandDeliveryTrack.css'; // We'll include CSS inline below
+import React from "react";
+import "./MyErrandDetails.css";
+import { CiLocationOn } from "react-icons/ci";
+import { IoCheckmarkCircle } from "react-icons/io5";
 
-const ErrandDeliveryTrack = () => {
+const MyErrandDetails = () => {
+  // Dummy runner & job data
+  const runner = {
+    initials: "JD",
+    name: "John Doe",
+    rating: 4.8,
+    jobs: 100,
+    verified: true,
+  };
+
+  // Dummy errand/location/status data
+  const errand = {
+    status: "Pending Pickup",
+    pickup: "123 Main Street, Lagos",
+    delivery: "456 Oak Avenue, Lekki",
+    progress: 0, // %
+  };
+
+  // Dummy timeline steps (only the first is done)
+  const steps = [
+    { id: 1, label: "Order assigned", time: "Oct 18, 10:00am", done: true },
+    { id: 2, label: "Runner departed", time: "", done: false },
+    { id: 3, label: "Arrived at pickup", time: "", done: false },
+    { id: 4, label: "Picked up item", time: "", done: false },
+    { id: 5, label: "On the way", time: "", done: false },
+    { id: 6, label: "Arrived at delivery", time: "", done: false },
+    { id: 7, label: "Delivered", time: "", done: false },
+  ];
+
   return (
-<div className="errand-delivery-containerr">
-      {/* Runner Card */}
-      <div className="rrunner-card">
-        <div className="rrunner-info">
-          <div className="rrunner-avatar">
-            <span className="avatar-initials">JD</span>
-          </div>
-          <div className="rrunner-details">
-            <h2 className="rrunner-name">John Doe</h2>
-            <div className="rrunner-badge">Verified Runner</div>
-            <div className="rrunner-stats">
-              <span className="rrating">★ 4.8</span>
-              <span className="deliverries">156 Deliveries</span>
+    <div className="med-root">
+      {/* Back link row */}
+      <div className="med-back-row">
+        <button className="med-back-btn" type="button">
+          ← Back to my errands
+        </button>
+      </div>
+
+      {/* Runner / Errand top card */}
+      <div className="med-card med-top-card">
+        <div className="med-top-row">
+          <div className="med-runner-info">
+            <div className="med-avatar">{runner.initials}</div>
+            <div className="med-runner-meta">
+              <div className="med-runner-line">
+                <h2 className="med-runner-name">{runner.name}</h2>
+                {runner.verified && (
+                  <span className="med-pill med-pill-verified">Verified Runner</span>
+                )}
+              </div>
+              <div className="med-runner-stats">
+                <span className="med-star">★</span>
+                <span className="med-rating">{runner.rating} Rating</span>
+                <span className="med-dot">•</span>
+                <span className="med-deliveries">{runner.jobs} Deliveries</span>
+              </div>
             </div>
           </div>
-          <div className="status-badge pending">Pending Pickup</div>
+
+          <div className="med-status-wrap">
+            <span className="med-pill med-pill-status">{errand.status}</span>
+          </div>
         </div>
 
-    
-        <div className="locations-container">
-          <div className="location pickup">
-            <div className="location-icon">📍</div>
-            <div className="location-details">
-              <div className="location-label">Pickup Location</div>
-              <div className="location-address">123 Main Street, Lagos</div>
+        <div className="med-locations-row">
+          <div className="med-loc-card med-pickup">
+            <div className="med-loc-icon">
+              <CiLocationOn size={18} />
+            </div>
+            <div className="med-loc-text">
+              <span className="med-loc-label">Pickup Location</span>
+              <p className="med-loc-value">{errand.pickup}</p>
             </div>
           </div>
-          <div className="location delivery">
-            <div className="location-icon">📍</div>
-            <div className="location-details">
-              <div className="location-label">Delivery Location</div>
-              <div className="location-address">456 Oak Avenue, Lekki</div>
+
+          <div className="med-loc-card med-delivery">
+            <div className="med-loc-icon med-loc-icon-purple">
+              <CiLocationOn size={18} />
+            </div>
+            <div className="med-loc-text">
+              <span className="med-loc-label">Delivery Location</span>
+              <p className="med-loc-value">{errand.delivery}</p>
             </div>
           </div>
         </div>
 
-
-        <div className="progress-section">
-          <div className="progress-label">
-            <span>Overall Progress</span>
-            <span className="progress-percent">0%</span>
+        <div className="med-progress-wrap">
+          <div className="med-progress-label-row">
+            <span className="med-progress-title">Overall Progress</span>
+            <span className="med-progress-val">{errand.progress}%</span>
           </div>
-          <div className="progress-bar">
-            <div className="progress-fill" style={{ width: '0%' }}></div>
+          <div className="med-progressbar">
+            <div
+              className="med-progressbar-fill"
+              style={{ width: `${errand.progress}%` }}
+            />
           </div>
         </div>
       </div>
 
-    
-      <div className="bottom-section">
-        <div className="runner-summary">
-          <div className="runner-avatar small">
-            <span className="avatar-initials">JD</span>
+      {/* Bottom two columns */}
+      <div className="med-grid">
+        {/* Left profile card */}
+        <div className="med-card med-profile-card">
+          <div className="med-profile-avatar">{runner.initials}</div>
+          <div className="med-profile-name">{runner.name}</div>
+
+          <div className="med-profile-meta">
+            <div className="med-profile-rating">
+              <span className="med-star">★</span>
+              <span>{runner.rating}</span>
+            </div>
+            <div className="med-profile-jobs">{runner.jobs} jobs</div>
           </div>
-          <div className="summary-details">
-            <h3 className="runner-name">John Doe</h3>
-            <div className="rating">★ 4.8</div>
-            <div className="jobs">100 jobs</div>
-          </div>
-          <button className="chat-button">
-            <span className="chat-icon">💬</span> Chat with Runner
+
+          <button type="button" className="med-chat-btn">
+            💬 Chat with Runner
           </button>
         </div>
 
-        <div className="delivery-timeline">
-          <h3 className="timeline-title">Delivery Progress</h3>
-          <div className="timeline">
-            <div className="timeline-item completed">
-              <div className="timeline-dot completed"></div>
-              <div className="timeline-content">
-                <div className="timeline-status">Order assigned</div>
-                <div className="timeline-time">Oct 19, 10:00am</div>
-              </div>
-            </div>
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="timeline-item">
-                <div className="timeline-dot"></div>
-                <div className="timeline-content"></div>
+        {/* Right delivery progress card */}
+        <div className="med-card med-timeline-card">
+          <h3 className="med-timeline-title">Delivery Progress</h3>
+
+          <div className="med-timeline">
+            {/* Vertical rail */}
+            <div className="med-rail" />
+
+            {/* Steps */}
+            {steps.map((step) => (
+              <div className="med-step-row" key={step.id}>
+                <div className="med-step-icon-wrap">
+                  {step.done ? (
+                    <div className="med-step-icon med-step-done">
+                      <div className="med-step-done-inner">
+                        <IoCheckmarkCircle size={18} />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="med-step-icon med-step-idle" />
+                  )}
+                </div>
+
+                <div className="med-step-text">
+                  {step.done ? (
+                    <>
+                      <div className="med-step-label">{step.label}</div>
+                      {step.time && <div className="med-step-time">{step.time}</div>}
+                    </>
+                  ) : (
+                    <div className="med-step-placeholder" />
+                  )}
+                </div>
               </div>
             ))}
           </div>
@@ -90,4 +165,4 @@ const ErrandDeliveryTrack = () => {
   );
 };
 
-export default ErrandDeliveryTrack;
+export default MyErrandDetails;

@@ -172,7 +172,7 @@ const DashboardPage = () => {
           </div>
         </div>
       )}
-
+          <h1>Recent Errands</h1>
   
       {!loading && errands.length > 0 && errands.map((item) => (
         <div key={item.id} className="recent-card">

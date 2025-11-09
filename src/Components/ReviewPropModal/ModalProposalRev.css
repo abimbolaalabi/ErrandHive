@@ -1,26 +1,24 @@
-
-.review-mod-cont{
-    /* width: 100%;
+.review-mod-cont {
+  /* width: 100%;
     height: 100vh;
     background-color: rgb(70, 69, 69);
     position: fixed;
     left: 0;
     top: 0;
     z-index: ; */
-    /* display: flex;
+  /* display: flex;
     justify-content: center;
     align-items: center; */
 }
 
-.review-wrapper{
-    /* background-color: #fff;
+.review-wrapper {
+  /* background-color: #fff;
     width: 50%;
     height: 90%; */
-    /* display: flex;
+  /* display: flex;
     justify-content: center;
     align-items: center; */
 }
-
 
 .review-mod-cont {
   position: fixed;
@@ -43,7 +41,6 @@
   animation: scaleIn 0.25s ease;
 }
 
-
 .rev-close {
   position: absolute;
   top: 20px;
@@ -58,7 +55,6 @@
   color: #888;
   margin-bottom: 30px;
 }
-
 
 .rev-task-box {
   width: 100%;
@@ -78,7 +74,6 @@
   font-size: 16px;
   font-weight: 600;
 }
-
 
 .rev-center {
   text-align: center;
@@ -129,14 +124,13 @@
   font-weight: 600;
 }
 
-
 .rev-btn-flex {
   display: flex;
   gap: 16px;
 }
 
-.rev-btn-outline,
-.rev-btn-fill {
+.rev-btn-outline
+ {
   width: 100%;
   padding: 14px 0;
   font-size: 15px;
@@ -145,7 +139,18 @@
   border: none;
   transition: 0.2s ease;
 }
-
+.rev-btn-fill {
+  width: 100%;
+  padding: 14px 0;
+  font-size: 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  border: none;
+  transition: 0.2s ease;
+  background-color: red;
+  text-decoration: none;
+  /* text-decoration: none; */
+}
 .rev-btn-outline {
   border: 1px solid #c8c8c8;
   background: transparent;
@@ -164,14 +169,13 @@
   gap: 6px;
   font-weight: 500;
 }
-.rev-btn-fill span{
+.rev-btn-fill span {
   color: white;
 }
 
 .rev-btn-fill:hover {
   background: #671ed1;
 }
-
 
 @keyframes scaleIn {
   from {
