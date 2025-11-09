@@ -69,7 +69,7 @@ const ModalProposalRev = ({ toclose, setErrandPay, info }) => {
           <button className="rev-btn-outline" onClick={() => toclose(false)}>
             Back to List
           </button>
-          <Link className="link" to={"/dashboard/my-errands/errandId/errandTrack"}>
+          <Link className="rev-btn-fill" to={"/dashboard/my-errands/errandId/errandTrack"}>
             <button
             className="rev-btn-fill"
             disabled={loading}

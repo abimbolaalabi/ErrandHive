@@ -1,47 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./PaymentsPage.css";
 import { HiArrowTrendingUp } from "react-icons/hi2";
+import axios from "axios";
 
 const PaymentsPage = () => {
 
-  const paymentsData = [
-    {
-      id: 1,
-      type: "Document Pickup",
-      date: "20th Oct 2025",
-      amount: "₦4000.00",
-      status: "Pending",
-      method: "Bank Transfer",
-    },
-    {
-      id: 2,
-      type: "Document Pickup",
-      date: "20th Oct 2025",
-      amount: "₦4000.00",
-      status: "Completed",
-      method: "Bank Transfer",
-    },
-    {
-      id: 3,
-      type: "Document Pickup",
-      date: "20th Oct 2025",
-      amount: "₦4000.00",
-      status: "Completed",
-      method: "Bank Transfer",
-    },
-    {
-      id: 4,
-      type: "Document Pickup",
-      date: "20th Oct 2025",
-      amount: "₦4000.00",
-      status: "Completed",
-      method: "Bank Transfer",
-    },
-  ];
+  const [paymentsData, setPaymentsData] = useState([]);
+  const token = localStorage.getItem("userToken");
+  const BaseUrl = import.meta.env.VITE_BASE_URL;
+
+  const getPayments = async () => {
+    try {
+      const res = await axios.get(
+        `${BaseUrl}/payment/history`,
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      );
+
+      // API returns: data.payments (array)
+      const payments = res?.data?.data;
+      console.log(res.data.data)
+      setPaymentsData(payments);
+
+    } catch (error) {
+      console.log("Payment history error:", error?.response?.data || error);
+    }
+  };
+
+  useEffect(() => {
+    getPayments();
+  }, []);
 
   return (
-
-
     <div className="payments-wrapper">
       <h2 className="payments-title">Payment & History</h2>
       <p className="payments-subtitle">Track your transaction and spending</p>
@@ -78,17 +69,21 @@ const PaymentsPage = () => {
           <p className="col-method">Payment Method</p>
         </div>
 
-        {paymentsData.map((item) => (
+        {(paymentsData.length > 0 ? paymentsData : []).map((item) => (
           <div key={item.id} className="table-row">
-            <p className="col-type type-text">Document<br /> <span> Pickup</span></p>
-            <p className="col-date">{item.date}</p>
-            <p className="col-amount">{item.amount}</p>
+            <p className="col-type type-text">
+              {item.description || "N/A"}
+            </p>
+            <p className="col-date">
+              {new Date(item.createdAt).toLocaleDateString()}
+            </p>
+            <p className="col-amount">₦{item.amount?.toLocaleString()}.00</p>
             <p className="col-status">
-              <span className={`status-badge ${item.status === "Completed" ? "completed" : "pending"}`}>
+              <span className={`status-badge ${item.status === "Paid" ? "completed" : "pending"}`}>
                 {item.status}
               </span>
             </p>
-            <p className="col-method">{item.method}</p>
+            <p className="col-method">Wallet / Transfer</p>
           </div>
         ))}
 

@@ -1,31 +1,108 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./ProfileDetailSetting.css"
 import { useParams } from 'react-router-dom'
 import { Eye, EyeOff } from 'lucide-react'
+import axios from "axios";
+import { toast } from "react-toastify";
+
 const ProfileDetailSetting = () => {
   const { profileId } = useParams()
+  const token = localStorage.getItem("userToken");
 
-    const [firstName, setFirstName] = useState('');
-   const [lastName, setLastName] = useState('');
-   const [emailAddress, setEmailAddress] = useState('');
-   const [aboutMe, setAboutMe] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [emailAddress, setEmailAddress] = useState('');
+  const [bio, setBio] = useState('');
 
-   const [currentPassword, setCurrentPassword] = useState('');
-   const [newPassword, setNewPassword] = useState('');
-   const [confirmPassword, setConfirmPassword] = useState('');
-   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
-   const [showNewPassword, setShowNewPassword] = useState(false);
-   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleSaveProfile = (e) => {
+  const handleSaveProfile = async (e) => {
     e.preventDefault();
-    console.log('Profile saved');
+
+    if (!token) return toast.error("You are not authenticated!");
+
+    const formData = new FormData();
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("bio", bio);
+
+    try {
+      const res = await axios.put(
+        `https://errandhive-project.onrender.com/api/v1/update/${profileId}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      toast.success(res.data?.message || "Profile updated successfully");
+        localStorage.setItem("userDetails", JSON.stringify(res.data?.data))
+      console.log("Updated User:", res.data?.data);
+
+    } catch (err) {
+      console.log(" Update error:", err?.response?.data);
+      toast.error(err?.response?.data?.message || "Update failed");
+    }
   };
 
-  const handleUpdatePassword = (e) => {
+  const handleUpdatePassword = async (e) => {
     e.preventDefault();
-    console.log('Password updated');
+
+    if (!token) return toast.error("You are not authenticated!");
+
+    if (!currentPassword || !newPassword || !confirmPassword) {
+      return toast.error("All password fields are required");
+    }
+
+    if (newPassword !== confirmPassword) {
+      return toast.error("New passwords do not match");
+    }
+
+    try {
+      const res = await axios.put(
+        "https://errandhive-project.onrender.com/api/v1/password",
+        {
+          oldPassword: currentPassword,
+          newPassword: newPassword,
+          confirmPassword: confirmPassword
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          }
+        }
+      );
+
+      toast.success(res?.data?.message || "Password updated successfully");
+
+      setCurrentPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+
+    } catch (err) {
+      console.log("Password update error:", err?.response?.data);
+      toast.error(err?.response?.data?.message || "Password update failed");
+    }
   };
+
+    useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("userDetails"));
+    if (user) {
+      setFirstName(user.firstName || "");
+      setLastName(user.lastName || "");
+      setEmailAddress(user.email || "");
+      setBio(user.bio || "");
+    }
+  }, []);
 
   return (
     <div className="cps-root">
@@ -67,9 +144,10 @@ const ProfileDetailSetting = () => {
               <input
                 type="email"
                 placeholder="Enter your email address"
-                value={emailAddress}
-                onChange={(e) => setEmailAddress(e.target.value)}
                 className="input-field"
+                   value={emailAddress}
+                disabled
+                readOnly
               />
             </div>
 
@@ -77,8 +155,8 @@ const ProfileDetailSetting = () => {
               <label className="form-label">About Me</label>
               <textarea
                 placeholder="Note about yourself"
-                value={aboutMe}
-                onChange={(e) => setAboutMe(e.target.value)}
+                value={bio}
+                onChange={(e) => setBio(e.target.value)}
                 rows={4}
                 className="textarea-field"
               />
@@ -105,7 +183,6 @@ const ProfileDetailSetting = () => {
                   type="button"
                   onClick={() => setShowCurrentPassword(!showCurrentPassword)}
                   className="toggle-visibility"
-                  aria-label="Toggle current password visibility"
                 >
                   {showCurrentPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
@@ -126,7 +203,6 @@ const ProfileDetailSetting = () => {
                   type="button"
                   onClick={() => setShowNewPassword(!showNewPassword)}
                   className="toggle-visibility"
-                  aria-label="Toggle new password visibility"
                 >
                   {showNewPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
@@ -147,7 +223,6 @@ const ProfileDetailSetting = () => {
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   className="toggle-visibility"
-                  aria-label="Toggle confirm password visibility"
                 >
                   {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
