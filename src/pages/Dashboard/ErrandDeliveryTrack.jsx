@@ -1,9 +1,9 @@
 import React from "react";
-import "./MyErrandDetails.css";
+import "./ErrandDeliveryTrack.css";
 import { CiLocationOn } from "react-icons/ci";
 import { IoCheckmarkCircle } from "react-icons/io5";
 
-const MyErrandDetails = () => {
+const ErrandDeliveryTrack = () => {
   // Dummy runner & job data
   const runner = {
     initials: "JD",
@@ -21,7 +21,7 @@ const MyErrandDetails = () => {
     progress: 0, // %
   };
 
-  // Dummy timeline steps (only the first is done)
+ 
   const steps = [
     { id: 1, label: "Order assigned", time: "Oct 18, 10:00am", done: true },
     { id: 2, label: "Runner departed", time: "", done: false },
@@ -165,4 +165,4 @@ const MyErrandDetails = () => {
   );
 };
 
-export default MyErrandDetails;
+export default ErrandDeliveryTrack;

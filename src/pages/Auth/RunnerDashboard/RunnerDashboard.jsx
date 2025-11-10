@@ -15,7 +15,7 @@ const RunnerDashboard = () => {
   const token = localStorage.getItem("userToken");
   const API_BASE_URL = "https://errandhive-project.onrender.com/api/v1";
 
-  // Dummy stats (replace with API if available)
+
   const totalRequests = 15;
   const completed = 10;
   const active = 5;

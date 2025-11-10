@@ -50,7 +50,7 @@ const handleImageUpload = async (e) => {
     formData.append("profileImage", file);
 
     const res = await axios.put(
-      `${BaseUrl}/update/${storedUser.id}`,
+      `${BaseUrl}/update`,
       formData,
       {
         headers: {
@@ -63,8 +63,8 @@ const handleImageUpload = async (e) => {
     toast.success("Profile image updated");
     const updatedUser = res?.data?.data;
     console.log(res.data.data)
-    setUser(updatedUser);
-    localStorage.setItem("userDetails", JSON.stringify(updatedUser));
+    // setUser(updatedUser);
+    // localStorage.setItem("userDetails", JSON.stringify(updatedUser));
   } catch (err) {
     console.log("Image upload error:", err?.response?.data);
     toast.error(err?.response?.data?.message || "Upload failed");

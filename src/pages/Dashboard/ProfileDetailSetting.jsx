@@ -33,7 +33,7 @@ const ProfileDetailSetting = () => {
 
     try {
       const res = await axios.put(
-        `https://errandhive-project.onrender.com/api/v1/update/${profileId}`,
+        `https://errandhive-project.onrender.com/api/v1/update`,
         formData,
         {
           headers: {

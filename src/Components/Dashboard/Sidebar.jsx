@@ -61,10 +61,8 @@ const Sidebar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("userToken");
-    localStorage.removeItem("userDetails");
-    localStorage.removeItem("userKyc");
-
     navigate("/login");
+    console.log("ib")
   };
 
   return (
