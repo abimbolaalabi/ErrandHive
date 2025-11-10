@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 
 const PrivateRoute = ({ allowedRole }) => {
-  const token = localStorage.getItem("userToken");
+  const token = JSON.parse(localStorage.getItem("userToken"));
   const userDetails = JSON.parse(localStorage.getItem("userDetails"));
 
   
