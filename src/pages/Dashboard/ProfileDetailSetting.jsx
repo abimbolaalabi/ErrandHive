@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 const ProfileDetailSetting = () => {
   const { profileId } = useParams()
-  const token = localStorage.getItem("userToken");
+  const token = JSON.parse(localStorage.getItem("userToken"));
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');

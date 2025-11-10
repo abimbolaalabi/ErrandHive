@@ -9,7 +9,7 @@ import axios from 'axios'
 const ErrandPayMod = ({toclose, setErrandPay, info}) => {
   const {runnerId} = useParams()
   const BaseUrl = import.meta.env.VITE_BASE_URL;
-const token = localStorage.getItem("userToken");
+const token = JSON.parse(localStorage.getItem("userToken"));
 const [loading, setLoading] = useState(false);
 
 const handlePayment = async () => {
@@ -18,7 +18,8 @@ const handlePayment = async () => {
 
 
     const res = await axios.post(
-      `${BaseUrl}/payment/initialize`,
+      `${BaseUrl}/payment/initialize`,{amount:info?.bidPrice
+         ,description:info?.title,receiverId:info?.runnerId},
      
       {
         headers: {
@@ -70,7 +71,11 @@ const handlePayment = async () => {
      
         <div className="ep-price-box">
           <p className="ep-price-label">Final Price</p>
-          <p className="ep-price-value">₦{Number(info?.bidPrice).toLocaleString() || Number(info?.currentPrice).toLocaleString()}</p>
+          <p className="ep-price-value">₦{
+  info?.bidPrice
+    ? Number(info?.bidPrice).toLocaleString()
+    : Number(info?.currentPrice || 0).toLocaleString()
+}</p>
         </div>
 
        

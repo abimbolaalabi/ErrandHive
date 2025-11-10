@@ -9,7 +9,7 @@ const Negotiation = ({ close, errand }) => {
   const [counterPrice, setCounterPrice] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isAccepting, setIsAccepting] = useState(false);
-  const token = localStorage.getItem("userToken");
+  const token = JSON.parse(localStorage.getItem("userToken"));
 
   
   const handlePropose = async () => {

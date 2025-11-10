@@ -19,7 +19,7 @@ const RunnerLayout = () => {
   
   const handleLogoutRunner = () => {
   localStorage.removeItem("userToken");
-  navigate("/");
+  navigate("/login");
 };
   
   const menuItems = [

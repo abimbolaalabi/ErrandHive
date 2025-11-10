@@ -35,7 +35,7 @@ const RunnerEarning = () => {
   const fetchWalletData = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem("userToken");
+      const token = JSON.parse(localStorage.getItem("userToken"));
 
       if (!token) {
         toast.error("No token found! Please login again.");

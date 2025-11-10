@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const ModalProposalRev = ({ toclose, setErrandPay, info }) => {
   const BaseUrl = import.meta.env.VITE_BASE_URL;
-  const token = localStorage.getItem("userToken");
+  const token = JSON.parse(localStorage.getItem("userToken"));
   const [loading, setLoading] = useState(false);
 
   const handleConfirm = async () => {
@@ -62,7 +62,12 @@ const ModalProposalRev = ({ toclose, setErrandPay, info }) => {
 
         <div className="rev-price-box">
           <p className="rev-price-label">Final Price</p>
-          <p className="rev-price-value">₦{Number(info?.bidPrice).toLocaleString() || Number(info?.currentPrice).toLocaleString()}</p>
+          {console.log(info)}
+          <p className="rev-price-value">₦{
+  info?.bidPrice
+    ? Number(info?.bidPrice).toLocaleString()
+    : Number(info?.currentPrice || 0).toLocaleString()
+}</p>
         </div>
 
         <div className="rev-btn-flex">

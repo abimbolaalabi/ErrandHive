@@ -26,7 +26,7 @@ const ActiveJobs = () => {
   const isVerified = userKyc;
 
   useEffect(() => {
-    const token = localStorage.getItem("userToken");
+    const token = JSON.parse(localStorage.getItem("userToken"));
 
     const fetchUserRating = async () => {
       try {

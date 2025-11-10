@@ -7,12 +7,13 @@ const AppProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [kycStatus, setKycStatus] = useState(null);
   const [userKyc, setUserKyc] = useState(localStorage.getItem("userKyc") || false );
+//   const [token,setToken]= useState(localStorage.getItem("userToken") || null)
   const BaseUrl = import.meta.env.VITE_BASE_URL;
 
   const getAUser = async () => {
     try {
       const userId = JSON.parse(localStorage.getItem("userDetails"));
-      const token = localStorage.getItem("userToken");
+      const token = JSON.parse(localStorage.getItem("userToken"));
 
       if (!userId?.id || !token) return;
 
@@ -54,6 +55,7 @@ const AppProvider = ({ children }) => {
         setUserKyc,
         kycStatus,
         setKycStatus,
+ 
       }}
     >
       {children}

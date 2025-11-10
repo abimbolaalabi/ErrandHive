@@ -20,17 +20,19 @@ const ModalProposal = ({ toclose, setReview, info, setInfo }) => {
     const initials =
         `${firstName?.[0] || ""}${lastName?.[0] || ""}`.toUpperCase();
     const BaseUrl = import.meta.env.VITE_BASE_URL
-
+       const token = JSON.parse(localStorage.getItem("userToken"));
+       console.log(token)
     const ErrandById = async () => {
         try {
             setLoading(true);
 
-            const token = localStorage.getItem("userToken");
+         
             if (!token) {
                 console.log("No token found");
                 setErrandId([]);
                 return;
             }
+            console.log(token)
 
             const res = await axios.get(
                 `${BaseUrl}/applicant/${info?.errandId}/${info?.runnerId}`,
@@ -108,6 +110,7 @@ const ModalProposal = ({ toclose, setReview, info, setInfo }) => {
 
                         <div className="rb-warning">
                             <LucideAlertTriangle size={18} />
+                            {console.log(item?.currentPrice)}
                             <span>Runner wants ₦{item?.bidPrice || item?.currentPrice}  for the offer</span>
                         </div>
 
@@ -123,6 +126,7 @@ const ModalProposal = ({ toclose, setReview, info, setInfo }) => {
                                     ...prev,
                                     applicationId: item?.id,
                                     bidPrice: item?.bidPrice,
+                                    currentPrice: item?.currentPrice,
                                     runnerName: `${item?.runner?.firstName} ${item?.runner?.lastName}`,
                                     runnerId: item?.runnerId
                                 }));

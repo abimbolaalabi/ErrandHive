@@ -55,7 +55,7 @@ const MyErrandsDetails = () => {
 
             setLoading(true);
 
-            const token = localStorage.getItem("userToken");
+            const token = JSON.parse(localStorage.getItem("userToken"));
             if (!token) {
                 console.log("No token found");
                 setAllErrand([]);
