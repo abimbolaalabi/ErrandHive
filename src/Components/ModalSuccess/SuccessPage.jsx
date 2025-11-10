@@ -1,10 +1,10 @@
 import React from "react";
-import "./PaymentSuccess.css";
+import "./SuccessPage.css";
 import { FaCheckCircle } from "react-icons/fa";
 import { BsShieldCheck, BsChat, BsReceipt } from "react-icons/bs";
 import { AiOutlineEye } from "react-icons/ai";
 
-const PaymentSuccess = () => {
+const SuccessPage = () => {
   return (
     <div className="success-page-container">
       <div className="success-page-box">
@@ -53,4 +53,4 @@ const PaymentSuccess = () => {
   );
 };
 
-export default PaymentSuccess;
+export default SuccessPage;
