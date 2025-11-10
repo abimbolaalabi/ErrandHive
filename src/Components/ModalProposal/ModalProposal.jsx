@@ -114,7 +114,7 @@ const ModalProposal = ({ toclose, setReview, info, setInfo }) => {
 
                         <div className="rb-actions">
 
-                            <button className="rb-reject">  < MdOutlineCancelPresentation />Reject</button>
+                            <button className="rb-reject" onClick={()=>toclose(false)}>  < MdOutlineCancelPresentation />Reject</button>
                             <button className="rb-accept" onClick={() => {
 
                                 setReview(true);
@@ -124,6 +124,7 @@ const ModalProposal = ({ toclose, setReview, info, setInfo }) => {
                                     applicationId: item?.id,
                                     bidPrice: item?.bidPrice,
                                     runnerName: `${item?.runner?.firstName} ${item?.runner?.lastName}`,
+                                    runnerId: item?.runnerId
                                 }));
 
                             }}>✔ ₦{item?.bidPrice || item?.currentPrice}</button>

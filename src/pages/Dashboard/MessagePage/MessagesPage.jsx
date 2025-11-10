@@ -1,5 +1,7 @@
-import  { useState } from "react";
+import { useEffect, useState } from "react";
 import "../MessagePage/MessagesPage.css";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const MessagesPage = () => {
   const [message, setMessage] = useState("");
@@ -15,7 +17,21 @@ const MessagesPage = () => {
     setMessages([...messages, newMsg]);
     setMessage("");
   };
+  const BaseUrl = import.meta.env.VITE_BASE_URL
+  const { runnerId } = useParams()
 
+  const getMessage = async () => {
+    try {
+      const res = axios.get(`${BaseUrl}/messages/${runnerId}`)
+      setMessage(res?.data?.data)
+    } catch (error) {
+      console.log("this is message", error)
+    }
+  }
+  useEffect(()=>{
+    getMessage()
+  },[])
+  
   return (
     <div className="messages-wrapper">
       <div className="messages-sidebar">

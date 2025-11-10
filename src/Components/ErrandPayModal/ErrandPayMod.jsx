@@ -1,29 +1,64 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./ErrandPayMod.css"
 import { IoClose } from 'react-icons/io5'
 import { PiShieldCheckDuotone } from 'react-icons/pi'
+import { useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import axios from 'axios'
 
-const ErrandPayMod = ({toclose, setErrandPay}) => {
+const ErrandPayMod = ({toclose, setErrandPay, info}) => {
+  const {runnerId} = useParams()
+  const BaseUrl = import.meta.env.VITE_BASE_URL;
+const token = localStorage.getItem("userToken");
+const [loading, setLoading] = useState(false);
+
+const handlePayment = async () => {
+  try {
+    setLoading(true);
+
+
+    const res = await axios.post(
+      `${BaseUrl}/payment/initialize`,
+     
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    toast.success(res?.data?.message || "Payment initialized successfully");
+    console.log(res.data.message)
+    JSON.parse(localStorage.getItem(runnerId))
+  } catch (err) {
+    console.log("PAYMENT ERROR:", err);
+    toast.error(err?.response?.data?.message || "Payment failed");
+  } finally {
+    setLoading(false);
+  }
+};
+
   return (
        <div className="errand-pay-cont">
       <div className="errand-pay-wrapper">
 
-        {/* Close Icon */}
+     
         <button className="ep-close" onClick={() => toclose(false)}>
           <IoClose size={22} />
         </button>
 
-        {/* Title */}
+     
         <h2 className="ep-title">Errand assigned</h2>
         <p className="ep-sub">Both parties have agreed on the price</p>
 
-        {/* Task Box */}
+    
         <div className="ep-task-box">
           <p className="ep-task-label">Errand Task</p>
-          <p className="ep-task-title">Document pickup</p>
+          <p className="ep-task-title">{info?.title}</p>
         </div>
 
-        {/* Center Icon + Text */}
+      
         <div className="ep-center">
           <div className="ep-success-icon">
             <span>✔</span>
@@ -32,13 +67,13 @@ const ErrandPayMod = ({toclose, setErrandPay}) => {
           <p className="ep-mid-sub">Both parties have agreed on the final price</p>
         </div>
 
-        {/* Price Box */}
+     
         <div className="ep-price-box">
           <p className="ep-price-label">Final Price</p>
-          <p className="ep-price-value">₦4,000</p>
+          <p className="ep-price-value">₦{Number(info?.bidPrice).toLocaleString() || Number(info?.currentPrice).toLocaleString()}</p>
         </div>
 
-        {/* Next Step Info */}
+       
         <div className="ep-next-step">
           <PiShieldCheckDuotone size={22} className="ep-shield" />
           <div>
@@ -49,8 +84,11 @@ const ErrandPayMod = ({toclose, setErrandPay}) => {
           </div>
         </div>
 
-        {/* Payment Button */}
-        <button className="ep-pay-btn">Make payment</button>
+      
+        <button className="ep-pay-btn" onClick={handlePayment}>
+           {loading ? "Processing..." : <>Make payment</>}
+        </button>
+
       </div>
     </div>
   )

@@ -114,6 +114,7 @@ const RunnerDashboard = () => {
 
         const status = response?.data?.data?.status || "not_submitted";
         setKycStatus(status);
+        console.log(response.data.data.status)
       } catch (error) {
         console.error("Error fetching KYC status:", error);
         setKycStatus("error");

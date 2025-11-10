@@ -18,9 +18,8 @@ const PaymentsPage = () => {
         }
       );
 
-      // API returns: data.payments (array)
       const payments = res?.data?.data;
-      console.log(res.data.data)
+      console.log(res?.data?.data)
       setPaymentsData(payments);
 
     } catch (error) {
@@ -72,14 +71,14 @@ const PaymentsPage = () => {
         {(paymentsData.length > 0 ? paymentsData : []).map((item) => (
           <div key={item.id} className="table-row">
             <p className="col-type type-text">
-              {item.description || "N/A"}
+              {item.description }
             </p>
             <p className="col-date">
               {new Date(item.createdAt).toLocaleDateString()}
             </p>
-            <p className="col-amount">₦{item.amount?.toLocaleString()}.00</p>
+            <p className="col-amount">₦{item.amount?.toLocaleString()}</p>
             <p className="col-status">
-              <span className={`status-badge ${item.status === "Paid" ? "completed" : "pending"}`}>
+              <span className={`status-badge ${item.status === "paid" ? "completed" : "pending"}`}>
                 {item.status}
               </span>
             </p>

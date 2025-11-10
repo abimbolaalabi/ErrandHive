@@ -19,8 +19,6 @@ const RunnerLayout = () => {
   
   const handleLogoutRunner = () => {
   localStorage.removeItem("userToken");
-  localStorage.removeItem("userDetails");
-  localStorage.removeItem("userKyc");
   navigate("/");
 };
   
