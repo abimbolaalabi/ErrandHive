@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { AppContext } from "../../../Context/App";
 import axios from "axios";
 import { io } from "socket.io-client";
- const {useParams} = runnerId
 const socket = io(import.meta.env.VITE_SOCKET_URL, {
   transports: ["websocket"],
   reconnection: true,
@@ -12,7 +11,7 @@ const socket = io(import.meta.env.VITE_SOCKET_URL, {
 
 const MessagesPage = () => {
   const { user } = useContext(AppContext);
-  const { runnerId } = useParams(); // client talks to runner or vice versa
+  const { runnerId } = useParams(); 
   const BaseUrl = import.meta.env.VITE_BASE_URL;
   const token = JSON.parse(localStorage.getItem("userToken"));
   const [message, setMessage] = useState("");
@@ -21,7 +20,7 @@ const MessagesPage = () => {
 
   const currentUserId = user?.id || JSON.parse(localStorage.getItem("userDetails"))?.id;
 
-  // ✅ Fetch messages from backend
+
   const getMessages = async () => {
     try {
       const res = await axios.get(`${BaseUrl}/messaages/${runnerId}`, {
@@ -33,7 +32,7 @@ const MessagesPage = () => {
     }
   };
 
-  // ✅ Send message to backend
+
   const sendMessage = async (e) => {
     e.preventDefault();
     if (!message.trim()) return;
@@ -44,7 +43,7 @@ const MessagesPage = () => {
       text: message,
     };
 
-    // optimistic UI
+
     setMessages((prev) => [
       ...prev,
       { ...newMessage, fromUser: true, createdAt: new Date() },
@@ -64,7 +63,7 @@ const MessagesPage = () => {
     }
   };
 
-  // ✅ Join socket room and listen for updates
+ 
   useEffect(() => {
     if (!currentUserId) return;
 
