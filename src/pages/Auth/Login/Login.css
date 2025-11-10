@@ -1,0 +1,254 @@
+.login-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  gap: 0.2rem;
+  overflow: hidden;
+}
+
+.login-left {
+  width: 60%;
+}
+
+.login-left-header {
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+
+.login-right {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white; 
+}
+
+.login-right-form {
+  width: 100%;
+  min-height: 95%;
+  background-color: white;
+  padding-inline: 2rem;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  gap: 2rem;
+}
+
+.login-text-layout {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.login-right-text {
+  color: #212121;
+  font-size: 31px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.email-container {
+  display: flex;
+  flex-direction: column;
+  padding-block: 0.1rem;
+  padding-inline: 0.1rem;
+}
+
+.form-right-title {
+  font-family: Poppins;
+  font-weight: 800;
+  color: #212121;
+}
+
+.email-right-input-box {
+  width: 95%;
+  height: 3rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid gray;
+}
+
+.email-input {
+  outline: none;
+  height: 100%;
+  width: 100%;
+  border: none;
+  font-size: 1rem;
+  padding-left: 1.7rem;
+  color: black;
+  font-family: sans-serif;
+}
+
+.password-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.password-right-input-box {
+  width: 95%;
+  height: 3rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid #212121;
+  position: relative;
+}
+
+.pasword-input {
+  outline: none;
+  height: 100%;
+  width: 100%;
+  border: none;
+  font-size: 1rem;
+  padding-left: 1.7rem;
+  color: black;
+  font-family: sans-serif;
+}
+
+.eye {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.checkbox-login-form {
+  padding-block: 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+}
+
+.remember-me-checkbox {
+  font-weight: 400;
+  font-size: 1rem;
+  font-family: Poppins;
+  color: #212121;
+}
+
+.login-btn {
+  width: 95%;
+  height: 3rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  color: white;
+  background-color: #8133f1;
+  border: none;
+  font-size: 1rem;
+}
+
+.login-btn:hover {
+  background-color: #6a20cc;
+}
+
+.login-right-or {
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  /* margin-bottom: 1rem; */
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background-color: #8133f1;
+}
+
+.or {
+  white-space: nowrap;
+  font-weight: 500;
+  font-family: Poppins;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.continue-with-google {
+  width: 95%;
+  height: 3rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  color: #212121;
+  background-color: #f2ebfe;
+  border: none;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-family: Poppins;
+  font-weight: 600;
+}
+
+.forgot-password-form {
+  margin-top: 0.3rem;
+  color: #8133f1;
+  font-weight: 400;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: Poppins;
+}
+
+.dont-account {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-message {
+  color: red;
+}
+
+@media screen and (max-width: 480px) {
+  .login-left,
+  .img-box-wrapper,
+  .carousel,
+  .swiper,
+  .slider,
+  .hero-carousel,
+  .left-images,
+  .login-images {
+    display: none !important;
+  }
+
+  .login-right-text {
+    display: none !important;
+  }
+
+  .login-right {
+    width: 100%;
+    height: auto;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: none;
+  }
+
+  .login-right-form {
+    width: 100%;
+    padding-inline: 1rem;
+    padding-top: 2rem;
+  }
+
+  .login-left-header {
+    display: flex !important;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+}

@@ -1,0 +1,236 @@
+.runner-ky-pop-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+.runner-ky-pop-modal::-webkit-scrollbar {
+  display: none;
+}
+
+.runner-ky-pop-modal {
+  width: 100%;
+  max-width: 620px;
+  max-height: 90vh;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.08);
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.runner-ky-pop-header {
+  padding: 24px;
+  position: relative;
+  border-bottom: 1px solid #eee;
+}
+
+.runner-ky-pop-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.runner-ky-pop-header p {
+  margin-top: 4px;
+  color: #666;
+  font-size: 14px;
+}
+
+.runner-ky-pop-close {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #444;
+  transition: 0.2s;
+}
+
+.runner-ky-pop-close:hover {
+  opacity: 0.7;
+}
+
+.runner-ky-pop-steps {
+  display: flex;
+  justify-content: space-between;
+  padding: 22px 36px;
+  gap: 10px;
+}
+
+.runner-ky-pop-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.runner-ky-pop-step-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #888;
+}
+
+.runner-ky-pop-step-icon.done {
+  background: #10b981;
+  color: #fff;
+}
+
+.runner-ky-pop-step-line {
+  width: 50px;
+  height: 3px;
+  background: #e5e7eb;
+  border-radius: 2px;
+}
+
+.runner-ky-pop-step-line.active {
+  background: #10b981;
+}
+
+.runner-ky-pop-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.runner-ky-pop-upload-card {
+  border: 1px solid #e6e6e6;
+  padding: 18px;
+  border-radius: 12px;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.runner-ky-pop-card-top {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.runner-ky-pop-card-icon {
+  background: #f3f3f3;
+  padding: 10px;
+  border-radius: 8px;
+  color: #666;
+}
+
+.runner-ky-pop-card-text h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.runner-ky-pop-card-text p {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: #666;
+  line-height: 1.3;
+}
+
+.runner-ky-pop-upload-btn {
+  width: 100%;
+  height: 48px;
+  border: 1.5px solid #dcdcdc;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 14px;
+  color: #555;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.runner-ky-pop-upload-btn:hover {
+  border-color: #7e33ff;
+  color: #7e33ff;
+}
+
+.runner-ky-pop-upload-btn input {
+  display: none;
+}
+
+.runner-ky-pop-upload-icon {
+  font-size: 18px;
+}
+
+.runner-ky-pop-guidelines {
+  background: #f5e9ff;
+  border-radius: 12px;
+  padding: 18px 20px;
+  width: 100%;
+  margin-top: 6px;
+}
+
+.runner-ky-pop-guidelines h4 {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #7e33ff;
+}
+
+.runner-ky-pop-guidelines ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.runner-ky-pop-guidelines li {
+  font-size: 13px;
+  color: #7e33ff;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.runner-ky-pop-footer {
+  padding: 24px 24px 30px;
+  border-top: 1px solid #eee;
+  background: #fff;
+}
+
+.runner-ky-pop-submit-btn {
+  width: 100%;
+  background: linear-gradient(90deg, #9b5cff 0%, #7e33ff 100%);
+  border: none;
+  padding: 15px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  transition: 0.2s ease-in-out;
+}
+
+.runner-ky-pop-submit-btn:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.runner-ky-pop-submit-btn:disabled {
+  background: #d5d5d5;
+  cursor: not-allowed;
+  opacity: 0.7;
+}

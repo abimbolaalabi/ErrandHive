@@ -1,0 +1,263 @@
+.morehero {
+  width: 100%;
+  max-width: 1443px;
+  margin: 0 auto;
+  padding: 60px;
+  background: linear-gradient(
+    180deg,
+    #361565 34.62%,
+    rgba(71, 28, 133, 0.7) 72.12%,
+    rgba(71, 28, 133, 0.6) 100%
+  );
+  text-align: center;
+  color: white;
+}
+
+.morehero-title {
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.morehero-subtitle {
+  font-size: 16px;
+  opacity: 0.8;
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+
+.feedback-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 20px;
+}
+
+.feedback-card {
+  flex: 1;
+  min-width: 300px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  padding: 25px;
+  color: #FFFFFF;
+  text-align: left;
+  position: relative;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.feedback-card:hover {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transform: translateY(-5px);
+  box-shadow: none;
+}
+
+.quote {
+  font-size: 60px;
+  color: #FFFFFF;
+  margin-bottom: 15px;
+}
+
+.feedback-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.user-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.user-img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #FFFFFF;
+}
+
+.stars {
+  display: flex;
+  gap: 3px;
+}
+
+.star {
+  color: #f9d949;
+  font-size: 14px;
+}
+
+@media (max-width: 1440px) {
+  .morehero {
+    padding: 50px;
+  }
+
+  .morehero-title {
+    font-size: 32px;
+  }
+
+  .feedback-card p {
+    font-size: 16px;
+  }
+
+  .quote {
+    font-size: 65px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .feedback-container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .feedback-card {
+    flex: 0 0 47%;
+    margin-bottom: 25px;
+  }
+
+  .quote {
+    font-size: 60px;
+  }
+
+  .feedback-card p {
+    font-size: 16px;
+  }
+
+  .user-name {
+    font-size: 16px;
+  }
+
+  .star {
+    font-size: 18px;
+  }
+
+  .user-img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .morehero-title {
+    font-size: 30px;
+  }
+
+  .morehero-subtitle {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .morehero {
+    padding: 40px 25px;
+  }
+
+  .feedback-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .feedback-card {
+    width: 90%;
+    min-width: auto;
+  }
+
+  .morehero-title {
+    font-size: 28px;
+  }
+
+  .morehero-subtitle {
+    font-size: 16px;
+  }
+
+  .quote {
+    font-size: 55px;
+  }
+
+  .feedback-card p {
+    font-size: 16px;
+  }
+
+  .user-name {
+    font-size: 15px;
+  }
+
+  .user-img {
+    width: 38px;
+    height: 38px;
+  }
+
+  .star {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 480px) {
+  .morehero {
+    padding: 35px 18px;
+  }
+
+  .morehero-title {
+    font-size: 24px;
+    text-align: left;
+  }
+
+  .morehero-subtitle {
+    font-size: 14px;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+
+  .feedback-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .feedback-card {
+    width: 100%;
+    padding: 25px 20px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .quote {
+    font-size: 55px;
+    margin-bottom: 10px;
+    line-height: 0.7;
+  }
+
+  .feedback-card p {
+    font-size: 15px; 
+    line-height: 1.65;
+    margin-bottom: 25px;
+    text-align: left; 
+  }
+
+  .user-row {
+    justify-content: flex-start; 
+    gap: 8px;
+  }
+
+  .user-img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .user-name {
+    font-size: 15px;
+  }
+  .star {
+    font-size: 17px;
+  }
+}

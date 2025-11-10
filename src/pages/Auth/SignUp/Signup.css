@@ -1,0 +1,223 @@
+.signup-wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  padding: 0 20px;
+}
+.signup-left {
+  width: 55%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  background-color: white;
+}
+.signup-right {
+  width: 45%;
+  height: 100vh;
+  margin-left: 55%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* padding: 30px; */
+  overflow-y: auto;
+
+}
+
+.signup-right-cont {
+  width: 39rem;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  padding: 40px ;
+  /* align-items: center; */
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+form h1 {
+  font-size: 31px;
+  font-weight: 600;
+  display: flex;
+  text-align: center;
+  align-self: center;
+}
+.input-cont {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 20px;
+}
+.input-contt {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 20px;
+}
+.input-cont label {
+  font-size: 16px;
+  font-weight: 600;
+}
+.input-cont input {
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  border: 1px solid #212121;
+  border-radius: 8px;
+}
+.checkbox-input {
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+  margin-top: 20px;
+}
+.checkbox-input input {
+  width: 30px;
+  height: 30px;
+  accent-color: #8133f1;
+}
+.password{
+    display: flex;
+    align-items: center;
+     width: 100%;
+  height: 50px;
+  /* background-color: red; */
+  border: 1px solid #212121;
+  border-radius: 8px;
+
+}
+.password input{
+  width: 93%;
+  height: 45px;
+  padding: 10px;
+  border: none;
+  outline: none;
+}
+.checkbox-input p {
+  font-size: 16px;
+  font-weight: 400;
+}
+.checkbox-input span {
+  font-style: italic;
+  color: #8133f1;
+  font-size: 16px;
+  font-weight: 500;
+}
+.button-cont {
+  margin-top: 40px;
+}
+.button-cont button {
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  background-color: #8133f1;
+  border-radius: 8px;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+}
+
+.signup-line-cont {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.firstline {
+  flex: 1;
+  height: 0.5px;
+  background-color: #8133f1;
+}
+
+.text-or {
+  white-space: nowrap;
+  font-weight: 500;
+  font-style: Medium;
+  font-family: Poppins;
+  font-size: 20px;
+}
+.google {
+  
+  width: 100%;
+  height: 50px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #212121;
+  background-color: #f2ebfe;
+  border: none;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  font-family: Poppins;
+  font-style: Semi-bold;
+}
+
+.google p {
+  font-size: 16px;
+  font-weight: 600;
+}
+.account-text {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+.account-text p {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.account-text span {
+  color: #8133f1;
+}
+
+@media screen and (max-width: 768px) {
+  .signup-left {
+    display: none !important;
+  }
+
+  .signup-right {
+    width: 100% !important;
+    margin-left: 0 !important;
+    padding: 0 15px;
+    height: auto;
+  }
+
+  .signup-right-cont {
+    width: 100% !important;
+    margin: 0 auto;
+    padding: 20px 10px;
+    box-shadow: none !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+
+  .signup-left {
+    display: none !important;
+  }
+
+  .signup-right {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+
+  .signup-right-cont {
+    width: 100%;
+    padding: 15px 10px;
+    box-shadow: none !important;
+  }
+}

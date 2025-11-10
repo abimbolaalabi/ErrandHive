@@ -1,0 +1,189 @@
+
+.rb-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+
+.rb-modal {
+  width: 100%;
+  max-width: 680px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 60px 32px;
+  position: relative;
+  font-family: "Inter", sans-serif;
+  animation: scaleIn 0.2s ease;
+  /* background-color: #c10000; */
+}
+
+.rb-close {
+  position: absolute;
+  top: 20px;
+  right: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.rb-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 10px;
+}
+
+.rb-avatar {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: #e8d7ff;
+  color: #8133f1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.rb-name {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.rb-rating {
+  /* margin: 4px 0; */
+  font-size: 12px;
+  font-weight: 400;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rb-meta {
+  display: flex;
+  gap: 16px;
+  margin-top: 4px;
+  font-size: 13px;
+  color: #777;
+}
+
+.rb-meta span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.rb-price-box {
+  text-align: right;
+}
+
+.rb-price-box p {
+  margin: 0;
+  font-size: 13px;
+  color: #777;
+}
+
+.rb-price-box h3 {
+  /* margin: 3px 0 0; */
+  color: #c10000;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.rb-message-box {
+  background: #f4e9ff;
+  padding: 14px 18px;
+  border-radius: 12px;
+  margin-top: 22px;
+  font-size: 14px;
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rb-message-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 6px;
+  /* background-color: #e63b2e; */
+}
+
+.rb-message-label .msg{
+   color: #8133f1;
+}
+.rb-message-text {
+  margin: 0;
+  /* line-height: 1.45; */
+  font-weight: 500;
+  font-size: 12px;
+  color: #8133f1;
+  /* background-color: aqua; */
+}
+
+.rb-warning {
+  background: #fff6e0;
+  padding: 13px 16px;
+  border-radius: 10px;
+  margin-top: 18px;
+  font-size: 14px;
+  color: #b27100;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rb-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 26px;
+}
+
+.rb-reject {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  border: 1.6px solid #e63b2e;
+  color: #e63b2e;
+  background: transparent;
+  padding: 11px 0;
+  border-radius: 12px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.rb-accept {
+  flex: 1;
+  background: #8133f1;
+  color: #fff;
+  border: none;
+  padding: 11px 0;
+  border-radius: 12px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

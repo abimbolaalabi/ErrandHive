@@ -1,0 +1,255 @@
+.subheader-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 80px;
+  width: 100%;
+  min-height: 800px;
+}
+
+.subheader-container-left-wrapper {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.subheader-writeup-holder {
+  width: 100%;
+  padding: 0.4rem;
+  margin-left: 1rem;
+}
+
+.subheader-writeup-holder-h1 {
+  font-weight: 600;
+  font-size: 52px;
+  line-height: 1.2;
+}
+
+.subheader-writeup-holder-paragraph {
+  max-width: 75%;
+  margin-left: 1.3rem;
+}
+
+.subheader-p {
+  color: #212121;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.subheader-btn-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 1.3rem;
+  margin-left: 1rem;
+  margin-top: 1.3rem;
+}
+
+.post-a-request-btn {
+  color: white;
+  background-color: #8133f1;
+  border: none;
+  padding: 0.9rem 2rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.05rem;
+  width: 230px;
+  transition: all 0.3s ease;
+}
+
+.earn-a-request-btn {
+  padding: 0.9rem 2rem;
+  cursor: pointer;
+  color: #212121;
+  border: 2px solid #8133f1;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  font-size: 1.05rem;
+  width: 230px;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.post-a-request-btn:hover {
+  background-color: #6a25d9;
+}
+
+.earn-a-request-btn:hover {
+  background-color: #f7f1ff;
+}
+
+.subheader-container-right-wrapper {
+  width: 55%;
+  position: relative;
+  min-height: 480px;
+}
+
+.right-top-image {
+  width: 350px;
+  height: 235px;
+  border-radius: 18px;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.right-bottom-image {
+  width: 350px;
+  height: 235px;
+  border-radius: 18px;
+  overflow: hidden;
+  position: absolute;
+  bottom: 5px;
+  left: 0px;
+}
+
+.right-top-image img,
+.right-bottom-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.yellow-dot {
+  width: 45px;
+  height: 45px;
+  background: #f2c94c;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.dot-1 {
+  top: 140px;
+  right: 400px;
+}
+
+.dot-2 {
+  bottom: 140px;
+  left: 450px;
+}
+
+@media (max-width: 768px) {
+  .subheader-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    min-height: 550px;
+    gap: 1.2rem;
+    background: #fff;
+  }
+
+  .subheader-container-left-wrapper {
+    width: 100%;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0 auto;
+    gap: 0.8rem;
+  }
+
+  .subheader-writeup-holder {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .subheader-writeup-holder-h1 {
+    font-size: 30px;
+    line-height: 1.15; 
+    font-weight: 700;
+    color: #111;
+    text-align: left; 
+    margin: 0 0 6px 0;
+    letter-spacing: -0.2px;
+  }
+
+  .purple, .subheader-writeup-holder-h1 span {
+    color: #8133f1;
+    font-weight: 700;
+  }
+
+  .subheader-writeup-holder-paragraph {
+    width: 100%;
+    max-width: 340px;
+    margin: 0 0 18px 0;
+    text-align: left;
+  }
+
+  .subheader-p {
+    color: #4f4f4f;
+    font-size: 15.5px;
+    line-height: 1.6;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  .subheader-btn-wrapper {
+    width: 100%;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0;
+    align-items: stretch;
+  }
+
+  .post-a-request-btn,
+  .earn-a-request-btn {
+    width: 100%;
+    display: inline-block;
+    padding: 12px 18px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    box-sizing: border-box;
+  }
+
+  .post-a-request-btn {
+    background-color: #8133f1;
+    color: #fff;
+    border: none;
+  }
+
+  .earn-a-request-btn {
+    background: #fff;
+    color: #8133f1;
+    border: 2px solid #8133f1;
+  }
+
+  .subheader-container-right-wrapper,
+  .right-top-image,
+  .right-bottom-image,
+  .yellow-dot {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .subheader-container {
+    min-height: 520px;
+    padding: 30px 16px;
+  }
+
+  .subheader-container-left-wrapper {
+    max-width: 340px;
+  }
+
+  .subheader-writeup-holder-h1 {
+    font-size: 26px;
+    line-height: 1.18;
+  }
+
+  .subheader-p {
+    font-size: 14.5px;
+  }
+
+  .post-a-request-btn,
+  .earn-a-request-btn {
+    font-size: 15px;
+    padding: 11px 16px;
+  }
+}
