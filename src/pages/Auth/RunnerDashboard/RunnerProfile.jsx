@@ -31,23 +31,23 @@ const RunnerProfile = () => {
   const memberSince = new Date().toLocaleDateString("en-US", { year: "numeric", month: "long" });
   const userRating = user?.rating || 4.5;
 
-  // const getUserById = async () => {
-    // setKycLoading(true);
-    // try {
-      // const res = await axios.get(`${BaseUrl}/user/${id}`, {
-        // headers: { Authorization: `Bearer ${token}` },
-      // });
-      // const userData = res?.data?.data;
-      // setUser(userData);
-      // setImage(userData?.profileImage || null);
-      // setHasBankAccount(!!userData?.bankAccount);
-    // } catch (error) {
-      // console.error("Error fetching user:", error);
-      // setUser(null);
-    // } finally {
-      // setKycLoading(false);
-    // }
-  // };
+  const getUserById = async () => {
+    setKycLoading(true);
+    try {
+      const res = await axios.get(`${BaseUrl}/user/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const userData = res?.data?.data;
+      setUser(userData);
+      setImage(userData?.profileImage || null);
+      setHasBankAccount(!!userData?.bankAccount);
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      setUser(null);
+    } finally {
+      setKycLoading(false);
+    }
+  };
 
   const getKyc = async () => {
     try {
@@ -74,7 +74,7 @@ const RunnerProfile = () => {
   };
 
   useEffect(() => {
-    // getUserById();
+    getUserById();
     getKyc();
   }, []);
 

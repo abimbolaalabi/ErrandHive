@@ -109,7 +109,7 @@ line-height: 1;
   cursor: pointer;
 }
 .kyc-btn-browse-btn {
-   height: 40px;
+   height: 0px;
   width: 200px;
 border: none;
 background-color:#8133F1;
