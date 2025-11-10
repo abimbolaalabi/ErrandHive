@@ -11,7 +11,7 @@ const Negotiation = ({ close, errand }) => {
   const [isAccepting, setIsAccepting] = useState(false);
   const token = localStorage.getItem("userToken");
 
-  // ✅ Handle propose price
+  
   const handlePropose = async () => {
     if (!counterPrice) {
       toast.error("Please enter a proposed price.");
@@ -50,7 +50,7 @@ const Negotiation = ({ close, errand }) => {
     }
   };
 
-  // ✅ Handle accept current price
+
   const handleAccept = async () => {
     setIsAccepting(true);
     try {

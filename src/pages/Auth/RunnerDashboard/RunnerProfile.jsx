@@ -15,7 +15,7 @@ import Bank from "../../../assets/Bank.png"
 
 const RunnerProfile = () => {
   const [user, setUser] = useState(null);
-  const [kycStatus, setKycStatus] = useState(null);
+  const [kycStatus, setKycStatus] = useState(localStorage.getItem("userKyc")|| null);
   const [kycReason, setKycReason] = useState("");
   const [kycLoading, setKycLoading] = useState(true);
   const [kycModel, setKycModel] = useState(false);
@@ -31,23 +31,23 @@ const RunnerProfile = () => {
   const memberSince = new Date().toLocaleDateString("en-US", { year: "numeric", month: "long" });
   const userRating = user?.rating || 4.5;
 
-  const getUserById = async () => {
-    setKycLoading(true);
-    try {
-      const res = await axios.get(`${BaseUrl}/user/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const userData = res?.data?.data;
-      setUser(userData);
-      setImage(userData?.profileImage || null);
-      setHasBankAccount(!!userData?.bankAccount);
-    } catch (error) {
-      console.error("Error fetching user:", error);
-      setUser(null);
-    } finally {
-      setKycLoading(false);
-    }
-  };
+  // const getUserById = async () => {
+    // setKycLoading(true);
+    // try {
+      // const res = await axios.get(`${BaseUrl}/user/${id}`, {
+        // headers: { Authorization: `Bearer ${token}` },
+      // });
+      // const userData = res?.data?.data;
+      // setUser(userData);
+      // setImage(userData?.profileImage || null);
+      // setHasBankAccount(!!userData?.bankAccount);
+    // } catch (error) {
+      // console.error("Error fetching user:", error);
+      // setUser(null);
+    // } finally {
+      // setKycLoading(false);
+    // }
+  // };
 
   const getKyc = async () => {
     try {
@@ -55,6 +55,8 @@ const RunnerProfile = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       const kyc = res?.data?.data;
+
+      console.log("kyc", kyc)
       if (kyc && kyc.status) {
         const status = kyc.status.toLowerCase();
         setKycStatus(status);
@@ -72,7 +74,7 @@ const RunnerProfile = () => {
   };
 
   useEffect(() => {
-    getUserById();
+    // getUserById();
     getKyc();
   }, []);
 

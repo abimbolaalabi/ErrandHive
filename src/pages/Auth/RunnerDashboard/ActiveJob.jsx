@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import "./ActiveJob.css";
 import { CiLocationOn, CiClock2 } from "react-icons/ci";
@@ -6,6 +6,7 @@ import Negotiation from "../../../Components/RunnerModal/Negotiation";
 import CounterSuccess from "../../../Components/RunnerModal/CounterSucces";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AppContext } from "../../../Context/App"
 
 const API_BASE_URL = "https://errandhive-project.onrender.com/api/v1";
 
@@ -16,24 +17,16 @@ const ActiveJobs = () => {
   const [negotiateModal, setNegotiateModal] = useState(false);
   const [counterModal, setCounterModal] = useState(false);
   const [selectedErrand, setSelectedErrand] = useState(null);
-  const [kycStatus, setKycStatus] = useState(null);
   const [jobStatus, setJobStatus] = useState({});
   const [userRating, setUserRating] = useState(0);
 
+  
+  const { userKyc, kycStatus } = useContext(AppContext);
+
+  const isVerified = userKyc;
+
   useEffect(() => {
     const token = localStorage.getItem("userToken");
-
-    const fetchKycStatus = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/kyc/my`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setKycStatus(response?.data?.data?.status || "not_submitted");
-      } catch (error) {
-        console.error("Error fetching KYC status:", error);
-        setKycStatus("error");
-      }
-    };
 
     const fetchUserRating = async () => {
       try {
@@ -63,16 +56,13 @@ const ActiveJobs = () => {
       }
     };
 
-    fetchKycStatus();
     fetchUserRating();
     fetchJobs();
   }, []);
 
-  const isVerified = kycStatus === "verified";
 
-  // Calculate total time and distance dynamically if jobs provide that info
-  const totalTime = jobs.reduce((acc, job) => acc + (job.estimatedTime || 0), 0); // in minutes
-  const totalDistance = jobs.reduce((acc, job) => acc + (job.distance || 0), 0); // in miles
+  const totalTime = jobs.reduce((acc, job) => acc + (job.estimatedTime || 0), 0);
+  const totalDistance = jobs.reduce((acc, job) => acc + (job.distance || 0), 0);
 
   const statsData = [
     { label: "Active Jobs", value: isVerified ? jobs.length : 0 },
@@ -111,9 +101,7 @@ const ActiveJobs = () => {
   };
 
   if (loading)
-    return (
-      <div style={{ padding: "2rem", textAlign: "center" }}>Loading jobs...</div>
-    );
+    return <div style={{ padding: "2rem", textAlign: "center" }}>Loading jobs...</div>;
   if (error)
     return (
       <div style={{ padding: "2rem", color: "red", textAlign: "center" }}>
@@ -135,7 +123,7 @@ const ActiveJobs = () => {
         ))}
       </div>
 
-      {(kycStatus === "pending" || kycStatus === "error" || kycStatus === "not_submitted") && (
+      {!isVerified && (
         <div className="dashboard-kyc">
           {kycStatus === "pending" ? (
             <>

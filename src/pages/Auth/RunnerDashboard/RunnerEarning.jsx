@@ -4,7 +4,7 @@ import { ArrowDownLeft } from "lucide-react";
 import { FaWallet } from "react-icons/fa";
 import { IoCopyOutline } from "react-icons/io5";
 import { RxEyeOpen, RxEyeClosed } from "react-icons/rx";
-import WithdrawBank from "../../../Components/RunnerModal/WithdrawBank";
+// import WithdrawBank from "../../../Components/RunnerModal/WithdrawBank";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -209,7 +209,7 @@ const RunnerEarning = () => {
         )}
       </section>
 
-      {withdrawModal && <WithdrawBank availableBalance={walletData.availableBalance} close={() => setWithdrawModal(false)} />}
+      {/* {withdrawModal && <WithdrawBank availableBalance={walletData.availableBalance} close={() => setWithdrawModal(false)} />} */}
     </div>
   );
 };
