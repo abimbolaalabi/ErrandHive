@@ -31,7 +31,8 @@ import ErrandDeliveryTrack from '../pages/Dashboard/ErrandDeliveryTrack'
 import Negotiation from '../Components/RunnerModal/Negotiation'
 import KycPopModel from '../Components/RunnerModal/KycPopupModel'
 import ErrandLive from '../pages/Auth/RunnerDashboard/ErrandLive'
-import SuccessModal from '../Components/ModalSuccess/SuccessModal'
+import SuccessPage from '../Components/ModalSuccess/SuccessPage'
+
 
 const Router = () => {
   return (
@@ -49,7 +50,7 @@ const Router = () => {
          <Route path="/reset-otp" element={<ResetOtp />} />
             {/* <Route path="/Negotiation" element={<Negotiation />} /> */}
              <Route path="KycMod" element={<KycPopModel />} />
-             {/* <Route path="/su" element={<SuccessModal />} /> */}
+         
              
              {/* <Route path="countersucess" element={<CounterSuccess />} /> */}
                           <Route path="errandlive" element={<ErrandLive />} />
@@ -60,10 +61,11 @@ const Router = () => {
             <Route path="my-errands" element={<MyErrandsPage />} />
             <Route path="my-errands/:errandId" element={<MyErrandsDetails />} />
             <Route path="my-errands/:errandId/:errandTrack" element={<ErrandDeliveryTrack />} />
+                    <Route path="/dashboard/success" element={<SuccessPage />} />
             <Route path="payments" element={<PaymentsPage />} />
             <Route path="messages/:runnerId" element={<MessagesPage />} />
             <Route path="profile" element={<ProfilePage />} />
-
+  
             <Route path="profile/:profileId" element={<ProfileDetailSetting />} />
           </Route>
         </Route>
