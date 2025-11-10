@@ -1,32 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import "./Runerdashboard.css";
 import cube from "../../../assets/cube.png";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { AppContext } from "../../../Context/App"; // adjust path if needed
 
 const RunnerDashboard = () => {
-  const [kycStatus, setKycStatus] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
-  const storedUser = JSON.parse(localStorage.getItem("userDetails")) || {};
-  const fullName = `${storedUser?.firstName || ""} ${
-    storedUser?.lastName || ""
-  }`.trim();
+  const { user, userKyc, kycStatus } = useContext(AppContext);
 
-  const data = [
+  const fullName = `${user?.firstName || ""} ${user?.lastName || ""}`.trim();
+
+  const totalRequests = 15;
+  const completed = 10;
+  const active = 5;
+  const totalSpent = 25000;
+
+  const stats = [
     {
       title: "Total Request",
-      value: "0",
+      value: userKyc ? totalRequests : "0",
       color: "#8133F1",
       icon: (
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
           <path d="M9 9h6v6H9z" />
         </svg>
@@ -34,17 +30,10 @@ const RunnerDashboard = () => {
     },
     {
       title: "Completed",
-      value: "0",
+      value: userKyc ? completed : "0",
       color: "#F59E0B",
       icon: (
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
           <polyline points="22,4 12,14.01 9,11.01" />
         </svg>
@@ -52,17 +41,10 @@ const RunnerDashboard = () => {
     },
     {
       title: "Active",
-      value: "0",
+      value: userKyc ? active : "0",
       color: "#8133F1",
       icon: (
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <circle cx="12" cy="12" r="10" />
           <polyline points="12,6 12,12 16,14" />
         </svg>
@@ -70,17 +52,10 @@ const RunnerDashboard = () => {
     },
     {
       title: "Total Spent",
-      value: "0",
+      value: userKyc ? `₦${totalSpent.toLocaleString()}` : "₦0",
       color: "#F97316",
       icon: (
-        <svg
-          width="80"
-          height="80"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1"
-        >
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
           <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
           <g strokeLinecap="round" strokeLinejoin="round">
             <path d="M8 16V8" />
@@ -94,97 +69,16 @@ const RunnerDashboard = () => {
     },
   ];
 
-  const API_BASE_URL = "https://errandhive-project.onrender.com/api/v1";
-  const token = localStorage.getItem("userToken");
-
-  useEffect(() => {
-    const fetchKycStatus = async () => {
-      try {
-        setLoading(true);
-
-        if (!token) {
-          console.error("No token found — user must log in again.");
-          setKycStatus("unauthorized");
-          return;
-        }
-
-        const response = await axios.get(`${API_BASE_URL}/kyc/my`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-
-        const status = response?.data?.data?.status || "not_submitted";
-        setKycStatus(status);
-        console.log(response.data.data.status)
-      } catch (error) {
-        console.error("Error fetching KYC status:", error);
-        setKycStatus("error");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchKycStatus();
-  }, [token]);
-
-  if (loading) {
-    return <p style={{ textAlign: "center" }}>Loading dashboard...</p>;
-  }
-
-  if (kycStatus !== "verified") {
-    return (
-      <main className="runner-dashboard-layout">
-        <div>
-          <img src={cube} alt="" />
-        </div>
-        <div className="title-dashboard-runner">
-          <h1>Welcome to your dashboard {fullName || "User"}! 👋</h1>
-        </div>
-
-        <div className="dashboard-kyc">
-          <div className="cube-holder">
-            <img src={cube} alt="kyc cube" />
-          </div>
-
-          {kycStatus === "pending" ? (
-            <>
-              <p className="kyc-reminder">Your KYC is under review.</p>
-              <p className="complete-kyc">
-                Please wait for approval to access jobs.
-              </p>
-            </>
-          ) : kycStatus === "error" ? (
-            <>
-              <p className="kyc-reminder">Error fetching KYC status.</p>
-              <p className="complete-kyc">Try reloading the page.</p>
-            </>
-          ) : (
-            <>
-              <p className="kyc-reminder">You have not completed KYC yet.</p>
-              <p className="complete-kyc">Complete KYC to get available jobs</p>
-              <div className="kyc-btn-holder">
-                <Link to="runnerprofile">
-                  <button type="submit" className="kyc-btn">
-                    Complete KYC
-                  </button>
-                </Link>
-              </div>
-            </>
-          )}
-        </div>
-      </main>
-    );
-  }
-
-  // ✅ When KYC is verified — show main dashboard + Browse Jobs with cube image
   return (
     <main className="runner-dashboard-layout">
       <div className="title-dashboard-runner">
         <h1>Welcome to your dashboard {fullName || "User"}! 👋</h1>
       </div>
 
+      {/* Dashboard cards */}
       <div className="e-grid-t">
-        {data.map((e, index) => (
-          <div key={index} className="e-card-t">
+        {stats.map((e, index) => (
+          <div key={index} className={`e-card-t ${!userKyc ? "inactive-card" : ""}`}>
             <div className="e-content-t">
               <h3 className="e-title-t">{e.title}</h3>
               <p className="e-value-t">{e.value}</p>
@@ -196,19 +90,52 @@ const RunnerDashboard = () => {
         ))}
       </div>
 
-      <div className="dashboard-kyc verified-kyc">
-        <div className="cube-browse-holder">
-          <img src={cube} alt="cube" className="cube-browse-img" />
+      {/* KYC messages */}
+      {kycStatus === "pending" && (
+        <div className="dashboard-kyc">
+          <div className="cube-holder">
+            <img src={cube} alt="kyc cube" />
+          </div>
+          <p className="kyc-reminder">Your KYC is under review.</p>
+          <p className="complete-kyc">Please wait for approval to access jobs.</p>
         </div>
+      )}
 
-        <p className="kyc-reminder">You have no active job yet</p>
+      {!userKyc && kycStatus !== "pending" && (
 
-        <div className="kyc-btn-holder" style={{ marginTop: "20px" }}>
-          <Link to="/runnerlayout/runneractive">
-            <button className="kyc-btn-browse-btn">Browse Jobs</button>
-          </Link>
+
+        <div className="dashboard-kyc">
+          <div className="cube-holder">
+            <img src={cube} alt="kyc cube" />
+          </div>
+          <p className="kyc-reminder">You have not completed KYC yet.</p>
+          <p className="complete-kyc">Complete KYC to get available jobs.</p>
+          <div className="kyc-btn-holder">
+            <button type="button" className="kyc-btn" onClick={() => navigate("runnerprofile")}>
+              Complete KYC
+            </button>
+          </div>
         </div>
-      </div>
+        
+      )}
+{              console.log(userKyc)
+}
+      {userKyc && (
+        <div className="dashboard-kyc verified-kyc">
+          <div className="cube-browse-holder">
+            <img src={cube} alt="cube" className="cube-browse-img" />
+          </div>
+          <p className="kyc-reminder">Ready to start earning</p>
+          <p className="kyc-reminder-p-tag">
+            There are jobs available right now. Browse and accept your first errand to get started
+          </p>
+          <div className="kyc-btn-holder" style={{ marginTop: "20px" }}>
+            <Link to="/runnerlayout/runneractive">
+              <button className="kyc-btn-browse-btn">Browse Jobs</button>
+            </Link>
+          </div>
+        </div>
+      )}
     </main>
   );
 };

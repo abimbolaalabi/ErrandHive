@@ -1,0 +1,94 @@
+/* --- Modal Overlay (The full screen, dimmed background) --- */
+.modal-overlay {
+  position: fixed; /* Stays in the same place even if the user scrolls */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Start from the top */
+  padding-top: 50px; /* Space from the top edge */
+  z-index: 1000; /* Ensures it's on top of other content */
+}
+
+/* --- Modal Content (The white box itself) --- */
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 12px; /* Rounded corners */
+  width: 90%;
+  max-width: 400px; /* Typical size for a modal */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+  animation: slideDown 0.3s ease-out; /* Simple entry animation */
+}
+
+/* Optional: Entry animation */
+@keyframes slideDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* --- Header Section --- */
+.modal-header {
+  position: relative; /* For positioning the close button */
+  padding-bottom: 20px;
+}
+
+.header-title {
+  font-size: 1.5rem; /* Larger and bold text */
+  font-weight: 700;
+  margin: 0 0 5px 0;
+  color: #333;
+}
+
+.header-status {
+  font-size: 0.9rem;
+  color: #777; /* Subtler color for the status */
+  margin: 0;
+}
+
+/* --- Close Button ('x') --- */
+.close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+  line-height: 1;
+  padding: 0;
+  outline: none;
+}
+
+/* --- Task Details Card (The inner section) --- */
+.task-details-card {
+  background-color: #f7f7f7; /* Light background for the card */
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.task-type {
+  font-size: 0.8rem;
+  color: #555; /* Slightly darker than status text */
+  text-transform: uppercase;
+  font-weight: 500;
+  margin: 0 0 5px 0;
+}
+
+.task-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}

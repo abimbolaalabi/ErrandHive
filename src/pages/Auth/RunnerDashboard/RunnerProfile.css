@@ -489,3 +489,129 @@
 .runnerProfile-actionBtn:hover {
   background-color: #9a65e0;
 }
+
+
+/* --- Rating --- */
+.runnerProfile-ratingContainer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 8px;
+  max-width: 120px;
+}
+
+.runnerProfile-ratingStar {
+  color: #f5b50a;
+  font-size: 18px;
+}
+
+.runnerProfile-ratingValue {
+  font-size: 16px;
+  color: #333;
+}
+
+.runnerProfile-ratingContainer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  color: #f5b50a; /* gold star */
+  margin-top: 4px;
+}
+
+.runnerProfile-ratingStar {
+  color: #f5b50a;
+}
+
+.runnerProfile-ratingValue {
+  font-size: 14px;
+  color: #333;
+}
+
+/* NEW BANK & WITHDRAWAL CARDS */
+
+.runnerProfile-bankCard,
+.runnerProfile-withdrawalCard {
+  margin-top: 25px;
+  padding: 28px 32px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s;
+}
+
+.runnerProfile-bankCard:hover,
+.runnerProfile-withdrawalCard:hover {
+
+  /* transform: translateY(-2px); */
+}
+
+.runnerProfile-bankCard {
+  background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+  border: 1.5px solid #ffe082;
+}
+
+.runnerProfile-withdrawalCard {
+  background: linear-gradient(135deg, #f3e8ff 0%, #e0c3fc 100%);
+  border: 1.5px solid #d8b4fe;
+}
+
+.runnerProfile-featureLeft {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.runnerProfile-bankCard .runnerProfile-kycIcon {
+  background-color: #ffd54f;
+  padding: 16px;
+  border-radius: 16px;
+}
+
+.runnerProfile-withdrawalCard .runnerProfile-kycIcon {
+  background-color: #c084fc;
+  padding: 16px;
+  border-radius: 16px;
+}
+
+.runnerProfile-featureInfo h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 6px 0;
+  color: #1a1a1a;
+}
+
+.runnerProfile-featureInfo p {
+  font-size: 14px;
+  color: #555;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.runnerProfile-bankBtn {
+  background-color: #9333ea !important;
+  /* padding: 12px 28px !important; */
+  /* border-radius: 50px !important; */
+  font-size: 15px !important;
+  width: 10rem;
+  height: 4rem;
+  box-shadow: 0 4px 15px rgba(147, 51, 234, 0.4);
+}
+
+.runnerProfile-withdrawalBtn {
+  background-color: #a855f7 !important;
+  padding: 12px 28px !important;
+  border-radius: 50px !important;
+  font-size: 15px !important;
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+}
+
+.runnerProfile-actionBtn:hover {
+  opacity: 0.92;
+  transform: scale(1.03);
+}
