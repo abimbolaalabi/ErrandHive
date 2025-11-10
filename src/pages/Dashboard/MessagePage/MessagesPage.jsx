@@ -86,12 +86,12 @@ const MessagesPage = () => {
     };
   }, [currentUserId, runnerId]);
 
-  // ✅ Scroll to bottom automatically
+
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // ✅ Fetch old messages initially
+
   useEffect(() => {
     if (runnerId) getMessages();
   }, [runnerId]);

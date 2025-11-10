@@ -5,7 +5,7 @@ import RunnerDashboard from '../pages/Auth/RunnerDashboard/RunnerDashboard'
 import ResetOtp from "../pages/Auth/ResetOtp/ResetOtp"
 import CounterSuccess from "../Components/RunnerModal/CounterSucces"
 import EditProfile from '../Components/EditProfile.jsx/EditProfile'
-import KycModal from  "../Components/RunnerModal/KycVerifiedStatus"
+import KycModal from "../Components/RunnerModal/KycVerifiedStatus"
 import RunnerEarning from '../pages/Auth/RunnerDashboard/RunnerEarning'
 import ActiveJob from '../pages/Auth/RunnerDashboard/ActiveJob'
 import RunnerProfile from '../pages/Auth/RunnerDashboard/RunnerProfile'
@@ -36,7 +36,7 @@ import SuccessModal from '../Components/ModalSuccess/SuccessModal'
 const Router = () => {
   return (
     <BrowserRouter>
-  <Routes>
+      <Routes>
         {/* Public routes */}
         <Route path="*" element={<PageNotFound />} />
         <Route path="/" element={<LandingPage />} />
@@ -46,13 +46,13 @@ const Router = () => {
         <Route path="/verifyemail" element={<VerifyEmail />} />
         <Route path="/forgot" element={<ForgotPassword />} />
         <Route path="/reset" element={<ResetPassword />} />
-         <Route path="/reset-otp" element={<ResetOtp />} />
-            {/* <Route path="/Negotiation" element={<Negotiation />} /> */}
-             <Route path="KycMod" element={<KycPopModel />} />
-             {/* <Route path="/su" element={<SuccessModal />} /> */}
-             
-             {/* <Route path="countersucess" element={<CounterSuccess />} /> */}
-                          <Route path="errandlive" element={<ErrandLive />} />
+        <Route path="/reset-otp" element={<ResetOtp />} />
+        {/* <Route path="/Negotiation" element={<Negotiation />} /> */}
+        <Route path="KycMod" element={<KycPopModel />} />
+
+
+        {/* <Route path="countersucess" element={<CounterSuccess />} /> */}
+        <Route path="errandlive" element={<ErrandLive />} />
         {/*  Client Dashboard */}
         <Route element={<PrivateRoute allowedRole="Client" />}>
           <Route path="/dashboard" element={<DashboardLayout />}>
@@ -60,6 +60,7 @@ const Router = () => {
             <Route path="my-errands" element={<MyErrandsPage />} />
             <Route path="my-errands/:errandId" element={<MyErrandsDetails />} />
             <Route path="my-errands/:errandId/:errandTrack" element={<ErrandDeliveryTrack />} />
+            <Route path="/dashboard/success" element={<SuccessModal />} />
             <Route path="payments" element={<PaymentsPage />} />
             <Route path="messages/:runnerId" element={<MessagesPage />} />
             <Route path="profile" element={<ProfilePage />} />
@@ -76,13 +77,13 @@ const Router = () => {
             <Route path="runnerearning" element={<RunnerEarning />} />
             <Route path="runnermessage/:runnerId" element={<RunnerMessage />} />
             <Route path="runnerprofile" element={<RunnerProfile />} />
-            <Route path="/runnerlayout/runnerprofile/runnerprofile/:profileid" element={<EditProfile/>} />
+            <Route path="/runnerlayout/runnerprofile/runnerprofile/:profileid" element={<EditProfile />} />
           </Route>
         </Route>
 
         {/* Admin dashboard */}
-        <Route path='/admindash' element={<AdminDashboard/>}> 
-          
+        <Route path='/admindash' element={<AdminDashboard />}>
+
         </Route>
       </Routes>
 
