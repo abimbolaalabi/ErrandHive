@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./ProfilePage.css";
 import { FaEnvelope } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
+import { AppContext } from "../../Context/App";
+import { useContext } from "react";
 import {
   IoShieldCheckmarkOutline,
   IoCheckmarkCircleOutline,
@@ -11,13 +13,16 @@ import {
 import Modaldashboard from "../../Components/ModalDashboard/Modaldashboard";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ProfilePage = () => {
   const [modaldash, setModalDash] = useState(false);
   const [image, setImage] = useState(null);
+  const [uploading, setUploading] = useState(false);
   const [kycStatus, setKycStatus] = useState(null);
   const [kycReason, setKycReason] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const { user, setUser, getAUser } = useContext(AppContext);
 
   const BaseUrl = import.meta.env.VITE_BASE_URL;
   const token = localStorage.getItem("userToken");
@@ -32,40 +37,68 @@ const ProfilePage = () => {
     return `${parts[0]?.charAt(0).toUpperCase() || ""}${parts[1]?.charAt(0).toUpperCase() || ""}`;
   };
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) setImage(URL.createObjectURL(file));
-  };
+const handleImageUpload = async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  // instant preview
+  const previewURL = URL.createObjectURL(file);
+  setImage(previewURL);
+
+  try {
+    const formData = new FormData();
+    formData.append("profileImage", file);
+
+    const res = await axios.put(
+      `${BaseUrl}/update/${storedUser.id}`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+
+    toast.success("Profile image updated");
+    const updatedUser = res?.data?.data;
+    console.log(res.data.data)
+    setUser(updatedUser);
+    localStorage.setItem("userDetails", JSON.stringify(updatedUser));
+  } catch (err) {
+    console.log("Image upload error:", err?.response?.data);
+    toast.error(err?.response?.data?.message || "Upload failed");
+    setImage(null);
+  }
+};
 
   const getKyc = async () => {
     try {
       const res = await axios.get(`${BaseUrl}/kyc/my`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log(res)
       const kyc = res?.data?.data;
       setKycStatus(kyc?.status?.toLowerCase());
       setKycReason(kyc?.reason || "");
-        const verified = kyc?.status === "verified" || kyc?.status === "approved";
+      const verified = kyc?.status === "verified" || kyc?.status === "approved";
       localStorage.setItem("userKyc", verified);
     } catch (error) {
       console.log("KYC fetch error:", error);
     }
   };
-   
+
   useEffect(() => {
+    getAUser();
     getKyc();
   }, []);
-   
+
   return (
     <div className="profile-container">
-  
       <div className="profile-header">
         <h1>Profile & Settings</h1>
         <p>Manage your account information and preferences</p>
       </div>
 
-  
       <div className="profile-card">
         <div className="profile-left">
           <div className="profile-avatar">
@@ -73,18 +106,22 @@ const ProfilePage = () => {
               {image ? (
                 <img src={image} alt="profile" className="avatar-img" />
               ) : (
-                getInitials(fullName)
+                getInitials(user?.fullName)
               )}
             </div>
 
             <label htmlFor="profileImage" className="camera-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24">
-                <path
-                  fill="currentColor"
-                  d="M12 17a4 4 0 1 0 0-8a4 4 0 0 0 0 8Zm0-10l1.2-2h3.6l1.2 2H20a2 2 0 0 1 2 2v10a2 
-                     2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h2Z"
-                />
-              </svg>
+              {uploading ? (
+                <span style={{ fontSize: "12px" }}>...</span>
+              ) : (
+                <svg width="20" height="20" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M12 17a4 4 0 1 0 0-8a4 4 0 0 0 0 8Zm0-10l1.2-2h3.6l1.2 2H20a2 2 0 0 1 2 2v10a2 
+                       2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h2Z"
+                  />
+                </svg>
+              )}
             </label>
 
             <input
@@ -95,15 +132,14 @@ const ProfilePage = () => {
               onChange={handleImageUpload}
             />
           </div>
-
-          <div className="profile-info">
+                    <div className="profile-info">
             <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
               <h2>{fullName}</h2>
               <p className="email">
-                <FaEnvelope /> {email}
+                <FaEnvelope /> {user?.email}
               </p>
             </div>
-            <div onClick={()=>navigate("/dashboard/profile/profileId")} className="profile-right">
+            <div onClick={() => navigate(`/dashboard/profile/${storedUser.id}`)} className="profile-right">
               <button className="edit-btn">
                 <MdEdit /> Edit Profile
               </button>
@@ -121,16 +157,12 @@ const ProfilePage = () => {
           </div>
           <div style={{ paddingTop: "10px" }}>
             <p className="bio">
-              Busy professional who values reliable service. Looking for trusted
-              runners for regular errands.
+             {user?.bio}
             </p>
           </div>
         </div>
       </div>
 
-    
-
-  
       {!kycStatus && (
         <div className="kyc-card">
           <div className="kyc-left">
@@ -164,9 +196,8 @@ const ProfilePage = () => {
         </div>
       )}
 
-  
       {(kycStatus === "verified" || kycStatus === "approved") && (
-        <div className="kyc-verified-container">
+        <div className="kyc-verified-containerr">
           <div className="kyc-verified-header">
             <div className="kyc-verified-header-left">
               <div className="kyc-verified-icon-wrapper">
@@ -204,7 +235,6 @@ const ProfilePage = () => {
         </div>
       )}
 
-      {/* KYC Rejected */}
       {kycStatus === "rejected" && (
         <div className="rejected-wrapper">
           <div className="rejected-header">
@@ -241,7 +271,7 @@ const ProfilePage = () => {
       )}
 
       {modaldash && <Modaldashboard close={setModalDash} />}
-    </div >
+    </div>
   );
 };
 

@@ -13,7 +13,6 @@ const EditProfile = () => {
 
   const [firstName, setFirstName] = useState(storedUser.firstName || '');
   const [lastName, setLastName] = useState(storedUser.lastName || '');
-  const [emailAddress, setEmailAddress] = useState(storedUser.email || '');
   const [aboutMe, setAboutMe] = useState(storedUser.bio || '');
 
   const [currentPassword, setCurrentPassword] = useState('');
@@ -27,12 +26,12 @@ const EditProfile = () => {
   const handleSaveChanges = async (e) => {
     e.preventDefault();
 
-    if (!firstName || !lastName || !emailAddress) {
+    if (!firstName || !lastName) {
       toast.error("Please fill in all required fields");
       return;
     }
 
-    if ((currentPassword || newPassword || confirmPassword)) {
+    if (currentPassword || newPassword || confirmPassword) {
       if (!currentPassword) {
         toast.error("Current password is required to update password");
         return;
@@ -55,7 +54,6 @@ const EditProfile = () => {
         {
           firstName,
           lastName,
-          email: emailAddress,
           bio: aboutMe,
           ...(currentPassword && newPassword && { currentPassword, newPassword })
         },
@@ -65,14 +63,17 @@ const EditProfile = () => {
       if (res.status === 200) {
         toast.success(res.data.message || "Profile updated successfully!");
         const updatedUser = res.data.data;
+
+        // Update localStorage without touching email
         localStorage.setItem('userDetails', JSON.stringify({
           ...storedUser,
           firstName: updatedUser.firstName,
           lastName: updatedUser.lastName,
-          email: emailAddress,
           bio: updatedUser.bio,
           profileImage: updatedUser.profileImage
         }));
+
+        // Reset password fields
         setCurrentPassword('');
         setNewPassword('');
         setConfirmPassword('');
@@ -122,10 +123,9 @@ const EditProfile = () => {
               <label className="form-label">Email Address</label>
               <input
                 type="email"
-                placeholder="Enter your email address"
-                value={emailAddress}
-                onChange={(e) => setEmailAddress(e.target.value)}
+                value={storedUser.email || ''}
                 className="input-field"
+                disabled
               />
             </div>
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./RunnerProfile.css";
-import { FaEnvelope, FaStar } from "react-icons/fa";
+import { FaEnvelope, FaStar, FaUniversity, FaCog } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 import { Link } from "react-router-dom";
 import {
@@ -11,6 +11,7 @@ import {
 } from "react-icons/io5";
 import KycPopupModel from "../../../Components/RunnerModal/KycPopupModel";
 import axios from "axios";
+import Bank from "../../../assets/Bank.png"
 
 const RunnerProfile = () => {
   const [user, setUser] = useState(null);
@@ -19,15 +20,15 @@ const RunnerProfile = () => {
   const [kycLoading, setKycLoading] = useState(true);
   const [kycModel, setKycModel] = useState(false);
   const [image, setImage] = useState(null);
+  const [hasBankAccount, setHasBankAccount] = useState(false);
 
   const BaseUrl = import.meta.env.VITE_BASE_URL;
   const token = localStorage.getItem("userToken");
-
+  console.log(token)
   const storedUser = JSON.parse(localStorage.getItem("userDetails"));
   const id = storedUser?.id;
 
   const memberSince = new Date().toLocaleDateString("en-US", { year: "numeric", month: "long" });
-
   const userRating = user?.rating || 4.5;
 
   const getUserById = async () => {
@@ -39,6 +40,7 @@ const RunnerProfile = () => {
       const userData = res?.data?.data;
       setUser(userData);
       setImage(userData?.profileImage || null);
+      setHasBankAccount(!!userData?.bankAccount);
     } catch (error) {
       console.error("Error fetching user:", error);
       setUser(null);
@@ -117,7 +119,6 @@ const RunnerProfile = () => {
             <div className="runnerProfile-avatarCircle">
               {image ? <img src={image} alt="profile" className="runnerProfile-avatarImg" /> : getInitials(fullName)}
             </div>
-
             <label htmlFor="profileImage" className="runnerProfile-cameraIcon">
               <svg width="20" height="20" viewBox="0 0 24 24">
                 <path
@@ -143,7 +144,6 @@ const RunnerProfile = () => {
           </div>
         </div>
 
-        {/* Member since and bio side by side */}
         <div className="runnerProfile-bottom" style={{ display: "flex", gap: "20px", marginTop: "15px" }}>
           <div className="runnerProfile-leftBottom" style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
             <p className="runnerProfile-memberSince"><span>Member since</span><br />{memberSince}</p>
@@ -159,7 +159,6 @@ const RunnerProfile = () => {
         </div>
       </div>
 
-      
       {kycStatus === null && (
         <div className="runnerProfile-kycCard">
           <div className="runnerProfile-kycLeft">
@@ -240,6 +239,30 @@ const RunnerProfile = () => {
           </div>
         </div>
       )}
+
+      {!hasBankAccount && (
+        <div className="runnerProfile-bankCard">
+          <div className="runnerProfile-featureLeft">
+            <div className="runnerProfile-kycIcon"><img src={Bank} alt="" /></div>
+            <div className="runnerProfile-featureInfo">
+              <h3>Add Your Bank Account</h3>
+              <p>Link your bank account to receive withdrawals securely and quickly.</p>
+            </div>
+          </div>
+          <button className="runnerProfile-actionBtn runnerProfile-bankBtn">Add Bank Account Now</button>
+        </div>
+      )}
+
+      <div className="runnerProfile-withdrawalCard">
+        <div className="runnerProfile-featureLeft">
+          <div className="runnerProfile-kycIcon"><img src={Bank} alt="" /></div>
+          <div className="runnerProfile-featureInfo">
+            <h3>Withdrawal Preference</h3>
+            <p>Customize how and when you want to receive your earnings</p>
+          </div>
+        </div>  
+        <button className="runnerProfile-actionBtn runnerProfile-withdrawalBtn">Edit Settings</button>
+      </div>
 
       {kycModel && <KycPopupModel close={setKycModel} />}
     </div>

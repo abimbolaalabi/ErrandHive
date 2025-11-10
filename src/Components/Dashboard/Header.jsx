@@ -3,7 +3,7 @@ import { AppContext } from '../../Context/App';
 import './Header.css';
 
 const Header = () => {
-  const { userType } = useContext(AppContext);
+  const { userType,user, setUser } = useContext(AppContext);
 
 
   const storedUser = JSON.parse(localStorage.getItem("userDetails")) || {};
@@ -37,7 +37,7 @@ const Header = () => {
         <div className="user-profile">
           <div className="user-info">
             <span className="user-namee">{fullName || "Guest"}</span>
-            <span className="user-role">{userType || storedUser?.role || "No Role"}</span>
+            <span className="user-role">{userType || user?.role || "No Role"}</span>
           </div>
         </div>
       </div>

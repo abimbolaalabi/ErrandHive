@@ -30,6 +30,7 @@ import ProfileDetailSetting from '../pages/Dashboard/ProfileDetailSetting'
 import ErrandDeliveryTrack from '../pages/Dashboard/ErrandDeliveryTrack'
 import Negotiation from '../Components/RunnerModal/Negotiation'
 import KycPopModel from '../Components/RunnerModal/KycPopupModel'
+import ErrandLive from '../pages/Auth/RunnerDashboard/ErrandLive'
 
 const Router = () => {
   return (
@@ -47,8 +48,8 @@ const Router = () => {
          <Route path="/reset-otp" element={<ResetOtp />} />
             {/* <Route path="/Negotiation" element={<Negotiation />} /> */}
              <Route path="KycMod" element={<KycPopModel />} />
-             <Route path="countersucess" element={<CounterSuccess />} />
-             
+             {/* <Route path="countersucess" element={<CounterSuccess />} /> */}
+                          <Route path="errandlive" element={<ErrandLive />} />
         {/*  Client Dashboard */}
         <Route element={<PrivateRoute allowedRole="Client" />}>
           <Route path="/dashboard" element={<DashboardLayout />}>

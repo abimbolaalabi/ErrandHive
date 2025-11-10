@@ -2,11 +2,17 @@ import "./Header.css";
 import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { useState } from "react";
-import "./Header.css"
-
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleScroll = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+      setMenuOpen(false);
+    }
+  };
 
   return (
     <header className="header-container">
@@ -15,7 +21,7 @@ const Header = () => {
           <img
             src="https://res.cloudinary.com/dwzomhflw/image/upload/v1761056644/IMG-20251021-WA0052_lf7sms.jpg"
             className="logo"
-            alt=""
+            alt="logo"
           />
           <span className="errand">Errandhive</span>
         </div>
@@ -26,36 +32,39 @@ const Header = () => {
 
         <nav className="header-navlink">
           <ul className="header-navlink-list-holder">
-            <li className="header-navlink-list">Home</li>
-            <li className="header-navlink-list">About</li>
-            <li className="header-navlink-list">Features</li>
-            <li className="header-navlink-list">How it Works</li>
+            <li onClick={() => handleScroll("home")} className="header-navlink-list">Home</li>
+            <li onClick={() => handleScroll("about")} className="header-navlink-list">About</li>
+            <li onClick={() => handleScroll("features")} className="header-navlink-list">Features</li>
+            <li onClick={() => handleScroll("how-it-works")} className="header-navlink-list">How it Works</li>
           </ul>
         </nav>
+
         <div className="header-btn-holder">
-           <Link to ={"/login"}>
-             <button className="sign-in-btn">Sign in</button>
-             </Link>
-             <Link to = {"/clientvsrunner"}>
-                    <button className="get-started-btn" >Get Started</button>
-             </Link>
-        
+          <Link to="/login">
+            <button className="sign-in-btn">Sign in</button>
+          </Link>
+          <Link to="/clientvsrunner">
+            <button className="get-started-btn">Get Started</button>
+          </Link>
         </div>
       </div>
 
       {menuOpen && (
         <div className="mobile-dropdown">
           <ul className="mobile-menu-list">
-            <li className="mobile-menu-item">Home</li>
-            <li className="mobile-menu-item">About</li>
-            <li className="mobile-menu-item">Features</li>
-            <li className="mobile-menu-item">How it Works</li>
+            <li onClick={() => handleScroll("home")} className="mobile-menu-item">Home</li>
+            <li onClick={() => handleScroll("about")} className="mobile-menu-item">About</li>
+            <li onClick={() => handleScroll("features")} className="mobile-menu-item">Features</li>
+            <li onClick={() => handleScroll("how-it-works")} className="mobile-menu-item">How it Works</li>
           </ul>
+
           <div className="mobile-btn-holder">
             <Link to="/login">
               <button className="sign-in-btn">Sign in</button>
             </Link>
-            <button className="get-started-btn">Get Started</button>
+            <Link to="/clientvsrunner">
+              <button className="get-started-btn">Get Started</button>
+            </Link>
           </div>
         </div>
       )}
