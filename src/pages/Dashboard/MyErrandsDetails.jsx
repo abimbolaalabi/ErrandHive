@@ -165,7 +165,7 @@ const MyErrandsDetails = () => {
 
             }
             {
-                errandpay && (<ErrandPayMod toclose={setErrandPay} />)
+                errandpay && (<ErrandPayMod toclose={setErrandPay} info={info} />)
 
             }
 

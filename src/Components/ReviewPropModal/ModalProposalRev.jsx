@@ -62,21 +62,22 @@ const ModalProposalRev = ({ toclose, setErrandPay, info }) => {
 
         <div className="rev-price-box">
           <p className="rev-price-label">Final Price</p>
-          <p className="rev-price-value">₦{Number(info?.bidPrice).toLocaleString()}</p>
+          <p className="rev-price-value">₦{Number(info?.bidPrice).toLocaleString() || Number(info?.currentPrice).toLocaleString()}</p>
         </div>
 
         <div className="rev-btn-flex">
           <button className="rev-btn-outline" onClick={() => toclose(false)}>
             Back to List
           </button>
-          <Link className="rev-btn-fill" to={"/dashboard/my-errands/errandId/errandTrack"}>
+
             <button
             className="rev-btn-fill"
             disabled={loading}
+            onClick={handleConfirm}
           >
             {loading ? "Processing..." : <><span>⚡</span> Confirm & Assign</>}
           </button>
-          </Link>
+
          
         </div>
       </div>
@@ -85,3 +86,5 @@ const ModalProposalRev = ({ toclose, setErrandPay, info }) => {
 };
 
 export default ModalProposalRev;
+
+// "/dashboard/my-errands/errandId/errandTrack"
