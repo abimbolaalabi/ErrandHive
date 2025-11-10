@@ -23,7 +23,7 @@ const RunnerProfile = () => {
   const [hasBankAccount, setHasBankAccount] = useState(false);
 
   const BaseUrl = import.meta.env.VITE_BASE_URL;
-  const token = localStorage.getItem("userToken");
+  const token = JSON.parse(localStorage.getItem("userToken"));
   console.log(token)
   const storedUser = JSON.parse(localStorage.getItem("userDetails"));
   const id = storedUser?.id;

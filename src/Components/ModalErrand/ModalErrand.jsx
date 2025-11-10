@@ -24,7 +24,7 @@ const ModalErrand = ({ toclose }) => {
   const [formErrors, setFormErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const token = localStorage.getItem("userToken");
+  const token = JSON.parse(localStorage.getItem("userToken"));
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

@@ -25,7 +25,7 @@ const BaseUrl = import.meta.env.VITE_BASE_URL
   try {
     setLoading(true);
 
-    const token = localStorage.getItem("userToken");
+    const token = JSON.parse(localStorage.getItem("userToken"));
     if (!token) {
       console.log("No token found");
       setErrands([]);
@@ -66,12 +66,10 @@ const BaseUrl = import.meta.env.VITE_BASE_URL
         <button onClick={() => setErrandMod(true)}> <span>+  New Errand</span></button>
       </div>
 
-      {/* Loading state */}
       {loading && (
         <p style={{ textAlign: 'center', marginTop: 24 }}>Loading errands...</p>
       )}
 
-      {/* Empty state */}
       {!loading && errands.length === 0 && (
         <div className="no-errands-section">
           <div className="no-errands-content">

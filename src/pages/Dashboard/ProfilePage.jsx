@@ -25,7 +25,7 @@ const ProfilePage = () => {
   const { user, setUser, getAUser } = useContext(AppContext);
 
   const BaseUrl = import.meta.env.VITE_BASE_URL;
-  const token = localStorage.getItem("userToken");
+  const {token} = JSON.parse(localStorage.getItem("userToken"));
   const storedUser = JSON.parse(localStorage.getItem("userDetails"));
 
   const fullName = `${storedUser?.firstName || ""} ${storedUser?.lastName || ""}`.trim();
@@ -73,10 +73,16 @@ const handleImageUpload = async (e) => {
 };
 
   const getKyc = async () => {
+    const rawToken = localStorage.getItem("userToken");
+const token = rawToken ? JSON.parse(rawToken) : null;
+
     try {
-      const res = await axios.get(`${BaseUrl}/kyc/my`, {
+   console.log({ Authorization: `Bearer ${localStorage.getItem("userToken")}` })
+      const res = await axios.get(`${BaseUrl}/kyc/my`,
+         {
         headers: { Authorization: `Bearer ${token}` },
       });
+    
       const kyc = res?.data?.data;
       setKycStatus(kyc?.status?.toLowerCase());
       setKycReason(kyc?.reason || "");

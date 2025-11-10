@@ -30,7 +30,7 @@ const KycPopupModel = ({ close }) => {
     try {
       setLoading(true);
       const user = JSON.parse(localStorage.getItem("userDetails"));
-      const token = localStorage.getItem("userToken");
+      const token = JSON.parse(localStorage.getItem("userToken"));
 
       if (!user || !token) {
         toast.error("User not logged in");

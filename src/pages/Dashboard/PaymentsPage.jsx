@@ -6,7 +6,7 @@ import axios from "axios";
 const PaymentsPage = () => {
 
   const [paymentsData, setPaymentsData] = useState([]);
-  const token = localStorage.getItem("userToken");
+  const token = JSON.parse(localStorage.getItem("userToken"));
   const BaseUrl = import.meta.env.VITE_BASE_URL;
 
   const getPayments = async () => {
@@ -65,24 +65,24 @@ const PaymentsPage = () => {
           <p className="col-date">Date</p>
           <p className="col-amount">Amount</p>
           <p className="col-status">Status</p>
-          <p className="col-method">Payment Method</p>
+          {/* <p className="col-method">Payment Method</p> */}
         </div>
 
         {(paymentsData.length > 0 ? paymentsData : []).map((item) => (
           <div key={item.id} className="table-row">
             <p className="col-type type-text">
-              {item.description }
+              {item?.description }
             </p>
             <p className="col-date">
-              {new Date(item.createdAt).toLocaleDateString()}
+              {new Date(item?.createdAt).toLocaleDateString()}
             </p>
-            <p className="col-amount">₦{item.amount?.toLocaleString()}</p>
+            <p className="col-amount">₦{item?.amount?.toLocaleString()}</p>
             <p className="col-status">
-              <span className={`status-badge ${item.status === "paid" ? "completed" : "pending"}`}>
+              <span className={`status-badge ${item?.status === "paid" ? "completed" : "pending"}`}>
                 {item.status}
               </span>
             </p>
-            <p className="col-method">Wallet / Transfer</p>
+            {/* <p className="col-method">Wallet / Transfer</p> */}
           </div>
         ))}
 

@@ -18,7 +18,7 @@ const DashboardPage = () => {
 
   const navigate = useNavigate();
   const storedUser = JSON.parse(localStorage.getItem("userDetails")) || {};
-  const userKyc = localStorage.getItem("userKyc") === "true";
+  const userKyc = localStorage.getItem("userKyc") ;
   const BaseUrl = import.meta.env.VITE_BASE_URL;
 
   const fullName = `${storedUser?.firstName || ""} ${storedUser?.lastName || ""}`.trim();
@@ -34,7 +34,7 @@ const DashboardPage = () => {
   try {
     setLoading(true);
 
-    const token = localStorage.getItem("userToken");
+    const token = JSON.parse(localStorage.getItem("userToken"));
     if (!token) {
       console.log("No token found");
       setErrands([]);
