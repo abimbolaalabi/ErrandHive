@@ -9,7 +9,6 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-container">
-
         <div className="footer-section brand">
           <div className="brand-logo">
             <span className="icon"><FaRunning /></span>
@@ -17,7 +16,6 @@ const Footer = () => {
           </div>
           <p>Connecting communities<br />through helpful errands.</p>
         </div>
-
         <div className="footer-section">
           <h4>Company</h4>
           <ul>
@@ -26,7 +24,6 @@ const Footer = () => {
             <li>Press</li>
           </ul>
         </div>
-
         <div className="footer-section">
           <h4>Support</h4>
           <ul>
@@ -35,7 +32,6 @@ const Footer = () => {
             <li>Contact</li>
           </ul>
         </div>
-
         <div className="footer-section">
           <h4>Legal</h4>
           <ul>
@@ -45,9 +41,7 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-
       <hr />
-
       <div className="footer-bottom">
         <p>© 2025 ErrandHive. All rights reserved.</p>
         <div className="socials">

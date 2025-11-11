@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+
 import "./RunnerLayout.css";
 import { IoIosSearch } from "react-icons/io";
 import { 
@@ -15,8 +15,13 @@ import { Outlet, useNavigate, useLocation } from "react-router-dom";
 
 const RunnerLayout = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-
+  const location = useLocation()
+  
+  const handleLogoutRunner = () => {
+  localStorage.removeItem("userToken");
+  navigate("/login");
+};
+  
   const menuItems = [
     { label: "Dashboard", icon: <MdOutlineDashboard />, path: "/runnerlayout" },
     { label: "Active Jobs", icon: <FaRunning />, path: "/runnerlayout/runneractive" },
@@ -25,6 +30,9 @@ const RunnerLayout = () => {
     { label: "Profile", icon: <IoMdPerson />, path: "/runnerlayout/runnerprofile" },
   ];
 
+
+  const user = JSON.parse(localStorage.getItem("userDetails"))||{}
+  const fullName = `${user?.fullName || ""} ${user?.lastName || ""}`.trim()
   return (
     <div className="runner-layout-style">
       <aside className="sidebar-runner">
@@ -45,7 +53,6 @@ const RunnerLayout = () => {
           </div>
         </div>
 
-        {/* ✅ Sidebar Links */}
         <div className="sidebar-main">
           {menuItems.map((item, index) => {
             const isActive = location.pathname === item.path;
@@ -63,27 +70,29 @@ const RunnerLayout = () => {
         </div>
 
         <div className="log-out-box">
-          <button type="submit" className="log-out-btn">
-            <IoIosLogOut style={{ fontSize: "1.5rem" }} />Log out
+          <button type="submit" className="log-out-btn"
+        onClick={handleLogoutRunner}
+          >
+            
+            <IoIosLogOut style={{ fontSize: "1.5rem" }} /> Log out
           </button>
-        </div>
+        </div> 
       </aside>
 
-      {/* Main Section */}
       <div className="main-section">
         <header className="header">
           <div className="input-holder">
             <IoIosSearch className="search-icons-runner" />
-            <input type="text" placeholder="Search errands, runner" className="input" />
+            <input type="text" placeholder=" Search errands, runner" className="input" />
           </div>
           <div className="wrapper-notification-profile">
             <div className="profile-notification-box">
               <div className="notification">
                 <IoMdNotificationsOutline className="notify" />
               </div>
-              <div className="red-box">
-                <span style={{ fontFamily: "Poppins", fontSize: "13px", color: "white" }}>3</span>
-              </div>
+              {/* <div className="red-box"> */}
+                {/* <span style={{ fontFamily: "Poppins", fontSize: "13px", color: "white" }}>3</span> */}
+              {/* </div> */}
             </div>
             <article className="wrapper-profile-shit">
               <div className="Profile-layout-box-runner">
@@ -92,7 +101,7 @@ const RunnerLayout = () => {
                 </div>
               </div>
               <div className="Profile-name-user-holder">
-                <h1 className="profile-h1-runner">John Doe</h1>
+                <h1 className="profile-h1-runner">{fullName || "guest"}</h1>
                 <p className="profile-p-runner">runner</p>
               </div>
             </article>

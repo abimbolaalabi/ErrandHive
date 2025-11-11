@@ -1,80 +1,143 @@
-import React from 'react'
-import "./Runerdashboard.css"
+import React, { useContext } from "react";
+import "./Runerdashboard.css";
+import cube from "../../../assets/cube.png";
+import { Link } from "react-router-dom";
+import { AppContext } from "../../../Context/App";
+
 
 const RunnerDashboard = () => {
+  const { user, kycStatus, userKyc } = useContext(AppContext);
 
-     const stats = [
-   {
-     title: 'Total Request',
-     value: '0',
-     icon: (
-       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-         <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-         <path d="M9 9h6v6H9z"/>
-       </svg>
-     ),
-     color: '#8133F1'
-   },
-   {
-     title: 'Completed',
-     value: '0',
-     icon: (
-       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-         <polyline points="22,4 12,14.01 9,11.01"/>
-       </svg>
-     ),
-     color: '#F59E0B'
-   },
-   {
-     title: 'Active',
-     value: '0',
-     icon: (
-       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-         <circle cx="12" cy="12" r="10"/>
-         <polyline points="12,6 12,12 16,14"/>
-       </svg>
-     ),
-     color: '#8133F1'
-   },
-   {
-     title: 'Total Spent',
-     value: '0',
-     icon: (
-       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-         <line x1="12" y1="1" x2="12" y2="23"/>
-         <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-       </svg>
-     ),
-     color: '#F97316'
-   }
- ];
+  const storedUser = user || JSON.parse(localStorage.getItem("userDetails")) || {};
+  const fullName = `${storedUser?.firstName || ""} ${storedUser?.lastName || ""}`.trim();
+
+  const data = [
+    {
+      title: "Total Request",
+      value: "0",
+      color: "#8133F1",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+          <path d="M9 9h6v6H9z" />
+        </svg>
+      ),
+    },
+    {
+      title: "Completed",
+      value: "0",
+      color: "#F59E0B",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+          <polyline points="22,4 12,14.01 9,11.01" />
+        </svg>
+      ),
+    },
+    {
+      title: "Active",
+      value: "0",
+      color: "#8133F1",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <circle cx="12" cy="12" r="10" />
+          <polyline points="12,6 12,12 16,14" />
+        </svg>
+      ),
+    },
+    {
+      title: "Total Spent",
+      value: "0",
+      color: "#F97316",
+      icon: (
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+          <g strokeLinecap="round" strokeLinejoin="round">
+            <path d="M8 16V8" />
+            <path d="M16 16V8" />
+            <path d="M8 8l8 8" />
+            <path d="M6 10h12" />
+            <path d="M6 14h12" />
+          </g>
+        </svg>
+      ),
+    },
+  ];
+
+  // ✅ Your condition should check for Completed (or userKyc)
+  const isVerified = userKyc || kycStatus?.toLowerCase() === "completed";
+
+  if (!isVerified) {
+    return (
+      <main className="runner-dashboard-layout">
+        <div className="title-dashboard-runner">
+          <h1>Welcome to your dashboard {fullName || "User"}! 👋</h1>
+        </div>
+
+        <div className="dashboard-kyc">
+          <div className="cube-holder">
+            <img src={cube} alt="kyc cube" />
+          </div>
+
+          {kycStatus === "Pending" ? (
+            <>
+              <p className="kyc-reminder">Your KYC is under review.</p>
+              <p className="complete-kyc">
+                Please wait for approval to access jobs.
+              </p>
+            </>
+          ) : (
+            <>
+              <p className="kyc-reminder">You have not completed KYC yet.</p>
+              <p className="complete-kyc">
+                Complete KYC to get available jobs
+              </p>
+              <div className="kyc-btn-holder">
+                <Link to="/runnerlayout/runnerprofile">
+                  <button type="submit" className="kyc-btn">
+                    Complete KYC
+                  </button>
+                </Link>
+              </div>
+            </>
+          )}
+        </div>
+      </main>
+    );
+  }
+
+  // ✅ If verified, show the main dashboard
   return (
-    <main className='runner-dashboard-layout'>
-      <div className='title-dashboard-runner'>
-        <h1>Welcome to your Dashboard 👋</h1>
-        {/* <div>victory</div> ddd*/}
+    <main className="runner-dashboard-layout">
+      <div className="title-dashboard-runner">
+        <h1>Welcome to your dashboard {fullName || "User"}! 👋</h1>
       </div>
 
-      
-      <div className="stats-grid">
-        {stats.map((stat, index) => (
-          <div key={index} className="stat-card">
-            <div className="stat-content">
-              <h3 className="stat-title">{stat.title}</h3>
-              <p className="stat-value">{stat.value}</p>
+      <div className="e-grid-t">
+        {data.map((e, index) => (
+          <div key={index} className="e-card-t">
+            <div className="e-content-t">
+              <h3 className="e-title-t">{e.title}</h3>
+              <p className="e-value-t">{e.value}</p>
             </div>
-            <div className="stat-icon" style={{ color: stat.color }}>
-              {stat.icon}
+            <div className="e-icon-t" style={{ color: e.color }}>
+              {e.icon}
             </div>
           </div>
         ))}
       </div>
-      <div className='dashboard-kyc'>
 
+      <div className="dashboard-kyc">
+        <p className="kyc-reminder">You have no active job yet</p>
+
+        <div className="kyc-btn-holder" style={{ marginTop: "20px" }}>
+          <Link to="/runnerlayout/runneractive">
+            <button className="kyc-btn browse-btn">Browse Jobs</button>
+          </Link>
+        </div>
       </div>
     </main>
-  )
-}
+  );
+};
 
-export default RunnerDashboard
+export default RunnerDashboard;

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Carousel.css";
+import { useNavigate } from "react-router-dom";
 
 
 const Carousel = () => {
@@ -34,14 +35,14 @@ const Carousel = () => {
     return () => clearInterval(slider);
   }, [slides.length]);
 
-  
+  const navigate = useNavigate()
 
 
   return (
     <div className="carousel-wrapper">
       <div className="carousel-right">
-        <aside className="logo">
-          <div className="errandlogo">
+        <aside className="carousel-logo" onClick={()=> navigate("/")}>
+          <div className="errandlogo" >
                     <img src="https://res.cloudinary.com/dwzomhflw/image/upload/v1761056644/IMG-20251021-WA0052_lf7sms.jpg" alt="" />
           </div>
           <p>ErrandHive</p>

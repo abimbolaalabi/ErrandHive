@@ -1,7 +1,6 @@
 .login-container {
   width: 100%;
- min-height: 100vh;
- height: auto;
+  height: 100vh;
   display: flex;
   justify-content: center;
   gap: 0.2rem;
@@ -9,37 +8,38 @@
 }
 
 .login-left {
-  width: 50%;
-  height: auto;
+  width: 60%;
 }
-.login-left-header{
- display: flex;
- gap: 0.2rem;
- align-items: center;
- margin-left: 1rem;
- margin-top: 1rem;
+
+.login-left-header {
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
+  margin-left: 1rem;
+  margin-top: 1rem;
 }
-.login-right{
+
+.login-right {
   width: 40%;
-   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
-   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  background: white; 
 }
+
 .login-right-form {
   width: 100%;
-  height: 100%;
+  min-height: 95%;
   background-color: white;
   padding-inline: 2rem;
-  box-sizing: border-box;
   padding: 1.5rem;
-display: flex;
+  box-sizing: border-box;
+  display: flex;
   flex-direction: column;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   gap: 2rem;
-  background-color:black;
 }
+
 .login-text-layout {
   display: flex;
   flex-direction: column;
@@ -64,7 +64,6 @@ display: flex;
   font-family: Poppins;
   font-weight: 800;
   color: #212121;
-  font-style: Semi-bold;
 }
 
 .email-right-input-box {
@@ -138,7 +137,6 @@ display: flex;
   font-size: 1rem;
   font-family: Poppins;
   color: #212121;
-  font-style: Regular;
 }
 
 .login-btn {
@@ -158,21 +156,19 @@ display: flex;
 
 .login-right-or {
   width: 95%;
-display: flex;
-justify-content: center;
-align-items: center;
-gap: 0.5rem;
-margin-top: 1rem;
-margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  /* margin-bottom: 1rem; */
 }
 
 .line {
-  flex: 1;            
-  height: 1px;         
+  flex: 1;
+  height: 1px;
   background-color: #8133f1;
 }
-
-
 
 .or {
   white-space: nowrap;
@@ -183,10 +179,10 @@ margin-bottom: 1rem;
 }
 
 .continue-with-google {
-   width: 95%;
- height: 3rem;
- border-radius: 0.5rem;
- cursor: pointer;
+  width: 95%;
+  height: 3rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
   color: #212121;
   background-color: #f2ebfe;
   border: none;
@@ -196,12 +192,11 @@ margin-bottom: 1rem;
   align-items: center;
   gap: 1rem;
   font-family: Poppins;
-  font-style: SemiBold;
   font-weight: 600;
 }
 
 .forgot-password-form {
-  margin-top: 1.5rem;
+  margin-top: 0.3rem;
   color: #8133f1;
   font-weight: 400;
   font-size: 1rem;
@@ -213,183 +208,47 @@ margin-bottom: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 2rem;
 }
 
 .error-message {
   color: red;
 }
 
-@media screen and (max-width: 1024px) {
-  .login-container {
-    flex-direction: column;
-    height: auto;
-    padding: 2rem 1rem;
-  }
-
-  .login-left {
-    width: 100%;
-    height: auto;
-  }
-
-  .img-box-wrapper {
-    padding-top: 1rem;
-  }
-
-  .login-right {
-    width: 100%;
-    height: auto;
-    padding-top: 1.5rem;
-  }
-
-  .form-wrapper {
-    width: 100%;
-    padding: 2rem 1.5rem;
-    box-shadow: rgba(100, 100, 111, 0.15) 0px 5px 20px 0px;
-  }
-
-  .login-right-form {
-    padding-inline: 1.5rem;
+@media screen and (max-width: 480px) {
+  .login-left,
+  .img-box-wrapper,
+  .carousel,
+  .swiper,
+  .slider,
+  .hero-carousel,
+  .left-images,
+  .login-images {
+    display: none !important;
   }
 
   .login-right-text {
-    font-size: 1.6rem;
-  }
-
-  .form-right-title {
-    font-size: 1.2rem;
-  }
-
-  .login-btn,
-  .continue-with-google {
-    height: 2.8rem;
-    font-size: 0.95rem;
-  }
-}
-
-
-@media screen and (max-width: 780px) {
-  .login-container {
-    flex-direction: column;
-    height: auto;
-    padding: 2rem 1rem;
-  }
-
-  .login-left {
-    width: 100%;
-    height: auto;
-  }
-
-  .img-box-wrapper {
-    padding-top: 0;
+    display: none !important;
   }
 
   .login-right {
     width: 100%;
     height: auto;
-  }
-
-  .form-wrapper {
-    padding: 1.5rem;
-  }
-}
-
-
-@media screen and (min-width: 401px) and (max-width: 480px) {
-  .login-container {
-    flex-direction: column;
-    height: auto;
-    padding: 1rem;
-    gap: 1rem;
-  }
-
-  .login-left {
-    display: none;
-  }
-
-  .login-right {
-    width: 100%;
-    height: auto;
-    background-color: white;
-    overflow: visible;
+    background: white;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: none;
   }
 
   .login-right-form {
     width: 100%;
     padding-inline: 1rem;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding-top: 2rem;
   }
 
-  .login-right-text {
-    font-size: 1.4rem;
-    margin-bottom: 1.5rem;
-    text-align: center;
-  }
-
-  .form-wrapper {
-    padding: 1rem;
-    gap: 1.5rem;
-    width: 100%;
-    box-shadow: none;
-  }
-
-  .form-right-title {
-    font-size: 1.2rem;
-  }
-
-  .email-right-input-box,
-  .password-right-input-box {
-    width: 100%;
-    height: 3.2rem;
-  }
-
-  .email-input,
-  .pasword-input {
-    font-size: 1rem;
-    padding-left: 1.2rem;
-  }
-
-  .checkbox-login-form {
-    padding-block: 1rem;
-    gap: 0.4rem;
-  }
-
-  .checkbox {
-    width: 20px;
-    height: 20px;
-  }
-
-  .remember-me-checkbox {
-    font-size: 1rem;
-  }
-
-  .login-btn,
-  .continue-with-google {
-    width: 100%;
-    height: 3rem;
-    font-size: 1rem;
-  }
-
-  .forgot-password-form {
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-  }
-
-  .dont-account {
-    padding-block: 2rem;
-    font-size: 0.95rem;
-  }
-
-  .eye {
-    right: 1rem;
-    top: 37%;
-    transform: translateY(-50%);
-  }
-
-  .error-message {
-    font-size: 0.8rem;
+  .login-left-header {
+    display: flex !important;
+    justify-content: center;
+    margin-bottom: 1rem;
   }
 }

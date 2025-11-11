@@ -13,13 +13,9 @@ const DownHero = () => {
     <section className="downhero">
       <h2 className="downhero-title">Frequently Asked Questions</h2>
       <p className="downhero-subtitle">Everything you need to know</p>
-
       <div className="faq-wrapper">
-        {/* LEFT COLUMN */}
         <div className="faq-column">
           <h3 className="faq-heading">For Users</h3>
-
-          {/* Question 1 */}
           <div className="faq-box" onClick={() => toggleFAQ(0)}>
             <p>What is ErrandHive?</p>
             <IoChevronDown
@@ -35,8 +31,6 @@ const DownHero = () => {
               </p>
             </div>
           )}
-
-          {/* Question 2 */}
           <div className="faq-box" onClick={() => toggleFAQ(1)}>
             <p>How do I post Errand?</p>
             <IoChevronDown
@@ -52,8 +46,6 @@ const DownHero = () => {
               </p>
             </div>
           )}
-
-          {/* Question 3 */}
           <div className="faq-box" onClick={() => toggleFAQ(2)}>
             <p>How do I pay for Errand?</p>
             <IoChevronDown
@@ -69,8 +61,6 @@ const DownHero = () => {
               </p>
             </div>
           )}
-
-          {/* Question 4 */}
           <div className="faq-box" onClick={() => toggleFAQ(3)}>
             <p>Are the runners verified?</p>
             <IoChevronDown
@@ -86,12 +76,8 @@ const DownHero = () => {
             </div>
           )}
         </div>
-
-        {/* RIGHT COLUMN */}
         <div className="faq-column">
           <h3 className="faq-heading">For Runners</h3>
-
-          {/* Question 5 */}
           <div className="faq-box" onClick={() => toggleFAQ(4)}>
             <p>How do I become a Runner?</p>
             <IoChevronDown
@@ -106,8 +92,6 @@ const DownHero = () => {
               </p>
             </div>
           )}
-
-          {/* Question 6 */}
           <div className="faq-box" onClick={() => toggleFAQ(5)}>
             <p>How much can I earn?</p>
             <IoChevronDown
@@ -123,8 +107,6 @@ const DownHero = () => {
               </p>
             </div>
           )}
-
-          {/* Question 7 */}
           <div className="faq-box" onClick={() => toggleFAQ(6)}>
             <p>When do I get paid?</p>
             <IoChevronDown
@@ -139,8 +121,6 @@ const DownHero = () => {
               </p>
             </div>
           )}
-
-          {/* Question 8 */}
           <div className="faq-box" onClick={() => toggleFAQ(7)}>
             <p>Is there a registration fee?</p>
             <IoChevronDown

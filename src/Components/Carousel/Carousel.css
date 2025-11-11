@@ -9,6 +9,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
+  /* padding: 10px; */
 }
 /* .client-left {
   width: 40%;
@@ -18,13 +19,13 @@
   flex-direction: column;
   align-items: center;
 } */
-.logo{
+.carousel-logo{
   display: flex;
   gap: 10px;
   align-items: center;
-  margin: 5px;
+  margin: 8px;
 }
-.logo p {
+.carousel-logo p {
   font-size: 24px;
   font-weight: 700;
   color: #8133f1;
@@ -40,7 +41,7 @@
 }
 .carousel-container {
   width: 70%;
-  min-height: 35rem;
+  min-height: 30rem;
   height: 100%;
   /* background-color: greenyellow; */
   margin: 100px auto;
@@ -55,7 +56,7 @@
 .client-carousel-img {
   max-width: 27rem;
   width: 100%;
-  height: 19rem;
+  height: 15rem;
   display: flex;
   flex-direction: column;
   align-items: center;

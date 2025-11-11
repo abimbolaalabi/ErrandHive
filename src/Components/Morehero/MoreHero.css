@@ -15,7 +15,7 @@
 
 .morehero-title {
   font-size: 32px;
-  font-weight: 700;
+  font-weight: 500;
   margin-bottom: 8px;
 }
 
@@ -23,6 +23,7 @@
   font-size: 16px;
   opacity: 0.8;
   margin-bottom: 40px;
+  font-weight: 300;
 }
 
 .feedback-container {
@@ -97,24 +98,24 @@
   font-size: 14px;
 }
 
-/* ---------------- RESPONSIVE DESIGN ---------------- */
-
-/* 🖥️ Large Laptops and Desktops */
 @media (max-width: 1440px) {
   .morehero {
     padding: 50px;
   }
 
   .morehero-title {
-    font-size: 30px;
+    font-size: 32px;
   }
 
-  .feedback-card {
-    padding: 20px;
+  .feedback-card p {
+    font-size: 16px;
+  }
+
+  .quote {
+    font-size: 65px;
   }
 }
 
-/* 💻 Tablets (Landscape & small laptops) */
 @media (max-width: 1024px) {
   .feedback-container {
     flex-wrap: wrap;
@@ -122,24 +123,40 @@
   }
 
   .feedback-card {
-    flex: 0 0 45%;
+    flex: 0 0 47%;
     margin-bottom: 25px;
   }
 
   .quote {
-    font-size: 50px;
+    font-size: 60px;
+  }
+
+  .feedback-card p {
+    font-size: 16px;
+  }
+
+  .user-name {
+    font-size: 16px;
+  }
+
+  .star {
+    font-size: 18px;
+  }
+
+  .user-img {
+    width: 40px;
+    height: 40px;
   }
 
   .morehero-title {
-    font-size: 28px;
+    font-size: 30px;
   }
 
   .morehero-subtitle {
-    font-size: 15px;
+    font-size: 16px;
   }
 }
 
-/* 📱 Tablets (Portrait) and Medium Phones */
 @media (max-width: 768px) {
   .morehero {
     padding: 40px 25px;
@@ -156,47 +173,91 @@
   }
 
   .morehero-title {
-    font-size: 26px;
+    font-size: 28px;
+  }
+
+  .morehero-subtitle {
+    font-size: 16px;
   }
 
   .quote {
-    font-size: 45px;
+    font-size: 55px;
+  }
+
+  .feedback-card p {
+    font-size: 16px;
+  }
+
+  .user-name {
+    font-size: 15px;
+  }
+
+  .user-img {
+    width: 38px;
+    height: 38px;
+  }
+
+  .star {
+    font-size: 17px;
   }
 }
 
-/* 📲 Small Phones (iPhone 6 and below) */
 @media (max-width: 480px) {
   .morehero {
-    padding: 30px 20px;
+    padding: 35px 18px;
   }
 
   .morehero-title {
-    font-size: 22px;
+    font-size: 24px;
+    text-align: left;
   }
 
   .morehero-subtitle {
     font-size: 14px;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+
+  .feedback-container {
+    flex-direction: column;
+    gap: 20px;
   }
 
   .feedback-card {
     width: 100%;
-    padding: 20px 15px;
+    padding: 25px 20px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.25);
   }
 
   .quote {
-    font-size: 40px;
+    font-size: 55px;
+    margin-bottom: 10px;
+    line-height: 0.7;
   }
 
   .feedback-card p {
-    font-size: 13px;
+    font-size: 15px; 
+    line-height: 1.65;
+    margin-bottom: 25px;
+    text-align: left; 
   }
 
-  .user-name {
-    font-size: 13px;
+  .user-row {
+    justify-content: flex-start; 
+    gap: 8px;
   }
 
   .user-img {
-    width: 30px;
-    height: 30px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .user-name {
+    font-size: 15px;
+  }
+  .star {
+    font-size: 17px;
   }
 }

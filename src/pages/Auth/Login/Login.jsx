@@ -8,24 +8,27 @@ import Carousel from "../../../Components/Carousel/Carousel";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { setUserDetails } from "../../../global/userSlice";
 
 const Login = () => {
   const [show, setShow] = useState(false);
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    remember: false, 
+    remember: false,
   });
   const [errors, setErrors] = useState({ email: "", password: "", remember: "" });
 
   const BaseURL = import.meta.env.VITE_BASE_URL;
+  // VITE_USERID = user_ID
+  // VITE_USERTOKEN = user_token
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   
+
   const validate = () => {
     const { email, password, remember } = formData;
     const newErrors = { email: "", password: "", remember: "" };
@@ -44,7 +47,7 @@ const Login = () => {
       isValid = false;
     }
 
-    
+
     if (!remember) {
       newErrors.remember = "You must check this box to continue";
       isValid = false;
@@ -54,19 +57,20 @@ const Login = () => {
     return isValid;
   };
 
+  
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({ ...formData, [name]: type === "checkbox" ? checked : value });
     setErrors({ ...errors, [name]: "" });
   };
 
-  const dispatchUser = useDispatch();
+  // const dispatchUser = useDispatch();
 
   const loginSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
       try {
-        setLoading(true); 
+        setLoading(true);
         const res = await axios.post(`${BaseURL}/login`, formData, {
           headers: { "Content-Type": "application/json" },
         });
@@ -75,9 +79,18 @@ const Login = () => {
         toast.success(res?.data?.message);
         const userDetails = res?.data?.data;
         const userToken = res?.data?.token;
-        dispatchUser(setUserDetails({ userDetails, userToken }));
+         const role = userDetails?.role;
+        // dispatchUser(setUserDetails({ userDetails, userToken }));
+        localStorage.setItem("userToken", JSON.stringify(userToken));
+        localStorage.setItem("userDetails", JSON.stringify(userDetails));
+        
+          role === "Client"
+        ? navigate("/dashboard")
+        : role === "Runner"
+        ? navigate("/runnerlayout")
+        : toast.error("Unknown role");
+       
 
-        navigate("/dashboard");
         setFormData({
           email: "",
           password: "",
@@ -87,7 +100,7 @@ const Login = () => {
         console.log("Login error:", error.response?.data || error.message);
         toast.error(error?.response?.data?.message || "Login failed");
       } finally {
-        setLoading(false); 
+        setLoading(false);
       }
     }
   };
@@ -124,7 +137,7 @@ const Login = () => {
             )}
           </div>
 
-          
+
           <div className="password-container">
             <label className="form-right-title">Password</label>
             <div className="password-right-input-box">
@@ -154,7 +167,7 @@ const Login = () => {
               <span className="error-message">{errors.password}</span>
             )}
 
-            
+
             <div className="checkbox-login-form">
               <input
                 type="checkbox"
@@ -169,7 +182,7 @@ const Login = () => {
               <span className="error-message">{errors.remember}</span>
             )}
 
-            
+
             <button
               type="submit"
               className="login-btn"

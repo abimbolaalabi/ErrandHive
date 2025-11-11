@@ -9,7 +9,7 @@ import "./MoreHero.css";
 
 const MoreHero = () => (
   <section className="morehero">
-    <h2 className="morehero-title">User’s Feedback</h2>
+    <h2 className="morehero-title">User's Feedback</h2>
     <p className="morehero-subtitle">Real experience from real people</p>
 
     <div className="feedback-container">
@@ -18,7 +18,7 @@ const MoreHero = () => (
         <p>
           ErrandHive has been a lifesaver! I used to waste hours running small
           errands after work, but now I just post them and someone nearby
-          handles it within minutes. It’s safe, fast, and super convenient.
+          handles it within minutes. It's safe, fast, and super convenient.
         </p>
         <div className="user-row">
           <img src={newpics} alt="Tomi Adeyemi" className="user-img" />
@@ -38,7 +38,7 @@ const MoreHero = () => (
         <p>
           I love how simple it is. I posted a last minute delivery and got
           matched with a verified runner in less than 5 minutes. Everything went
-          smoothly — definitely using ErrandHive again!
+          smoothly definitely using ErrandHive again!
         </p>
         <div className="user-row">
           <img src={womanpics} alt="Chioma Eze" className="user-img" />
@@ -52,12 +52,11 @@ const MoreHero = () => (
           </div>
         </div>
       </div>
-
       <div className="feedback-card">
         <RiDoubleQuotesL className="quote" />
         <p>
           ErrandHive gave me a flexible way to earn without stress. I pick
-          errands around my area whenever I’m free. It’s easy, and payments come
+          errands around my area whenever I'm free. It's easy, and payments come
           through instantly after each task.
         </p>
         <div className="user-row">
