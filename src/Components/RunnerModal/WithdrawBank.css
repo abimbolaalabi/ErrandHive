@@ -1,0 +1,132 @@
+.withdraw-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(22, 22, 22, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+.x-end-withdraw{
+    background-color: transparent;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+}
+.withdraw-container {
+  background: #fff;
+  width: 400px;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.withdraw-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.withdraw-header h3 {
+  font-size: 1.1rem;
+  color: #111;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.withdraw-subtitle {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 4px;
+  margin-bottom: 16px;
+}
+
+.balance-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f7f2ff;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.balance-label {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.balance-amount {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #111;
+}
+
+.balance-icon {
+  background: #9b5eff;
+  color: white;
+  font-size: 22px;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.input-section {
+  margin-bottom: 12px;
+}
+
+.input-section label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.input-section input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+}
+
+.input-section input:focus {
+  border-color: #9b5eff;
+}
+
+.info-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #9b5eff;
+  font-size: 0.9rem;
+  margin: 8px 0 16px;
+}
+
+.info-icon {
+  font-size: 18px;
+}
+
+.continue-btn {
+  width: 100%;
+  background: #9b5eff;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.continue-btn:hover {
+  background: #864df0;
+}

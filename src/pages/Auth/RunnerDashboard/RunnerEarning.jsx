@@ -32,7 +32,7 @@ const RunnerEarning = () => {
     setTimeout(() => setCopied(false), 1500);
   };
 
-  // ✅ Fetch wallet and payment history data
+ 
   const fetchWalletData = async () => {
     try {
       setLoading(true);
@@ -43,7 +43,7 @@ const RunnerEarning = () => {
         return;
       }
 
-      // ✅ Fetch wallet balance
+     
       const walletResponse = await axios.get(
         `${API_BASE_URL}/payment/wallet/balance`,
         {
@@ -52,7 +52,7 @@ const RunnerEarning = () => {
       );
 
       const wallet = walletResponse.data.data;
-
+             console.log(wallet)
       setWalletData({
         availableBalance: wallet.balance || 0,
         pendingEarnings: wallet.pendingEarnings || 0,
@@ -104,7 +104,7 @@ const RunnerEarning = () => {
         <p>Manage your earnings and withdrawals</p>
       </header>
 
-      {/* ✅ Summary Cards Section */}
+     
       <section className="summary-cards-container">
         {/* Available Balance */}
         <div className="summary-card available-balance-card">
@@ -197,7 +197,7 @@ const RunnerEarning = () => {
         </div>
       </section>
 
-      {/* ✅ Transaction History */}
+   
       <section className="transaction-history-section">
         <h3>Transaction History</h3>
         {transactions.length === 0 ? (

@@ -18,10 +18,24 @@ const ActiveJobs = () => {
   const [negotiateModal, setNegotiateModal] = useState(false);
   const [counterModal, setCounterModal] = useState(false);
   const [selectedErrand, setSelectedErrand] = useState(null);
+  const [isVerified, setIsVerified] = useState(false);
 
-  // ✅ Fetch jobs from API
+  // ✅ Check KYC status from user or localStorage
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("userDetails"));
+    const verified =
+      user?.kycStatus === "Verified" ||
+      storedUser?.kycStatus === "Verified";
+    setIsVerified(verified);
+  }, [user]);
+
+  // ✅ Fetch jobs only if verified
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("userToken"));
+    if (!isVerified) {
+      setLoading(false);
+      return;
+    }
 
     const fetchJobs = async () => {
       if (!token) {
@@ -43,9 +57,8 @@ const ActiveJobs = () => {
     };
 
     fetchJobs();
-  }, []);
+  }, [isVerified]);
 
-  // ✅ When clicking negotiation button
   const handleStartNegotiation = (job) => {
     if (!jobStatus[job._id]) {
       setSelectedErrand(job);
@@ -56,7 +69,6 @@ const ActiveJobs = () => {
     }
   };
 
-  // ✅ Stats computation
   const totalTime = jobs.reduce((acc, job) => acc + (job.estimatedTime || 0), 0);
   const totalDistance = jobs.reduce((acc, job) => acc + (job.distance || 0), 0);
   const userRating = user?.rating || 0;
@@ -80,7 +92,7 @@ const ActiveJobs = () => {
       <ToastContainer position="top-right" autoClose={3000} />
       <h1 className="active-job-heading">Active Jobs</h1>
 
-      {/* ✅ Stats Section */}
+      {/* ✅ Stats Section (always visible) */}
       <div className="card-grid">
         {statsData.map((stat, index) => (
           <div key={index} className="stat-card">
@@ -90,8 +102,13 @@ const ActiveJobs = () => {
         ))}
       </div>
 
-      {/* ✅ Job List Section */}
-      {jobs.length === 0 ? (
+      {/* 🚫 If not verified */}
+      {!isVerified ? (
+        <div className="dashboard-kyc verified-kyc">
+          <p className="kyc-reminder">Please complete your KYC to access jobs.</p>
+          <p className="complete-kyc">Go to your profile to verify your identity.</p>
+        </div>
+      ) : jobs.length === 0 ? (
         <div className="dashboard-kyc verified-kyc">
           <p className="kyc-reminder">No active jobs available at the moment.</p>
         </div>
@@ -145,7 +162,7 @@ const ActiveJobs = () => {
         })
       )}
 
-      {/* ✅ Modals */}
+    
       {negotiateModal && selectedErrand && (
         <Negotiation
           close={() => setNegotiateModal(false)}
