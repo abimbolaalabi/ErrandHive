@@ -64,8 +64,8 @@ const RunnerDashboard = () => {
     },
   ];
 
-  // ✅ Your condition should check for Completed (or userKyc)
-  const isVerified = userKyc || kycStatus?.toLowerCase() === "completed";
+ 
+  const isVerified = userKyc || kycStatus?.toLowerCase() === "verified";
 
   if (!isVerified) {
     return (
@@ -106,7 +106,7 @@ const RunnerDashboard = () => {
     );
   }
 
-  // ✅ If verified, show the main dashboard
+  
   return (
     <main className="runner-dashboard-layout">
       <div className="title-dashboard-runner">
