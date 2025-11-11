@@ -48,10 +48,10 @@ const Login = () => {
     }
 
 
-    if (!remember) {
-      newErrors.remember = "You must check this box to continue";
-      isValid = false;
-    }
+    // if (!remember) {
+    //   newErrors.remember = "You must check this box to continue";
+    //   isValid = false;
+    // }
 
     setErrors(newErrors);
     return isValid;
@@ -169,18 +169,18 @@ const Login = () => {
 
 
             <div className="checkbox-login-form">
-              <input
+              {/* <input
                 type="checkbox"
                 name="remember"
                 checked={formData.remember}
                 onChange={handleChange}
                 className="checkbox"
-              />
-              <span className="remember-me-checkbox">Remember me</span>
+              /> */}
+              {/* <span className="remember-me-checkbox">Remember me</span> */}
             </div>
-            {errors.remember && (
+            {/* {errors.remember && (
               <span className="error-message">{errors.remember}</span>
-            )}
+            )} */}
 
 
             <button

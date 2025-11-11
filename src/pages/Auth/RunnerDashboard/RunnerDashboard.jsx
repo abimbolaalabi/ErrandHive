@@ -1,44 +1,21 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import "./Runerdashboard.css";
 import cube from "../../../assets/cube.png";
 import { Link } from "react-router-dom";
 import { AppContext } from "../../../Context/App";
-import axios from "axios";
-
-const API_BASE_URL = "https://errandhive-project.onrender.com/api/v1";
 
 const RunnerDashboard = () => {
   const { user, kycStatus, userKyc } = useContext(AppContext);
 
-  const [totalErrands, setTotalErrands] = useState(0); // ✅ total errands
+  // ✅ Safely get stored user
   const storedUser = user || JSON.parse(localStorage.getItem("userDetails")) || {};
   const fullName = `${storedUser?.firstName || ""} ${storedUser?.lastName || ""}`.trim();
 
-  // Fetch total errands
-  useEffect(() => {
-    const fetchTotalErrands = async () => {
-      const token = JSON.parse(localStorage.getItem("userToken"));
-      if (!token) return;
-
-      try {
-        const res = await axios.get(`${API_BASE_URL}/errand/getAll`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        if (res?.data?.data && Array.isArray(res.data.data)) {
-          setTotalErrands(res.data.data.length);
-        }
-      } catch (err) {
-        console.error("Failed to fetch errands:", err);
-      }
-    };
-
-    fetchTotalErrands();
-  }, []);
-
+  // ✅ Dashboard summary boxes
   const data = [
     {
       title: "Total Request",
-      value: totalErrands, // ✅ dynamic total errands
+      value: "0",
       color: "#8133F1",
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -88,8 +65,10 @@ const RunnerDashboard = () => {
     },
   ];
 
-  const isVerified = userKyc || kycStatus?.toLowerCase() === "verified";
+  // ✅ Verify KYC status safely
+  const isVerified = userKyc || (kycStatus && kycStatus.toLowerCase() === "verified");
 
+  // 🚫 If KYC not done
   if (!isVerified) {
     return (
       <main className="runner-dashboard-layout">
@@ -105,16 +84,12 @@ const RunnerDashboard = () => {
           {kycStatus === "Pending" ? (
             <>
               <p className="kyc-reminder">Your KYC is under review.</p>
-              <p className="complete-kyc">
-                Please wait for approval to access jobs.
-              </p>
+              <p className="complete-kyc">Please wait for approval to access jobs.</p>
             </>
           ) : (
             <>
               <p className="kyc-reminder">You have not completed KYC yet.</p>
-              <p className="complete-kyc">
-                Complete KYC to get available jobs
-              </p>
+              <p className="complete-kyc">Complete KYC to get available jobs</p>
               <div className="kyc-btn-holder">
                 <Link to="/runnerlayout/runnerprofile">
                   <button type="submit" className="kyc-btn">
@@ -129,6 +104,7 @@ const RunnerDashboard = () => {
     );
   }
 
+  // ✅ When verified
   return (
     <main className="runner-dashboard-layout">
       <div className="title-dashboard-runner">

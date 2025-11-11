@@ -11,9 +11,7 @@ import { AppContext } from "../../../Context/App";
 const API_BASE_URL = "https://errandhive-project.onrender.com/api/v1";
 
 const ActiveJobs = () => {
-  const { userKyc, user } = useContext(AppContext); // Get KYC & user info
-  const isVerified = true; // Treat entering via Browse Jobs as verified
-
+  const { user } = useContext(AppContext);
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [jobStatus, setJobStatus] = useState({});
@@ -21,7 +19,7 @@ const ActiveJobs = () => {
   const [counterModal, setCounterModal] = useState(false);
   const [selectedErrand, setSelectedErrand] = useState(null);
 
-  // Fetch jobs
+  // ✅ Fetch jobs from API
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("userToken"));
 
@@ -47,16 +45,18 @@ const ActiveJobs = () => {
     fetchJobs();
   }, []);
 
+  // ✅ When clicking negotiation button
   const handleStartNegotiation = (job) => {
     if (!jobStatus[job._id]) {
       setSelectedErrand(job);
       setNegotiateModal(true);
+      setJobStatus((prev) => ({ ...prev, [job._id]: "proposed" }));
     } else {
       toast.info("This job has already been proposed/accepted.");
     }
   };
 
-  // ✅ Calculate stats
+  // ✅ Stats computation
   const totalTime = jobs.reduce((acc, job) => acc + (job.estimatedTime || 0), 0);
   const totalDistance = jobs.reduce((acc, job) => acc + (job.distance || 0), 0);
   const userRating = user?.rating || 0;
@@ -68,14 +68,19 @@ const ActiveJobs = () => {
     { label: "Average Ratings", value: userRating },
   ];
 
-  if (loading) return <div style={{ padding: "2rem", textAlign: "center" }}>Loading jobs...</div>;
+  if (loading)
+    return (
+      <div style={{ padding: "2rem", textAlign: "center" }}>
+        Loading jobs...
+      </div>
+    );
 
   return (
     <div className="card-container-wrapper">
       <ToastContainer position="top-right" autoClose={3000} />
       <h1 className="active-job-heading">Active Jobs</h1>
 
-      {/* Stats boxes */}
+      {/* ✅ Stats Section */}
       <div className="card-grid">
         {statsData.map((stat, index) => (
           <div key={index} className="stat-card">
@@ -85,7 +90,7 @@ const ActiveJobs = () => {
         ))}
       </div>
 
-      {/* Jobs list */}
+      {/* ✅ Job List Section */}
       {jobs.length === 0 ? (
         <div className="dashboard-kyc verified-kyc">
           <p className="kyc-reminder">No active jobs available at the moment.</p>
@@ -93,8 +98,11 @@ const ActiveJobs = () => {
       ) : (
         jobs.map((job) => {
           const status = jobStatus[job._id];
-          const isButtonDisabled = status === "accepted" || status === "proposed";
-          const buttonText = isButtonDisabled ? "View Details" : "Start Negotiation";
+          const isButtonDisabled =
+            status === "accepted" || status === "proposed";
+          const buttonText = isButtonDisabled
+            ? "View Details"
+            : "Start Negotiation";
 
           return (
             <div key={job._id} className="document-card">
@@ -118,11 +126,14 @@ const ActiveJobs = () => {
 
               <div className="bottom-info-row">
                 <div className="price-time-info">
-                  <CiClock2 /> {new Date(job.createdAt).toLocaleString()} ₦{job.price.toLocaleString()}
+                  <CiClock2 /> {new Date(job.createdAt).toLocaleString()} ₦
+                  {job.price?.toLocaleString() || "0"}
                 </div>
 
                 <button
-                  className={`negotiation-button ${isButtonDisabled ? "view-details-btn" : ""}`}
+                  className={`negotiation-button ${
+                    isButtonDisabled ? "view-details-btn" : ""
+                  }`}
                   onClick={() => handleStartNegotiation(job)}
                   disabled={isButtonDisabled}
                 >
@@ -134,12 +145,19 @@ const ActiveJobs = () => {
         })
       )}
 
+      {/* ✅ Modals */}
       {negotiateModal && selectedErrand && (
-        <Negotiation close={() => setNegotiateModal(false)} errand={selectedErrand} />
+        <Negotiation
+          close={() => setNegotiateModal(false)}
+          errand={selectedErrand}
+        />
       )}
 
       {counterModal && selectedErrand && (
-        <CounterSuccess close={() => setCounterModal(false)} errand={selectedErrand} />
+        <CounterSuccess
+          close={() => setCounterModal(false)}
+          errand={selectedErrand}
+        />
       )}
     </div>
   );
