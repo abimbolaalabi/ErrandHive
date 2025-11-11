@@ -4,19 +4,17 @@ import { toast, ToastContainer } from "react-toastify";
 import ConfirmWithdrawal from "./ConfirmWithdrawal";
 import "react-toastify/dist/ReactToastify.css";
 
-const WithdrawBank = ({ close, availableBalance }) => {
+const WithdrawBank = ({ close, availableBalance = 5000 }) => {
   const [amount, setAmount] = useState("");
   const [showConfirm, setShowConfirm] = useState(false);
 
-  // Handle input: only numbers and decimal
   const handleInputChange = (e) => {
     const value = e.target.value;
-    const regex = /^\d*\.?\d*$/; // only digits and decimal
+    const regex = /^\d*\.?\d*$/;
     if (regex.test(value)) setAmount(value);
   };
 
   const handleContinue = () => {
-    // Parse amount and available balance as numbers
     const amountValue = parseFloat(amount);
     const balanceValue = parseFloat(
       availableBalance.toString().replace(/,/g, "")
@@ -26,25 +24,26 @@ const WithdrawBank = ({ close, availableBalance }) => {
       toast.error("Enter a valid amount.");
       return;
     }
-//console.log("mr josh")
 
     if (amountValue < 1000) {
       toast.error("Minimum withdrawal is ₦1,000.00.");
       return;
     }
+
     if (amountValue > balanceValue) {
       toast.error("Insufficient balance.");
       return;
     }
 
-    setShowConfirm(true); // show confirmation modal
+    // ✅ show next modal
+    setShowConfirm(true);
   };
 
   return (
     <>
       <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
 
-      {/* Step 1: Enter amount */}
+      {/* STEP 1: Enter withdrawal amount */}
       {!showConfirm && (
         <ModalBackdrop>
           <ModalContent>
@@ -52,6 +51,7 @@ const WithdrawBank = ({ close, availableBalance }) => {
               <HeaderTitle>Withdraw to Bank</HeaderTitle>
               <CloseButton onClick={() => close(false)}>&times;</CloseButton>
             </ModalHeader>
+
             <ModalBody>
               <WithdrawalInputLabel>Withdrawal Amount</WithdrawalInputLabel>
               <WithdrawalInput
@@ -60,13 +60,15 @@ const WithdrawBank = ({ close, availableBalance }) => {
                 value={amount}
                 onChange={handleInputChange}
               />
-              <ContinueButton onClick={handleContinue}>Continue</ContinueButton>
+              <ContinueButton onClick={handleContinue}>
+                Continue
+              </ContinueButton>
             </ModalBody>
           </ModalContent>
         </ModalBackdrop>
       )}
 
-      {/* Step 2: Confirm withdrawal */}
+      {/* STEP 2: Confirm withdrawal modal */}
       {showConfirm && (
         <ConfirmWithdrawal
           amount={amount}
@@ -76,6 +78,7 @@ const WithdrawBank = ({ close, availableBalance }) => {
               `Withdrawal of ₦${parseFloat(amount).toLocaleString()} confirmed!`
             );
             setAmount("");
+            setShowConfirm(false);
             close(false);
           }}
         />
