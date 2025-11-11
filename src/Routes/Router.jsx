@@ -32,6 +32,8 @@ import Negotiation from '../Components/RunnerModal/Negotiation'
 import KycPopModel from '../Components/RunnerModal/KycPopupModel'
 import ErrandLive from '../pages/Auth/RunnerDashboard/ErrandLive'
 import AddBank from '../Components/AddBank/AddBankDeal'
+import SuccessPage from '../Components/ModalSuccess/SuccessPage'
+
 
 const Router = () => {
   return (
@@ -50,6 +52,8 @@ const Router = () => {
          <Route path="/addBank" element={<AddBank />} />
             {/* <Route path="/Negotiation" element={<Negotiation />} /> */}
              <Route path="KycMod" element={<KycPopModel />} />
+         
+             
              {/* <Route path="countersucess" element={<CounterSuccess />} /> */}
                           <Route path="errandlive" element={<ErrandLive />} />
         {/*  Client Dashboard */}
@@ -59,9 +63,11 @@ const Router = () => {
             <Route path="my-errands" element={<MyErrandsPage />} />
             <Route path="my-errands/:errandId" element={<MyErrandsDetails />} />
             <Route path="my-errands/:errandId/:errandTrack" element={<ErrandDeliveryTrack />} />
+                    <Route path="success" element={<SuccessPage />} />
             <Route path="payments" element={<PaymentsPage />} />
-            <Route path="messages" element={<MessagesPage />} />
+            <Route path="messages/:runnerId" element={<MessagesPage />} />
             <Route path="profile" element={<ProfilePage />} />
+  
             <Route path="profile/:profileId" element={<ProfileDetailSetting />} />
           </Route>
         </Route>
@@ -72,7 +78,7 @@ const Router = () => {
             <Route index element={<RunnerDashboard />} />
             <Route path="runneractive" element={<ActiveJob />} />
             <Route path="runnerearning" element={<RunnerEarning />} />
-            <Route path="runnermessage" element={<RunnerMessage />} />
+            <Route path="runnermessage/:runnerId" element={<RunnerMessage />} />
             <Route path="runnerprofile" element={<RunnerProfile />} />
             <Route path="/runnerlayout/runnerprofile/runnerprofile/:profileid" element={<EditProfile/>} />
              <Route path="/runnerlayout/runnerprofile/runnerprofile/:bankId" element={<AddBank />} />
