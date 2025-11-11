@@ -79,7 +79,7 @@ const MessagesPage = () => {
 
     socket.emit("send_message", newMsg);
 
-    // Optimistic UI update
+  
     setMessages((prev) => [
       ...prev,
       { text: message, fromUser: true, time: "Now" },
@@ -87,7 +87,7 @@ const MessagesPage = () => {
     setMessage("");
   };
 
-  // 🔽 Auto scroll
+
   useEffect(() => {
     const chatBody = document.querySelector(".chat-body");
     if (chatBody) chatBody.scrollTop = chatBody.scrollHeight;
