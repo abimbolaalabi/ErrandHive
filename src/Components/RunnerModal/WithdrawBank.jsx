@@ -26,12 +26,12 @@ const WithdrawBank = ({ close, availableBalance }) => {
       toast.error("Enter a valid amount.");
       return;
     }
+//console.log("mr josh")
 
     if (amountValue < 1000) {
       toast.error("Minimum withdrawal is ₦1,000.00.");
       return;
     }
-
     if (amountValue > balanceValue) {
       toast.error("Insufficient balance.");
       return;
