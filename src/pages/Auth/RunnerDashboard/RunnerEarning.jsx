@@ -60,7 +60,7 @@ const RunnerEarning = () => {
         walletId: wallet.walletId || "N/A",
       });
 
-      // ✅ Fetch payment history
+   
       const txResponse = await axios.get(
         `${API_BASE_URL}/payment/history`,
         {
@@ -133,7 +133,6 @@ const RunnerEarning = () => {
             <p className="wallet-id-number">{walletData.walletId}</p>
             <div
               className="copy-icon-placeholder"
-              onClick={copyWalletId}
               style={{ cursor: "pointer", position: "relative" }}
             >
               <IoCopyOutline style={{ fontSize: "1rem" }} />

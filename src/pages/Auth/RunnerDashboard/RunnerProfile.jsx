@@ -251,7 +251,8 @@ const RunnerProfile = () => {
               <p>Link your bank account to receive withdrawals securely and quickly.</p>
             </div>
           </div>
-          <button className="runnerProfile-actionBtn runnerProfile-bankBtn">Add Bank Account Now</button>
+          <Link to={`/runnerlayout/runnerprofile/runnerprofile/${id}`}></Link>
+          <button className="runnerProfile-actionBtn runnerProfile-bankBtn" >Add Bank Account Now</button>
         </div>
       )}
 
@@ -263,7 +264,12 @@ const RunnerProfile = () => {
             <p>Customize how and when you want to receive your earnings</p>
           </div>
         </div>  
-        <button className="runnerProfile-actionBtn runnerProfile-withdrawalBtn">Edit Settings</button>
+
+  <button className="runnerProfile-actionBtn runnerProfile-bankBtn">
+    Edit Settings
+  </button>
+
+
       </div>
 
       {kycModel && <KycPopupModel close={setKycModel} />}
