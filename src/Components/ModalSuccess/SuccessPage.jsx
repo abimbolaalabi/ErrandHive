@@ -14,19 +14,19 @@ const SuccessPage = () => {
 
         <h2 className="success-title">Payment Successful! ✨</h2>
         <p className="success-subtitle">
-          Your payment was completed successfully.
-          <br /> A verified runner will begin your errand soon.
+          Your payment was completed successfully. <br />
+          A verified runner will begin your errand soon.
         </p>
 
         <div className="success-info-card">
           <div className="success-info-row">
             <span>Amount Paid</span>
-            <strong>₦5,000</strong>
+            <strong>Success</strong>
           </div>
 
           <div className="success-info-row">
             <span>Errand</span>
-            <strong>Package Delivery to Ikeja</strong>
+            <strong>Confirmed</strong>
           </div>
 
           <div className="success-escrow">
@@ -37,17 +37,9 @@ const SuccessPage = () => {
 
         <button className="success-view-btn">
           <AiOutlineEye />
-          View Errand Status
+          Go to DashBoard
         </button>
 
-        <div className="success-footer-actions">
-          <button className="success-chat-btn">
-            <BsChat /> Chat
-          </button>
-          <button className="success-receipt-btn">
-            <BsReceipt /> Receipt
-          </button>
-        </div>
       </div>
     </div>
   );

@@ -61,7 +61,7 @@ const Router = () => {
             <Route path="my-errands" element={<MyErrandsPage />} />
             <Route path="my-errands/:errandId" element={<MyErrandsDetails />} />
             <Route path="my-errands/:errandId/:errandTrack" element={<ErrandDeliveryTrack />} />
-                    <Route path="/dashboard/success" element={<SuccessPage />} />
+                    <Route path="success" element={<SuccessPage />} />
             <Route path="payments" element={<PaymentsPage />} />
             <Route path="messages/:runnerId" element={<MessagesPage />} />
             <Route path="profile" element={<ProfilePage />} />

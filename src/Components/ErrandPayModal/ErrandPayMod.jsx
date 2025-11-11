@@ -4,11 +4,13 @@ import { IoClose } from "react-icons/io5";
 import { PiShieldCheckDuotone } from "react-icons/pi";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ErrandPayMod = ({ toclose, setErrandPay, info }) => {
   const BaseUrl = import.meta.env.VITE_BASE_URL;
   const token = JSON.parse(localStorage.getItem("userToken"));
   const [loading, setLoading] = useState(false);
+  const Navigate = useNavigate()
 
 
   const price = info?.bidPrice || info?.currentPrice || 0;
@@ -31,21 +33,25 @@ const ErrandPayMod = ({ toclose, setErrandPay, info }) => {
           },
         }
       );
+      console.log(res?.data)
+      const checkoutUrl = res?.data?.data?.koraResponse?.data?.checkout_url
 
-      const checkoutUrl = res?.data?.data?.koraResponse?.data?.checkout_url;
-      const ok = res?.data?.status === true;
+      const ok = res?.data?.success === true;
 
       if (ok && checkoutUrl) {
-        toast.success("Redirecting to secure payment page...");
+        toast.success(res.data.message);
+        console.log(res.data.message)
         setTimeout(() => {
-          window.location.href = checkoutUrl; 
+          window.location.href = checkoutUrl;
+          // window.location.href = url;
+          // Navigate(checkoutUrl) 
         }, 1000);
       } else {
-        toast.error("Could not initialize payment");
+        toast.error();
       }
     } catch (err) {
       console.log("PAYMENT ERROR:", err);
-      toast.error(err?.response?.data?.message || "Payment failed");
+      toast.error(err?.data?.message);
     } finally {
       setLoading(false);
     }
