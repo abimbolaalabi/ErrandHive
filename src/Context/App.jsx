@@ -53,10 +53,8 @@ const AppProvider = ({ children }) => {
         getAUser,
         userKyc,
         setUserKyc,
-        kycStatus,
+        kycStatus, 
         setKycStatus,
-
- 
       }}
     >
       {children}
