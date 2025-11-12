@@ -11,31 +11,18 @@ import { AppContext } from "../../../Context/App";
 const API_BASE_URL = "https://errandhive-project.onrender.com/api/v1";
 
 const ActiveJobs = () => {
-  const { user } = useContext(AppContext);
+  const { user } = useContext(AppContext); // user and KYC info if needed
+
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [jobStatus, setJobStatus] = useState({});
   const [negotiateModal, setNegotiateModal] = useState(false);
   const [counterModal, setCounterModal] = useState(false);
   const [selectedErrand, setSelectedErrand] = useState(null);
-  const [isVerified, setIsVerified] = useState(false);
 
-  // ✅ Check KYC status from user or localStorage
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("userDetails"));
-    const verified =
-      user?.kycStatus === "Verified" ||
-      storedUser?.kycStatus === "Verified";
-    setIsVerified(verified);
-  }, [user]);
-
-  // ✅ Fetch jobs only if verified
+  // ✅ Fetch jobs
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("userToken"));
-    if (!isVerified) {
-      setLoading(false);
-      return;
-    }
 
     const fetchJobs = async () => {
       if (!token) {
@@ -57,18 +44,18 @@ const ActiveJobs = () => {
     };
 
     fetchJobs();
-  }, [isVerified]);
+  }, []);
 
   const handleStartNegotiation = (job) => {
     if (!jobStatus[job._id]) {
       setSelectedErrand(job);
       setNegotiateModal(true);
-      setJobStatus((prev) => ({ ...prev, [job._id]: "proposed" }));
     } else {
       toast.info("This job has already been proposed/accepted.");
     }
   };
 
+  // ✅ Compute totals
   const totalTime = jobs.reduce((acc, job) => acc + (job.estimatedTime || 0), 0);
   const totalDistance = jobs.reduce((acc, job) => acc + (job.distance || 0), 0);
   const userRating = user?.rating || 0;
@@ -92,7 +79,7 @@ const ActiveJobs = () => {
       <ToastContainer position="top-right" autoClose={3000} />
       <h1 className="active-job-heading">Active Jobs</h1>
 
-      {/* ✅ Stats Section (always visible) */}
+      {/* ✅ Stats boxes */}
       <div className="card-grid">
         {statsData.map((stat, index) => (
           <div key={index} className="stat-card">
@@ -102,15 +89,12 @@ const ActiveJobs = () => {
         ))}
       </div>
 
-      {/* 🚫 If not verified */}
-      {!isVerified ? (
+      {/* ✅ Jobs list */}
+      {jobs.length === 0 ? (
         <div className="dashboard-kyc verified-kyc">
-          <p className="kyc-reminder">Please complete your KYC to access jobs.</p>
-          <p className="complete-kyc">Go to your profile to verify your identity.</p>
-        </div>
-      ) : jobs.length === 0 ? (
-        <div className="dashboard-kyc verified-kyc">
-          <p className="kyc-reminder">No active jobs available at the moment.</p>
+          <p className="kyc-reminder">
+            No active jobs available at the moment.
+          </p>
         </div>
       ) : (
         jobs.map((job) => {
@@ -143,7 +127,8 @@ const ActiveJobs = () => {
 
               <div className="bottom-info-row">
                 <div className="price-time-info">
-                  <CiClock2 /> {new Date(job.createdAt).toLocaleString()} ₦
+                  <CiClock2 />{" "}
+                  {new Date(job.createdAt).toLocaleString()} ₦
                   {job.price?.toLocaleString() || "0"}
                 </div>
 
@@ -162,7 +147,7 @@ const ActiveJobs = () => {
         })
       )}
 
-    
+     
       {negotiateModal && selectedErrand && (
         <Negotiation
           close={() => setNegotiateModal(false)}
