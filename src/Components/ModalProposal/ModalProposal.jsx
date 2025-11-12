@@ -122,15 +122,17 @@ const ModalProposal = ({ toclose, setReview, info, setInfo }) => {
 
                                 setReview(true);
                                 toclose(false)
+                               
                                 setInfo((prev) => ({
                                     ...prev,
                                     applicationId: item?.id,
                                     bidPrice: item?.bidPrice,
                                     currentPrice: item?.currentPrice,
                                     runnerName: `${item?.runner?.firstName} ${item?.runner?.lastName}`,
-                                    runnerId: item?.runnerId
+                                    runnerId: item?.runnerId,
+                                    errandId: item?.errandId
                                 }));
-
+                                  {console.log(info)}
                             }}>✔ ₦{item?.bidPrice || item?.currentPrice}</button>
                         </div>
 

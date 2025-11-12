@@ -5,7 +5,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 const PaymentsPage = () => {
-  const { errandId } = useParams();
+  // const { errandId } = useParams();
   const [paymentsData, setPaymentsData] = useState([]);
   const token = JSON.parse(localStorage.getItem("userToken")); 
   const BaseUrl = import.meta.env.VITE_BASE_URL;
@@ -23,8 +23,7 @@ const PaymentsPage = () => {
       setPaymentsData(payments);
     } catch (error) {
       console.log(
-        " Payment history error:",
-        error?.response?.data || error.message
+        " Payment history error:",error
       );
     }
   };
@@ -34,6 +33,7 @@ const PaymentsPage = () => {
   }, []);
 
   return (
+    
     <div className="payments-wrapper">
       <h2 className="payments-title">Payment & History</h2>
       <p className="payments-subtitle">Track your transactions and spending</p>

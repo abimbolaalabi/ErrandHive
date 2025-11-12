@@ -13,7 +13,7 @@ const ModalProposalRev = ({ toclose, setErrandPay, info }) => {
   const handleConfirm = async () => {
     try {
       setLoading(true);
-
+      console.log(info)
       const res = await axios.patch(
         `${BaseUrl}/errands/${info?.errandId}/applications/${info?.applicationId}/accept`,
         {},
@@ -92,4 +92,4 @@ const ModalProposalRev = ({ toclose, setErrandPay, info }) => {
 
 export default ModalProposalRev;
 
-// "/dashboard/my-errands/errandId/errandTrack"
+// 

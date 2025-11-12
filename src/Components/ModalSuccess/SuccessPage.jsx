@@ -3,8 +3,16 @@ import "./SuccessPage.css";
 import { FaCheckCircle } from "react-icons/fa";
 import { BsShieldCheck, BsChat, BsReceipt } from "react-icons/bs";
 import { AiOutlineEye } from "react-icons/ai";
+import { useNavigate, useParams } from "react-router-dom";
 
 const SuccessPage = () => {
+  const queryParams = new URLSearchParams(location.search);
+  const reference = queryParams.get("reference").split("_")[0];
+
+  console.log("Payment reference:", reference);
+  // console.log(refernce)
+  const navigate = useNavigate()
+
   return (
     <div className="success-page-container">
       <div className="success-page-box">
@@ -35,7 +43,7 @@ const SuccessPage = () => {
           </div>
         </div>
 
-        <button className="success-view-btn">
+        <button className="success-view-btn" onClick={()=> navigate(`/dashboard/my-errands/errandId/errandTrack/${reference}`)}>
           <AiOutlineEye />
           Go to DashBoard
         </button>

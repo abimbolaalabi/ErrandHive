@@ -13,18 +13,18 @@ const ErrandPayMod = ({ toclose, setErrandPay, info }) => {
   const Navigate = useNavigate()
 
 
-  const price = info?.bidPrice || info?.currentPrice || 0;
+  const price = info?.bidPrice || info?.currentPrice ;
 
   const handlePayment = async () => {
     try {
       setLoading(true);
-
+       console.log(info.errandId)
       const res = await axios.post(
-        `${BaseUrl}/payment/initialize`,
+        `${BaseUrl}/payment/initialize/${info?.errandId}`,
         {
-          amount: price,
+         
           description: info?.title || "Errand Payment",
-          receiverId: info?.runnerId,
+        
         },
         {
           headers: {
@@ -34,8 +34,8 @@ const ErrandPayMod = ({ toclose, setErrandPay, info }) => {
         }
       );
       console.log(res?.data)
-      const checkoutUrl = res?.data?.data?.koraResponse?.data?.checkout_url
-
+      const checkoutUrl = res?.data?.data?.data?.checkout_url
+      console.log(checkoutUrl)
       const ok = res?.data?.success === true;
 
       if (ok && checkoutUrl) {
