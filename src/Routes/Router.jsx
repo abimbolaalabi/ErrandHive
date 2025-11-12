@@ -32,6 +32,7 @@ import KycPopModel from "../Components/RunnerModal/KycPopupModel";
 import ErrandLive from "../pages/Auth/RunnerDashboard/ErrandLive";
 import SuccessPage from "../Components/ModalSuccess/SuccessPage";
 import RunnerMessage from "../pages/Auth/RunnerDashboard/RunnerMessage";
+import AddBankDeal from "../Components/AddBank/AddBankDeal";
 
 const Router = () => {
   return (
@@ -46,9 +47,14 @@ const Router = () => {
         <Route path="/verifyemail" element={<VerifyEmail />} />
         <Route path="/forgot" element={<ForgotPassword />} />
         <Route path="/reset" element={<ResetPassword />} />
-        <Route path="/reset-otp" element={<ResetOtp />} />
-        <Route path="/kycmod" element={<KycPopModel />} />
-        <Route path="/errandlive" element={<ErrandLive />} />
+         <Route path="/reset-otp" element={<ResetOtp />} />
+         <Route path="/addBank" element={<AddBankDeal />} />
+            {/* <Route path="/Negotiation" element={<Negotiation />} /> */}
+             <Route path="KycMod" element={<KycPopModel />} />
+             {/* <Route path="countersucess" element={<CounterSuccess />} /> */}
+          <Route path="errandlive" element={<ErrandLive />} />
+
+
 
         {/*  Client Dashboard */}
         <Route element={<PrivateRoute allowedRole="Client" />}>

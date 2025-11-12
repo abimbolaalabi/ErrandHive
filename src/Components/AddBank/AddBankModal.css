@@ -1,0 +1,203 @@
+/* AddBankAccountModal.css */
+.add-bank-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-bank-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.add-bank-modal {
+  position: relative;
+  background: #fff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  animation: add-bank-modalIn 0.3s ease-out;
+}
+
+@keyframes add-bank-modalIn {
+  from { opacity: 0; transform: translateY(-20px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.add-bank-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #666;
+  cursor: default;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-bank-title {
+  margin: 24px 24px 8px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1c1c1e;
+}
+
+.add-bank-subtitle {
+  margin: 0 24px 24px;
+  font-size: 14px;
+  color: #666;
+}
+
+.add-bank-form {
+  padding: 0 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.add-bank-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-bank-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.add-bank-required {
+  color: #e11d48;
+}
+
+.add-bank-info-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
+  background: #ccc;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 16px;
+}
+
+.add-bank-input {
+  padding: 14px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.add-bank-input:focus {
+  outline: none;
+  border-color: #9333ea;
+  box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.2);
+}
+
+.add-bank-input.readonly {
+  background: #f3f4f6;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.add-bank-input.italic {
+  font-style: italic;
+  color: #888;
+  background: #f9fafb;
+}
+
+.add-bank-input::placeholder {
+  color: #9ca3af;
+}
+
+.add-bank-security-note {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  background: #f5f0ff;
+  border-radius: 12px;
+  margin: 8px 24px 0;
+}
+
+.add-bank-shield-icon {
+  width: 20px;
+  height: 20px;
+  color: #9333ea;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.add-bank-security-text {
+  font-size: 13px;
+  color: #6b21a8;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.add-bank-buttons {
+  display: flex;
+  gap: 12px;
+  padding: 16px 24px 24px;
+  background: #f9fafb;
+}
+
+.add-bank-cancel-btn,
+.add-bank-save-btn {
+  flex: 1;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 15px;
+  cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.add-bank-cancel-btn {
+  border: 1px solid #d1d5db;
+  background: white;
+  color: #374151;
+}
+
+.add-bank-save-btn {
+  background: #9333ea;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(147, 51, 234, 0.3);
+}
+
+.add-bank-sparkles-icon {
+  width: 18px;
+  height: 18px;
+}

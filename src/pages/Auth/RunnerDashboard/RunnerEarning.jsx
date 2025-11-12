@@ -4,7 +4,7 @@ import { ArrowDownLeft } from "lucide-react";
 import { FaWallet } from "react-icons/fa";
 import { IoCopyOutline } from "react-icons/io5";
 import { RxEyeOpen, RxEyeClosed } from "react-icons/rx";
-// import WithdrawBank from "../../../Components/RunnerModal/WithdrawBank";
+import WithdrawBank from "../../../Components/RunnerModal/WithdrawBank";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -32,6 +32,7 @@ const RunnerEarning = () => {
     setTimeout(() => setCopied(false), 1500);
   };
 
+ 
   const fetchWalletData = async () => {
     try {
       setLoading(true);
@@ -42,32 +43,40 @@ const RunnerEarning = () => {
         return;
       }
 
-      
+     
       const walletResponse = await axios.get(
         `${API_BASE_URL}/payment/wallet/balance`,
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
-      const data = walletResponse.data.data;
 
+      const wallet = walletResponse.data.data;
+             console.log(wallet)
       setWalletData({
-        availableBalance: data.balance || 0,
-        pendingEarnings: data.pendingEarnings || 0,
-        totalEarnings: data.totalEarnings || 0,
-        walletId: data.walletId || "N/A",
+        availableBalance: wallet.balance || 0,
+        pendingEarnings: wallet.pendingEarnings || 0,
+        totalEarnings: wallet.totalEarnings || 0,
+        walletId: wallet.walletId || "N/A",
       });
 
-      const txResponse = await axios.get(`${API_BASE_URL}/payment/history`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setTransactions(txResponse.data.data || []);
+   
+      const txResponse = await axios.get(
+        `${API_BASE_URL}/payment/history`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      const txData = Array.isArray(txResponse.data.data)
+        ? txResponse.data.data
+        : [];
+
+      setTransactions(txData);
 
       toast.success("Wallet data loaded successfully!");
     } catch (err) {
-      console.log("Error fetching wallet data:", err);
+      console.error("Error fetching wallet data:", err);
       toast.error("Failed to load wallet data.");
     } finally {
       setLoading(false);
@@ -95,6 +104,7 @@ const RunnerEarning = () => {
         <p>Manage your earnings and withdrawals</p>
       </header>
 
+     
       <section className="summary-cards-container">
         {/* Available Balance */}
         <div className="summary-card available-balance-card">
@@ -123,7 +133,6 @@ const RunnerEarning = () => {
             <p className="wallet-id-number">{walletData.walletId}</p>
             <div
               className="copy-icon-placeholder"
-              onClick={copyWalletId}
               style={{ cursor: "pointer", position: "relative" }}
             >
               <IoCopyOutline style={{ fontSize: "1rem" }} />
@@ -188,28 +197,44 @@ const RunnerEarning = () => {
         </div>
       </section>
 
-      {/* Transaction History */}
+   
       <section className="transaction-history-section">
         <h3>Transaction History</h3>
         {transactions.length === 0 ? (
           <p>No transactions yet.</p>
         ) : (
           <ul className="transaction-list">
-            {transactions.map((tx) => (
-              <li key={tx.id} className="transaction-item">
+            {transactions.map((tx, index) => (
+              <li key={index} className="transaction-item">
                 <span className="tx-date">
-                  {new Date(tx.date).toLocaleDateString()}
+                  {new Date(tx.createdAt).toLocaleDateString()}
                 </span>
-                <span className="tx-type">{tx.type}</span>
-                <span className="tx-amount">₦{tx.amount}</span>
-                <span className="tx-status">{tx.status}</span>
+                <span className="tx-type">{tx.type || "N/A"}</span>
+                <span className="tx-amount">₦{tx.amount || 0}</span>
+                <span
+                  className={`tx-status ${
+                    tx.status?.toLowerCase() === "completed"
+                      ? "completed"
+                      : tx.status?.toLowerCase() === "pending"
+                      ? "pending"
+                      : "failed"
+                  }`}
+                >
+                  {tx.status || "Unknown"}
+                </span>
               </li>
             ))}
           </ul>
         )}
       </section>
 
-      {/* {withdrawModal && <WithdrawBank availableBalance={walletData.availableBalance} close={() => setWithdrawModal(false)} />} */}
+      {/* ✅ Withdraw Modal */}
+      {withdrawModal && (
+        <WithdrawBank
+          availableBalance={walletData.availableBalance}
+          close={() => setWithdrawModal(false)}
+        />
+      )}
     </div>
   );
 };
