@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./ErrandDeliveryTrack.css";
 import { CiLocationOn } from "react-icons/ci";
 import { IoCheckmarkCircle } from "react-icons/io5";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ErrandDeliveryTrack = () => {
   // Dummy runner & job data
@@ -31,6 +33,30 @@ const ErrandDeliveryTrack = () => {
     { id: 6, label: "Arrived at delivery", time: "", done: false },
     { id: 7, label: "Delivered", time: "", done: false },
   ];
+  const [aUser, setAUser] = useState({})
+const BaseUrl = import.meta.env.VITE_BASE_URL
+const {errandId} = useParams()
+
+const navigate = useNavigate()
+
+
+    const getAUserById = async()=> {
+      try {
+          const token = JSON.parse(localStorage.getItem("userToken"));
+        const res = await axios.get(`${BaseUrl}/errand/get/${errandId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+        setAUser(res?.data?.data)
+      } catch (error) {
+        console.log("This is errandDeliError",error)
+      }
+    }
+    useEffect(()=> {
+      getAUserById()
+    },[])
+
 
   return (
     <div className="med-root">
@@ -45,10 +71,10 @@ const ErrandDeliveryTrack = () => {
       <div className="med-card med-top-card">
         <div className="med-top-row">
           <div className="med-runner-info">
-            <div className="med-avatar">{runner.initials}</div>
+            <div className="med-avatar">{aUser?.initials}</div>
             <div className="med-runner-meta">
               <div className="med-runner-line">
-                <h2 className="med-runner-name">{runner.name}</h2>
+                <h2 className="med-runner-name">{aUser?.assignedRunner?.firstName} {aUser?.assignedRunner?.lastName}</h2>
                 {runner.verified && (
                   <span className="med-pill med-pill-verified">Verified Runner</span>
                 )}
@@ -74,7 +100,7 @@ const ErrandDeliveryTrack = () => {
             </div>
             <div className="med-loc-text">
               <span className="med-loc-label">Pickup Location</span>
-              <p className="med-loc-value">{errand.pickup}</p>
+              <p className="med-loc-value">{aUser?.pickupAddress}</p>
             </div>
           </div>
 
@@ -84,7 +110,7 @@ const ErrandDeliveryTrack = () => {
             </div>
             <div className="med-loc-text">
               <span className="med-loc-label">Delivery Location</span>
-              <p className="med-loc-value">{errand.delivery}</p>
+              <p className="med-loc-value">{aUser?.deliveryAddress}</p>
             </div>
           </div>
         </div>
@@ -118,7 +144,7 @@ const ErrandDeliveryTrack = () => {
             <div className="med-profile-jobs">{runner.jobs} jobs</div>
           </div>
 
-          <button type="button" className="med-chat-btn">
+          <button type="button" className="med-chat-btn" onClick={()=> navigate(`/dashboard/messages/${errandId}`)}>
             💬 Chat with Runner
           </button>
         </div>

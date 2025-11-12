@@ -31,6 +31,7 @@ import Negotiation from "../Components/RunnerModal/Negotiation";
 import KycPopModel from "../Components/RunnerModal/KycPopupModel";
 import ErrandLive from "../pages/Auth/RunnerDashboard/ErrandLive";
 import SuccessPage from "../Components/ModalSuccess/SuccessPage";
+import RunnerMessage from "../pages/Auth/RunnerDashboard/RunnerMessage";
 import AddBankDeal from "../Components/AddBank/AddBankDeal";
 
 const Router = () => {
@@ -62,11 +63,11 @@ const Router = () => {
             <Route path="my-errands" element={<MyErrandsPage />} />
             <Route path="my-errands/:errandId" element={<MyErrandsDetails />} />
             <Route
-              path="my-errands/:errandId/:errandTrack"
+              path="my-errands/:errandId/:errandTrack/:errandId"
               element={<ErrandDeliveryTrack />}
             />
             <Route path="success" element={<SuccessPage />} />
-            <Route path="payments/:errandId" element={<PaymentsPage />} />
+            <Route path="payments" element={<PaymentsPage />} />
 
             {/* Client Messages (chat with runner) */}
             <Route path="messages/:runnerId" element={<MessagesPage />} />
@@ -92,8 +93,7 @@ const Router = () => {
             />
 
             {/* Runner Message */}
-            <Route path="runnermessage/:userId" element={<MessagesPage />} />
-           
+            <Route path="runnermessage/:errandId" element={<RunnerMessage />} />
           </Route>
         </Route>
 

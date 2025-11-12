@@ -1,81 +1,534 @@
-import { useState } from "react";
-import "./RuneerMessage.css";
+import { useEffect, useRef, useState, useContext , } from "react";
+import { io } from "socket.io-client";
+import axios from "axios";
+import { AppContext } from "../../../Context/App";
+import "./Chat.css";
+import { useParams } from "react-router-dom";
 
-const RunnerMessage = () => {
-  const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState([
-    { sender: "JD", text: "Hi! I've accepted your pickup errand. I’ll head to the pickup location now", time: "10:16am", fromUser: false },
-    { sender: "You", text: "Alright! please handle the package with care.", time: "10:17am", fromUser: true },
-    { sender: "JD", text: "Absolutely! Your package will get to you safely", time: "10:18am", fromUser: false },
-  ]);
+// ✅ Initialize socket correctly
+const socket = io(import.meta.env.VITE_BASE_URL, {
+  transports: ["websocket"],
+  reconnection: true,
+});
 
-  const handleSend = () => {
-    if (!message.trim()) return;
-    const newMsg = { sender: "You", text: message, time: "Now", fromUser: true };
-    setMessages([...messages, newMsg]);
-    setMessage("");
+
+
+export default function Chat({ receiver }) {
+  const{errandId}= useParams()
+  const { user } = useContext(AppContext);
+  const token =JSON.parse(localStorage.getItem("userToken"));
+  const [messages, setMessages] = useState([]);
+  const [text, setText] = useState("");
+  const [loading, setLoading] = useState(false);
+  const messagesEndRef = useRef(null);
+
+const [chatinfo, setChatInfo] = useState({})
+  const userId = user?._id || user?.id;
+  const receiverId = chatinfo?.assignedRunner?.id
+
+
+  console.log("🟢 Receiver:", token);
+
+
+const Baseurl = import.meta.env.VITE_BASE_URL
+const getMessages = async()=> {
+try {
+  const res = await axios.get(`${Baseurl}/errand/get/${errandId}`)
+  setChatInfo(res.data.data)
+
+} catch (error) {
+  console.log(error)
+}
+}
+
+useEffect(() => {
+  const fetchMessages = async () => {
+    try {
+      const res = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/messages/${errandId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log("🟢 Fetched messages:", res.data);
+      // Adjust based on your API response structure
+      setMessages(res.data?.data || []);
+    } catch (err) {
+      console.error(
+        " Error fetching messages:",
+        err?.response?.data || err.message
+      );
+    }
+  };
+getMessages()
+  fetchMessages();
+}, [errandId, userId, receiverId, token]);
+
+  const sendMessa = async()=>{try {
+console.log("chatinfo   :",chatinfo)
+        const payload ={runnerId:errandId,senderId:chatinfo?.poster?.id,text}
+console.log("i am payload  :",payload)
+
+    await axios.post( `${import.meta.env.VITE_BASE_URL}/messages/${errandId}`,payload,
+          { headers: { Authorization: `Bearer ${token}` } })
+    
+  } catch (error) {
+   console.log(error) 
+  }}
+
+console.log("messsages,   ",messages)
+  useEffect(() => {
+    if (!userId) return;
+
+    socket.emit("join", userId);
+
+    const onNewMessage = (msg) => {
+      if (msg.error) {
+        const toast = document.createElement("div");
+        toast.textContent = msg.error;
+        toast.style.position = "fixed";
+        toast.style.bottom = "20px";
+        toast.style.left = "50%";
+        toast.style.transform = "translateX(-50%)";
+        toast.style.backgroundColor = "#ffdddd";
+        toast.style.color = "#b30000";
+        toast.style.padding = "10px 16px";
+        toast.style.borderRadius = "8px";
+        toast.style.boxShadow = "0 2px 6px rgba(0,0,0,0.2)";
+        toast.style.fontWeight = "500";
+        toast.style.zIndex = "9999";
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 4000);
+        return;
+      }
+
+      // Only add relevant messages for this conversation
+      if (
+        (msg.senderId === userId && msg.receiverId === receiverId) ||
+        (msg.senderId === receiverId && msg.receiverId === userId)
+      ) {
+        setMessages((prev) => {
+          if (prev.some((m) => String(m._id) === String(msg._id))) return prev;
+          return [...prev, msg];
+        });
+      }
+    };
+
+    socket.on("new-message", onNewMessage);
+
+    return () => {
+      socket.off("new-message", onNewMessage);
+    };
+  }, [userId, receiverId]);
+
+  // ✅ Send message
+  const sendMessage = async (e) => {
+    e.preventDefault();
+    if (!text.trim() || !userId || !receiverId) return;
+
+    socket.emit("private-message", {
+      senderId: userId,
+      receiverId,
+      text,
+    });
+
+    // Optimistic UI update
+    setMessages((prev) => [
+      ...prev,
+      {
+        _id: Date.now().toString(),
+        senderId: userId,
+        receiverId,
+        text,
+        createdAt: new Date(),
+      },
+    ]);
+
+    setText("");
   };
 
+  // ✅ Auto scroll on new messages
+
+
+
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+console.log(chatinfo);
+
   return (
-    <div className="runner-message-wrapper">
-      <div className="runner-message-sidebar">
-        <h3>Messages</h3>
+    <div className="chat-container">
+      <div className="chat-header">Chat with {chatinfo?. assignedRunner?.firstName|| "User"}</div>
 
-        <div className="runner-search-box">
-          <input type="text" placeholder="Search conversations..." />
-        </div>
+      <div className="chat-messages">
+        {loading && <div className="loader">Loading messages…</div>}
 
-        <div className="runner-conversation active">
-          <div style={{ display: "flex" }}>
-            <div className="runner-avatar">JD</div>
-            <div className="runner-conversation-info">
-              <p className="runner-name">John Doe</p>
-              <p className="runner-status">Package return</p>
-              <p className="runner-status-light">Request accepted</p>
+        {messages.length === 0 && !loading && (
+          <div className="no-messages">No messages yet — say hi 👋</div>
+        )}
+
+        {messages.map((m) => {
+          const isSent = String(m.senderId) === String(userId);
+          const date = new Date(m.createdAt);
+          const now = new Date();
+          const isToday = date.toDateString() === now.toDateString();
+          const formatted = isToday
+            ? date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+            : date.toLocaleString([], {
+                day: "numeric",
+                month: "short",
+                hour: "2-digit",
+                minute: "2-digit",
+              });
+
+          return (
+            <div
+              key={m._id || Math.random()}
+              className={`message ${isSent ? "sent" : "received"}`}
+            >
+              <div className="text">{m.text}</div>
+              <div className="ts">{formatted}</div>
             </div>
-          </div>
-          <span className="runner-online-dot">online</span>
-        </div>
+          );
+        })}
+
+        <div ref={messagesEndRef} />
       </div>
 
-      <div className="runner-message-chat">
-        <div className="runner-chat-header">
-          <div className="runner-avatar large">JD</div>
-          <div>
-            <h4 style={{fontSize:"1.5rem"}}>John Doe</h4>
-            <p style={{fontSize:"1rem"}}>Runner</p>
-          </div>
-          <button className="runner-menu-btn">⋮</button>
-        </div>
-
-        <div className="runner-chat-body">
-          {messages.map((msg, i) => (
-            <div key={i} className={`runner-message ${msg.fromUser ? "from-user" : ""}`}>
-              {!msg.fromUser && <div className="runner-avatar small">{msg.sender}</div>}
-
-              <div className="runner-bubble">
-                <p>{msg.text}</p>
-                <span className="runner-time">{msg.time}</span>
-              </div>
-
-              {msg.fromUser && <div className="runner-avatar small">{msg.sender}</div>}
-            </div>
-          ))}
-        </div>
-
-        <div className="runner-chat-input">
-          <input
-            type="text"
-            placeholder="Type your message..."
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleSend()}
-          />
-          <button onClick={handleSend}>➤</button>
-        </div>
-      </div>
+      <form onSubmit={sendMessage} className="chat-input">
+        <input
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Type a message..."
+        />
+        <button type="submit"onClick={sendMessa}>Send</button>
+      </form>
     </div>
   );
-};
+}
 
-export default RunnerMessage;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { useEffect, useState } from "react";
+// import "./MessagesPage.css";
+// import { useParams } from "react-router-dom";
+// import { getMessages } from "../../../global/chatService";
+// import { connectSocket } from "../../../global/socket";
+// // import { connectSocket } from "../../config/socket";
+// // import { getMessages } from "../../api/messageService";
+
+// const MessagesPage = () => {
+//   const [message, setMessage] = useState("");
+//   const [messages, setMessages] = useState([]);
+//   const [socket, setSocket] = useState(null);
+
+//   const { userId } = useParams(); 
+//   const token = localStorage.getItem("token");
+//   const currentUserId = localStorage.getItem("userId");
+
+
+//   useEffect(() => {
+//     if (!token) return;
+
+//     const newSocket = connectSocket(token);
+//     setSocket(newSocket);
+
+//     // Join private room
+//     newSocket.emit("join_room", {
+//       senderId: currentUserId,
+//       receiverId: userId,
+//     });
+
+//     // Listen for messages
+//     newSocket.on("receive_message", (msg) => {
+//       setMessages((prev) => [
+//         ...prev,
+//         {
+//           text: msg.text,
+//           fromUser: msg.senderId === currentUserId,
+//           time: new Date(msg.createdAt).toLocaleTimeString([], {
+//             hour: "2-digit",
+//             minute: "2-digit",
+//           }),
+//         },
+//       ]);
+//     });
+
+//     return () => newSocket.disconnect();
+//   }, [userId, token, currentUserId]);
+
+  
+//   useEffect(() => {
+//     const fetchHistory = async () => {
+//       try {
+//         const data = await getMessages(userId);
+//         const formatted = data.map((m) => ({
+//           text: m.text,
+//           fromUser: m.senderId === currentUserId,
+//           time: new Date(m.createdAt).toLocaleTimeString([], {
+//             hour: "2-digit",
+//             minute: "2-digit",
+//           }),
+//         }));
+//         setMessages(formatted);
+//       } catch (err) {
+//         console.error("Error fetching messages:", err.message);
+//       }
+//     };
+//     fetchHistory();
+//   }, [userId, currentUserId]);
+
+
+//   const handleSend = () => {
+//     if (!message.trim() || !socket) return;
+
+//     const newMsg = {
+//       senderId: currentUserId,
+//       receiverId: userId,
+//       text: message,
+//     };
+
+//     socket.emit("send_message", newMsg);
+
+  
+//     setMessages((prev) => [
+//       ...prev,
+//       { text: message, fromUser: true, time: "Now" },
+//     ]);
+//     setMessage("");
+//   };
+
+
+//   useEffect(() => {
+//     const chatBody = document.querySelector(".chat-body");
+//     if (chatBody) chatBody.scrollTop = chatBody.scrollHeight;
+//   }, [messages]);
+
+//   return (
+//     <div className="messages-wrapper">
+//       <div className="messages-sidebar">
+//         <h3>Messages</h3>
+//         <p className="subtext">Chat with your runners</p>
+//         <div className="search-box">
+//           <input type="text" placeholder="Search conversations..." />
+//         </div>
+
+//         <div className="conversation active">
+//           <div style={{ display: "flex" }}>
+//             <div className="avatar">JD</div>
+//             <div className="conversation-info">
+//               <p className="name">John Doe</p>
+//               <p className="status">Package return</p>
+//               <p className="status-light">Request accepted</p>
+//             </div>
+//           </div>
+//           <span className="online-dot">online</span>
+//         </div>
+//       </div>
+
+//       <div className="messages-chat">
+//         <div className="chat-header">
+//           <div className="avatar large">JD</div>
+//           <div>
+//             <h4>John Doe</h4>
+//             <p>Runner</p>
+//           </div>
+//           <button className="menu-btn">⋮</button>
+//         </div>
+
+//         <div className="chat-body">
+//           {messages.map((msg, i) => (
+//             <div
+//               key={i}
+//               className={`message ${msg.fromUser ? "from-user" : ""}`}
+//             >
+//               {!msg.fromUser && <div className="avatar small">JD</div>}
+//               <div className="bubble">
+//                 <p>{msg.text}</p>
+//                 <span className="time">{msg.time}</span>
+//               </div>
+//               {msg.fromUser && <div className="avatar small">You</div>}
+//             </div>
+//           ))}
+//         </div>
+
+//         <div className="chat-input">
+//           <input
+//             type="text"
+//             placeholder="Type your message..."
+//             value={message}
+//             onChange={(e) => setMessage(e.target.value)}
+//             onKeyDown={(e) => e.key === "Enter" && handleSend()}
+//           />
+//           <button onClick={handleSend}>➤</button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default MessagesPage;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { useState } from "react";
+// import "./RuneerMessage.css";
+
+// const RunnerMessage = () => {
+//   const [message, setMessage] = useState("");
+//   const [messages, setMessages] = useState([
+//     { sender: "JD", text: "Hi! I've accepted your pickup errand. I’ll head to the pickup location now", time: "10:16am", fromUser: false },
+//     { sender: "You", text: "Alright! please handle the package with care.", time: "10:17am", fromUser: true },
+//     { sender: "JD", text: "Absolutely! Your package will get to you safely", time: "10:18am", fromUser: false },
+//   ]);
+
+//   const handleSend = () => {
+//     if (!message.trim()) return;
+//     const newMsg = { sender: "You", text: message, time: "Now", fromUser: true };
+//     setMessages([...messages, newMsg]);
+//     setMessage("");
+//   };
+
+//   return (
+//     <div className="runner-message-wrapper">
+//       <div className="runner-message-sidebar">
+//         <h3>Messages</h3>
+
+//         <div className="runner-search-box">
+//           <input type="text" placeholder="Search conversations..." />
+//         </div>
+
+//         <div className="runner-conversation active">
+//           <div style={{ display: "flex" }}>
+//             <div className="runner-avatar">JD</div>
+//             <div className="runner-conversation-info">
+//               <p className="runner-name">John Doe</p>
+//               <p className="runner-status">Package return</p>
+//               <p className="runner-status-light">Request accepted</p>
+//             </div>
+//           </div>
+//           <span className="runner-online-dot">online</span>
+//         </div>
+//       </div>
+
+//       <div className="runner-message-chat">
+//         <div className="runner-chat-header">
+//           <div className="runner-avatar large">JD</div>
+//           <div>
+//             <h4 style={{fontSize:"1.5rem"}}>John Doe</h4>
+//             <p style={{fontSize:"1rem"}}>Runner</p>
+//           </div>
+//           <button className="runner-menu-btn">⋮</button>
+//         </div>
+
+//         <div className="runner-chat-body">
+//           {messages.map((msg, i) => (
+//             <div key={i} className={`runner-message ${msg.fromUser ? "from-user" : ""}`}>
+//               {!msg.fromUser && <div className="runner-avatar small">{msg.sender}</div>}
+
+//               <div className="runner-bubble">
+//                 <p>{msg.text}</p>
+//                 <span className="runner-time">{msg.time}</span>
+//               </div>
+
+//               {msg.fromUser && <div className="runner-avatar small">{msg.sender}</div>}
+//             </div>
+//           ))}
+//         </div>
+
+//         <div className="runner-chat-input">
+//           <input
+//             type="text"
+//             placeholder="Type your message..."
+//             value={message}
+//             onChange={(e) => setMessage(e.target.value)}
+//             onKeyDown={(e) => e.key === "Enter" && handleSend()}
+//           />
+//           <button onClick={handleSend}>➤</button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default RunnerMessage;

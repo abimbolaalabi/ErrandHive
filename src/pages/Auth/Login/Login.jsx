@@ -81,6 +81,7 @@ const Login = () => {
         const userToken = res?.data?.token;
          const role = userDetails?.role;
         // dispatchUser(setUserDetails({ userDetails, userToken }));
+        localStorage.clear()
         localStorage.setItem("userToken", JSON.stringify(userToken));
         localStorage.setItem("userDetails", JSON.stringify(userDetails));
         
