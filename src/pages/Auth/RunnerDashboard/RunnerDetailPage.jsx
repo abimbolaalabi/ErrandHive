@@ -94,7 +94,7 @@ const RunnerDetailPage = () => {
                 <div className="runnerDetailPage-jobs">{details?.assignedRunner?.totalJobs} jobs</div>
               </div>
             </div>
-            <button className="runnerDetailPage-chat-btn" onClick={()=>window.location.href =`http://localhost:5174/runnerlayout/runnermessage/${runnerId}`}>Chat with Client</button>
+            <button className="runnerDetailPage-chat-btn" onClick={()=>window.location.href =`https://errand-hive.vercel.app/runnerlayout/runnermessage/${runnerId}`}>Chat with Client</button>
             <button className="runnerDetailPage-otp-btn">Request OTP</button>
           </div>
 
