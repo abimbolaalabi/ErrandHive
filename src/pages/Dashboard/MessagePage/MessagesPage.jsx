@@ -1,418 +1,290 @@
-import { useEffect, useRef, useState, useContext , } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import { io } from "socket.io-client";
 import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
+import "./MessagesPage.css";
 import { AppContext } from "../../../Context/App";
-import "./Chat.css";
-import { useParams } from "react-router-dom";
 
-// ✅ Initialize socket correctly
-const socket = io(import.meta.env.VITE_BASE_URL, {
+// ONE GLOBAL SOCKET
+const socket = io(import.meta.env.VITE_SOCKET_URL, {
   transports: ["websocket"],
   reconnection: true,
 });
 
-
-
-export default function Chat({ receiver }) {
-  const{runnerId}= useParams()
+export default function MessagesPage() {
+  const { id } = useParams(); // errandId
+  const navigate = useNavigate();
   const { user } = useContext(AppContext);
-  const token =JSON.parse(localStorage.getItem("userToken"));
+
+  const token = JSON.parse(localStorage.getItem("userToken"));
+  const BaseUrl = import.meta.env.VITE_BASE_URL;
+
+  const [chatInfo, setChatInfo] = useState({});
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
+  const [myRunners, setMyRunners] = useState([]);
+  const [menuOpen, setMenuOpen] = useState(false)
+
   const messagesEndRef = useRef(null);
 
-const [chatinfo, setChatInfo] = useState({})
-  const userId = user?._id || user?.id;
-  const receiverId = chatinfo?.assignedRunner?.id
+  // Logged in user
+  const userId = user?.id
+
+  // Identify participants
+  const clientId = chatInfo?.poster?.id;
+  const runnerId = chatInfo?.assignedTo
+
+  // Detconsermine receiver
+
+  console.log("dhfhffj", runnerId, clientId)
+  let receiverId = null;
 
 
-  console.log("🟢 Receiver:", token);
+  console.log("tessstere  ", chatInfo?.poster)
+  if (clientId && runnerId) {
+    receiverId = userId === clientId ? runnerId : clientId;
+  }
 
-
-const Baseurl = import.meta.env.VITE_BASE_URL
-const getMessages = async()=> {
-try {
-  const res = await axios.get(`${Baseurl}/errand/get/${runnerId}`)
-  setChatInfo(res.data.data)
-
-} catch (error) {
-  console.log(error)
-}
-}
-
-useEffect(() => {
-  const fetchMessages = async () => {
+  // ⭐ FETCH ALL ERRANDS FOR SIDEBAR LIST
+  const fetchMyRunners = async () => {
     try {
-      const res = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/messages/${runnerId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await axios.get(`${BaseUrl}/errand/my-errands
+`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
 
-      console.log("🟢 Fetched messages:", res.data);
-      // Adjust based on your API response structure
-      setMessages(res.data?.data || []);
+      const assigned = res?.data?.data?.filter(e => e.assignedTo != null);
+
+      console.log("assigned pag     e", res?.data.data)
+      setMyRunners(assigned || []);
     } catch (err) {
-      console.error(
-        " Error fetching messages:",
-        err?.response?.data || err.message
-      );
+      console.log("Runner fetch error:", err);
     }
   };
-getMessages()
-  fetchMessages();
-}, [runnerId, userId, receiverId, token]);
 
-  const sendMessa = async()=>{try {
-console.log("chatinfo   :",chatinfo)
-        const payload ={errandId:runnerId,senderId:chatinfo?.poster?.id,text}
-console.log("i am payload  :",payload)
-
-    await axios.post( `${import.meta.env.VITE_BASE_URL}/messages/${runnerId}`,payload,
-          { headers: { Authorization: `Bearer ${token}` } })
-    
-  } catch (error) {
-   console.log(error) 
-  }}
-
-console.log("messsages,   ",messages)
   useEffect(() => {
-    if (!userId) return;
+    fetchMyRunners();
+  }, []);
 
-    socket.emit("join", userId);
+  // ⭐ JOIN ROOM
+  useEffect(() => {
+    if (!userId || !receiverId) return;
 
-    const onNewMessage = (msg) => {
-      if (msg.error) {
-        const toast = document.createElement("div");
-        toast.textContent = msg.error;
-        toast.style.position = "fixed";
-        toast.style.bottom = "20px";
-        toast.style.left = "50%";
-        toast.style.transform = "translateX(-50%)";
-        toast.style.backgroundColor = "#ffdddd";
-        toast.style.color = "#b30000";
-        toast.style.padding = "10px 16px";
-        toast.style.borderRadius = "8px";
-        toast.style.boxShadow = "0 2px 6px rgba(0,0,0,0.2)";
-        toast.style.fontWeight = "500";
-        toast.style.zIndex = "9999";
-        document.body.appendChild(toast);
-        setTimeout(() => toast.remove(), 4000);
-        return;
-      }
-
-      // Only add relevant messages for this conversation
-      if (
-        (msg.senderId === userId && msg.receiverId === receiverId) ||
-        (msg.senderId === receiverId && msg.receiverId === userId)
-      ) {
-        setMessages((prev) => {
-          if (prev.some((m) => String(m._id) === String(msg._id))) return prev;
-          return [...prev, msg];
-        });
-      }
-    };
-
-    socket.on("new-message", onNewMessage);
-
-    return () => {
-      socket.off("new-message", onNewMessage);
-    };
+    const roomId = [userId, receiverId].sort().join("_err");
+    socket.emit("join_room", roomId);
   }, [userId, receiverId]);
 
-  // ✅ Send message
+  // ⭐ LISTEN FOR LIVE MESSAGES
+  useEffect(() => {
+    const incoming = (msg) => {
+      setMessages((prev) => [...prev, msg]);
+    };
+
+    socket.on("receive_message", incoming);
+
+    return () => socket.off("receive_message", incoming);
+  }, []);
+
+  // ⭐ LOAD CHAT INFO + MESSAGE HISTORY
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       setLoading(true);
+
+  //       const info = await axios.get(`${BaseUrl}/errand/get/${id}`, {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       });
+
+  //       setChatInfo(info.data.data);
+
+  //       const msg = await axios.get(`${BaseUrl}/messages/${id}`, {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       });
+
+  //       setMessages(msg.data?.data || []);
+  //     } catch (err) {
+  //       console.log("Chat fetch error:", err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   })();
+  // }, [id]);
+  useEffect(() => {
+    (async () => {
+      try {
+        setLoading(true);
+
+        setMessages([]); // 🟢 clear old messages when switching
+
+        const info = await axios.get(`${BaseUrl}/errand/get/${id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        setChatInfo(info.data.data);
+
+        const msg = await axios.get(`${BaseUrl}/messages/${id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        setMessages(msg.data?.data || []);
+      } catch (err) {
+        console.log("Chat fetch error:", err);
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [id]);
+
   const sendMessage = async (e) => {
     e.preventDefault();
-    if (!text.trim() || !userId || !receiverId) return;
 
-    socket.emit("private-message", {
+    if (!text.trim() || !receiverId) return;
+
+    const roomId = [userId, receiverId].sort().join("_");
+
+    const payload = {
       senderId: userId,
       receiverId,
       text,
-    });
+      roomId,
+      createdAt: new Date(),
+    };
 
-    // Optimistic UI update
-    setMessages((prev) => [
-      ...prev,
-      {
-        _id: Date.now().toString(),
-        senderId: userId,
-        receiverId,
-        text,
-        createdAt: new Date(),
-      },
-    ]);
+    // 1️⃣ ADD THIS — Update your UI immediately
+    setMessages(prev => [...prev, payload]);
+
+    // 2️⃣ Emit to socket
+    socket.emit("send_message", payload);
+
+    try {
+      await axios.post(`${BaseUrl}/messages/${id}`, payload, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+    } catch (err) {
+      console.log("Save error:", err);
+    }
 
     setText("");
   };
 
-  // ✅ Auto scroll on new messages
-
-
-
-
+  // ⭐ Auto scroll
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
-console.log(chatinfo);
 
   return (
-    <div className="chat-container">
-      <div className="chat-header">Chat with {chatinfo?. assignedRunner?.firstName|| "User"}</div>
+    <div className="messages-wrapper">
 
-      <div className="chat-messages">
-        {loading && <div className="loader">Loading messages…</div>}
+      {/* SIDEBAR */}
+      <div className="messages-sidebar">
+        <h3>Messages</h3>
+        <p className="subtext">Chat with your runners</p>
 
-        {messages.length === 0 && !loading && (
-          <div className="no-messages">No messages yet — say hi 👋</div>
+        <div className="search-box">
+          <input type="text" placeholder="Search conversations..." />
+        </div>
+
+        {/* Runner / Conversation List */}
+        {myRunners.length === 0 && (
+          <p className="empty-text">No runners yet</p>
         )}
 
-        {messages.map((m) => {
-          const isSent = String(m.senderId) === String(userId);
-          const date = new Date(m.createdAt);
-          const now = new Date();
-          const isToday = date.toDateString() === now.toDateString();
-          const formatted = isToday
-            ? date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
-            : date.toLocaleString([], {
-                day: "numeric",
-                month: "short",
-                hour: "2-digit",
-                minute: "2-digit",
-              });
+        {myRunners.map((item) => (
+          <div
+            key={item.id}
+            className={`conversation ${item.id === id ? "active" : ""}`}
+            onClick={() => navigate(`/dashboard/messages/${item.id}`)}
+          >
+            <div className="conv-user">
+              <div className="avatar">
+                {item.assignedTo.firstName?.[0] || "U"}
+              </div>
 
-          return (
-            <div
-              key={m._id || Math.random()}
-              className={`message ${isSent ? "sent" : "received"}`}
-            >
-              <div className="text">{m.text}</div>
-              <div className="ts">{formatted}</div>
+              <div className="conversation-info">
+                <p className="name">
+                  {item.assignedTo.firstName} {item.assignedTo.lastName}
+                </p>
+                <p className="status">{item.title}</p>
+                <p className="status-light">Click to chat</p>
+              </div>
             </div>
-          );
-        })}
 
-        <div ref={messagesEndRef} />
+            <span className="online-dot">online</span>
+          </div>
+        ))}
       </div>
 
-      <form onSubmit={sendMessage} className="chat-input">
-        <input
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder="Type a message..."
-        />
-        <button type="submit"onClick={sendMessa}>Send</button>
-      </form>
+      {/* CHAT AREA */}
+      <div className="messages-chat">
+        <div className="chat-header">
+          <div className="avatar large">{chatInfo?.assignedTo?.firstName?.charAt(0).toUpperCase()}</div>
+          <div>
+            <h4>
+              {chatInfo?.assignedTo?.firstName ||
+                chatInfo?.poster?.firstName ||
+                "User"}
+            </h4>
+            <p>Runner</p>
+          </div>
+          <div className="menu-container">
+            <button
+              className="menu-btn"
+              onClick={() => setMenuOpen((prev) => !prev)}
+            >
+              ⋮
+            </button>
+
+            {menuOpen && (
+              <div className="menu-options">
+                <p onClick={() => navigate(`/dashboard/messages/${id}/status`)}>View Progress</p>
+              </div>
+            )}
+          </div>
+
+        </div>
+
+        <div className="chat-body">
+          {loading && <p>Loading...</p>}
+
+          {messages.map((m, i) => {
+            const mine = m.senderId === userId;
+
+            return (
+              <div key={i} className={`message ${mine ? "from-user" : ""}`}>
+                {!mine && (
+                  <div className="avatar small">
+                    {chatInfo?.assignedTo?.firstName?.[0] || "U"}
+                  </div>
+                )}
+
+                <div className="bubble">
+                  <p>{m.text}</p>
+                  <span className="time">
+                    {new Date(m.createdAt).toLocaleTimeString()}
+                  </span>
+                </div>
+
+                {mine && <div className="avatar small">You</div>}
+              </div>
+            );
+          })}
+
+          <div ref={messagesEndRef} />
+        </div>
+
+        {/* INPUT */}
+        <form className="chat-input" onSubmit={sendMessage}>
+          <input
+            type="text"
+            placeholder="Type your message..."
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
+          <button >➤</button>
+        </form>
+
+      </div>
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import { useEffect, useState } from "react";
-// import "./MessagesPage.css";
-// import { useParams } from "react-router-dom";
-// import { getMessages } from "../../../global/chatService";
-// import { connectSocket } from "../../../global/socket";
-// // import { connectSocket } from "../../config/socket";
-// // import { getMessages } from "../../api/messageService";
-
-// const MessagesPage = () => {
-//   const [message, setMessage] = useState("");
-//   const [messages, setMessages] = useState([]);
-//   const [socket, setSocket] = useState(null);
-
-//   const { userId } = useParams(); 
-//   const token = localStorage.getItem("token");
-//   const currentUserId = localStorage.getItem("userId");
-
-
-//   useEffect(() => {
-//     if (!token) return;
-
-//     const newSocket = connectSocket(token);
-//     setSocket(newSocket);
-
-//     // Join private room
-//     newSocket.emit("join_room", {
-//       senderId: currentUserId,
-//       receiverId: userId,
-//     });
-
-//     // Listen for messages
-//     newSocket.on("receive_message", (msg) => {
-//       setMessages((prev) => [
-//         ...prev,
-//         {
-//           text: msg.text,
-//           fromUser: msg.senderId === currentUserId,
-//           time: new Date(msg.createdAt).toLocaleTimeString([], {
-//             hour: "2-digit",
-//             minute: "2-digit",
-//           }),
-//         },
-//       ]);
-//     });
-
-//     return () => newSocket.disconnect();
-//   }, [userId, token, currentUserId]);
-
-  
-//   useEffect(() => {
-//     const fetchHistory = async () => {
-//       try {
-//         const data = await getMessages(userId);
-//         const formatted = data.map((m) => ({
-//           text: m.text,
-//           fromUser: m.senderId === currentUserId,
-//           time: new Date(m.createdAt).toLocaleTimeString([], {
-//             hour: "2-digit",
-//             minute: "2-digit",
-//           }),
-//         }));
-//         setMessages(formatted);
-//       } catch (err) {
-//         console.error("Error fetching messages:", err.message);
-//       }
-//     };
-//     fetchHistory();
-//   }, [userId, currentUserId]);
-
-
-//   const handleSend = () => {
-//     if (!message.trim() || !socket) return;
-
-//     const newMsg = {
-//       senderId: currentUserId,
-//       receiverId: userId,
-//       text: message,
-//     };
-
-//     socket.emit("send_message", newMsg);
-
-  
-//     setMessages((prev) => [
-//       ...prev,
-//       { text: message, fromUser: true, time: "Now" },
-//     ]);
-//     setMessage("");
-//   };
-
-
-//   useEffect(() => {
-//     const chatBody = document.querySelector(".chat-body");
-//     if (chatBody) chatBody.scrollTop = chatBody.scrollHeight;
-//   }, [messages]);
-
-//   return (
-//     <div className="messages-wrapper">
-//       <div className="messages-sidebar">
-//         <h3>Messages</h3>
-//         <p className="subtext">Chat with your runners</p>
-//         <div className="search-box">
-//           <input type="text" placeholder="Search conversations..." />
-//         </div>
-
-//         <div className="conversation active">
-//           <div style={{ display: "flex" }}>
-//             <div className="avatar">JD</div>
-//             <div className="conversation-info">
-//               <p className="name">John Doe</p>
-//               <p className="status">Package return</p>
-//               <p className="status-light">Request accepted</p>
-//             </div>
-//           </div>
-//           <span className="online-dot">online</span>
-//         </div>
-//       </div>
-
-//       <div className="messages-chat">
-//         <div className="chat-header">
-//           <div className="avatar large">JD</div>
-//           <div>
-//             <h4>John Doe</h4>
-//             <p>Runner</p>
-//           </div>
-//           <button className="menu-btn">⋮</button>
-//         </div>
-
-//         <div className="chat-body">
-//           {messages.map((msg, i) => (
-//             <div
-//               key={i}
-//               className={`message ${msg.fromUser ? "from-user" : ""}`}
-//             >
-//               {!msg.fromUser && <div className="avatar small">JD</div>}
-//               <div className="bubble">
-//                 <p>{msg.text}</p>
-//                 <span className="time">{msg.time}</span>
-//               </div>
-//               {msg.fromUser && <div className="avatar small">You</div>}
-//             </div>
-//           ))}
-//         </div>
-
-//         <div className="chat-input">
-//           <input
-//             type="text"
-//             placeholder="Type your message..."
-//             value={message}
-//             onChange={(e) => setMessage(e.target.value)}
-//             onKeyDown={(e) => e.key === "Enter" && handleSend()}
-//           />
-//           <button onClick={handleSend}>➤</button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default MessagesPage;

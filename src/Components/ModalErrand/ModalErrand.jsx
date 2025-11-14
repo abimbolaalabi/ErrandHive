@@ -117,7 +117,7 @@ const ModalErrand = ({ toclose }) => {
           <p className="top-note">
             Note!! Do not place items above **₦100,000** for pickup
           </p>
-          <span onClick={() => toclose(false)} className="close-button">X</span>
+          <span onClick={() => toclose(false)} className="closee-button">X</span>
         </div>
 
         <h2 className="post-errand-header">Post New Errand</h2>

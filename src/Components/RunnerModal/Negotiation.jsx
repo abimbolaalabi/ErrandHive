@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import "./Negotiation.css";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import RunnerPropModal from "./RunnerPropModal";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const API_BASE_URL = "https://errandhive-project.onrender.com/api/v1";
 
@@ -9,9 +12,12 @@ const Negotiation = ({ close, errand }) => {
   const [counterPrice, setCounterPrice] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isAccepting, setIsAccepting] = useState(false);
-  const token = JSON.parse(localStorage.getItem("userToken"));
+  const [runnerPMod, setRunnerPMod] = useState(false);
 
-  
+  const token = JSON.parse(localStorage.getItem("userToken"));
+  const navigate = useNavigate();
+
+  // ✅ Handle proposing a counter price
   const handlePropose = async () => {
     if (!counterPrice) {
       toast.error("Please enter a proposed price.");
@@ -24,55 +30,57 @@ const Negotiation = ({ close, errand }) => {
 
     setIsLoading(true);
     try {
-      const response = await fetch(`${API_BASE_URL}/apply/${errand.id}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
+      const response = await axios.post(
+        `${API_BASE_URL}/apply/${errand.id}`,
+        {
           bidPrice: Number(counterPrice),
-          action: "propose",
-        }),
-      });
-      console.log(response)
+          // action: "propose",
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-      const data = await response.json();
-
-      if (!response.ok) throw new Error(data.message || "Failed to propose price");
-
-      toast.success("Proposal sent successfully!");
+      toast.success(response?.data?.message || "Proposal sent successfully!");
       close();
     } catch (error) {
-      toast.error(error.message || "Something went wrong, please try again.");
+      const errMsg =
+        error.response?.data?.message ||
+        error.message ||
+        "Something went wrong, please try again.";
+      toast.error(errMsg);
     } finally {
       setIsLoading(false);
     }
   };
 
-
+  // ✅ Handle accepting an errand offer
   const handleAccept = async () => {
     setIsAccepting(true);
     try {
-      const response = await fetch(`${API_BASE_URL}/apply/${errand.id}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          action: "accept",
-        }),
-      });
+      const response = await axios.post(
+        `${API_BASE_URL}/apply/${errand.id}`,
+        { action: "accept" },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-      const data = await response.json();
-
-      if (!response.ok) throw new Error(data.message || "Failed to accept errand");
-
-      toast.success("You’ve accepted the current price!");
+      toast.success(response?.data?.message || "You’ve accepted the current price!");
       close();
+      navigate(`/runnerlayout/runnertrack/${errand.id}`);
     } catch (error) {
-      toast.error(error.message || "Something went wrong, please try again.");
+      const errMsg =
+        error.response?.data?.message ||
+        error.message ||
+        "Something went wrong, please try again.";
+      toast.error(errMsg);
     } finally {
       setIsAccepting(false);
     }
@@ -81,6 +89,7 @@ const Negotiation = ({ close, errand }) => {
   return (
     <div className="negotiation-overlay">
       <ToastContainer position="top-right" autoClose={3000} />
+
       <div className="negotiation-modal">
         <button className="close-btn" onClick={close}>
           ×
@@ -143,18 +152,23 @@ const Negotiation = ({ close, errand }) => {
           >
             {isLoading ? "Proposing..." : "Propose Price"}
           </button>
+<button
+  className="accept-btn"
+  onClick={() => {
+    handleAccept();
+    navigate(`/runnerlayout/runnertrack/${errand.id}`);
+  }}
+  disabled={isAccepting}
+>
+  {isAccepting
+    ? "Accepting..."
+    : `Accept ₦${errand.price?.toLocaleString() || "0"}`}
+</button>
 
-          <button
-            className="accept-btn"
-            onClick={handleAccept}
-            disabled={isAccepting}
-          >
-            {isAccepting
-              ? "Accepting..."
-              : `Accept ₦${errand.price?.toLocaleString() || "0"}`}
-          </button>
         </div>
       </div>
+
+      {runnerPMod && <RunnerPropModal toclose={setRunnerPMod} />}
     </div>
   );
 };

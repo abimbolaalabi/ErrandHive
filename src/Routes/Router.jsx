@@ -32,6 +32,9 @@ import KycPopModel from "../Components/RunnerModal/KycPopupModel";
 import ErrandLive from "../pages/Auth/RunnerDashboard/ErrandLive";
 import SuccessPage from "../Components/ModalSuccess/SuccessPage";
 import RunnerMessage from "../pages/Auth/RunnerDashboard/RunnerMessage";
+import RunnerDetailPage from "../pages/Auth/RunnerDashboard/RunnerDetailPage";
+import UnifiedChat from "../pages/Chat/UnifiedChat";
+import AddBankDeal from "../pages/Auth/RunnerDashboard/AddBankDeal";
 
 const Router = () => {
   return (
@@ -50,22 +53,23 @@ const Router = () => {
         <Route path="/kycmod" element={<KycPopModel />} />
         <Route path="/errandlive" element={<ErrandLive />} />
 
+   <Route path="/chat/:id" element={<UnifiedChat />} />
         {/*  Client Dashboard */}
         <Route element={<PrivateRoute allowedRole="Client" />}>
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route index element={<DashboardPage />} />
             <Route path="my-errands" element={<MyErrandsPage />} />
             <Route path="my-errands/:errandId" element={<MyErrandsDetails />} />
-            <Route
-              path="my-errands/:errandId/:errandTrack/:errandId"
-              element={<ErrandDeliveryTrack />}
-            />
+          
             <Route path="success" element={<SuccessPage />} />
             <Route path="payments" element={<PaymentsPage />} />
-
+         
             {/* Client Messages (chat with runner) */}
-            <Route path="messages/:runnerId" element={<MessagesPage />} />
-
+            <Route path="messages/:id" element={<MessagesPage />} />
+              <Route
+              path="messages/:id/status"
+              element={<ErrandDeliveryTrack />}
+            />
             <Route path="profile" element={<ProfilePage />} />
             <Route
               path="profile/:profileId"
@@ -73,7 +77,7 @@ const Router = () => {
             />
           </Route>
         </Route>
-
+ 
         {/*  Runner Dashboard */}
         <Route element={<PrivateRoute allowedRole="Runner" />}>
           <Route path="/runnerlayout" element={<RunnerLayout />}>
@@ -83,16 +87,19 @@ const Router = () => {
             <Route path="runnerprofile" element={<RunnerProfile />} />
             <Route
               path="runnerprofile/runnerprofile/:profileid"
-              element={<EditProfile />}
-            />
-
+              element={<EditProfile />} />
+            <Route
+              path="runnerprofile/:bank" element={<AddBankDeal />}/>
             {/* Runner Message */}
-            <Route path="runnermessage/:errandId" element={<RunnerMessage />} />
+              <Route path="runnermessage" element={<RunnerMessage />} />
+            <Route path="runnermessage/:id" element={<RunnerMessage />} />
+            <Route path="runnertrack/:runnerId" element={<RunnerDetailPage />} />
           </Route>
         </Route>
 
         {/* Admin Dashboard */}
         <Route path="/admindash" element={<AdminDashboard />} />
+
       </Routes>
     </BrowserRouter>
   );

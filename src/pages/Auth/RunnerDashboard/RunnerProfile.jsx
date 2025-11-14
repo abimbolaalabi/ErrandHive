@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./RunnerProfile.css";
 import { FaEnvelope, FaStar, FaUniversity, FaCog } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   IoShieldCheckmarkOutline,
   IoCheckmarkCircleOutline,
@@ -22,6 +22,8 @@ const RunnerProfile = () => {
   const [image, setImage] = useState(null);
   const [hasBankAccount, setHasBankAccount] = useState(false);
 
+  const navigate= useNavigate()
+ 
   const BaseUrl = import.meta.env.VITE_BASE_URL;
   const token = JSON.parse(localStorage.getItem("userToken"));
   console.log(token)
@@ -251,7 +253,7 @@ const RunnerProfile = () => {
               <p>Link your bank account to receive withdrawals securely and quickly.</p>
             </div>
           </div>
-          <button className="runnerProfile-actionBtn runnerProfile-bankBtn">Add Bank Account Now</button>
+          <button className="runnerProfile-actionBtn runnerProfile-bankBtn" onClick={()=> navigate("/runnerlayout/runnerprofile/bank")}>Add Bank Account Now</button>
         </div>
       )}
 

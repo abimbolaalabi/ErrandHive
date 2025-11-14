@@ -1,189 +1,218 @@
 import React, { useEffect, useState } from "react";
 import "./ErrandDeliveryTrack.css";
-import { CiLocationOn } from "react-icons/ci";
-import { IoCheckmarkCircle } from "react-icons/io5";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ErrandDeliveryTrack = () => {
-  // Dummy runner & job data
-  const runner = {
-    initials: "JD",
-    name: "John Doe",
-    rating: 4.8,
-    jobs: 100,
-    verified: true,
-  };
+  const [steps, setSteps] = useState([
+    { id: 1, label: "Order assigned", status: "Assigned", time: "", done: false },
+    { id: 2, label: "Runner heading to pickup", status: "HeadingToPickup", time: "", done: false },
+    { id: 3, label: "Runner arrived at pickup location", status: "ArrivedAtPickup", time: "", done: false },
+    { id: 4, label: "Item picked up with (OTP)", status: "PickedUp", time: "", done: false },
+    { id: 5, label: "Runner heading to delivery location", status: "HeadingToDelivery", time: "", done: false },
+    { id: 6, label: "Runner arrived at delivery location", status: "ArrivedAtDelivery", time: "", done: false },
+    { id: 7, label: "Delivery confirmed (OTP)", status: "Delivered", time: "", done: false },
+  ]);
 
-  // Dummy errand/location/status data
-  const errand = {
-    status: "Pending Pickup",
-    pickup: "123 Main Street, Lagos",
-    delivery: "456 Oak Avenue, Lekki",
-    progress: 0, // %
-  };
+  const [aUser, setAUser] = useState({});
+  const [loading, setLoading] = useState(false);
 
- 
-  const steps = [
-    { id: 1, label: "Order assigned", time: "Oct 18, 10:00am", done: true },
-    { id: 2, label: "Runner departed", time: "", done: false },
-    { id: 3, label: "Arrived at pickup", time: "", done: false },
-    { id: 4, label: "Picked up item", time: "", done: false },
-    { id: 5, label: "On the way", time: "", done: false },
-    { id: 6, label: "Arrived at delivery", time: "", done: false },
-    { id: 7, label: "Delivered", time: "", done: false },
-  ];
-  const [aUser, setAUser] = useState({})
-const BaseUrl = import.meta.env.VITE_BASE_URL
-const {errandId} = useParams()
+  const BaseUrl = import.meta.env.VITE_BASE_URL;
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-const navigate = useNavigate()
+  // ⭐ Fetch single errand details
+  const getAUserById = async () => {
+    try {
+      const token = JSON.parse(localStorage.getItem("userToken"));
+      const res = await axios.get(`${BaseUrl}/errand/get/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
+      setAUser(res?.data?.data);
 
-    const getAUserById = async()=> {
-      try {
-          const token = JSON.parse(localStorage.getItem("userToken"));
-        const res = await axios.get(`${BaseUrl}/errand/get/${errandId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
-        setAUser(res?.data?.data)
-      } catch (error) {
-        console.log("This is errandDeliError",error)
-      }
+      // ⭐ Populate steps that are already completed in backend
+      const completedSteps = res?.data?.data?.completedSteps || [];
+
+      const updated = steps.map((s) => ({
+        ...s,
+        done: completedSteps.includes(s.status),
+        time: completedSteps.includes(s.status)
+          ? new Date().toLocaleString()
+          : "",
+      }));
+
+      setSteps(updated);
+
+    } catch (error) {
+      console.log("Fetch errand error:", error);
     }
-    useEffect(()=> {
-      getAUserById()
-    },[])
+  };
 
+  // ⭐ SEND PROGRESS UPDATE TO BACKEND
+  const updateStatus = async (status) => {
+    try {
+      setLoading(true);
+      const token = JSON.parse(localStorage.getItem("userToken"));
+
+      const res = await axios.put(
+        `https://errandhive-project.onrender.com/api/v1/errands/${id}/progress`,
+        { step: status },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      toast.success(res?.data?.message || "Step updated!");
+
+      // ⭐ Update UI instantly
+      const updatedSteps = steps.map((s) =>
+        s.status === status
+          ? { ...s, done: true, time: new Date().toLocaleString() }
+          : s
+      );
+
+      setSteps(updatedSteps);
+      getAUserById();
+
+    } catch (err) {
+      console.log("Status update error:", err);
+      toast.error(err?.response?.data?.message || "Update failed");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // User clicks a step circle
+  const handleCircleClick = (step) => {
+    if (loading) return;
+    if (step.done) return; // cannot redo step
+
+    updateStatus(step.status);
+  };
+
+  useEffect(() => {
+    getAUserById();
+  }, []);
 
   return (
     <div className="med-root">
-      {/* Back link row */}
+      <ToastContainer />
+
+      {/* Back Button */}
       <div className="med-back-row">
-        <button className="med-back-btn" type="button">
+        <button className="med-back-btn" type="button" onClick={() => navigate(-1)}>
           ← Back to my errands
         </button>
       </div>
 
-      {/* Runner / Errand top card */}
+      {/* TOP CARD */}
       <div className="med-card med-top-card">
         <div className="med-top-row">
           <div className="med-runner-info">
-            <div className="med-avatar">{aUser?.initials}</div>
+            <div className="med-avatar">
+              {aUser?.assignedRunner?.firstName?.[0]}
+              {aUser?.assignedRunner?.lastName?.[0]}
+            </div>
+
             <div className="med-runner-meta">
               <div className="med-runner-line">
-                <h2 className="med-runner-name">{aUser?.assignedRunner?.firstName} {aUser?.assignedRunner?.lastName}</h2>
-                {runner.verified && (
-                  <span className="med-pill med-pill-verified">Verified Runner</span>
-                )}
+                <h2 className="med-runner-name">
+                  {aUser?.assignedRunner?.firstName} {aUser?.assignedRunner?.lastName}
+                </h2>
+                <span className="med-pill med-pill-verified">Verified Runner</span>
               </div>
+
               <div className="med-runner-stats">
                 <span className="med-star">★</span>
-                <span className="med-rating">{runner.rating} Rating</span>
+                <span className="med-rating">{aUser?.assignedRunner?.rating || 4.8} Rating</span>
                 <span className="med-dot">•</span>
-                <span className="med-deliveries">{runner.jobs} Deliveries</span>
+                <span className="med-deliveries">{aUser?.assignedRunner?.totalJobs || 23} Deliveries</span>
               </div>
             </div>
           </div>
 
           <div className="med-status-wrap">
-            <span className="med-pill med-pill-status">{errand.status}</span>
+            <span className="med-pill med-pill-status">{aUser?.status}</span>
+            {loading && <span className="loading-text">Updating...</span>}
           </div>
         </div>
 
+        {/* LOCATIONS */}
         <div className="med-locations-row">
           <div className="med-loc-card med-pickup">
-            <div className="med-loc-icon">
-              <CiLocationOn size={18} />
-            </div>
-            <div className="med-loc-text">
-              <span className="med-loc-label">Pickup Location</span>
-              <p className="med-loc-value">{aUser?.pickupAddress}</p>
-            </div>
+            <span className="med-loc-label">Pickup Location</span>
+            <p className="med-loc-value">{aUser?.pickupAddress}</p>
           </div>
 
           <div className="med-loc-card med-delivery">
-            <div className="med-loc-icon med-loc-icon-purple">
-              <CiLocationOn size={18} />
-            </div>
-            <div className="med-loc-text">
-              <span className="med-loc-label">Delivery Location</span>
-              <p className="med-loc-value">{aUser?.deliveryAddress}</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="med-progress-wrap">
-          <div className="med-progress-label-row">
-            <span className="med-progress-title">Overall Progress</span>
-            <span className="med-progress-val">{errand.progress}%</span>
-          </div>
-          <div className="med-progressbar">
-            <div
-              className="med-progressbar-fill"
-              style={{ width: `${errand.progress}%` }}
-            />
+            <span className="med-loc-label">Delivery Location</span>
+            <p className="med-loc-value">{aUser?.deliveryAddress}</p>
           </div>
         </div>
       </div>
 
-      {/* Bottom two columns */}
+      {/* TIMELINE */}
       <div className="med-grid">
-        {/* Left profile card */}
+        {/* LEFT PROFILE CARD */}
         <div className="med-card med-profile-card">
-          <div className="med-profile-avatar">{runner.initials}</div>
-          <div className="med-profile-name">{runner.name}</div>
-
-          <div className="med-profile-meta">
-            <div className="med-profile-rating">
-              <span className="med-star">★</span>
-              <span>{runner.rating}</span>
-            </div>
-            <div className="med-profile-jobs">{runner.jobs} jobs</div>
+          <div className="med-profile-avatar">
+            {aUser?.assignedRunner?.firstName?.[0]}
+            {aUser?.assignedRunner?.lastName?.[0]}
           </div>
 
-          <button type="button" className="med-chat-btn" onClick={()=> navigate(`/dashboard/messages/${errandId}`)}>
+          <div className="med-profile-name">
+            {aUser?.assignedRunner?.firstName} {aUser?.assignedRunner?.lastName}
+          </div>
+
+          <div className="med-profile-meta">
+            <span className="med-star">★</span>
+            <span>{aUser?.assignedRunner?.rating || 4.8}</span>
+            <span className="med-dot">•</span>
+            <span>{aUser?.assignedRunner?.totalJobs || 23} Jobs</span>
+          </div>
+
+          <button
+            type="button"
+            className="med-chat-btn"
+            onClick={() => navigate(`/dashboard/messages/${id}`)}
+          >
             💬 Chat with Runner
           </button>
         </div>
 
-        {/* Right delivery progress card */}
+        {/* RIGHT TIMELINE */}
         <div className="med-card med-timeline-card">
           <h3 className="med-timeline-title">Delivery Progress</h3>
 
           <div className="med-timeline">
-            {/* Vertical rail */}
             <div className="med-rail" />
 
-            {/* Steps */}
             {steps.map((step) => (
               <div className="med-step-row" key={step.id}>
                 <div className="med-step-icon-wrap">
                   {step.done ? (
-                    <div className="med-step-icon med-step-done">
-                      <div className="med-step-done-inner">
-                        <IoCheckmarkCircle size={18} />
-                      </div>
-                    </div>
+                    <div className="med-step-done" />
                   ) : (
-                    <div className="med-step-icon med-step-idle" />
+                    <div
+                      className="med-step-idle"
+                      onClick={() => handleCircleClick(step)}
+                    />
                   )}
                 </div>
 
                 <div className="med-step-text">
-                  {step.done ? (
-                    <>
-                      <div className="med-step-label">{step.label}</div>
-                      {step.time && <div className="med-step-time">{step.time}</div>}
-                    </>
-                  ) : (
-                    <div className="med-step-placeholder" />
-                  )}
+                  <div className="med-step-label">{step.label}</div>
+                  {step.time && <div className="med-step-time">{step.time}</div>}
                 </div>
               </div>
             ))}
+
           </div>
         </div>
       </div>

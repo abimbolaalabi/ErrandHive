@@ -9,7 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;         
+  z-index: 1000;        
 }
 
 .modalerrand-child {
@@ -52,7 +52,7 @@
     font-weight: 700;
 }
 
-.close-button {
+.closee-button {
     cursor: pointer;
     font-weight: bold;
     line-height: 1;
