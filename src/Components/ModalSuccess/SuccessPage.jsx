@@ -45,7 +45,7 @@ const SuccessPage = () => {
          
 
           <div className="success-footer-actions">
-            <button className="success-secondary-btn" onClick={()=>window.location.href = `http://localhost:5174/dashboard/messages/${reference}`
+            <button className="success-secondary-btn" onClick={()=>window.location.href = `https://errand-hive.vercel.app/dashboard/messages/${reference}`
 }>
               <BsChat className="btn-icon" />
               Chat
@@ -54,6 +54,7 @@ const SuccessPage = () => {
           </div>
         </div>
       </div>
+      //dggd
     </div>
   );
 };
