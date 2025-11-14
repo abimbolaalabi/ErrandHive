@@ -71,7 +71,8 @@ export default function MessagesPage() {
   useEffect(() => {
     if (!userId || !receiverId) return;
 
-    const roomId = [userId, receiverId].sort().join("_err");
+    const roomId = [userId, receiverId].sort().join("_");
+
     socket.emit("join_room", roomId);
   }, [userId, receiverId]);
 
