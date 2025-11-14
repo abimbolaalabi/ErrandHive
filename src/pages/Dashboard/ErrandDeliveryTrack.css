@@ -4,10 +4,10 @@
   min-height: 100%;
   box-sizing: border-box;
   padding: 16px 20px 28px;
-  background: #f5f7fa; /* light gray background */
+  background: #f5f7fa; 
 }
 
-/* Back link row */
+
 .med-back-row {
   margin-bottom: 12px;
 }
@@ -20,7 +20,7 @@
   cursor: pointer;
 }
 
-/* Generic card */
+
 .med-card {
   background: #fff;
   border-radius: 14px;
@@ -28,9 +28,11 @@
   padding: 18px;
 }
 
-/* Top card */
+
 .med-top-card {
   margin-bottom: 18px;
+  height: auto;
+  min-height: 15rem;
 }
 
 /* Runner row */
@@ -74,8 +76,19 @@
 
 .med-runner-name {
   margin: 0;
-  font-size: 20px;
+  font-weight: 400;
+  font-size: 18px;
   color: #0f172a;
+}
+
+.med-rating{
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.med-deliveries{
+  font-weight: 400;
+  font-size: 18px;
 }
 
 .med-pill {
@@ -88,6 +101,8 @@
 .med-pill-verified {
   background: #e9f9ef;
   color: #15803d;
+  font-weight: 400;
+  font-size: 16px;
   border: 1px solid #c7f0d7;
 }
 
@@ -179,43 +194,6 @@
   line-height: 1.25rem;
 }
 
-/* Progress */
-.med-progress-wrap {
-  margin-top: 8px;
-}
-
-.med-progress-label-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 6px;
-}
-
-.med-progress-title {
-  font-size: 14px;
-  color: #334155;
-}
-
-.med-progress-val {
-  font-size: 13px;
-  color: #64748b;
-}
-
-.med-progressbar {
-  width: 100%;
-  height: 8px;
-  border-radius: 8px;
-  background: #e2e8f0;
-  overflow: hidden;
-}
-
-.med-progressbar-fill {
-  height: 100%;
-  background: #6d28d9;
-  width: 0%;
-  transition: width 0.3s ease;
-}
-
 /* Two-column grid */
 .med-grid {
   display: grid;
@@ -230,7 +208,7 @@
   align-items: center;
   padding: 18px;
   gap: 12px;
-  min-height: 260px;
+  height: max-content;
 }
 
 .med-profile-avatar {
@@ -280,100 +258,100 @@
   background: #f8fafc;
 }
 
-/* Timeline card */
+/* TIMELINE STYLES - UPDATED FOR SECOND IMAGE */
 .med-timeline-card {
-  min-height: 420px;
-  padding: 18px 20px;
+  padding: 20px;
 }
 
 .med-timeline-title {
-  margin: 0 0 16px 0;
-  color: #0f172a;
   font-size: 18px;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 20px;
 }
 
-/* Timeline */
 .med-timeline {
   position: relative;
-  padding-left: 28px;
+  padding-left: 0;
 }
 
-/* ✅ Updated rail so it does NOT touch first circle */
+/* VERTICAL RAIL */
 .med-rail {
   position: absolute;
-  left: 18px;
-  top: 30px;
-  bottom: 10px;
+  left: 15px;
+  top: 0;
+  bottom: 0;
   width: 2px;
-  background: #cbd5e1;
+  background: #22c55e;
+  border-radius: 2px;
 }
 
-/* Timeline rows */
+/* STEP ROW - UPDATED LAYOUT */
 .med-step-row {
-  position: relative;
   display: grid;
-  grid-template-columns: 28px 1fr;
+  grid-template-columns: 32px 1fr;
+  gap: 15px;
   align-items: flex-start;
-  gap: 10px;
-  padding: 12px 0;
-}
-
-/* ✅ Remove gap above first row */
-.med-step-row:first-child {
-  padding-top: 0;
+  margin-bottom: 8px;
+  position: relative;
+  min-height: 50px;
 }
 
 .med-step-icon-wrap {
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 2px;
+  z-index: 2;
 }
 
-/* ✅ Green done step (updated) */
+/* COMPLETED CIRCLE - UPDATED */
 .med-step-done {
-  width: 26px;
-  height: 26px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: #fff;
-  border: 2px solid #22c55e;
+  background: #22c55e;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
-.med-step-done-inner {
-  color: #22c55e;
+.med-step-done::before {
+  content: "✓";
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
 }
 
-/* Idle empty circle */
+/* NOT DONE CIRCLE - UPDATED */
 .med-step-idle {
-  width: 22px;
-  height: 22px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   border: 2px solid #cbd5e1;
   background: #fff;
 }
 
-/* Step text */
+/* TEXT AREA - UPDATED */
 .med-step-text {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  min-height: 24px;
+  gap: 4px;
+  padding: 4px 0;
 }
 
 .med-step-label {
   font-size: 14px;
+  font-weight: 500;
   color: #0f172a;
-  font-weight: 600;
+  line-height: 1.4;
 }
 
 .med-step-time {
   font-size: 12px;
   color: #64748b;
-}
-
-.med-step-placeholder {
-  height: 20px;
+  font-weight: 400;
 }
 
 /* Responsive */

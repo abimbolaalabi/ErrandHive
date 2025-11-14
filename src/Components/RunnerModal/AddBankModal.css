@@ -1,0 +1,155 @@
+/* BACKDROP */
+.bank-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 9998;
+}
+
+/* MODAL POSITION */
+.bank-modal-container {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+/* MODAL BOX */
+.bank-modal {
+  width: 100%;
+  max-width: 470px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px 30px 32px;
+  position: relative;
+  animation: slideUp 0.25s ease-out;
+  font-family: Inter, sans-serif;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* CLOSE BUTTON */
+.bank-close-btn {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #444;
+}
+
+/* TITLE + SUBTITLE */
+.bank-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.bank-subtitle {
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 26px;
+}
+
+/* FORM */
+.bank-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.bank-group label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1f2937;
+  margin-bottom: 6px;
+}
+
+.required {
+  color: #e11d48;
+}
+
+.info-icon {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* INPUT */
+.bank-group input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  font-size: 15px;
+  background: #f9fafb;
+}
+
+.bank-group input::placeholder {
+  color: #9ca3af;
+}
+
+.readonly {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+/* DIGITS SMALL TEXT */
+.digits-count {
+  font-size: 12px;
+  color: #9ca3af;
+  margin-top: 4px;
+}
+
+/* SECURITY BOX */
+.bank-security-box {
+  background: #f5f0ff;
+  padding: 14px 16px;
+  border-radius: 12px;
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+  color: #6a1bb9;
+}
+
+.security-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+/* BUTTONS */
+.bank-buttons {
+  display: flex;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.cancel-btn {
+  flex: 1;
+  padding: 14px 0;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  font-size: 15px;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.save-btn {
+  flex: 1;
+  padding: 14px 0;
+  background: #9333ea;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  box-shadow: 0px 4px 12px rgba(147, 51, 234, 0.25);
+  cursor: pointer;
+}

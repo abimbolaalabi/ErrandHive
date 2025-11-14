@@ -1,0 +1,156 @@
+.runnerPropModal-cont {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  font-family: "Inter", sans-serif;
+}
+
+.runnerPropModal-wrapper {
+  width: 100%;
+  max-width: 750px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 60px 32px 40px;
+  position: relative;
+  animation: scaleIn 0.25s ease;
+}
+
+.runnerPropModal-close {
+  position: absolute;
+  top: 20px;
+  right: 22px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.runnerPropModal-top-text {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 30px;
+}
+
+.runnerPropModal-task-box {
+  width: 100%;
+  border: 1px solid #e8e8e8;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 35px;
+}
+
+.runnerPropModal-task-label {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.runnerPropModal-task-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.runnerPropModal-center {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.runnerPropModal-success-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #1dcf5f;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  margin: 0 auto 18px;
+}
+
+.runnerPropModal-assign-title {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.runnerPropModal-assign-sub {
+  font-size: 14px;
+  color: #777;
+}
+
+.runnerPropModal-price-box {
+  border: 2px solid #c89bff;
+  background: #f7f1ff;
+  border-radius: 14px;
+  padding: 24px 10px;
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.runnerPropModal-price-label {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.runnerPropModal-price-value {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.runnerPropModal-btn-flex {
+  display: flex;
+  gap: 16px;
+}
+
+.runnerPropModal-btn-outline,
+.runnerPropModal-btn-fill {
+  width: 100%;
+  padding: 14px 0;
+  font-size: 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  border: none;
+  transition: 0.2s ease;
+}
+
+.runnerPropModal-btn-outline {
+  border: 1px solid #c8c8c8;
+  background: transparent;
+}
+
+.runnerPropModal-btn-outline:hover {
+  background: #f2f2f2;
+}
+
+.runnerPropModal-btn-fill {
+  background: #7c28f5;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+.runnerPropModal-btn-fill span {
+  color: white;
+}
+
+.runnerPropModal-btn-fill:hover {
+  background: #671ed1;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

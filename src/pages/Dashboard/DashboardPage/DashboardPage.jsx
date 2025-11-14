@@ -66,7 +66,7 @@ const DashboardPage = () => {
     clientSummaryDashBoard();
   }, []);
 
-  // ✅ Map summary data to your existing stat cards dynamically
+  
   const stats = [
     {
       title: "Total Request",

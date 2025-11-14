@@ -84,6 +84,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 .table-wrapper {
   background: #fff;
@@ -91,12 +92,14 @@
   border-radius: 18px;
   padding: 24px;
   margin-top: 1.8rem;
+
 }
 
 .table-header,
 .table-row {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background: #fff;
   border: 1px solid #dcdcdc;
   border-radius: 14px;
@@ -123,6 +126,7 @@
 .col-type {
   width: 30%;
   font-weight: 600;
+
 }
 .col-date {
   width: 18%;

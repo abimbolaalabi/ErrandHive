@@ -7,11 +7,10 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const SuccessPage = () => {
   const queryParams = new URLSearchParams(location.search);
-  const reference = queryParams.get("reference").split("_")[0];
+  const reference = queryParams.get("reference")?.split("_")[0];
 
   console.log("Payment reference:", reference);
-  // console.log(refernce)
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <div className="success-page-container">
@@ -20,37 +19,42 @@ const SuccessPage = () => {
           <FaCheckCircle className="success-icon" />
         </div>
 
-        <h2 className="success-title">Payment Successful! ✨</h2>
+        <h2 className="success-title">Payment Successful!</h2>
         <p className="success-subtitle">
-          Your payment was completed successfully. <br />
-          A verified runner will begin your errand soon.
+          Your errand has been confirmed. A verified Runner will begin shortly.
         </p>
 
         <div className="success-info-card">
           <div className="success-info-row">
             <span>Amount Paid</span>
-            <strong>Success</strong>
+            <strong>#4,000</strong>
           </div>
 
           <div className="success-info-row">
             <span>Errand</span>
-            <strong>Confirmed</strong>
+            <strong>Document pickup</strong>
           </div>
 
           <div className="success-escrow">
             <BsShieldCheck className="escrow-icon" />
-            <p>Funds held securely in escrow</p>
+            <span>○ Funds held securely in escrow</span>
           </div>
         </div>
 
-        <button className="success-view-btn" onClick={()=> navigate(`/dashboard/my-errands/errandId/errandTrack/${reference}`)}>
-          <AiOutlineEye />
-          Go to DashBoard
-        </button>
+        <div className="success-actions">
+         
 
+          <div className="success-footer-actions">
+            <button className="success-secondary-btn" onClick={()=>window.location.href = `http://localhost:5174/dashboard/messages/${reference}`
+}>
+              <BsChat className="btn-icon" />
+              Chat
+            </button>
+           
+          </div>
+        </div>
       </div>
     </div>
   );
 };
-
 export default SuccessPage;

@@ -21,30 +21,37 @@ const ActiveJobs = () => {
   const [selectedErrand, setSelectedErrand] = useState(null);
 
   // ✅ Fetch jobs
-  useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("userToken"));
+ useEffect(() => {
+  const token = JSON.parse(localStorage.getItem("userToken"));
 
-    const fetchJobs = async () => {
-      if (!token) {
-        toast.error("User token missing");
-        setLoading(false);
-        return;
-      }
+  const fetchJobs = async () => {
+    if (!token) {
+      toast.error("User token missing");
+      setLoading(false);
+      return;
+    }
 
-      try {
-        const res = await axios.get(`${API_BASE_URL}/errand/getAll`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setJobs(Array.isArray(res.data.data) ? res.data.data : []);
-      } catch (err) {
-        toast.error(err.response?.data?.message || "Failed to fetch jobs.");
-      } finally {
-        setLoading(false);
-      }
-    };
+    try {
+      const res = await axios.get(`${API_BASE_URL}/errand/getAll`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-    fetchJobs();
-  }, []);
+      const all = Array.isArray(res.data.data) ? res.data.data : [];
+
+      // 🔥 FILTER ONLY UNASSIGNED ERRANDS
+      const unassigned = all.filter(job => !job.assignedTo);
+
+      setJobs(unassigned);
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Failed to fetch jobs.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchJobs();
+}, []);
+
 
   const handleStartNegotiation = (job) => {
     if (!jobStatus[job._id]) {

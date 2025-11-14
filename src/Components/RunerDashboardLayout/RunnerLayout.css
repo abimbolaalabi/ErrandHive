@@ -6,7 +6,7 @@
   background: white;
 }
 
-.sidebar-runner {
+.sidebarr-runner {
   width: 250px;
   height: 90vh;
    position: sticky;
@@ -14,21 +14,21 @@
    left: 0;
    background-color: #fff;
 }
-.sidebar-header{
+.sidebarr-headerr{
   width: 100%;
   height: 15%;
   border-bottom: 1px solid #21212166;
 
 }
-.sidebar-header-title{
+.sidebarr-headerr-title{
   display: flex;
   align-items: center;
   gap: 0.3rem;
 }
-.sidebar-header img{
+.sidebarr-headerr img{
   width: 20%;
 }
-.sidebar-main{
+.sidebarr-main{
   width: 100%;
 height: 70%;
 display: flex;
