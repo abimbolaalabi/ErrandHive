@@ -11,6 +11,7 @@ const MyErrandsPage = () => {
   const [errands, setErrands] = useState([]);
   const [loading, setLoading] = useState(true);
 const BaseUrl = import.meta.env.VITE_BASE_URL
+ const userKyc = localStorage.getItem("userKyc");
   // Format: DD/MM/YYYY
   const formatDate = (iso) => {
     if (!iso) return '';
@@ -63,7 +64,12 @@ const BaseUrl = import.meta.env.VITE_BASE_URL
             Manage your errands.
           </p>
         </div>
-        <button onClick={() => setErrandMod(true)} className='new-errand-btn'> <span className='errand-span-b'>+  New Errand</span></button>
+        {
+          userKyc && (
+              <button onClick={() => setErrandMod(true)} className='new-errand-btn'> <span className='errand-span-b'>+  New Errand</span></button>
+          )
+        }
+      
       </div>
 
       {loading && (

@@ -10,63 +10,23 @@ const AddBankModal = ({ close }) => {
     bankName: "",
     accountNumber: "",
     accountName: "",
-    bvn: "",
   });
 
   const [loading, setLoading] = useState(false);
-
   const token = JSON.parse(localStorage.getItem("userToken"));
 
-  // HANDLE INPUT
-  const handleChange = async (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // only digits for bankCode / accountNumber / bvn
+    // Clean numeric fields
     const cleanValue =
-      name === "bankCode" || name === "accountNumber" || name === "bvn"
+      name === "bankCode" || name === "accountNumber"
         ? value.replace(/\D/g, "")
         : value;
 
     setBankData((prev) => ({ ...prev, [name]: cleanValue }));
-
-    // SIMPLE verification — if bankCode exists and accountNumber has 10 digits
-    if (
-      (name === "accountNumber" && cleanValue.length === 10) ||
-      (name === "bankCode" && cleanValue.length >= 3)
-    ) {
-      const bank = name === "bankCode" ? cleanValue : prev.bankCode;
-      const account = name === "accountNumber" ? cleanValue : prev.accountNumber;
-
-      if (bank.length >= 3 && account.length === 10) {
-        verifyBank(bank, account);
-      }
-    }
   };
 
-  // 🔥 SIMPLE BANK VERIFICATION
-  const verifyBank = async (bankCode, accountNumber) => {
-    try {
-      const res = await axios.post(
-        "https://errandhive-project.onrender.com/api/v1/payment/bank/details",
-        { bank: bankCode, account: accountNumber },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      const data = res.data.data;
-
-      setBankData((prev) => ({
-        ...prev,
-        bankName: data.bankName,
-        accountName: data.accountName,
-      }));
-
-      toast.success("Bank verified!");
-    } catch (err) {
-      toast.error("Verification failed");
-    }
-  };
-
-  // SUBMIT (VERY SIMPLE)
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -75,7 +35,9 @@ const AddBankModal = ({ close }) => {
       await axios.post(
         "https://errandhive-project.onrender.com/api/v1/payment/banks/details",
         bankData,
-        { headers: { Authorization: `Bearer ${token}` } }
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
 
       toast.success("Bank saved!");
@@ -90,6 +52,7 @@ const AddBankModal = ({ close }) => {
   return (
     <>
       <ToastContainer />
+
       <div className="bank-backdrop"></div>
 
       <div className="bank-modal-container">
@@ -115,6 +78,17 @@ const AddBankModal = ({ close }) => {
               />
             </div>
 
+            {/* BANK NAME (USER TYPES MANUALLY) */}
+            <div className="bank-group">
+              <label>Bank Name*</label>
+              <input
+                name="bankName"
+                value={bankData.bankName}
+                onChange={handleChange}
+                placeholder="GTBank, Access Bank, etc."
+              />
+            </div>
+
             {/* ACCOUNT NUMBER */}
             <div className="bank-group">
               <label>Account Number*</label>
@@ -125,30 +99,17 @@ const AddBankModal = ({ close }) => {
                 placeholder="0123456789"
                 maxLength={10}
               />
-
               <small>{bankData.accountNumber.length}/10 digits</small>
             </div>
 
             {/* ACCOUNT NAME */}
             <div className="bank-group">
-              <label>Account Name</label>
+              <label>Account Name*</label>
               <input
+                name="accountName"
                 value={bankData.accountName}
-                readOnly
-                placeholder="Auto-filled after verification"
-                className="readonly"
-              />
-            </div>
-
-            {/* BVN */}
-            <div className="bank-group">
-              <label>BVN (Optional)</label>
-              <input
-                name="bvn"
-                value={bankData.bvn}
                 onChange={handleChange}
-                placeholder="01234567890"
-                maxLength={11}
+                placeholder="John Doe"
               />
             </div>
 
