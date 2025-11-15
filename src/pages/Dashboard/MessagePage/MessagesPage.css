@@ -246,3 +246,156 @@
   cursor: pointer;
   font-size: 1rem;
 }
+
+@media screen and (max-width: 480px) {
+  /* Wrapper stacks vertically */
+  .messages-wrapper {
+    flex-direction: column;
+    height: 100%;
+    gap: 0;
+  }
+
+  /* Sidebar on top, scrollable horizontally */
+  .messages-sidebar {
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    border-right: none;
+    padding: 0.8rem 1rem;
+    max-height: 180px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* Conversations inside sidebar */
+  .conversation {
+    flex-direction: row;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 8px;
+    margin-bottom: 0.4rem;
+  }
+
+  .conversation.active {
+    border: 1px solid #d6c9ff;
+  }
+
+  .conversation .avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+  }
+
+  .conversation-info p {
+    font-size: 0.75rem;
+  }
+
+  .messages-sidebar h3 {
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .messages-sidebar .subtext {
+    font-size: 0.7rem;
+  }
+
+  .search-box input {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  /* Chat area */
+  .messages-chat {
+    width: 100%;
+    flex: 1;
+    border-radius: 0 0 10px 10px;
+    border: 1px solid #e6e6e6;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Chat header */
+  .chat-header {
+    padding: 0.6rem 1rem;
+  }
+
+  .chat-header .avatar.large {
+    width: 36px;
+    height: 36px;
+    font-size: 0.85rem;
+    margin-right: 0.6rem;
+  }
+
+  .chat-header h4 {
+    font-size: 0.95rem;
+  }
+
+  .chat-header p {
+    font-size: 0.7rem;
+  }
+
+  /* Chat body */
+  .chat-body {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    overflow-y: auto;
+    background: #fafbfc;
+  }
+
+  /* Messages */
+  .message {
+    display: flex;
+    margin-bottom: 0.8rem;
+  }
+
+  .message .avatar.small {
+    width: 28px;
+    height: 28px;
+    font-size: 0.7rem;
+    margin-right: 0.4rem;
+  }
+
+  .bubble {
+    max-width: 85%;
+    font-size: 0.85rem;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .bubble .time {
+    font-size: 0.65rem;
+  }
+
+  .from-user {
+    justify-content: flex-end;
+  }
+
+  .from-user .bubble {
+    background: #eae2ff;
+  }
+
+  /* Chat input */
+  .chat-input {
+    flex-direction: row;
+    padding: 0.5rem;
+    border-top: 1px solid #e6e6e6;
+    position: sticky;
+    bottom: 0;
+    z-index: 5;
+    background: #fff;
+  }
+
+  .chat-input input {
+    flex: 1;
+    padding: 0.5rem 0.6rem;
+    font-size: 0.85rem;
+    border-radius: 8px;
+  }
+
+  .chat-input button {
+    width: 35px;
+    height: 35px;
+    font-size: 0.85rem;
+    margin-left: 0.4rem;
+  }
+}

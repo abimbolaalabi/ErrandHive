@@ -57,13 +57,13 @@ const BaseUrl = import.meta.env.VITE_BASE_URL
   return (
     <div className="dashboard-page">
       <div className="welcome-seection">
-        <div>
+        <div className='new-errand-holder'> 
           <h1 className="welcome-title">My Errands</h1>
           <p className="welcome-subtitle">
             Manage your errands.
           </p>
         </div>
-        <button onClick={() => setErrandMod(true)}> <span>+  New Errand</span></button>
+        <button onClick={() => setErrandMod(true)} className='new-errand-btn'> <span className='errand-span-b'>+  New Errand</span></button>
       </div>
 
       {loading && (

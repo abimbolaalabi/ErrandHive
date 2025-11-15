@@ -26,6 +26,7 @@
   overflow-y: auto;     
   overflow-x: hidden;
 }
+
 .modalerrand-child::-webkit-scrollbar {
   display: none; 
 }
@@ -75,10 +76,8 @@
     margin: 0 0 20px 0;
 }
 
-
 .form-content {
     padding: 0 20px;
- 
     flex-grow: 1; 
 }
 
@@ -136,8 +135,6 @@
     font-size: 0.95rem;
 }
 
-
-
 .attachments-section {
     margin-top: 10px;
     margin-bottom: 30px;
@@ -149,7 +146,6 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
-    /* border: 2px dashed #a052ff;  */
     border-radius: 8px;
     background-color: #f9f0ff; 
     text-align: center;
@@ -172,7 +168,6 @@
     font-size: 0.75rem;
     color: #777;
 }
-
 
 .action-buttons {
     display: flex;
@@ -206,23 +201,66 @@
 .post-btn {
     background-color: #a052ff;
     color: #fff;
-    border: 2px solid #a052ff;/
+    border: 2px solid #a052ff;
 }
 
 .post-btn:hover {
     background-color: #8c42e5; 
 }
 
-
+/* -------------------- RESPONSIVENESS -------------------- */
 @media (max-width: 600px) {
     .modalerrand-child {
         width: 90%;
         height: 95%;
         border-radius: 0.5rem;
+        padding: 10px;
+    }
+
+    .top-note-container {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    .post-errand-header {
+        font-size: 16px;
+        margin: 10px 0 5px 0;
+    }
+
+    .post-errand-subheader {
+        font-size: 12px;
+        margin-bottom: 15px;
+    }
+
+    .form-content {
+        padding: 0 10px;
+    }
+
+    .form-input, .form-textarea {
+        font-size: 0.95rem;
+        padding: 8px 10px;
+    }
+
+    .attachments-section {
+        margin-bottom: 20px;
+    }
+
+    .attachment-box {
+        padding: 15px;
+    }
+
+    .attachment-icon {
+        font-size: 1.25rem;
     }
 
     .action-buttons {
         flex-direction: column;
         gap: 10px;
+        padding: 15px;
+    }
+
+    .btn {
+        font-size: 0.95rem;
+        padding: 10px;
     }
 }
