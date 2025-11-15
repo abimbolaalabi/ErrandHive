@@ -33,8 +33,8 @@ const RunnerDashboard = () => {
 
   const data = [
     {
-      title: "Total Request",
-      value: summary?.totalRequests ?? 0,
+      title: "Total Applications",
+      value: summary?.totalApplications ?? 0,
       color: "#8133F1",
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -56,7 +56,7 @@ const RunnerDashboard = () => {
     },
     {
       title: "Active",
-      value: "0",
+      value: summary?.activeJobs ?? 0,
       color: "#8133F1",
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -67,7 +67,7 @@ const RunnerDashboard = () => {
     },
     {
       title: "Total Spent",
-      value: `₦${Number(summary?.totalSpent ?? 0).toLocaleString()}`,
+      value: `₦${Number(summary?.totalEarnings ?? 0).toLocaleString()}`,
       color: "#F97316",
       icon: (
         <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
@@ -108,7 +108,7 @@ const RunnerDashboard = () => {
             </>
           ) : (
             <>
-              <p className="kyc-reminder">You have not completed KYC yet.</p>
+              <p className="kyc-reminder">You have no active jobs yet.</p>
               <p className="complete-kyc">
                 Complete KYC to get available jobs
               </p>
@@ -130,7 +130,7 @@ const RunnerDashboard = () => {
   return (
     <main className="runner-dashboard-layout">
       <div className="title-dashboard-runner">
-        <h1>Welcome to your dashboard {fullName || "User"}! 👋</h1>
+        <h1>Welcome to your dashboard {user?.fullName || "Guest"}! 👋</h1>
       </div>
 
       <div className="e-grid-t">
