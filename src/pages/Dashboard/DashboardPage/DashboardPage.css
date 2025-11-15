@@ -1,4 +1,4 @@
-
+/* --- Base Dashboard Styles (kept your original code) --- */
 .dashboard-page {
   max-width: 1200px;
   margin: 0 auto;
@@ -8,12 +8,11 @@
   margin-bottom: 2rem;
 }
 
-.post-errand-btn{
-    width: 12%;
+.post-errand-btn {
+  width: 12%;
   height: 40px;
   background-color: #8133f1;
   gap: 3rem;
-
   color: #fff;
   border-radius: 7px;
   border: none;
@@ -40,7 +39,6 @@
   grid-template-columns: repeat(auto-fit, minmax(230px, 4fr));
   gap: 1.5rem;
   margin-bottom: 2rem;
- 
 }
 
 .statt-card {
@@ -149,6 +147,43 @@
   transform: translateY(0);
 }
 
+/* --- Recent Errands Section --- */
+.recent-errands {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.recent-errand-card {
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s;
+}
+
+.recent-errand-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.recent-errand-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 0.5rem 0;
+}
+
+.recent-errand-details {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin: 0;
+}
+
+/* --- Existing Dashboard Responsiveness --- */
 @media (max-width: 768px) {
   .dashboard-page {
     padding: 0 1rem;
@@ -203,6 +238,7 @@
   }
 }
 
+/* --- Small Mobile Screens --- */
 @media (max-width: 480px) {
   .stats-grid {
     grid-template-columns: 1fr;
@@ -213,8 +249,42 @@
     text-align: center;
     gap: 1rem;
   }
-  
+  .post-errand-btn{
+    width: 260px;
+    height: 50px;
+  }
   .stat-icon {
     order: -1;
+  }
+
+   .recent-card {
+    padding: 0.75rem;
+  }
+
+  .recent-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .pickup-delivery-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .pickup-section,
+  .delivery-section {
+    flex: unset;
+  }
+
+  .recent-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .details-btn {
+    width: 100%;
+    text-align: center;
   }
 }

@@ -3,14 +3,25 @@ import { AppContext } from '../../Context/App';
 import { GiHamburgerMenu } from "react-icons/gi"; // Import hamburger icon
 import './Header.css';
 
-const Header = ({ toggleSidebar }) => { // receive toggle function from parent
-  const { userType,user, setUser } = useContext(AppContext);
+const Header = ({ setSidebarOpen }) => {
+  const { userType, user } = useContext(AppContext);
 
   const storedUser = JSON.parse(localStorage.getItem("userDetails")) || {};
   const fullName = `${storedUser?.firstName || ""} ${storedUser?.lastName || ""}`.trim();
 
   return (
     <header className="dashboard-header">
+
+      {/* HAMBURGER BUTTON FOR MOBILE */}
+      <button
+        className="hamburger-btn"
+        onClick={() => setSidebarOpen(prev => !prev)}
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
       <div className="header-left">
         {/* Hamburger button for mobile */}
         <button className="hamburger-btn" onClick={toggleSidebar}>
@@ -29,7 +40,7 @@ const Header = ({ toggleSidebar }) => { // receive toggle function from parent
           />
         </div>
       </div>
-      
+
       <div className="header-right">
         <button className="notification-btn">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -45,6 +56,7 @@ const Header = ({ toggleSidebar }) => { // receive toggle function from parent
           </div>
         </div>
       </div>
+
     </header>
   );
 };
