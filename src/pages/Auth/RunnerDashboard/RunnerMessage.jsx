@@ -12,7 +12,7 @@ const socket = io(import.meta.env.VITE_SOCKET_URL, {
 });
 
 export default function RunnerMessage() {
-  const { id } = useParams(); // errandId
+  const { id } = useParams(); // errand id
   const navigate = useNavigate();
   const { user } = useContext(AppContext);
 
@@ -28,74 +28,74 @@ export default function RunnerMessage() {
 
   const messagesEndRef = useRef(null);
 
-  // Logged-in runner
   const userId = user?.id;
 
   // -----------------------------------------------------
-  // 1️⃣ Fetch errands assigned to runner
+  // FETCH ALL ERRANDS FOR SIDEBAR
   // -----------------------------------------------------
-  const fetchRunnerErrands = async () => {
-    try {
-      const res = await axios.get(`${BaseUrl}/errand/runner-errands`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      setErrands(res?.data?.data || []);
-    } catch (err) {
-      console.log("Fetch errands error:", err);
-    }
-  };
-
   useEffect(() => {
+    const fetchRunnerErrands = async () => {
+      try {
+        const res = await axios.get(`${BaseUrl}/errand/runner-errands`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        setErrands(res?.data?.data || []);
+      } catch (err) {
+        console.log("Fetch errands error:", err);
+      }
+    };
+
     fetchRunnerErrands();
   }, []);
 
   // -----------------------------------------------------
-  // 2️⃣ Load the selected conversation
+  // FETCH CHAT INFO + HISTORY
   // -----------------------------------------------------
   useEffect(() => {
     if (!id) return;
 
-    (async () => {
+    const loadChat = async () => {
       try {
         setLoading(true);
         setMessages([]);
 
-        // Get errand info
         const info = await axios.get(`${BaseUrl}/errand/get/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
         setChatInfo(info.data.data);
-
+console.log("dyiufhiigg ",info.data.data)
         const clientId = info.data.data?.poster?.id;
-        const runnerId = info.data.data?.assignedTo; // FIXED: string
+        const runnerId = info.data.data?.assignedTo;
 
         if (!clientId || !runnerId) return;
 
         const receiverId = userId === runnerId ? clientId : runnerId;
         const roomId = [userId, receiverId].sort().join("_");
 
-        // Get chat history by roomId
-        const msg = await axios.get(`${BaseUrl}/messages/messages/history/${roomId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const history = await axios.get(
+          `${BaseUrl}/messages/messages/history/${roomId}`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
 
-        setMessages(msg.data?.data || []);
+        setMessages(history.data?.data || []);
       } catch (err) {
         console.log("Chat load error:", err);
       } finally {
         setLoading(false);
       }
-    })();
+    };
+
+    loadChat();
   }, [id, userId]);
 
   // -----------------------------------------------------
-  // 3️⃣ JOIN SOCKET ROOM
+  // JOIN SOCKET ROOM
   // -----------------------------------------------------
   useEffect(() => {
     const clientId = chatInfo?.poster?.id;
-    const runnerId = chatInfo?.assignedTo; // FIXED
+    const runnerId = chatInfo?.assignedTo;
 
     if (!clientId || !runnerId) return;
 
@@ -106,19 +106,20 @@ export default function RunnerMessage() {
   }, [chatInfo, userId]);
 
   // -----------------------------------------------------
-  // 4️⃣ Receive live messages
+  // RECEIVE LIVE MESSAGES WITHOUT DUPLICATES
   // -----------------------------------------------------
   useEffect(() => {
     const incoming = (msg) => {
+      if (msg.senderId === userId) return; // prevents duplicates
       setMessages((prev) => [...prev, msg]);
     };
 
     socket.on("receive_message", incoming);
     return () => socket.off("receive_message", incoming);
-  }, []);
+  }, [userId]);
 
   // -----------------------------------------------------
-  // 5️⃣ SEND MESSAGE
+  // SEND MESSAGE
   // -----------------------------------------------------
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -126,7 +127,7 @@ export default function RunnerMessage() {
     if (!text.trim() || !chatInfo?.poster?.id) return;
 
     const clientId = chatInfo.poster.id;
-    const runnerId = chatInfo.assignedTo; // FIXED
+    const runnerId = chatInfo.assignedTo;
 
     const receiverId = userId === runnerId ? clientId : runnerId;
     const roomId = [userId, receiverId].sort().join("_");
@@ -140,9 +141,7 @@ export default function RunnerMessage() {
       createdAt: new Date(),
     };
 
-    // Update UI instantly
     setMessages((prev) => [...prev, payload]);
-
     socket.emit("send_message", payload);
 
     try {
@@ -156,14 +155,18 @@ export default function RunnerMessage() {
     setText("");
   };
 
-  // Scroll to bottom
+  // -----------------------------------------------------
+  // SCROLL TO LAST MESSAGE
+  // -----------------------------------------------------
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   // -----------------------------------------------------
-  // UI
+  // PAYMENT BLOCK SCREEN
   // -----------------------------------------------------
+  const isPaid = chatInfo?.paymentStatus === "paid";
+console.log("paiid   , ",chatInfo)
   return (
     <div className="messages-wrapper">
 
@@ -182,7 +185,6 @@ export default function RunnerMessage() {
               <div className="avatar">
                 {item.poster.firstName?.charAt(0)}
               </div>
-
               <div className="conversation-info">
                 <p className="name">
                   {item.poster.firstName} {item.poster.lastName}
@@ -195,75 +197,94 @@ export default function RunnerMessage() {
         ))}
       </div>
 
-      {/* CHAT AREA */}
-      <div className="messages-chat">
+      {/* 🔒 LOCK SCREEN IF NOT PAID */}
+      {!isPaid && (
+        <div className="messages-chat center-block">
+          <h2 className="lock-title">Payment Required</h2>
+          <p className="lock-desc">
+            The client must complete the payment before messaging becomes available.
+            You will gain full access once payment is confirmed.
+          </p>
 
-        <div className="chat-header">
-          <div className="avatar large">
-            {chatInfo?.poster?.firstName?.charAt(0)}
-          </div>
-
-          <div>
-            <h4>{chatInfo?.poster?.firstName} {chatInfo?.poster?.lastName}</h4>
-            <p>Client</p>
-          </div>
-
-          {/* MENU DROPDOWN */}
-          <div className="menu-container">
-            <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)}>⋮</button>
-            {menuOpen && (
-              <div className="menu-options">
-                <p onClick={() => navigate(`/runnerlayout/runnermessage/${id}/status`)}>
-                  View Progress
-                </p>
-              </div>
-            )}
-          </div>
+      
         </div>
+      )}
 
-        {/* CHAT BODY */}
-        <div className="chat-body">
-          {messages.map((m, i) => {
-            const mine = m.senderId === userId;
+      {/* CHAT UI - ONLY SHOW IF PAID */}
+      {isPaid && (
+        <div className="messages-chat">
 
-            return (
-              <div key={i} className={`message ${mine ? "from-user" : ""}`}>
-                {!mine && (
-                  <div className="avatar small">
-                    {chatInfo?.poster?.firstName?.charAt(0)}
-                  </div>
-                )}
+          <div className="chat-header">
+            <div className="avatar large">
+              {chatInfo?.poster?.firstName?.charAt(0)}
+            </div>
 
-                <div className="bubble">
-                  <p>{m.text}</p>
-                  <span className="time">
-                    {new Date(m.createdAt).toLocaleTimeString([], {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </span>
+            <div>
+              <h4>
+                {chatInfo?.poster?.firstName} {chatInfo?.poster?.lastName}
+              </h4>
+              <p>Client</p>
+            </div>
+
+            <div className="menu-container">
+              <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)}>⋮</button>
+              {menuOpen && (
+                <div className="menu-options">
+                  <p onClick={() => navigate(`/runnerlayout/runnermessage/${id}/status`)}>
+                    View Progress
+                  </p>
                 </div>
+              )}
+            </div>
+          </div>
 
-                {mine && <div className="avatar small">You</div>}
-              </div>
-            );
-          })}
+          {/* CHAT BODY */}
+          <div className="chat-body">
+            {loading && <p>Loading...</p>}
 
-          <div ref={messagesEndRef} />
+            {messages.map((m, i) => {
+              const mine = m.senderId === userId;
+
+              return (
+                <div key={i} className={`message ${mine ? "from-user" : ""}`}>
+                  {!mine && (
+                    <div className="avatar small">
+                      {chatInfo?.poster?.firstName?.charAt(0)}
+                    </div>
+                  )}
+
+                  <div className="bubble">
+                    <p>{m.text}</p>
+                    <span className="time">
+                      {new Date(m.createdAt).toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </span>
+                  </div>
+
+                  {mine && <div className="avatar small">You</div>}
+                </div>
+              );
+            })}
+
+            <div ref={messagesEndRef} />
+          </div>
+
+          {/* INPUT */}
+          <form className="chat-input" onSubmit={sendMessage}>
+            <input
+              type="text"
+              placeholder="Type your message..."
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+            />
+            <button>➤</button>
+          </form>
+
         </div>
+      )}
 
-        {/* INPUT */}
-        <form className="chat-input" onSubmit={sendMessage}>
-          <input
-            type="text"
-            placeholder="Type your message..."
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-          />
-          <button>➤</button>
-        </form>
-
-      </div>
     </div>
   );
 }

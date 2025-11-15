@@ -156,7 +156,7 @@ const Negotiation = ({ close, errand }) => {
   className="accept-btn"
   onClick={() => {
     handleAccept();
-    navigate(`/runnerlayout/runnertrack/${errand.id}`);
+    navigate(`/runnerlayout/runnermessage/${errand.id}/status/`);
   }}
   disabled={isAccepting}
 >

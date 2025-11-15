@@ -93,7 +93,8 @@ const Router = () => {
             {/* Runner Message */}
               <Route path="runnermessage" element={<RunnerMessage />} />
             <Route path="runnermessage/:id" element={<RunnerMessage />} />
-            <Route path="runnertrack/:runnerId" element={<RunnerDetailPage />} />
+            <Route path="runnermessage/:id/status" element={< RunnerDetailPage/>} />
+            {/* <Route path="runnertrack/:runnerId" element={<RunnerDetailPage />} /> */}
           </Route>
         </Route>
 
