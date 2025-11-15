@@ -1,18 +1,22 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../Context/App';
+import { GiHamburgerMenu } from "react-icons/gi"; // Import hamburger icon
 import './Header.css';
 
-const Header = () => {
+const Header = ({ toggleSidebar }) => { // receive toggle function from parent
   const { userType,user, setUser } = useContext(AppContext);
 
-
   const storedUser = JSON.parse(localStorage.getItem("userDetails")) || {};
-
   const fullName = `${storedUser?.firstName || ""} ${storedUser?.lastName || ""}`.trim();
 
   return (
     <header className="dashboard-header">
       <div className="header-left">
+        {/* Hamburger button for mobile */}
+        <button className="hamburger-btn" onClick={toggleSidebar}>
+          <GiHamburgerMenu size={24} />
+        </button>
+
         <div className="search-container">
           <svg className="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <circle cx="11" cy="11" r="8" />
