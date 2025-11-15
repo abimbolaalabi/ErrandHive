@@ -226,3 +226,42 @@
   padding: 20px;
   background-color: #e5e7eb;
 }
+/* ========== MOBILE HEADER ONLY ========== */
+@media screen and (max-width: 768px) {
+
+  /* Header rearrange */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    padding: 10px 15px;
+  }
+
+  /* Show hamburger */
+  .hamburger-btn {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+  }
+
+  /* Hide search input on mobile */
+  .input-holder {
+    display: none;
+  }
+
+  /* Profile stays at right */
+  .wrapper-notification-profile {
+    margin-left: auto;
+    gap: 1rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .Profile-layout-box-runner {
+    margin-left: 0 !important;
+    justify-content: flex-end;
+  }
+}

@@ -1,14 +1,14 @@
 import "./RunnerLayout.css";
 import { IoIosSearch } from "react-icons/io";
-import { 
-  IoMdNotificationsOutline, 
-  IoMdPerson, 
-  IoMdWallet, 
-  IoIosLogOut
+import {
+  IoMdNotificationsOutline,
+  IoMdPerson,
+  IoMdWallet,
+  IoIosLogOut,
 } from "react-icons/io";
 import { MdOutlineDashboard } from "react-icons/md";
 import { BiMessageRoundedDetail } from "react-icons/bi";
-import { FaRunning } from "react-icons/fa";  
+import { FaRunning } from "react-icons/fa";
 import Profile from "../../assets/Profile.png";
 import axios from "axios";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
@@ -18,7 +18,6 @@ import { GiHamburgerMenu } from "react-icons/gi";
 const RunnerLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
 
   const token = JSON.parse(localStorage.getItem("userToken"));
 
@@ -53,8 +52,16 @@ const RunnerLayout = () => {
   // ⭐ MENU ITEMS
   const menuItems = [
     { label: "Dashboard", icon: <MdOutlineDashboard />, path: "/runnerlayout" },
-    { label: "Active Jobs", icon: <FaRunning />, path: "/runnerlayout/runneractive" },
-    { label: "My Earnings", icon: <IoMdWallet />, path: "/runnerlayout/runnerearning" },
+    {
+      label: "Active Jobs",
+      icon: <FaRunning />,
+      path: "/runnerlayout/runneractive",
+    },
+    {
+      label: "My Earnings",
+      icon: <IoMdWallet />,
+      path: "/runnerlayout/runnerearning",
+    },
 
     // {
     //   label: "Messages",
@@ -63,13 +70,17 @@ const RunnerLayout = () => {
     //     ? `/runnerlayout/runnermessage/${errand.id}`
     //     : "/runnerlayout/runnermessage",
     // },
-{
-  label: "Messages",
-  icon: <BiMessageRoundedDetail />,
-  path: "/runnerlayout/runnermessage",   // ALWAYS SHOW LIST FIRST
-},
+    {
+      label: "Messages",
+      icon: <BiMessageRoundedDetail />,
+      path: "/runnerlayout/runnermessage", // ALWAYS SHOW LIST FIRST
+    },
 
-    { label: "Profile", icon: <IoMdPerson />, path: "/runnerlayout/runnerprofile" },
+    {
+      label: "Profile",
+      icon: <IoMdPerson />,
+      path: "/runnerlayout/runnerprofile",
+    },
   ];
 
   const handleLogoutRunner = () => {
@@ -86,11 +97,25 @@ const RunnerLayout = () => {
               src="https://res.cloudinary.com/dwzomhflw/image/upload/v1761056644/IMG-20251021-WA0052_lf7sms.jpg"
               alt=""
             />
-            <span style={{ color: "#6a20cc", fontFamily: "Poppins", fontWeight: "500", fontSize: "24px" }}>
+            <span
+              style={{
+                color: "#6a20cc",
+                fontFamily: "Poppins",
+                fontWeight: "500",
+                fontSize: "24px",
+              }}
+            >
               ErrandHive
             </span>
           </div>
-          <p style={{ textAlign: "center", fontFamily: "Poppins", fontWeight: "400", fontSize: "10px" }}>
+          <p
+            style={{
+              textAlign: "center",
+              fontFamily: "Poppins",
+              fontWeight: "400",
+              fontSize: "10px",
+            }}
+          >
             run errand
           </p>
         </div>
@@ -112,7 +137,11 @@ const RunnerLayout = () => {
         </div>
 
         <div className="log-out-box">
-          <button type="submit" className="log-out-btn" onClick={handleLogoutRunner}>
+          <button
+            type="submit"
+            className="log-out-btn"
+            onClick={handleLogoutRunner}
+          >
             <IoIosLogOut style={{ fontSize: "1.5rem" }} /> Log out
           </button>
         </div>
@@ -122,7 +151,11 @@ const RunnerLayout = () => {
         <header className="header">
           <div className="input-holder">
             <IoIosSearch className="search-icons-runner" />
-            <input type="text" placeholder=" Search errands, runner" className="input" />
+            <input
+              type="text"
+              placeholder=" Search errands, runner"
+              className="input"
+            />
           </div>
 
           <div className="wrapper-notification-profile">
