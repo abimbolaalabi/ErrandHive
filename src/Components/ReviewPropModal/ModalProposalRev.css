@@ -187,3 +187,57 @@
     opacity: 1;
   }
 }
+
+
+@media screen and (max-width: 480px) {
+  .review-wrapper {
+    width: 95%;
+    padding: 30px 16px 24px;
+    border-radius: 16px;
+  }
+
+  .rev-top-text {
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+
+  .rev-task-label {
+    font-size: 12px;
+  }
+
+  .rev-task-title {
+    font-size: 14px;
+  }
+
+  .rev-assign-title {
+    font-size: 16px;
+  }
+
+  .rev-assign-sub {
+    font-size: 12px;
+  }
+
+  .rev-price-label {
+    font-size: 12px;
+  }
+
+  .rev-price-value {
+    font-size: 16px;
+  }
+
+  .rev-btn-flex {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .rev-btn-outline, .rev-btn-fill {
+    font-size: 13px;
+    padding: 10px 0;
+  }
+
+  .rev-success-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+}

@@ -13,6 +13,7 @@ import Profile from "../../assets/Profile.png";
 import axios from "axios";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const RunnerLayout = () => {
   const navigate = useNavigate();
@@ -26,6 +27,8 @@ const RunnerLayout = () => {
 
   const [assignedErrand, setAssignedErrand] = useState(null);
   const [errand, setErrand] = useState(null);
+  const [showSidebar, setShowSidebar] = useState(false);
+
   // ⭐ GET ERRANDS ASSIGNED TO RUNNER
   const BaseUrl = import.meta.env.VITE_BASE_URL;
 

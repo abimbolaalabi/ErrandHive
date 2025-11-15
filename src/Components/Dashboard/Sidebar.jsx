@@ -5,7 +5,7 @@ import "./Sidebar.css";
 import { FaRunning } from "react-icons/fa";
 import axios from "axios";
 
-const Sidebar = () => {
+const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { user } = useContext(AppContext);
   const [errand, setErrand] = useState(null);
   const location = useLocation();
@@ -15,7 +15,7 @@ const Sidebar = () => {
 
   const getErrandById = async () => {
     try {
-      const token = JSON.parse(localStorage.getItem("userToken"));
+    const token = JSON.parse(localStorage.getItem("userToken"));
       const res = await axios.get(`${BaseUrl}/errand/my-errands`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -86,7 +86,28 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${sidebarOpen ? "open" : ""}`}>
+      
+      {/* CLOSE BUTTON (only visible on mobile when open) */}
+      {sidebarOpen && (
+        <button
+          className="close-sidebar-btn"
+          onClick={() => setSidebarOpen(false)}
+          style={{
+            position: "absolute",
+            top: "15px",
+            right: "15px",
+            background: "none",
+            border: "none",
+            fontSize: "22px",
+            cursor: "pointer",
+            zIndex: 2000,
+          }}
+        >
+          ✖
+        </button>
+      )}
+
       {/* TOP LOGO */}
       <div className="sidebar-header">
         <div className="logoo">
@@ -111,6 +132,7 @@ const Sidebar = () => {
               key={item.path}
               to={item.path}
               className={`nav-item ${isActive ? "active" : ""}`}
+              onClick={() => setSidebarOpen(false)}
             >
               <span className="nav-icon">{item.icon}</span>
               <span className="nav-label">{item.label}</span>
@@ -118,7 +140,7 @@ const Sidebar = () => {
           );
         })}
 
-        {/* LOGOUT */}
+        
         <div className="nav-item logout" onClick={handleLogout}>
           <span className="nav-icon">
             <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
