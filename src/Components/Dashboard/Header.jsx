@@ -2,16 +2,25 @@ import React, { useContext } from 'react';
 import { AppContext } from '../../Context/App';
 import './Header.css';
 
-const Header = () => {
-  const { userType,user, setUser } = useContext(AppContext);
-
+const Header = ({ setSidebarOpen }) => {
+  const { userType, user } = useContext(AppContext);
 
   const storedUser = JSON.parse(localStorage.getItem("userDetails")) || {};
-
   const fullName = `${storedUser?.firstName || ""} ${storedUser?.lastName || ""}`.trim();
 
   return (
     <header className="dashboard-header">
+
+      {/* HAMBURGER BUTTON FOR MOBILE */}
+      <button
+        className="hamburger-btn"
+        onClick={() => setSidebarOpen(prev => !prev)}
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
       <div className="header-left">
         <div className="search-container">
           {/* <svg className="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -25,7 +34,7 @@ const Header = () => {
           /> */}
         </div>
       </div>
-      
+
       <div className="header-right">
         <button className="notification-btn">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -41,6 +50,7 @@ const Header = () => {
           </div>
         </div>
       </div>
+
     </header>
   );
 };

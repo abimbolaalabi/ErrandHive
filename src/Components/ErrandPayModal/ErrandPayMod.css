@@ -170,3 +170,63 @@
     opacity: 1);
   }
 } */
+@media screen and (max-width: 480px) {
+  .errand-pay-wrapper {
+    width: 95%;
+    padding: 30px 16px 24px;
+    border-radius: 16px;
+    margin-top: 10px;
+  }
+
+  .ep-title {
+    font-size: 18px;
+  }
+
+  .ep-sub {
+    font-size: 12px;
+    margin-bottom: 24px;
+  }
+
+  .ep-task-label {
+    font-size: 12px;
+  }
+
+  .ep-task-title {
+    font-size: 14px;
+  }
+
+  .ep-mid-title {
+    font-size: 16px;
+  }
+
+  .ep-mid-sub {
+    font-size: 12px;
+  }
+
+  .ep-price-label {
+    font-size: 12px;
+  }
+
+  .ep-price-value {
+    font-size: 16px;
+  }
+
+  .ep-next-title {
+    font-size: 13px;
+  }
+
+  .ep-next-desc {
+    font-size: 12px;
+  }
+
+  .ep-pay-btn {
+    font-size: 13px;
+    padding: 12px 0;
+  }
+
+  .ep-success-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+}

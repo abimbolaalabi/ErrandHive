@@ -110,3 +110,16 @@
   cursor: pointer;
   font-weight: 600;
 }
+
+
+  
+      @media screen  and (max-width: 480px) {
+        
+  .new-errand-btn{
+       width: 700px;
+    font-size: 14px;  
+     
+  }
+  
+}
+  

@@ -32,3 +32,17 @@
   font-size: 25px;
   font-family: "Poppins", sans-serif;
 }
+
+
+@media screen and (max-width: 480px) {
+  .modal-child {
+    width: 90%;
+    height: auto;
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .spinner-text {
+    font-size: 18px;
+  }
+}
