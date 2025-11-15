@@ -7,6 +7,135 @@
 }
 .dashboard-kyc{
     width: 100%;
-    height: 15rem;
+    height: 20rem;
     background-color: #fff;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-block: 0.5rem;
+    margin-bottom: 2rem;
+}
+.e-grid-t{
+    display: grid;
+grid-template-columns: repeat(auto-fit, minmax(216.5px, 4fr));
+gap: 1.5rem;
+ margin-bottom: 2rem;
+}
+.e-card-t{
+    background: white;
+padding: 1.2rem;
+border-radius: 12px;
+box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+display: flex;
+align-items: center;
+justify-content: space-between;
+transition: all 0.2s;
+height: 9rem;
+}
+.e-card-t:hover{
+     transform: translateY(-2px);
+ box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+ cursor: pointer;
+}
+.e-content-t{
+flex: 1;
+}
+.e-title-t{
+font-size: 1rem;
+font-weight: 600;
+font-family: Poppins;
+font-style: SemiBold;
+color: #212121;
+margin: 0 0 0.5rem 0;
+text-transform: uppercase;
+letter-spacing: 0.05em;
+}
+.e-value-t{
+font-size: 25px;
+font-weight: 700;
+color: #212121;
+font-style: Bold;
+margin: 0;
+line-height: 1;
+}
+.e-icon-t{
+     width: 48px;
+ height: 48px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ border-radius: 8px;
+ margin-left: 0.08rem;
+ background: rgba(129, 51, 241, 0.1);
+
+}
+.cube-holder{
+    width: 12%;
+    height: 50%;
+    margin-bottom: 0.5rem;
+}
+.cube-holder img{
+    width: 100%;
+}
+.remainder-holder{
+    width: 100%;
+}
+.kyc-reminder{
+    font-size: 25px;
+    font-weight: 500;
+    color: #212121;
+    font-style: Medium;
+}
+.complete-kyc{
+    font-weight: 400;
+    font-size: 1rem;
+    font-style: Regular;
+}
+.kyc-btn-holder{
+    margin-top: 2rem;
+}
+.kyc-btn{
+  height: 30px;
+  width: 150px;
+  border: none;
+  background-color:#8133F1;
+  color: white;
+  border-radius: 8px;
+  font-family: Poppins;
+  font-style: SemiBold;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.kyc-btn-browse-btn {
+   height: 0px;
+  width: 200px;
+border: none;
+background-color:#8133F1;
+color: white;
+border-radius: 8px;
+font-family: Poppins;
+font-style: SemiBold;
+font-size: 1rem;
+font-weight: 600;
+ cursor: pointer;
+}
+.kyc-remind{
+    font-size: 1rem;
+    margin-top: 0.5rem;
+       margin-bottom: 0.5rem;
+}
+.complete-kyc-reload{
+ height: 30px;
+width: 150px;
+border: none;
+background-color:#8133F1;
+color: white;
+border-radius: 8px;
+font-family: Poppins;
+font-style: SemiBold;
+font-size: 1rem;
+font-weight: 600;
+cursor: pointer;
 }

@@ -21,7 +21,25 @@ const VerifyEmail = () => {
   const navigate = useNavigate();
 
   const BaseURL = import.meta.env.VITE_BASE_URL;
-  const userEmail = JSON.parse(localStorage.getItem("email"));
+  let userEmail = null;
+  try {
+    userEmail =
+      JSON.parse(localStorage.getItem("resetEmail")) ||
+      JSON.parse(localStorage.getItem("email"));
+  } catch {
+    userEmail =
+      localStorage.getItem("resetEmail") || localStorage.getItem("email");
+  }
+
+  const isResetFlow = JSON.parse(localStorage.getItem("isReset"));
+  console.log(userEmail);
+
+  useEffect(() => {
+    if (!userEmail) {
+      toast.error("No email found. Please restart verification.");
+      navigate("/forgotpassword");
+    }
+  }, [userEmail, navigate]);
 
   const handleChange = (e, index) => {
     const value = e.target.value.replace(/[^0-9]/g, "");
@@ -42,7 +60,6 @@ const VerifyEmail = () => {
       inputRefs.current[index - 1]?.focus();
     }
   };
-
 
   useEffect(() => {
     if (timer > 0) {
@@ -65,7 +82,6 @@ const VerifyEmail = () => {
     }
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const otpCode = codes.join("");
@@ -81,29 +97,26 @@ const VerifyEmail = () => {
         email: userEmail,
         otp: otpCode,
       });
-
+      console.log(userEmail);
       toast.success(res?.data?.message || "Verification successful!");
       setCodes(["", "", "", "", "", ""]);
 
       setTimeout(() => {
-        navigate("/login");
+        if (isResetFlow) {
+          navigate("/reset");
+        } else {
+          navigate("/login");
+        }
       }, 2000);
-    } catch (error) { 
+    } catch (error) {
       console.log(error);
-      toast.error(error?.response?.data?.message || "Invalid verification code");
+      toast.error(
+        error?.response?.data?.message || "Invalid verification code"
+      );
     } finally {
       setBtnLoading(false);
     }
   };
-  const resetOtp = async()=>{
-  try{
-  const res = await axios.post(`${BaseURL}/reset-otp`, {
-    email:userEmail
-  })
-  }catch(err){
-    console.log("err",err)
-  }
-  }
 
   return (
     <main className="verify-section">
@@ -139,7 +152,11 @@ const VerifyEmail = () => {
         <form className="verify-form" onSubmit={handleSubmit}>
           <div className="security-header">
             <div className="security-icon-box">
-              <img src={security} alt="security-icon" className="img-security" />
+              <img
+                src={security}
+                alt="security-icon"
+                className="img-security"
+              />
             </div>
             <h1 className="security-header-h1">Verify Your Email</h1>
             <p className="security-header-p">

@@ -11,9 +11,7 @@ export default function MidHero() {
       <div className="container">
         <h2 className="title">Why Choose ErrandHive</h2>
         <p className="subtitle">The trusted platform for all your errand needs</p>
-
         <div className="cards-container">
-
           <div className="card">
             <div className="icon-1">
               <img src={Clock} alt="Fast & Reliable" />
@@ -23,7 +21,6 @@ export default function MidHero() {
               Get your errands done quickly <br/>with our network of verified <br/>runners.
             </p>
           </div>
-
           <div className="card">
             <div className="icon-2">
               <img src={Shield} alt="Safe and secured payment" />
@@ -33,7 +30,6 @@ export default function MidHero() {
               Secure, escrow protected <br/>payments. We hold your payment <br/>until the task is complete.
             </p>
           </div>
-
           <div className="card">
             <div className="icon-3">
               <img src={Settings} alt="Verified Runners" />

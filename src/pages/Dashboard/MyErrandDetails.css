@@ -1,0 +1,333 @@
+.recents-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 2rem;
+  border: 1px solid #eff2f6;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  margin-top: 5rem;
+}
+
+.recents-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.recents-header h4 {
+  font-size: 25px;
+  font-weight: 500;
+  margin: 0;
+  color: #1e1e1e;
+}
+
+.statuss-badge {
+  background: #f1ba2ab2;
+  color: #fff;
+  font-size: 13px;
+  padding: 0.35rem 1.1rem;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.pickups-delivery-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.icons-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+  color: #1e1e1e;
+  font-weight: 400;
+  margin-bottom: 3px;
+}
+
+.addresss {
+  font-size: 13px;
+  font-weight: 400;
+  color: #212121;
+  margin-left: 24px;
+}
+
+.recents-footer {
+  display: flex;
+  align-items: center;
+  margin-top: 0.2rem;
+}
+
+.dates {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 400;
+  color: #212121;
+}
+
+.prices {
+  font-size: 13px;
+  font-weight: 400;
+  margin-left: 1.2rem;
+}
+
+.detailss-btn {
+  margin-left: auto;
+  background: #8758ff;
+  color: white;
+  font-size: 0.85rem;
+  padding: 0.55rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.runner-applications {
+  margin-top: 6rem;
+}
+
+.runner-applications h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1e1e1e;
+  margin-bottom: 4px;
+}
+
+.runner-subtitle {
+  font-size: 14px;
+  color: #6b6b6b;
+  margin-bottom: 1.2rem;
+}
+
+.runner-applications {
+  margin-top: 3rem;
+  width: 100%;
+}
+
+.runner-applications h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1e1e1e;
+  margin-bottom: 4px;
+}
+
+.runner-subtitle {
+  font-size: 14px;
+  color: #6b6b6b;
+  margin-bottom: 1.6rem;
+}
+
+.runner-card {
+  display: flex;
+  gap: 1.3rem;
+  align-items: flex-start;
+  padding: 2rem 2.2rem;
+  border: 1px solid #eff2f6;
+  border-radius: 18px;
+  background: #fff;
+  margin-bottom: 1.6rem;
+}
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.runner-card:hover {
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.runner-left {
+  display: flex;
+  gap: 1.3rem;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.initials-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(135, 88, 255, 0.15);
+  color: #8758ff;
+  font-weight: 600;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(135, 88, 255, 0.2);
+}
+
+.runner-info {
+  max-width: 70rem;
+  width: 100%;
+}
+
+.runner-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e1e1e;
+  margin: 0 0 4px;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.runner-rating {
+  font-size: 20px;
+  font-weight: 300;
+
+  margin-bottom: 8px;
+}
+
+.runner-bio {
+  font-size: 17px;
+  color: #212121;
+  margin-bottom: 10px;
+  font-weight: 300;
+}
+
+.runner-price {
+  font-size: 20px;
+  font-weight: 400;
+  color: #000;
+}
+
+/* BUTTON */
+.view-btn {
+  background: #8758ff;
+  border: none;
+  width: 15%;
+  height: 40px;
+  border-radius: 9px;
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.view-btn:hover {
+  background: #7647f5;
+}
+@media screen and (max-width: 480px) {
+
+  .recents-card {
+    padding: 1.2rem;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .recents-header h4 {
+    font-size: 18px;
+  }
+
+  .statuss-badge {
+    font-size: 11px;
+    padding: 0.25rem 0.8rem;
+  }
+
+  .pickups-delivery-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .icons-text {
+    font-size: 14px;
+    gap: 4px;
+  }
+
+  .addresss {
+    font-size: 12px;
+    margin-left: 16px;
+  }
+
+  .recents-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .dates, .prices {
+    font-size: 12px;
+    gap: 4px;
+    margin-left: 0;
+  }
+
+  .detailss-btn {
+    margin-left: 0;
+    width: 100%;
+    padding: 0.5rem 0;
+    font-size: 0.75rem;
+  }
+
+  .runner-applications {
+    margin-top: 2rem;
+  }
+
+  .runner-applications h3 {
+    font-size: 18px;
+  }
+
+  .runner-subtitle {
+    font-size: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .runner-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 1.2rem;
+    gap: 1rem;
+  }
+
+  .top-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .runner-left {
+    flex-direction: row;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .initials-circle {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .runner-info {
+    max-width: 100%;
+  }
+
+  .runner-name {
+    font-size: 18px;
+  }
+
+  .runner-rating {
+    font-size: 16px;
+  }
+
+  .runner-bio {
+    font-size: 14px;
+  }
+
+  .runner-price {
+    font-size: 16px;
+  }
+
+  .view-btn {
+    width: 100%;
+    font-size: 0.75rem;
+    height: 36px;
+  }
+}

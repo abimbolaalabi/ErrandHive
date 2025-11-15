@@ -7,10 +7,6 @@
   z-index: 1000;             
 }
 
-body {
-  padding-top: 90px; 
-}
-
 .newhero-section {
   width: 100%;
   background: #F2EBFE99;
@@ -51,7 +47,6 @@ body {
   color: #212121;
   font-size: 16px;
   font-weight: 300;
-  font-style: light;
 }
 
 .newhero-right {
@@ -68,44 +63,31 @@ body {
   box-shadow: 0px 6px 25px rgba(0, 0, 0, 0.08);
 }
 
-@media (max-width: 1440px) {
-  .newhero-title {
-    font-size: 2.1rem;
-  }
-  .newhero-text {
-    width: 85%;
-  }
-  .newhero-image {
-    width: 400px;
-  }
-}
-
 @media (max-width: 1024px) {
   .newhero-inner {
-    flex-direction: column;
-    text-align: center;
+    flex-direction: column; 
+    align-items: center;
+    text-align: left;
+    gap: 1.8rem;
   }
 
   .newhero-left {
-    text-align: center;
-  }
-
-  .newhero-title {
-    font-size: 2rem;
+    width: 100%;
+    max-width: 600px;
   }
 
   .newhero-text {
-    width: 90%;
-    margin: 0 auto;
+    width: 100%;
   }
 
   .newhero-right {
-    justify-content: center;
+    width: 100%;
+    justify-content: center; 
   }
 
   .newhero-image {
-    width: 380px;
-    margin-top: 2rem;
+    width: 520px;       
+    margin-top: 1rem;
   }
 }
 
@@ -114,32 +96,49 @@ body {
     padding: 50px 20px;
   }
 
+  .newhero-inner {
+    flex-direction: column; 
+    align-items: center;
+    text-align: left;
+  }
+
+  .newhero-left {
+    width: 100%;
+    max-width: 500px;
+  }
+
   .newhero-title {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
   }
 
   .newhero-text {
+    width: 100%;
     font-size: 0.95rem;
-    line-height: 1.6;
+  }
+
+  .newhero-right {
+    justify-content: center;
   }
 
   .newhero-image {
-    width: 320px;
+    width: 450px;     
   }
 }
 
 @media (max-width: 480px) {
-  body {
+  /* body {
     padding-top: 70px;
-  }
-
-  .newhero-section {
-    padding: 40px 15px;
-  }
+  } */
 
   .newhero-inner {
     flex-direction: column;
-    gap: 1.5rem;
+    align-items: center;
+    gap: 1.3rem;
+  }
+
+  .newhero-left {
+    width: 100%;
+    max-width: 350px;
   }
 
   .newhero-title {
@@ -148,10 +147,13 @@ body {
 
   .newhero-text {
     font-size: 0.9rem;
-    width: 100%;
+  }
+
+  .newhero-right {
+    justify-content: center;
   }
 
   .newhero-image {
-    width: 260px;
+    width: 300px;   
   }
 }

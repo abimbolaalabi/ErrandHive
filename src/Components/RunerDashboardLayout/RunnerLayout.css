@@ -1,192 +1,262 @@
+/* General Layout */
 .runner-layout-style {
   display: flex;
-  height: 100vh;
+  height: 100vh;     
+  overflow: hidden;   
   font-family: 'Poppins', sans-serif;
+  background: #F4F5F7; /* Very light grey background */
 }
 
-.sidebar-runner {
+/* Sidebar */
+.sidebarr-runner {
   width: 250px;
-  height: 100%;
-  position: sticky;
-  left: 0;
+  height: 100vh;
+  position: fixed;  
   top: 0;
+  left: 0;
+  background-color: #fff;
+  overflow-y: auto; 
+  border-right: 1px solid #f0f0f0; 
+  display: flex; 
+  flex-direction: column;
+  padding-bottom: 20px;
 }
-.sidebar-header{
+
+.sidebarr-headerr {
   width: 100%;
-  height: 15%;
-  border-bottom: 1px solid #21212166;
+  border-bottom: 1px solid #f0f0f0; 
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0; 
 }
-.sidebar-header-title{
+
+.sidebarr-headerr-title {
   display: flex;
   align-items: center;
   gap: 0.3rem;
+  margin-bottom: 5px; 
 }
-.sidebar-header img{
-  width: 20%;
+
+.sidebarr-headerr img {
+  width: 50px; 
 }
-.sidebar-main{
+
+.sidebar-title-text {
+  color: #6a20cc; 
+  font-family: "Poppins"; 
+  font-weight: 700; 
+  font-size: 20px; 
+}
+
+.sidebar-subtitle-text {
+  text-align: center; 
+  font-family: "Poppins"; 
+  font-weight: 400; 
+  font-size: 12px;
+  color: #a0a0a0; 
+}
+
+.sidebarr-main {
   width: 100%;
-height: 70%;
-display: flex;
-flex-direction: column;
-gap: 2rem;
-padding-left: 2rem;
-margin-top: 1rem;
+  flex-grow: 1; 
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; 
+  padding: 20px 15px; 
 }
+
 .Boxholder {
-  width: 179px;
-  height: 42px;
-  display: flex; 
-align-items: center; 
-  gap: 1rem; 
+  width: 100%;
+  padding: 10px 15px; 
+  display: flex;
+  align-items: center;
+  gap: 15px; 
   cursor: pointer;
   border-radius: 8px;
-  color: #212121;
+  color: #5d5d5d; 
   font-weight: 500;
+  font-size: 15px;
   transition: all 0.3s;
 }
 
 .Boxholder:hover {
-  background-color: #6a20cc33; 
+  background-color: #f6f0ff; 
+  color: #8133F1;
 }
 
-
-.Boxholder.active {
+/* Active Dashboard Link Styling */
+.active-sidebar-link {
   background-color: #8133F11A; 
   color: #8133F1; 
+  font-weight: 600;
 }
+
 .sidebar-icon {
-  font-size: 25px; 
+  font-size: 20px;
 }
 
+/* Logout Section */
+.log-out-box {
+  padding: 0 15px; 
+  margin-top: auto; 
+}
+
+.log-out-link {
+    color: #5d5d5d; 
+}
+
+.logout-icon {
+    font-size: 20px;
+    color: #999; 
+}
+
+
+/* Main Content Section */
 .main-section {
-  flex: 1;
+  margin-left: 250px;                 
+  width: calc(100% - 250px);        
+  height: 100vh;
   display: flex;
   flex-direction: column;
-}
-.log-out-box{
-
-  height: 9%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.log-out-btn{
-  font-size: 1rem;
-  font-family: Poppins;
-  font-style: 1rem;
-  font-style: Regular;
-  color: red;
-  border: none;
-  background: transparent;
-  display: flex;
-  gap: 1rem;
-  cursor: pointer;
-  margin-left:2rem;
+  overflow: hidden;                   
 }
 
+
+/* Header/Navbar */
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
+  padding: 10px 30px; 
   background-color: #FFFFFF;
   height: 70px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .input-holder {
   position: relative;
-  width: 25%;
-  height: 30px;
-}
-.input{
-    outline: none;
-    border: none;
-    overflow: hidden;
-      width: 100%;
-      height: 100%;
-    padding-left: 1.5rem;
-    font-family: Poppins;
-    font-weight: 250;
-    font-style: Thin;
-    font-size: 1rem;
-    background-color: #FFFFFF;
+  width: 350px; 
+  height: 40px; 
 }
 
-.search-icons-runner{
-  position: absolute;
-  bottom: 7px;
+/* Search Input Styles */
+.search-input {
+  outline: none;
+  border: none;
+  width: 100%;
+  height: 100%;
+  padding-left: 40px; 
+  font-family: Poppins;
+  font-weight: 300;
+  font-size: 0.9rem;
+  background-color: #F2EBFE66; /* Correct light purple background */
+  border-radius: 20px; /* Highly rounded corners */
 }
-.wrapper-notification-profile{
-  width: 50%;
+
+.search-input::placeholder {
+  color: #212121; /* Dark placeholder text color */
+  font-weight: 300;
+}
+
+.search-icons-runner {
+  position: absolute;
+  top: 50%; 
+  left: 15px; 
+  transform: translateY(-50%);
+  color: #212121; /* Dark icon color */
+  font-size: 20px;
+}
+
+.wrapper-notification-profile {
+  width: auto;
   height: 100%;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 30px; /* Space between notification and profile */
 }
-.profile-notification-box{
-width: 10%;
-height: 80%;
-margin-left:8rem;
+
+.profile-notification-box {
+  width: auto;
+  height: 80%;
   display: flex;
   align-items: center;
   position: relative;
+  cursor: pointer;
 }
-.notify{
-  font-size: 1.5rem;
+
+.notify {
+  font-size: 24px;
+  color: #5d5d5d; 
 }
-.red-box{
-height: 17px;
-width: 18px;
-background-color:#E91F1F;
-border: none;
-display: flex;
-justify-content: center;
-border-radius: 9px;
-position: absolute;
-top: 1px;
-right: 8px;
-}
-.wrapper-profile-shit{
-  width: 80%;
+
+/* Profile Info Group */
+.wrapper-profile-shit {
+  width: auto;
   height: 100%;
   display: flex;
-  justify-content: flex-end;
+  align-items: center; 
+  gap: 10px; /* Gap between picture and name */
 }
-.Profile-layout-box-runner{
-  width: 20%;
+
+/* 1. Profile Picture Box (Left side of the profile group) */
+.Profile-layout-box-runner {
+  width: auto;
   height: 100%;
   display: flex;
-  justify-content: flex-end;
-  margin-left: 2rem;
+  align-items: center;
 }
-.profile-pic-layout{
-  background-color: #C5A1F9;
-  height: 50px;
-  width: 50px;
-  border-radius: 25px;
+
+.profile-pic-layout {
+  height: 40px; 
+  width: 40px;
+  border-radius: 50%;
+  border: 2px solid #9974D0; /* Border to match image */
   display: flex;
-justify-content: center;
-align-items: center;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
 
+.profile-pic-layout img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
+/* 2. Name/Role Holder (Right side of the profile group) */
+.Profile-name-user-holder {
+  width: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: flex-start; /* Align text to the left within its container */
 }
-.Profile-name-user-holder{
- width: 30%;
- height: 100%;
- display: flex;
- flex-direction: column;
- margin-left: 1rem;
 
+.profile-h1-runner {
+  font-size: 16px; 
+  font-weight: 500; 
+  margin: 0;
+  padding: 0;
 }
-.profile-h1-runner{
-  font-size: 20px;
+
+.profile-p-runner {
+  font-size: 12px; 
+  color: #999; 
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
 }
-.profile-p-runner{
-  font-size: 13px;
-}
+
+/* ONLY CONTENT SHOULD SCROLL */
 .content {
   flex: 1;
-  padding: 20px;
-  background-color: #e5e7eb;
+  overflow-y: auto;   
+  padding: 30px; 
+  background-color: #F9F9F9; /* Light background for the dashboard content */
 }

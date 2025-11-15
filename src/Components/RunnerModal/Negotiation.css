@@ -1,0 +1,178 @@
+.negotiation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #8583830d;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.negotiation-modal {
+  background: #fff;
+  border-radius: 10px;
+  width: 45%;
+  height: 85%;
+  padding: 25px 30px;
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  
+  overflow-y: scroll;       /* allow scrolling */
+  scrollbar-width: none;    /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+.negotiation-modal::-webkit-scrollbar {
+  display: none;            /* Chrome, Safari, Opera */
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  color: #555;
+  cursor: pointer;
+}
+
+.modal-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 5px;
+}
+
+.modal-subtitle {
+  font-size: 0.88rem;
+  color: #6b6b6b;
+  margin-bottom: 20px;
+}
+
+.info-card {
+  background: #f9fafc;
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  border: 1px solid #f0f0f0;
+}
+
+.info-title {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.info-content {
+  font-size: 0.92rem;
+  color: #222;
+  margin: 2px 0;
+}
+
+.info-sub {
+  font-size: 0.83rem;
+  color: #555;
+  margin-top: 5px;
+}
+
+.offer-box {
+  background: #f5ecff;
+  border-radius: 8px;
+  text-align: center;
+  padding: 15px 0;
+  margin: 18px 0;
+}
+
+.offer-label {
+  font-size: 0.88rem;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.offer-amount {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #5b21b6;
+  margin: 0;
+}
+
+.propose-section {
+  margin-bottom: 20px;
+}
+
+.propose-label {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #222;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.offer-limit-text {
+  font-size: 0.8rem;
+  color: #777;
+  font-weight: 400;
+}
+
+.propose-input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  outline: none;
+}
+
+.propose-input:focus {
+  border-color: #7c3aed;
+}
+
+.helper-text {
+  font-size: 0.8rem;
+  color: #777;
+  margin-top: 5px;
+}
+
+.button-row {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.propose-btn {
+  flex: 1;
+  background: white;
+  border: 1.5px solid #7c3aed;
+  color: #7c3aed;
+  border-radius: 8px;
+  padding: 10px 0;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.propose-btn:hover {
+  background: #f5ecff;
+}
+
+.accept-btn {
+  flex: 1;
+  background: #7c3aed;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 0;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.accept-btn:hover {
+  background: #5b21b6;
+}

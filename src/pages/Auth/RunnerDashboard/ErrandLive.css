@@ -1,0 +1,268 @@
+.errandLive-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fc;
+  min-height: 100vh;
+  color: #333;
+}
+
+.errandLive-header {
+  background: white;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+
+.errandLive-logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: #9333ea;
+}
+
+.errandLive-headerRight {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.errandLive-icon {
+  font-size: 22px;
+  color: #9333ea;
+  cursor: pointer;
+}
+
+.errandLive-user {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.errandLive-user svg {
+  color: #9333ea;
+}
+
+.errandLive-breadcrumb {
+  padding: 1rem 2rem;
+  font-size: 14px;
+  color: #666;
+}
+
+.errandLive-breadcrumb span {
+  cursor: pointer;
+}
+
+.errandLive-main {
+  padding: 0 2rem;
+  display: flex;
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.errandLive-pickupSection {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 350px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  height: fit-content;
+}
+
+.errandLive-pickupSection h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #1a1a1a;
+}
+
+.errandLive-taskItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.errandLive-taskIcon {
+  color: #9333ea;
+  font-size: 20px;
+}
+
+.errandLive-taskItem p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.errandLive-taskItem strong {
+  display: block;
+  font-size: 15px;
+  color: #1a1a1a;
+  margin-top: 4px;
+}
+
+.errandLive-price {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  font-size: 24px;
+  font-weight: 700;
+  color: #10b981;
+}
+
+.errandLive-price svg {
+  color: #10b981;
+}
+
+.errandLive-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.errandLive-clientCard,
+.errandLive-progressCard {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+.errandLive-clientCard h3,
+.errandLive-progressCard h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #1a1a1a;
+}
+
+.errandLive-clientInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.errandLive-clientAvatar {
+  width: 60px;
+  height: 60px;
+  background: #e9bbf9;
+  color: #9333ea;
+  font-weight: 700;
+  font-size: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.errandLive-clientDetails strong {
+  display: block;
+  font-size: 18px;
+  margin-bottom: 0.5rem;
+}
+
+.errandLive-chatBtn {
+  background: #f3e8ff;
+  color: #9333ea;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 14px;
+}
+
+.errandLive-startBtn {
+  background: #9333ea;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.errandLive-progressSteps {
+  position: relative;
+}
+
+.errandLive-progressSteps::before {
+  content: '';
+  position: absolute;
+  left: 30px;
+  top: 40px;
+  bottom: 40px;
+  width: 2px;
+  background: #e5e7eb;
+  z-index: 1;
+}
+
+.errandLive-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.errandLive-stepCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f3f4f6;
+  border: 3px solid #e5e7eb;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.errandLive-stepCircle.done {
+  background: #10b981;
+  color: white;
+  border-color: #10b981;
+}
+
+.errandLive-stepCircle.current {
+  background: white;
+  border-color: #10b981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+}
+
+.errandLive-stepLabel strong {
+  display: block;
+  font-size: 16px;
+  color: #1a1a1a;
+}
+
+.errandLive-stepLabel span {
+  font-size: 13px;
+  color: #888;
+}
+
+.errandLive-finalLabel {
+  position: absolute;
+  left: 70px;
+  bottom: -10px;
+  font-size: 14px;
+  color: #666;
+}
+
+.errandLive-step.completed .errandLive-stepLabel strong,
+.errandLive-step.active .errandLive-stepLabel strong {
+  color: #10b981;
+}
