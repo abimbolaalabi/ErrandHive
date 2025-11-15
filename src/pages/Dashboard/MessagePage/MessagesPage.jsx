@@ -5,14 +5,14 @@ import { useParams, useNavigate } from "react-router-dom";
 import "./MessagesPage.css";
 import { AppContext } from "../../../Context/App";
 
-// ONE GLOBAL SOCKET
+// GLOBAL SOCKET
 const socket = io(import.meta.env.VITE_SOCKET_URL, {
   transports: ["websocket"],
   reconnection: true,
 });
 
 export default function MessagesPage() {
-  const { id } = useParams(); // errandId
+  const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useContext(AppContext);
 
@@ -24,99 +24,41 @@ export default function MessagesPage() {
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
   const [myRunners, setMyRunners] = useState([]);
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const messagesEndRef = useRef(null);
+  const userId = user?.id;
 
-  // Logged in user
-  const userId = user?.id
-
-  // Identify participants
-  const clientId = chatInfo?.poster?.id;
-  const runnerId = chatInfo?.assignedTo
-
-  // Detconsermine receiver
-
-  console.log("dhfhffj", runnerId, clientId)
-  let receiverId = null;
-
-
-  console.log("tessstere  ", chatInfo?.poster)
-  if (clientId && runnerId) {
-    receiverId = userId === clientId ? runnerId : clientId;
-  }
-
-  // ⭐ FETCH ALL ERRANDS FOR SIDEBAR LIST
-  const fetchMyRunners = async () => {
-    try {
-      const res = await axios.get(`${BaseUrl}/errand/my-errands
-`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-
-      const assigned = res?.data?.data?.filter(e => e.assignedTo != null);
-
-      console.log("assigned pag     e", res?.data.data)
-      setMyRunners(assigned || []);
-    } catch (err) {
-      console.log("Runner fetch error:", err);
-    }
-  };
-
+  // -----------------------------------------------------
+  // FETCH ALL ASSIGNED ERRANDS FOR SIDEBAR
+  // -----------------------------------------------------
   useEffect(() => {
+    const fetchMyRunners = async () => {
+      try {
+        const res = await axios.get(`${BaseUrl}/errand/my-errands`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        const assigned = res?.data?.data?.filter(e => e.assignedTo != null);
+        setMyRunners(assigned || []);
+      } catch (err) {
+        console.log("Runner fetch error:", err);
+      }
+    };
+
     fetchMyRunners();
   }, []);
 
-  // ⭐ JOIN ROOM
+  // -----------------------------------------------------
+  // FETCH CHAT INFO + HISTORY
+  // -----------------------------------------------------
   useEffect(() => {
-    if (!userId || !receiverId) return;
+    if (!id) return;
 
-    const roomId = [userId, receiverId].sort().join("_");
-
-    socket.emit("join_room", roomId);
-  }, [userId, receiverId]);
-
-  // ⭐ LISTEN FOR LIVE MESSAGES
-  useEffect(() => {
-    const incoming = (msg) => {
-      setMessages((prev) => [...prev, msg]);
-    };
-
-    socket.on("receive_message", incoming);
-
-    return () => socket.off("receive_message", incoming);
-  }, []);
-
-  // ⭐ LOAD CHAT INFO + MESSAGE HISTORY
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       setLoading(true);
-
-  //       const info = await axios.get(`${BaseUrl}/errand/get/${id}`, {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       });
-
-  //       setChatInfo(info.data.data);
-
-  //       const msg = await axios.get(`${BaseUrl}/messages/${id}`, {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       });
-
-  //       setMessages(msg.data?.data || []);
-  //     } catch (err) {
-  //       console.log("Chat fetch error:", err);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   })();
-  // }, [id]);
-  useEffect(() => {
-    (async () => {
+    const loadChat = async () => {
       try {
         setLoading(true);
-
-        setMessages([]); // 🟢 clear old messages when switching
+        setMessages([]);
 
         const info = await axios.get(`${BaseUrl}/errand/get/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
@@ -124,38 +66,83 @@ export default function MessagesPage() {
 
         setChatInfo(info.data.data);
 
-        const msg = await axios.get(`${BaseUrl}/messages/${id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const clientId = info.data.data?.poster?.id;
+        const runnerId = info.data.data?.assignedRunner?.id; // FIXED (runner object)
+
+        if (!clientId || !runnerId) return;
+
+        const receiverId = userId === clientId ? runnerId : clientId;
+        const roomId = [userId, receiverId].sort().join("_");
+
+        const msg = await axios.get(
+          `${BaseUrl}/messages/messages/history/${roomId}`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
 
         setMessages(msg.data?.data || []);
       } catch (err) {
-        console.log("Chat fetch error:", err);
+        console.log("Chat load error:", err);
       } finally {
         setLoading(false);
       }
-    })();
-  }, [id]);
+    };
 
+    loadChat();
+  }, [id, userId]);
+
+  // -----------------------------------------------------
+  // JOIN SOCKET ROOM
+  // -----------------------------------------------------
+  useEffect(() => {
+    const clientId = chatInfo?.poster?.id;
+    const runnerId = chatInfo?.assignedRunner?.id;
+
+    if (!clientId || !runnerId) return;
+
+    const receiverId = userId === clientId ? runnerId : clientId;
+    const roomId = [userId, receiverId].sort().join("_");
+
+    socket.emit("join_room", roomId);
+  }, [chatInfo, userId]);
+
+  // -----------------------------------------------------
+  // RECEIVE MESSAGES LIVE (NO DUPLICATES)
+  // -----------------------------------------------------
+  useEffect(() => {
+    const incoming = (msg) => {
+      if (msg.senderId !== userId) {
+        setMessages(prev => [...prev, msg]);
+      }
+    };
+
+    socket.on("receive_message", incoming);
+    return () => socket.off("receive_message", incoming);
+  }, [userId]);
+
+  // -----------------------------------------------------
+  // SEND MESSAGE
+  // -----------------------------------------------------
   const sendMessage = async (e) => {
     e.preventDefault();
 
-    if (!text.trim() || !receiverId) return;
+    const clientId = chatInfo?.poster?.id;
+    const runnerId = chatInfo?.assignedRunner?.id;
 
+    if (!text.trim() || !clientId || !runnerId) return;
+
+    const receiverId = userId === clientId ? runnerId : clientId;
     const roomId = [userId, receiverId].sort().join("_");
 
     const payload = {
       senderId: userId,
       receiverId,
       text,
+      errandId: id,
       roomId,
       createdAt: new Date(),
     };
 
-    // 1️⃣ ADD THIS — Update your UI immediately
     setMessages(prev => [...prev, payload]);
-
-    // 2️⃣ Emit to socket
     socket.emit("send_message", payload);
 
     try {
@@ -169,27 +156,25 @@ export default function MessagesPage() {
     setText("");
   };
 
-  // ⭐ Auto scroll
+  // -----------------------------------------------------
+  // AUTO SCROLL
+  // -----------------------------------------------------
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  // -----------------------------------------------------
+  // PAYMENT LOCK SCREEN
+  // -----------------------------------------------------
+  const isPaid = chatInfo?.paymentStatus === "paid";
+
   return (
     <div className="messages-wrapper">
 
-      {/* SIDEBAR */}
+      {/* SIDEBAR LEFT */}
       <div className="messages-sidebar">
         <h3>Messages</h3>
         <p className="subtext">Chat with your runners</p>
-
-        <div className="search-box">
-          <input type="text" placeholder="Search conversations..." />
-        </div>
-
-        {/* Runner / Conversation List */}
-        {myRunners.length === 0 && (
-          <p className="empty-text">No runners yet</p>
-        )}
 
         {myRunners.map((item) => (
           <div
@@ -199,93 +184,104 @@ export default function MessagesPage() {
           >
             <div className="conv-user">
               <div className="avatar">
-                {item.assignedTo.firstName?.[0] || "U"}
+                {item.assignedRunner?.firstName?.charAt(0)}
               </div>
 
               <div className="conversation-info">
                 <p className="name">
-                  {item.assignedTo.firstName} {item.assignedTo.lastName}
+                  {item.assignedRunner?.firstName} {item.assignedRunner?.lastName}
                 </p>
                 <p className="status">{item.title}</p>
-                <p className="status-light">Click to chat</p>
+                <p className="status-light">Tap to chat</p>
               </div>
             </div>
-
-            <span className="online-dot">online</span>
           </div>
         ))}
       </div>
 
-      {/* CHAT AREA */}
-      <div className="messages-chat">
-        <div className="chat-header">
-          <div className="avatar large">{chatInfo?.assignedTo?.firstName?.charAt(0).toUpperCase()}</div>
-          <div>
-            <h4>
-              {chatInfo?.assignedTo?.firstName ||
-                chatInfo?.poster?.firstName ||
-                "User"}
-            </h4>
-            <p>Runner</p>
-          </div>
-          <div className="menu-container">
-            <button
-              className="menu-btn"
-              onClick={() => setMenuOpen((prev) => !prev)}
-            >
-              ⋮
-            </button>
-
-            {menuOpen && (
-              <div className="menu-options">
-                <p onClick={() => navigate(`/dashboard/messages/${id}/status`)}>View Progress</p>
-              </div>
-            )}
-          </div>
-
+      {/* 🔒 LOCK CHAT WHEN PAYMENT IS PENDING */}
+      {!isPaid && (
+        <div className="messages-chat center-block">
+          <h2 className="lock-title">Complete Payment to Continue</h2>
+          <p className="lock-desc">
+            You must complete the payment for this errand before messaging the runner.
+            Once your payment is verified, chat will be automatically unlocked.
+          </p>
         </div>
+      )}
 
-        <div className="chat-body">
-          {loading && <p>Loading...</p>}
+      {/* CHAT UI — ONLY SHOW WHEN PAID */}
+      {isPaid && (
+        <div className="messages-chat">
+          <div className="chat-header">
+            <div className="avatar large">
+              {chatInfo?.assignedRunner?.firstName?.charAt(0)}
+            </div>
 
-          {messages.map((m, i) => {
-            const mine = m.senderId === userId;
+            <div>
+              <h4>{chatInfo?.assignedRunner?.firstName} {chatInfo?.assignedRunner?.lastName}</h4>
+              <p>Runner</p>
+            </div>
 
-            return (
-              <div key={i} className={`message ${mine ? "from-user" : ""}`}>
-                {!mine && (
-                  <div className="avatar small">
-                    {chatInfo?.assignedTo?.firstName?.[0] || "U"}
-                  </div>
-                )}
+            <div className="menu-container">
+              <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)}>⋮</button>
 
-                <div className="bubble">
-                  <p>{m.text}</p>
-                  <span className="time">
-                    {new Date(m.createdAt).toLocaleTimeString()}
-                  </span>
+              {menuOpen && (
+                <div className="menu-options">
+                  <p onClick={() => navigate(`/dashboard/messages/${id}/status`)}>
+                    View Progress
+                  </p>
                 </div>
+              )}
+            </div>
+          </div>
 
-                {mine && <div className="avatar small">You</div>}
-              </div>
-            );
-          })}
+          {/* CHAT BODY */}
+          <div className="chat-body">
+            {loading && <p>Loading messages...</p>}
 
-          <div ref={messagesEndRef} />
+            {messages.map((m, i) => {
+              const mine = m.senderId === userId;
+
+              return (
+                <div key={i} className={`message ${mine ? "from-user" : ""}`}>
+                  {!mine && (
+                    <div className="avatar small">
+                      {chatInfo?.assignedRunner?.firstName?.charAt(0)}
+                    </div>
+                  )}
+
+                  <div className="bubble">
+                    <p>{m.text}</p>
+                    <span className="time">
+                      {new Date(m.createdAt).toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit"
+                      })}
+                    </span>
+                  </div>
+
+                  {mine && <div className="avatar small">You</div>}
+                </div>
+              );
+            })}
+
+            <div ref={messagesEndRef} />
+          </div>
+
+          {/* CHAT INPUT */}
+          <form className="chat-input" onSubmit={sendMessage}>
+            <input
+              type="text"
+              placeholder="Type your message..."
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+            />
+            <button>➤</button>
+          </form>
+
         </div>
-
-        {/* INPUT */}
-        <form className="chat-input" onSubmit={sendMessage}>
-          <input
-            type="text"
-            placeholder="Type your message..."
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-          />
-          <button >➤</button>
-        </form>
-
-      </div>
+      )}
     </div>
   );
 }
