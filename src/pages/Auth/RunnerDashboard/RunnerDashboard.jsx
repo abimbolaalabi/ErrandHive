@@ -1,20 +1,40 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Runerdashboard.css";
 import cube from "../../../assets/cube.png";
 import { Link } from "react-router-dom";
 import { AppContext } from "../../../Context/App";
+import axios from "axios";
 
 
 const RunnerDashboard = () => {
   const { user, kycStatus, userKyc } = useContext(AppContext);
-
+  const [summary, setSummary] = useState({})
   const storedUser = user || JSON.parse(localStorage.getItem("userDetails")) || {};
   const fullName = `${storedUser?.firstName || ""} ${storedUser?.lastName || ""}`.trim();
+  const BaseUrl = import.meta.env.VITE_BASE_URL
+
+
+  const runnerSummaryDashBoard = async () => {
+    try {
+      const token = JSON.parse(localStorage.getItem("userToken"));
+      const res = await axios.get(`${BaseUrl}/runner/dashboard-summary`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setSummary(res?.data?.data || {});
+    } catch (error) {
+      console.log("This is clientSummaryDashBoard error:", error);
+    }
+  };
+
+
+  useEffect(() => {
+    runnerSummaryDashBoard()
+  }, [])
 
   const data = [
     {
       title: "Total Request",
-      value: "0",
+      value: summary?.totalRequests ?? 0,
       color: "#8133F1",
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -25,7 +45,7 @@ const RunnerDashboard = () => {
     },
     {
       title: "Completed",
-      value: "0",
+      value: summary?.completedJobs ?? 0,
       color: "#F59E0B",
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -47,7 +67,7 @@ const RunnerDashboard = () => {
     },
     {
       title: "Total Spent",
-      value: "0",
+      value: `₦${Number(summary?.totalSpent ?? 0).toLocaleString()}`,
       color: "#F97316",
       icon: (
         <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
@@ -64,7 +84,7 @@ const RunnerDashboard = () => {
     },
   ];
 
- 
+
   const isVerified = userKyc || kycStatus?.toLowerCase() === "verified";
 
   if (!isVerified) {
@@ -106,7 +126,7 @@ const RunnerDashboard = () => {
     );
   }
 
-  
+
   return (
     <main className="runner-dashboard-layout">
       <div className="title-dashboard-runner">
