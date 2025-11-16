@@ -215,119 +215,243 @@
 .view-btn:hover {
   background: #7647f5;
 }
-@media screen and (max-width: 480px) {
+@media (min-width: 2560px) {
+  .recents-card {
+    padding: 3rem;
+  }
+  .runner-card {
+    padding: 3rem;
+  }
+  .runner-name {
+    font-size: 28px;
+  }
+}
 
+@media (max-width: 1920px) {
+  .recents-card {
+    max-width: 95%;
+  }
+}
+
+@media (max-width: 1600px) {
+  .runner-name {
+    font-size: 22px;
+  }
+  .runner-bio {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 1440px) {
+  .recents-card {
+    padding: 1.8rem;
+  }
+}
+
+@media (max-width: 1366px) {
+  .runner-card {
+    padding: 1.8rem;
+  }
+}
+
+@media (max-width: 1280px) {
+  .recents-card {
+    margin-top: 4rem;
+  }
+  .runner-name {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .recents-card {
+    padding: 1.5rem;
+    gap: 2rem;
+  }
+  .runner-card {
+    padding: 1.6rem;
+  }
+}
+
+@media (max-width: 912px) {
+  .recents-header h4 {
+    font-size: 22px;
+  }
+  .runner-card {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 820px) {
+  .pickups-delivery-row {
+    flex-direction: column;
+  }
+  .view-btn {
+    width: 40%;
+  }
+}
+
+@media (max-width: 768px) {
+  .recents-card {
+    padding: 1.3rem;
+  }
+  .runner-name {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .runner-card {
+    padding: 1.2rem;
+  }
+  .runner-price {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
   .recents-card {
     padding: 1.2rem;
     gap: 1.5rem;
     margin-top: 2rem;
   }
-
   .recents-header h4 {
     font-size: 18px;
   }
-
   .statuss-badge {
     font-size: 11px;
     padding: 0.25rem 0.8rem;
   }
-
   .pickups-delivery-row {
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
   }
-
   .icons-text {
     font-size: 14px;
     gap: 4px;
   }
-
   .addresss {
     font-size: 12px;
     margin-left: 16px;
   }
-
   .recents-footer {
     flex-direction: column;
     align-items: flex-start;
     gap: 6px;
   }
-
   .dates, .prices {
     font-size: 12px;
     gap: 4px;
     margin-left: 0;
   }
-
   .detailss-btn {
     margin-left: 0;
     width: 100%;
     padding: 0.5rem 0;
     font-size: 0.75rem;
   }
-
   .runner-applications {
     margin-top: 2rem;
   }
-
   .runner-applications h3 {
     font-size: 18px;
   }
-
   .runner-subtitle {
     font-size: 12px;
     margin-bottom: 1rem;
   }
-
   .runner-card {
     flex-direction: column;
     align-items: flex-start;
     padding: 1rem 1.2rem;
     gap: 1rem;
   }
-
   .top-row {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.8rem;
   }
-
   .runner-left {
     flex-direction: row;
     gap: 1rem;
     width: 100%;
   }
-
   .initials-circle {
     width: 40px;
     height: 40px;
     font-size: 14px;
   }
-
   .runner-info {
     max-width: 100%;
   }
-
   .runner-name {
     font-size: 18px;
   }
-
   .runner-rating {
     font-size: 16px;
   }
-
   .runner-bio {
     font-size: 14px;
   }
-
   .runner-price {
     font-size: 16px;
   }
-
   .view-btn {
     width: 100%;
     font-size: 0.75rem;
     height: 36px;
   }
 }
+
+@media (max-width: 414px) {
+  .runner-name {
+    font-size: 17px;
+  }
+  .recents-header h4 {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 390px) {
+  .icons-text {
+    font-size: 13px;
+  }
+  .runner-bio {
+    font-size: 13px;
+  }
+  .runner-price {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 375px) {
+  .detailss-btn {
+    font-size: 0.7rem;
+  }
+  .view-btn {
+    height: 34px;
+  }
+}
+
+@media (max-width: 360px) {
+  .runner-name {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 320px) {
+  .recents-card {
+    padding: 0.9rem;
+  }
+  .detailss-btn {
+    font-size: 0.65rem;
+  }
+  .runner-card {
+    padding: 0.9rem;
+  }
+  .runner-name {
+    font-size: 15px;
+  }
+}
+

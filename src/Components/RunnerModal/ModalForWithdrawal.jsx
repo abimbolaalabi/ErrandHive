@@ -185,3 +185,4 @@ const ModalForWithdrawal = ({ toclose, setSuccess, amount , onSuccess }) => {
 };
 
 export default ModalForWithdrawal;
+
