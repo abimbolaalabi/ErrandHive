@@ -108,6 +108,7 @@
   border-radius: 1px;
 }
 
+
 @media (max-width: 768px) {
   .search-container {
     display: none;

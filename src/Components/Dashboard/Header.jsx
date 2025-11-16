@@ -3,6 +3,7 @@ import { AppContext } from '../../Context/App';
 import { GiHamburgerMenu } from "react-icons/gi";
 import './Header.css';
 import { useNavigate } from 'react-router-dom';
+import Profile from "../../assets/Profile.png"; 
 
 const Header = ({ setSidebarOpen }) => {
   const { userType, user } = useContext(AppContext);
@@ -48,6 +49,7 @@ const Header = ({ setSidebarOpen }) => {
         </button>
 
         <div className="user-profile">
+           <img src={Profile} alt="User Profile" />
           <div className="user-info">
             <span className="user-namee">{fullName || "Guest"}</span>
             <span className="user-role">{userType || user?.role || "No Role"}</span>
