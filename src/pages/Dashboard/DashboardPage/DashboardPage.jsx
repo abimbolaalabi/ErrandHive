@@ -7,6 +7,7 @@ import { CiLocationOn } from "react-icons/ci";
 import { BsClock } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import cube from "../../../assets/cube.png";
+import { toast } from "react-toastify";
 
 const DashboardPage = () => {
   const [errandMod, setErrandMod] = useState(false);
@@ -42,7 +43,7 @@ const DashboardPage = () => {
       });
       setErrands(res?.data?.data || []);
     } catch (err) {
-      console.log("Fetch errands error:", err.response?.data || err.message);
+      toast.error(err.response?.data || err.message);
       setErrands([]);
     } finally {
       setLoading(false);
@@ -56,8 +57,8 @@ const DashboardPage = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setSummary(res?.data?.data || {});
-    } catch (error) {
-      console.log("This is clientSummaryDashBoard error:", error);
+    } catch (err) {
+      toast.error(err.response?.data || err.message);
     }
   };
 

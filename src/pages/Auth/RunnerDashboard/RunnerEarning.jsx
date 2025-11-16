@@ -18,7 +18,9 @@ const API_BASE_URL = "https://errandhive-project.onrender.com/api/v1";
 const RunnerEarning = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [copied, setCopied] = useState(false);
-  const [withdrawModal, setWithdrawModal] = useState(false);
+
+  const [withdrawAmount, setWithdrawAmount] = useState(0);
+
   const [mod, setMod] = useState(false)
   const [modal, setModal] = useState(false)
   const [open, setOpen] = useState(false)
@@ -77,12 +79,12 @@ const RunnerEarning = () => {
         }
       );
 
-      const txData = Array.isArray(txResponse.data.data)
-        ? txResponse.data.data
-        : [];
+      const txData = txResponse.data.data
+     
 
-      setTransactions(txData);
 
+      setTransactions(txData.payments);
+console.log(" i am txt data, ",txData.payments)
       toast.success("Wallet data loaded successfully!");
     } catch (err) {
       console.error("Error fetching wallet data:", err);
@@ -107,6 +109,8 @@ const RunnerEarning = () => {
 
   return (
     <div className="wallet-page-container">
+       
+
       <ToastContainer position="top-right" autoClose={2000} />
       <header className="wallet-page-header">
         <h2>My Wallet</h2>
@@ -134,6 +138,7 @@ const RunnerEarning = () => {
               )}
             </div>
           </div>
+          {console.log("checking wallet ",)}
           <p className="card-main-value">
             {isVisible ? `₦${walletData.availableBalance}` : "•••••"}
           </p>
@@ -213,7 +218,8 @@ const RunnerEarning = () => {
           <p>No transactions yet.</p>
         ) : (
           <ul className="transaction-list">
-            {transactions.map((tx, index) => (
+            
+            {/* {transactions.map((tx, index) => (
               <li key={index} className="transaction-item">
                 <span className="tx-date">
                   {new Date(tx.createdAt).toLocaleDateString()}
@@ -232,7 +238,7 @@ const RunnerEarning = () => {
                   {tx.status || "Unknown"}
                 </span>
               </li>
-            ))}
+            ))} */}
           </ul>
         )}
       </section>
@@ -245,18 +251,34 @@ const RunnerEarning = () => {
         />
       )} */}
      {
-      mod && (<ModalForWithdraw close={setMod} setModal={setModal}/>)
+      mod && (
+  <ModalForWithdraw
+    close={setMod}
+    setModal={setModal}
+    setWithdrawAmount={setWithdrawAmount} 
+  />
+)
+
      }
      {
-      modal && (<ModalForWithdrawal toclose={setModal} setOpen={setOpen}/>)
+modal && (
+  <ModalForWithdrawal
+    setSuccess={setSuccess}
+          onSuccess={() => fetchWalletData()} 
+
+    toclose={setModal}
+    setOpen={setOpen}
+    amount={withdrawAmount} 
+  />
+)
      }
      {
       open && (<ConfirmWithdrawalModal toclose={setOpen} setSuccess={setSuccess}/>)
      }
-     {
+     {/* {
       success && (<WithdrawalSuccessModal toclose={setSuccess} />)
      }
- 
+  */}
     </div>
   );
 };

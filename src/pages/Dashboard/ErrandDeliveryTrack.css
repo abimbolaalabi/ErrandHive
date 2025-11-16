@@ -344,6 +344,11 @@
   margin-left: 40px;
 }
 
+<<<<<<< HEAD
+/* ========== RESPONSIVENESS ========== */
+
+/* Tablet & Medium Screens */
+=======
 
 @media (max-width: 1024px) {
   .med-root {
@@ -351,56 +356,113 @@
   }
 }
 
+>>>>>>> f407c218211e187e7ebe3da56b4242cd0f243695
 @media (max-width: 900px) {
   .med-top-row {
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
   }
+<<<<<<< HEAD
+
+  .med-locations-row {
+    flex-direction: column;
+  }
+
+  .med-grid {
+    flex-direction: column;
+  }
+
+=======
   .med-locations-row {
     flex-direction: column;
   }
   .med-grid {
     flex-direction: column;
   }
+>>>>>>> f407c218211e187e7ebe3da56b4242cd0f243695
   .med-profile-card {
     width: 100%;
     order: 2;
   }
+<<<<<<< HEAD
+
+=======
+>>>>>>> f407c218211e187e7ebe3da56b4242cd0f243695
   .med-timeline-card {
     width: 100%;
     order: 1;
   }
 }
 
+<<<<<<< HEAD
+/* Mobile Phones */
+@media (max-width: 480px) {
+=======
 @media (max-width: 480px) {
   .med-root {
     padding: 15px;
   }
+>>>>>>> f407c218211e187e7ebe3da56b4242cd0f243695
   .med-card {
     padding: 18px;
     border-radius: 14px;
   }
+<<<<<<< HEAD
+
+=======
+>>>>>>> f407c218211e187e7ebe3da56b4242cd0f243695
   .med-top-row {
     flex-direction: column;
     align-items: flex-start;
     gap: 15px;
   }
+<<<<<<< HEAD
+
+  .med-runner-name {
+    font-size: 18px;
+  }
+
+  .med-runner-stats {
+    font-size: 13px;
+  }
+
+=======
   .med-runner-name {
     font-size: 18px;
   }
   .med-runner-stats {
     font-size: 13px;
   }
+>>>>>>> f407c218211e187e7ebe3da56b4242cd0f243695
   .med-avatar {
     width: 48px;
     height: 48px;
     font-size: 20px;
   }
+<<<<<<< HEAD
+
+=======
+>>>>>>> f407c218211e187e7ebe3da56b4242cd0f243695
   .med-locations-row {
     flex-direction: column;
     gap: 15px;
   }
+<<<<<<< HEAD
+
+  .med-loc-card {
+    padding: 14px;
+  }
+
+  .med-grid {
+    flex-direction: column;
+  }
+
+  .med-profile-card {
+    width: 100%;
+  }
+
+=======
   .med-loc-card {
     padding: 14px;
   }
@@ -410,21 +472,54 @@
   .med-profile-card {
     width: 100%;
   }
+>>>>>>> f407c218211e187e7ebe3da56b4242cd0f243695
   .med-profile-avatar {
     width: 60px;
     height: 60px;
     font-size: 22px;
   }
+<<<<<<< HEAD
+
+  .med-chat-btn {
+    padding: 10px;
+  }
+
+  /* Timeline */
+  .progress-timeline {
+    padding-left: 30px;
+  }
+
+=======
   .med-chat-btn {
     padding: 10px;
   }
   .progress-timeline {
     padding-left: 30px;
   }
+>>>>>>> f407c218211e187e7ebe3da56b4242cd0f243695
   .progress-circle {
     width: 24px;
     height: 24px;
   }
+<<<<<<< HEAD
+
+  .progress-label {
+    font-size: 13px;
+  }
+
+  .progress-time {
+    font-size: 11px;
+  }
+}
+
+
+
+
+
+
+
+
+=======
   .progress-label {
     font-size: 13px;
   }
@@ -432,3 +527,4 @@
     font-size: 11px;
   }
 }
+>>>>>>> f407c218211e187e7ebe3da56b4242cd0f243695
