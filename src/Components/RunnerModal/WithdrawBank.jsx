@@ -7,10 +7,15 @@ import Processing from "./Processing";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+const WITHDRAWAL_FEE = 1000;
+
 const WithdrawBank = ({ close, availableBalance }) => {
   const [amount, setAmount] = useState("");
   const [showConfirm, setShowConfirm] = useState(false);
   const [showProcessing, setShowProcessing] = useState(false);
+
+  const totalDeduction = WITHDRAWAL_FEE;
+  const amountToReceive = parseFloat(amount) > 0 ? parseFloat(amount) - totalDeduction : 0;
 
   const handleInputChange = (e) => {
     const value = e.target.value;
@@ -19,8 +24,9 @@ const WithdrawBank = ({ close, availableBalance }) => {
 
   const handleContinue = () => {
     const numericAmount = parseFloat(amount);
-    if (!numericAmount || numericAmount < 1000) {
-      toast.error("Minimum withdrawal is ₦1,000.00", {
+
+    if (!numericAmount || isNaN(numericAmount)) {
+      toast.error("Enter a valid amount", {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: true,
@@ -29,32 +35,17 @@ const WithdrawBank = ({ close, availableBalance }) => {
       return;
     }
 
-    if (numericAmount < availableBalance) {
-      toast.error("Insufficient funds for this withdrawal", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-      });
-      return;
-    }
-
-
+    // ✅ Removed minimum 1000 check, user can proceed with any positive number
     setShowConfirm(true);
   };
 
   const handleConfirm = () => {
-
     setShowConfirm(false);
-
- 
     setShowProcessing(true);
-
   };
 
   return (
     <>
-      {/* Main WithdrawBank modal */}
       <div className="withdraw-overlay">
         <div className="withdraw-container">
           <div className="withdraw-header">
@@ -86,30 +77,51 @@ const WithdrawBank = ({ close, availableBalance }) => {
               onChange={handleInputChange}
             />
           </div>
-
+          
           <div className="info-text">
             <IoInformationCircleOutline className="info-icon" />
-            <p>Minimum withdrawal is ₦1,000.00.</p>
+            <p>Enter any amount to proceed</p>
           </div>
 
-          <button className="continue-btn" onClick={handleContinue}>
+          {parseFloat(amount) > 0 && (
+            <div className="withdrawal-summary-card">
+              <div className="summary-row">
+                <p>Withdrawal Amount</p>
+                <p>₦{parseFloat(amount).toLocaleString()}</p>
+              </div>
+              <div className="summary-row">
+                <p>Total Deduction</p>
+                <p className="deduction-amount">₦{totalDeduction.toLocaleString()}</p>
+              </div>
+            </div>
+          )}
+
+          <button 
+            className="continue-btn" 
+            onClick={handleContinue} 
+            disabled={!parseFloat(amount)}
+          >
             Continue
           </button>
         </div>
       </div>
 
-      {/* ✅ Confirm Withdrawal modal */}
       {showConfirm && (
         <ConfirmWithdrawal
           close={setShowConfirm}
           amount={amount}
-          openSuccess={handleConfirm} // ✅ your comment stays
+          deduction={totalDeduction}
+          amountReceived={amountToReceive}
+          openSuccess={handleConfirm}
         />
       )}
 
-      {/* ✅ Processing modal */}
-      {showProcessing && <Processing />}
 
+
+
+{showProcessing && (
+  <Processing close={() => setShowProcessing(false)} />
+)}
       <ToastContainer />
     </>
   );

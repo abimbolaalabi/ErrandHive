@@ -1,13 +1,12 @@
-/* General Layout */
+
 .runner-layout-style {
   display: flex;
   height: 100vh;     
   overflow: hidden;   
   font-family: 'Poppins', sans-serif;
-  background: #F4F5F7; /* Very light grey background */
+  background: #F4F5F7; 
 }
 
-/* Sidebar */
 .sidebarr-runner {
   width: 250px;
   height: 100vh;
@@ -20,6 +19,7 @@
   display: flex; 
   flex-direction: column;
   padding-bottom: 20px;
+  z-index: 999; 
 }
 
 .sidebarr-headerr {
@@ -30,6 +30,10 @@
   flex-direction: column;
   align-items: center;
   padding: 20px 0; 
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 10; 
 }
 
 .sidebarr-headerr-title {
@@ -39,8 +43,11 @@
   margin-bottom: 5px; 
 }
 
-.sidebarr-headerr img {
-  width: 50px; 
+.sidebarr-headerr-title img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 12px;
 }
 
 .sidebar-title-text {
@@ -86,7 +93,6 @@
   color: #8133F1;
 }
 
-/* Active Dashboard Link Styling */
 .active-sidebar-link {
   background-color: #8133F11A; 
   color: #8133F1; 
@@ -97,23 +103,21 @@
   font-size: 20px;
 }
 
-/* Logout Section */
 .log-out-box {
   padding: 0 15px; 
   margin-top: auto; 
 }
 
 .log-out-link {
-    color: #5d5d5d; 
+  color: #5d5d5d; 
 }
 
 .logout-icon {
-    font-size: 20px;
-    color: #999; 
+  font-size: 20px;
+  color: #999; 
 }
 
 
-/* Main Content Section */
 .main-section {
   margin-left: 250px;                 
   width: calc(100% - 250px);        
@@ -124,7 +128,6 @@
 }
 
 
-/* Header/Navbar */
 .header {
   display: flex;
   align-items: center;
@@ -144,7 +147,6 @@
   height: 40px; 
 }
 
-/* Search Input Styles */
 .search-input {
   outline: none;
   border: none;
@@ -154,12 +156,12 @@
   font-family: Poppins;
   font-weight: 300;
   font-size: 0.9rem;
-  background-color: #F2EBFE66; /* Correct light purple background */
-  border-radius: 20px; /* Highly rounded corners */
+  background-color: #F2EBFE66; 
+  border-radius: 20px; 
 }
 
 .search-input::placeholder {
-  color: #212121; /* Dark placeholder text color */
+  color: #212121;
   font-weight: 300;
 }
 
@@ -168,7 +170,7 @@
   top: 50%; 
   left: 15px; 
   transform: translateY(-50%);
-  color: #212121; /* Dark icon color */
+  color: #212121; 
   font-size: 20px;
 }
 
@@ -177,7 +179,7 @@
   height: 100%;
   display: flex;
   align-items: center;
-  gap: 30px; /* Space between notification and profile */
+  gap: 30px; 
 }
 
 .profile-notification-box {
@@ -194,16 +196,14 @@
   color: #5d5d5d; 
 }
 
-/* Profile Info Group */
 .wrapper-profile-shit {
   width: auto;
   height: 100%;
   display: flex;
   align-items: center; 
-  gap: 10px; /* Gap between picture and name */
+  gap: 10px; 
 }
 
-/* 1. Profile Picture Box (Left side of the profile group) */
 .Profile-layout-box-runner {
   width: auto;
   height: 100%;
@@ -211,31 +211,32 @@
   align-items: center;
 }
 
+
 .profile-pic-layout {
   height: 40px; 
   width: 40px;
   border-radius: 50%;
-  border: 2px solid #9974D0; /* Border to match image */
+  /* border: 2px solid #9974D0; */
   display: flex;
+  background: #9974D0;
   justify-content: center;
   align-items: center;
   overflow: hidden;
 }
 
-.profile-pic-layout img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* 2. Name/Role Holder (Right side of the profile group) */
+/* .profile-pic-layout img { */
+  /* width: 100%; */
+  /* height: 100%; */
+  /* object-fit: cover; */
+/* } */
+/*  */
 .Profile-name-user-holder {
   width: auto;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center; 
-  align-items: flex-start; /* Align text to the left within its container */
+  align-items: flex-start; 
 }
 
 .profile-h1-runner {
@@ -253,56 +254,81 @@
   padding: 0;
 }
 
-/* ONLY CONTENT SHOULD SCROLL */
 .content {
   flex: 1;
-<<<<<<< HEAD
-  overflow-y: auto;   /* scroll only here */
-  padding: 20px;
-  background-color: #e5e7eb;
-}
-/* ========== MOBILE HEADER ONLY ========== */
-@media screen and (max-width: 768px) {
-
-  /* Header rearrange */
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 60px;
-    padding: 10px 15px;
-  }
-
-  /* Show hamburger */
-  .hamburger-btn {
-    display: block;
-    background: none;
-    border: none;
-    font-size: 28px;
-    cursor: pointer;
-  }
-
-  /* Hide search input on mobile */
-  .input-holder {
-    display: none;
-  }
-
-  /* Profile stays at right */
-  .wrapper-notification-profile {
-    margin-left: auto;
-    gap: 1rem;
-    display: flex;
-    align-items: center;
-  }
-
-  .Profile-layout-box-runner {
-    margin-left: 0 !important;
-    justify-content: flex-end;
-  }
-}
-=======
   overflow-y: auto;   
   padding: 30px; 
-  background-color: #F9F9F9; /* Light background for the dashboard content */
+  background-color: #F9F9F9; 
 }
->>>>>>> 2f69487c98b756546210f30b307a7fbf66329dbc
+
+.hamburger-menu {
+  display: none;
+  background: none;
+  border: none;
+  outline: none;
+}
+.close-sidebar-btn {
+   display: none;
+  position: absolute;
+  top: 10px;      /* moved down */
+  right: 10px;    /* moved away from the logo */
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+  /* color:inherit; */
+}
+
+@media (max-width: 480px) {
+
+
+  .hamburger-menu {
+    display: flex !important;
+    position: relative;
+    z-index: 10001;
+  }
+
+  /* Header adjustments */
+  .header {
+    justify-content: space-between;
+  }
+  .notify{
+    font-size: 3.5rem;
+  }
+
+ 
+  .sidebarr-runner {
+    left: -260px !important; /* hide by default */
+    width: 220px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 9999; /* overlay everything */
+    transition: left 0.3s ease-in-out;
+    background-color: #fff;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  }
+
+  .show-mobile-sidebar {
+    left: 0 !important;
+  }
+
+  .sidebarr-headerr-title img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+  .notify{
+    font-size: 5rem;
+  }
+  
+  .main-section {
+    margin-left: 0 !important;
+    width: 100% !important;
+    overflow-x: hidden;
+  }
+   .close-sidebar-btn {
+    display: block;
+  }
+}

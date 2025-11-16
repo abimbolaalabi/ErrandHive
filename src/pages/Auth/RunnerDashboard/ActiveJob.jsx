@@ -16,7 +16,7 @@ const ActiveJobs = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [jobStatus, setJobStatus] = useState({});
-  const [negotiateModal, setNegotiateModal] = useState(false);
+  const [negotiateModal, seJJtNegotiateModal] = useState(false);
   const [counterModal, setCounterModal] = useState(false);
   const [selectedErrand, setSelectedErrand] = useState(null);
 
@@ -25,7 +25,7 @@ const ActiveJobs = () => {
   const token = JSON.parse(localStorage.getItem("userToken"));
 
   const fetchJobs = async () => {
-    if (!token) {
+    if (!token) {J
       toast.error("User token missing");
       setLoading(false);
       return;

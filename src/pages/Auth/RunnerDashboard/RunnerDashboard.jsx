@@ -91,7 +91,7 @@ const RunnerDashboard = () => {
     return (
       <main className="runner-dashboard-layout">
         <div className="title-dashboard-runner">
-          <h1>Welcome to your dashboard {fullName || "User"}! 👋</h1>
+          <h1>Welcome to your dashboard {storedUser.fullName}! 👋</h1>
         </div>
 
         <div className="dashboard-kyc">

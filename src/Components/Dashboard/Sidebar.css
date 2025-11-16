@@ -1,4 +1,4 @@
-/* Sidebar Styles */
+
 .sidebar {
   width: 280px;
   background: white;
@@ -6,14 +6,14 @@
   display: flex;
   flex-direction: column;
   position: fixed;
-  height: 100vh; /* FIX: Must be full height */
+  height: 100vh; 
   left: 0;
   top: 0;
-  z-index: 2000; /* FIX: Ensure it's above all elements */
-  transition: transform 0.3s ease; /* FIX: Smooth transition */
+  z-index: 2000; 
+  transition: transform 0.3s ease; 
 }
 
-/* Header Inside Sidebar */
+
 .sidebar-header {
   padding: 1.5rem;
   border-bottom: 1px solid #f1f5f9;
