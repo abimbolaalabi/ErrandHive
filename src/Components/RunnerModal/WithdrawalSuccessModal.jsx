@@ -19,6 +19,7 @@ const WithdrawalSuccessModal = () => {
             <polyline points="20 6 9 17 4 12"></polyline>
           </svg>
         </div>
+        {/* jj */}
 
         <h4 className='success-main-message'>Withdrawal Initiated!</h4>
         <p className='success-sub-message'>Your withdrawal of ₦1,000 is being processed</p>

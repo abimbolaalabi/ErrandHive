@@ -88,7 +88,6 @@
   color: white;
 }
 
-/* INPUT LABEL */
 .forlabel {
   margin-top: 18px;
   font-size: 14px;
@@ -96,7 +95,7 @@
   display: block;
 }
 
-/* INPUT */
+
 .forinput {
   width: 100%;
   padding: 14px;
@@ -111,7 +110,7 @@
   color: #c1c1c1;
 }
 
-/* MINIMUM WARNING */
+
 .forwarning {
   background: #f3e9ff;
   color: #7b2cf3;
@@ -124,7 +123,7 @@
   gap: 6px;
 }
 
-/* BUTTON */
+
 .forbutton {
   margin-top: 22px;
   width: 100%;
