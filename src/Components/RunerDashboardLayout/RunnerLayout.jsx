@@ -147,8 +147,8 @@ const RunnerLayout = () => {
             <article className="wrapper-profile-shit">
               <div className="Profile-layout-box-runner">
                 <div className="profile-pic-layout">
-                  <div style={{color:"white"}}>V</div>
-                  {/* <img src={Profile} alt="User Profile" /> */}
+                  {/* <div style={{color:"white"}}>V</div> */}
+                  <img src={Profile} alt="User Profile" />
                 </div>
               </div>
 

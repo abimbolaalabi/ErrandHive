@@ -655,6 +655,41 @@
 .lock-btn:hover {
   background: #5b21b6;
 }
+.runnerProfile-carouselNote {
+  width: 100%;
+  background: #fff7e6;
+  border: 1px solid #ffe0b3;
+  padding: 12px 0;
+  margin-top: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.runnerProfile-carouselTrack {
+  display: flex;
+  width: max-content;
+  animation: scrollText 12s linear infinite;
+  gap: 60px;
+  padding-left: 100%;
+}
+
+.runnerProfile-carouselTrack span {
+  font-size: 15px;
+  font-weight: 500;
+  color: #c87a00;
+  white-space: nowrap;
+}
+
+
+@keyframes scrollText {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
 /* ===== Mobile Responsiveness: 480px ===== */
 @media (max-width: 480px) {
 
