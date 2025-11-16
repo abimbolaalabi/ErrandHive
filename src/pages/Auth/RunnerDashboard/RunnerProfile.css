@@ -655,3 +655,169 @@
 .lock-btn:hover {
   background: #5b21b6;
 }
+/* ===== Mobile Responsiveness: 480px ===== */
+@media (max-width: 480px) {
+
+  .runnerProfile-container {
+    padding: 20px 15px;
+  }
+
+  .runnerProfile-header h1 {
+    font-size: 20px;
+  }
+
+  .runnerProfile-header p {
+    font-size: 12px;
+  }
+
+  .runnerProfile-card {
+    padding: 15px;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .runnerProfile-left {
+    gap: 14px;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .runnerProfile-avatarCircle {
+    width: 70px;
+    height: 70px;
+    font-size: 22px;
+  }
+
+  .runnerProfile-avatarImg {
+    width: 70px;
+    height: 70px;
+  }
+
+  .runnerProfile-cameraIcon {
+    width: 28px;
+    height: 28px;
+    bottom: -4px;
+    right: -4px;
+  }
+
+  .runnerProfile-info {
+    flex-direction: column;
+    gap: 8px;
+    height: auto;
+  }
+
+  .runnerProfile-info h2 {
+    font-size: 16px;
+  }
+
+  .runnerProfile-email {
+    font-size: 12px;
+  }
+
+  .runnerProfile-right .runnerProfile-editBtn {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  .runnerProfile-memberSince,
+  .runnerProfile-bio {
+    font-size: 12px;
+  }
+
+  .runnerProfile-kycCard,
+  .runnerProfile-reviewCard,
+  .runnerProfile-kycVerifiedContainer,
+  .runnerProfile-rejectedWrapper,
+  .runnerProfile-bankCard,
+  .runnerProfile-withdrawalCard {
+    padding: 15px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .runnerProfile-kycLeft,
+  .runnerProfile-reviewDetails,
+  .runnerProfile-kycVerifiedHeaderLeft,
+  .runnerProfile-rejectedHeaderLeft,
+  .runnerProfile-featureLeft {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .runnerProfile-kycInfo h3,
+  .runnerProfile-reviewTexts h3,
+  .runnerProfile-kycVerifiedTitle,
+  .runnerProfile-rejectedTitle,
+  .runnerProfile-featureInfo h3 {
+    font-size: 14px;
+  }
+
+  .runnerProfile-kycInfo p,
+  .runnerProfile-reviewTexts p,
+  .runnerProfile-kycVerifiedSubtext,
+  .runnerProfile-rejectedSubtext,
+  .runnerProfile-featureInfo p {
+    font-size: 12px;
+  }
+
+  .runnerProfile-statusLabel,
+  .runnerProfile-pending,
+  .runnerProfile-kycVerifiedStatusLabel,
+  .runnerProfile-rejectedStatusTag {
+    font-size: 10px;
+    padding: 1px 6px;
+  }
+
+  .runnerProfile-kycVerifiedStepsWrapper {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .runnerProfile-kycVerifiedStepCard {
+    padding: 8px;
+  }
+
+  
+  
+ 
+.runnerProfile-withdrawalBtn,
+.runnerProfile-verifyBtn,
+  .runnerProfile-rejectedActionBtn,
+  .lock-btn {
+    width: 300px;
+    font-size: 14px;
+    padding: 10px 0;
+  }
+  .runnerProfile-bankBtn{
+    width: 300px;
+    height: 40px;
+  }
+
+  .runnerProfile-ratingContainer {
+    padding: 4px 8px;
+    max-width: 100px;
+    gap: 4px;
+  }
+
+  .runnerProfile-ratingStar {
+    font-size: 16px;
+  }
+
+  .runnerProfile-ratingValue {
+    font-size: 12px;
+  }
+
+  .lock-title {
+    font-size: 20px;
+  }
+
+  .lock-desc {
+    font-size: 13px;
+    max-width: 100%;
+  }
+
+  .center-block {
+    padding: 1.5rem;
+  }
+}

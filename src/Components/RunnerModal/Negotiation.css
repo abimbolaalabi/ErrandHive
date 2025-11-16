@@ -176,3 +176,75 @@
 .accept-btn:hover {
   background: #5b21b6;
 }
+/* ============================
+   MOBILE RESPONSIVENESS (480px)
+   ============================ */
+@media (max-width: 480px) {
+  .negotiation-overlay {
+    padding: 10px;
+    align-items: flex-end;        /* modal comes from bottom */
+  }
+
+  .negotiation-modal {
+    width: 100%;
+    height: 90%;
+    padding: 20px;
+    border-radius: 16px 16px 0 0; /* rounded top */
+  }
+
+  .close-btn {
+    top: 12px;
+    right: 15px;
+    font-size: 20px;
+  }
+
+  .modal-title {
+    font-size: 1.1rem;
+  }
+
+  .modal-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .info-card {
+    padding: 12px 14px;
+  }
+
+  .info-title {
+    font-size: 0.82rem;
+  }
+
+  .info-content {
+    font-size: 0.9rem;
+  }
+
+  .offer-box {
+    padding: 12px 0;
+    margin: 16px 0;
+  }
+
+  .offer-amount {
+    font-size: 1.3rem;
+  }
+
+  .propose-label {
+    font-size: 0.85rem;
+  }
+
+  .propose-input {
+    padding: 9px 10px;
+    font-size: 0.95rem;
+  }
+
+  .button-row {
+    flex-direction: column;   /* buttons stack */
+    gap: 10px;
+  }
+
+  .propose-btn,
+  .accept-btn {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 0.95rem;
+  }
+}

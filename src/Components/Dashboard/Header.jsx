@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../Context/App';
+import { GiHamburgerMenu } from "react-icons/gi";
 import './Header.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,17 +14,17 @@ const Header = ({ setSidebarOpen }) => {
   return (
     <header className="dashboard-header">
 
-      {/* HAMBURGER BUTTON FOR MOBILE */}
+      {/* SINGLE HAMBURGER (Mobile Only) */}
       <button
         className="hamburger-btn"
         onClick={() => setSidebarOpen(prev => !prev)}
       >
-        <span></span>
-        <span></span>
-        <span></span>
+        <GiHamburgerMenu size={24} />
       </button>
 
       <div className="header-left">
+
+        {/* SEARCH BAR */}
         <div className="search-container">
           {/* <svg className="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <circle cx="11" cy="11" r="8" />

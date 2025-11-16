@@ -234,3 +234,108 @@
   cursor: not-allowed;
   opacity: 0.7;
 }
+/* ===============================
+   MOBILE RESPONSIVENESS – 480px
+   =============================== */
+@media (max-width: 480px) {
+
+  .runner-ky-pop-overlay {
+    padding: 10px;
+    align-items: flex-end;    /* slide-up bottom style */
+  }
+
+  .runner-ky-pop-modal {
+    width: 100%;
+    max-width: 100%;
+    max-height: 92vh;
+    border-radius: 16px 16px 0 0; /* rounded top */
+    padding-bottom: 10px;
+  }
+
+  .runner-ky-pop-header {
+    padding: 18px 16px;
+  }
+
+  .runner-ky-pop-header h2 {
+    font-size: 18px;
+  }
+
+  .runner-ky-pop-header p {
+    font-size: 13px;
+  }
+
+  .runner-ky-pop-close {
+    top: 18px;
+    right: 16px;
+    font-size: 18px;
+  }
+
+  /* Steps Section */
+  .runner-ky-pop-steps {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .runner-ky-pop-step-line {
+    display: none;            
+  }
+
+  /* Body Layout */
+  .runner-ky-pop-body {
+    padding: 18px 16px;
+    gap: 14px;
+  }
+
+  .runner-ky-pop-upload-card {
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .runner-ky-pop-card-top {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .runner-ky-pop-card-text h3 {
+    font-size: 14px;
+  }
+
+  .runner-ky-pop-card-text p {
+    font-size: 12.5px;
+  }
+
+  /* Upload Button */
+  .runner-ky-pop-upload-btn {
+    height: 44px;
+    font-size: 13px;
+  }
+
+  .runner-ky-pop-upload-icon {
+    font-size: 16px;
+  }
+
+  /* Guidelines Box */
+  .runner-ky-pop-guidelines {
+    padding: 14px;
+  }
+
+  .runner-ky-pop-guidelines h4 {
+    font-size: 13.5px;
+  }
+
+  .runner-ky-pop-guidelines li {
+    font-size: 12.5px;
+  }
+
+  /* Footer */
+  .runner-ky-pop-footer {
+    padding: 18px 16px 22px;
+  }
+
+  .runner-ky-pop-submit-btn {
+    font-size: 14px;
+    padding: 14px;
+    border-radius: 8px;
+  }
+}

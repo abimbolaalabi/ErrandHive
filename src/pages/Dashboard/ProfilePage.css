@@ -866,7 +866,7 @@
     font-size: 12px;
   }
 
-  /* Rejected Card */
+  
   .rejected-wrapper {
     padding: 16px;
     flex-direction: column;
@@ -893,5 +893,24 @@
     margin-left: 1rem;
     margin-top: 0.5rem;
   }
-}
 
+
+.profile-right .edit-btn {
+    padding: 5px 10px;
+    font-size: 12px;
+
+   
+    position: relative;
+    z-index: 1000; 
+  }
+
+ 
+  .profile-right {
+    position: relative;
+    z-index: 1; 
+  }
+
+  .verify-btn{
+  width: 300px;
+  }
+}

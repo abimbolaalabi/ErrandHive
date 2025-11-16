@@ -11,21 +11,21 @@ import { AppContext } from "../../../Context/App";
 const API_BASE_URL = "https://errandhive-project.onrender.com/api/v1";
 
 const ActiveJobs = () => {
-  const { user } = useContext(AppContext); // user and KYC info if needed
+  const { user } = useContext(AppContext); 
 
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [jobStatus, setJobStatus] = useState({});
-  const [negotiateModal, setNegotiateModal] = useState(false);
+  const [negotiateModal, seJJtNegotiateModal] = useState(false);
   const [counterModal, setCounterModal] = useState(false);
   const [selectedErrand, setSelectedErrand] = useState(null);
 
-  // ✅ Fetch jobs
+ 
  useEffect(() => {
   const token = JSON.parse(localStorage.getItem("userToken"));
 
   const fetchJobs = async () => {
-    if (!token) {
+    if (!token) {J
       toast.error("User token missing");
       setLoading(false);
       return;
