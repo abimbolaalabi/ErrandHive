@@ -162,3 +162,71 @@
 .negotiation-button:hover {
     background-color: #6b20b8; 
 }
+/* ========== MOBILE SMALL DEVICES (max-width: 480px) ========== */
+@media (max-width: 480px) {
+
+    .card-container-wrapper {
+        padding: 15px;
+    }
+
+    .card-title {
+        font-size: 1.3em;
+        margin-bottom: 18px;
+    }
+
+    /* Stat cards stack */
+    .card-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .stat-card {
+        padding: 18px;
+    }
+
+    .stat-value {
+        font-size: 1.5em;
+    }
+
+    /* Document job card adjustments */
+    .document-card {
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    /* Top row stacks */
+    .document-details-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 5px 0 20px;
+    }
+
+    .location-item {
+        width: 100%;
+    }
+
+    .location-item.right-align {
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    /* Bottom section stacks */
+    .bottom-info-row {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .price-time-info {
+        font-size: 0.95em;
+    }
+
+    /* Button fills width */
+    .negotiation-button {
+        width: 100%;
+        padding: 12px;
+        font-size: 1em;
+    }
+}

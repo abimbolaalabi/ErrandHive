@@ -35,6 +35,7 @@ import RunnerMessage from "../pages/Auth/RunnerDashboard/RunnerMessage";
 import RunnerDetailPage from "../pages/Auth/RunnerDashboard/RunnerDetailPage";
 import UnifiedChat from "../pages/Chat/UnifiedChat";
 import AddBankDeal from "../pages/Auth/RunnerDashboard/AddBankDeal";
+import Notification from "../pages/Dashboard/Notification";
 
 const Router = () => {
   return (
@@ -59,6 +60,7 @@ const Router = () => {
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route index element={<DashboardPage />} />
             <Route path="my-errands" element={<MyErrandsPage />} />
+            <Route path="notification" element={<Notification />} />
             <Route path="my-errands/:errandId" element={<MyErrandsDetails />} />
           
             <Route path="success" element={<SuccessPage />} />

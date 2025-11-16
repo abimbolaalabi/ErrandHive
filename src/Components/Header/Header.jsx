@@ -1,10 +1,13 @@
 import "./Header.css";
 import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AppContext } from "../../Context/App";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { userType, user, getAUser } = useContext(AppContext);
+  const [show, setShow] = useState(false)
 
   const handleScroll = (id) => {
     const section = document.getElementById(id);
@@ -13,6 +16,8 @@ const Header = () => {
       setMenuOpen(false);
     }
   };
+
+  console.log("object", user)
 
   return (
     <header className="header-container">
@@ -59,12 +64,16 @@ const Header = () => {
           </ul>
 
           <div className="mobile-btn-holder">
+
             <Link to="/login">
               <button className="sign-in-btn">Sign in</button>
             </Link>
-            <Link to="/clientvsrunner">
-              <button className="get-started-btn">Get Started</button>
-            </Link>
+            {!getAUser && (
+              <Link to="/clientvsrunner">
+                <button className="get-started-btn">Get Started</button>
+              </Link>
+            )}
+
           </div>
         </div>
       )}
