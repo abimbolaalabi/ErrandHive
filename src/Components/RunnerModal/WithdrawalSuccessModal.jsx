@@ -1,5 +1,5 @@
 import React from 'react';
-import './WithdrawalSuccessModal.css';
+import './WithdrawalSuccessModal';
 const IoClose = ({ size, className }) => <span className={className} style={{ fontSize: size }}>&times;</span>;
 
 const WithdrawalSuccessModal = () => {
