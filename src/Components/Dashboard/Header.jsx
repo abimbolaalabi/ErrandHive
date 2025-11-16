@@ -2,9 +2,11 @@ import React, { useContext } from 'react';
 import { AppContext } from '../../Context/App';
 import { GiHamburgerMenu } from "react-icons/gi";
 import './Header.css';
+import { useNavigate } from 'react-router-dom';
 
 const Header = ({ setSidebarOpen }) => {
   const { userType, user } = useContext(AppContext);
+  const navigate = useNavigate()
 
   const storedUser = JSON.parse(localStorage.getItem("userDetails")) || {};
   const fullName = `${storedUser?.firstName || ""} ${storedUser?.lastName || ""}`.trim();
@@ -37,11 +39,12 @@ const Header = ({ setSidebarOpen }) => {
       </div>
 
       <div className="header-right">
-        <button className="notification-btn">
+        <button className="notification-btn" onClick={()=> navigate("/dashboard/notification")}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
             <path d="M13.73 21a2 2 0 0 1-3.46 0" />
           </svg>
+          <div className='ntfy'>0</div>
         </button>
 
         <div className="user-profile">
