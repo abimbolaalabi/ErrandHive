@@ -51,9 +51,9 @@
   position: relative;
 }
 .ntfy {
-  /* background-color: red; */
-  width: 15px;
-  height: 15px;
+  background-color: red;
+  width: 20px;
+  height: 20px;
   position: absolute;
   border-radius: 50%;
   border: 1px solid black;
@@ -62,6 +62,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
 }
 
 /* User profile box */

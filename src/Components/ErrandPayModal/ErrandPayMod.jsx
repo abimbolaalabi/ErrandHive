@@ -39,7 +39,7 @@ const ErrandPayMod = ({ toclose, setErrandPay, info }) => {
       const ok = res?.data?.success === true;
 
       if (ok && checkoutUrl) {
-        toast.success(res.data.message);
+        // toast.success(res.data.message);
         console.log(res.data.message)
         setTimeout(() => {
           window.location.href = checkoutUrl;

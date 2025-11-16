@@ -208,59 +208,174 @@
     background-color: #8c42e5; 
 }
 
-/* -------------------- RESPONSIVENESS -------------------- */
-@media (max-width: 600px) {
-    .modalerrand-child {
-        width: 90%;
-        height: 95%;
-        border-radius: 0.5rem;
-        padding: 10px;
-    }
-
-    .top-note-container {
-        padding: 8px 12px;
-        font-size: 12px;
-    }
-
-    .post-errand-header {
-        font-size: 16px;
-        margin: 10px 0 5px 0;
-    }
-
-    .post-errand-subheader {
-        font-size: 12px;
-        margin-bottom: 15px;
-    }
-
-    .form-content {
-        padding: 0 10px;
-    }
-
-    .form-input, .form-textarea {
-        font-size: 0.95rem;
-        padding: 8px 10px;
-    }
-
-    .attachments-section {
-        margin-bottom: 20px;
-    }
-
-    .attachment-box {
-        padding: 15px;
-    }
-
-    .attachment-icon {
-        font-size: 1.25rem;
-    }
-
-    .action-buttons {
-        flex-direction: column;
-        gap: 10px;
-        padding: 15px;
-    }
-
-    .btn {
-        font-size: 0.95rem;
-        padding: 10px;
-    }
+@media (min-width: 2560px) {
+  .modalerrand-child {
+    width: 32%;
+    max-height: 850px;
+  }
+  .post-errand-header {
+    font-size: 22px;
+  }
 }
+
+@media (max-width: 1920px) {
+  .modalerrand-child {
+    width: 38%;
+  }
+}
+
+@media (max-width: 1600px) {
+  .modalerrand-child {
+    width: 42%;
+  }
+}
+
+@media (max-width: 1440px) {
+  .modalerrand-child {
+    width: 48%;
+  }
+}
+
+@media (max-width: 1366px) {
+  .modalerrand-child {
+    width: 52%;
+  }
+}
+
+@media (max-width: 1280px) {
+  .modalerrand-child {
+    width: 55%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .modalerrand-child {
+    width: 60%;
+    height: 92%;
+  }
+}
+
+@media (max-width: 912px) {
+  .modalerrand-child {
+    width: 70%;
+  }
+}
+
+@media (max-width: 820px) {
+  .modalerrand-child {
+    width: 75%;
+  }
+  .post-errand-header {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 768px) {
+  .modalerrand-child {
+    width: 80%;
+  }
+  .form-input,
+  .form-textarea {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 600px) {
+  /* your existing rules remain */
+}
+
+@media (max-width: 480px) {
+  .modalerrand-child {
+    width: 94%;
+    height: 96%;
+  }
+  .post-errand-header {
+    font-size: 15px;
+  }
+  .post-errand-subheader {
+    font-size: 11px;
+  }
+  .label-with-icon,
+  .label-text {
+    font-size: 12px;
+  }
+  .attachment-box {
+    padding: 14px;
+  }
+}
+
+@media (max-width: 414px) {
+  .modalerrand-child {
+    width: 96%;
+    border-radius: 6px;
+  }
+  .form-input,
+  .form-textarea {
+    font-size: 0.9rem;
+  }
+  .btn {
+    font-size: 0.9rem;
+    padding: 9px;
+  }
+}
+
+@media (max-width: 390px) {
+  .form-input,
+  .form-textarea {
+    font-size: 0.85rem;
+    padding: 7px 9px;
+  }
+  .attachment-box p {
+    font-size: 0.8rem;
+  }
+  .attachment-box .max-file-size {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .modalerrand-child {
+    height: 97%;
+  }
+  .post-errand-header {
+    font-size: 14px;
+  }
+  .btn {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .form-content {
+    padding: 0 6px;
+  }
+  .form-input,
+  .form-textarea {
+    font-size: 0.83rem;
+    padding: 6px 8px;
+  }
+  .attachment-box {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 320px) {
+  .modalerrand-child {
+    width: 98%;
+    height: 98%;
+    border-radius: 5px;
+  }
+  .post-errand-header {
+    font-size: 13px;
+  }
+  .form-input,
+  .form-textarea {
+    font-size: 0.8rem;
+    padding: 6px;
+  }
+  .btn {
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+}
+

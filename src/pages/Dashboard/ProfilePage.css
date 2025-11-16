@@ -516,401 +516,197 @@
   color: #5b5b5b;
 }
 
-@media screen and (max-width: 780px) and (min-width: 481px) {
+@media (min-width: 2560px) {
   .profile-container {
-    padding: 24px;
+    max-width: 2000px;
+    margin: auto;
   }
-
-  /* Header */
-  .profile-header h1 {
-    font-size: 22px;
-  }
-
-  .profile-header p {
-    font-size: 13px;
-  }
-
-  /* Profile Card */
-  .profile-card {
-    height: auto;
-    padding: 16px;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .profile-left {
-    flex-direction: row;
-    gap: 20px;
-    align-items: center;
-  }
-
-  .avatar-circle {
-    width: 80px;
-    height: 80px;
-    font-size: 24px;
-  }
-
-  .camera-icon {
-    width: 30px;
-    height: 30px;
-    font-size: 14px;
-  }
-
-  .profile-info {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-
-  .profile-info h2 {
-    font-size: 18px;
-  }
-
-  .profile-info .email {
-    font-size: 13px;
-    gap: 7px;
-  }
-
-  .member-since, .bio {
-    font-size: 13px;
-  }
-
-  .profile-right .edit-btn {
-    padding: 6px 12px;
-    font-size: 13px;
-  }
-
-  /* KYC Card */
-  .kyc-card {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    padding: 18px;
-    gap: 12px;
-  }
-
-  .kyc-info h3 {
-    font-size: 15px;
-  }
-
-  .kyc-info p {
-    font-size: 13px;
-  }
-
-  .verify-btn {
-    padding: 9px 18px;
-    font-size: 13px;
-  }
-
-  /* Status Card */
-  .status-card {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    padding: 18px;
-    gap: 12px;
-  }
-
-  .status-text h3 {
-    font-size: 15px;
-  }
-
-  .status-text p {
-    font-size: 13px;
-  }
-
-  .action-btn {
-    padding: 9px 18px;
-    font-size: 13px;
-  }
-
-  /* Review Card */
-  .review-card {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    padding: 18px;
-    gap: 12px;
-  }
-
-  .review-texts h3 {
-    font-size: 15px;
-  }
-
-  .review-texts p {
-    font-size: 13px;
-  }
-
-  .review-action {
-    padding: 9px 18px;
-    font-size: 13px;
-  }
-
-  /* KYC Verified Steps */
-  .kyc-verified-containerr {
-    padding: 20px;
-  }
-
-  .kyc-verified-title {
-    font-size: 16px;
-  }
-
-  .kyc-verified-subtext {
-    font-size: 13px;
-  }
-
-  .kyc-verified-steps-wrapper {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 14px;
-  }
-
-  .kyc-verified-step-card {
-    flex: 1 1 45%;
-    padding: 14px 18px;
-  }
-
-  .kyc-verified-step-title {
-    font-size: 15px;
-  }
-
-  .kyc-verified-step-desc {
-    font-size: 13px;
-  }
-
-  /* Rejected Card */
+  .profile-card,
+  .kyc-card,
+  .status-card,
+  .review-card,
+  .kyc-verified-containerr,
   .rejected-wrapper {
-    padding: 18px;
-    flex-direction: column;
-    gap: 12px;
+    padding: 36px;
   }
-
-  .rejected-title {
-    font-size: 16px;
-  }
-
-  .rejected-subtext {
-    font-size: 13px;
-  }
-
-  .rejected-action-btn {
-    padding: 9px 18px;
-    font-size: 13px;
-  }
-
-  .rejected-reason-text {
-    font-size: 13px;
-  }
-
-  .edit-btn {
-    margin-left: 1rem;
-    margin-top: 0.5rem;
+  .profile-header h1 {
+    font-size: 28px;
   }
 }
 
-
-@media screen and (max-width: 480px) {
+@media (max-width: 1920px) {
   .profile-container {
-    padding: 16px;
+    padding: 40px;
   }
+}
 
-  /* Header */
-  .profile-header h1 {
-    font-size: 20px;
+@media (max-width: 1600px) {
+  .profile-card {
+    padding: 20px;
   }
-
-  .profile-header p {
-    font-size: 12px;
+  .avatar-circle {
+    width: 85px;
+    height: 85px;
   }
+}
 
-  /* Profile Card */
+@media (max-width: 1440px) {
+  .profile-card {
+    padding: 18px;
+  }
+}
+
+@media (max-width: 1366px) {
+  .profile-container {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .profile-container {
+    padding: 24px;
+  }
   .profile-card {
     height: auto;
-    padding: 12px;
-    flex-direction: column;
-    gap: 12px;
   }
+}
 
+@media (max-width: 1024px) {
+  .profile-card,
+  .kyc-card,
+  .review-card,
+  .status-card,
+  .rejected-wrapper {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
   .profile-left {
     flex-direction: row;
-    gap: 16px;
-    align-items: center;
   }
-
-  .avatar-circle {
-    width: 70px;
-    height: 70px;
-    font-size: 22px;
-  }
-
-  .camera-icon {
-    width: 28px;
-    height: 28px;
-    font-size: 14px;
-  }
-
   .profile-info {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
   }
+}
 
+@media (max-width: 912px) {
+  .profile-container {
+    padding: 20px;
+  }
+  .kyc-verified-steps-wrapper {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .kyc-verified-step-card {
+    flex: 1 1 48%;
+  }
+}
+
+@media (max-width: 820px) {
+  .profile-container {
+    padding: 18px;
+  }
+  .profile-card {
+    padding: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-left {
+    gap: 14px;
+  }
+  .avatar-circle {
+    width: 75px;
+    height: 75px;
+    font-size: 22px;
+  }
+  .kyc-verified-steps-wrapper {
+    gap: 14px;
+  }
+  .kyc-verified-step-card {
+    flex: 1 1 48%;
+  }
+}
+
+@media (max-width: 600px) {
+  .profile-card {
+    padding: 14px;
+  }
   .profile-info h2 {
-    font-size: 16px;
-  }
-
-  .profile-info .email {
-    font-size: 12px;
-    gap: 6px;
-  }
-
-  .member-since, .bio {
-    font-size: 12px;
-  }
-
-  .profile-right .edit-btn {
-    padding: 5px 10px;
-    font-size: 12px;
-  }
-
-  /* KYC Card */
-  .kyc-card {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 16px;
-    gap: 10px;
-  }
-
-  .kyc-info h3 {
-    font-size: 14px;
-  }
-
-  .kyc-info p {
-    font-size: 12px;
-  }
-
-  .verify-btn {
-    padding: 8px 16px;
-    font-size: 12px;
-  }
-
-  /* Status Card */
-  .status-card {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 16px;
-    gap: 10px;
-  }
-
-  .status-text h3 {
-    font-size: 14px;
-  }
-
-  .status-text p {
-    font-size: 12px;
-  }
-
-  .action-btn {
-    padding: 8px 16px;
-    font-size: 12px;
-  }
-
-  /* Review Card */
-  .review-card {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 16px;
-    gap: 10px;
-  }
-
-  .review-texts h3 {
-    font-size: 14px;
-  }
-
-  .review-texts p {
-    font-size: 12px;
-  }
-
-  .review-action {
-    padding: 8px 16px;
-    font-size: 12px;
-  }
-
-  /* KYC Verified Steps */
-  .kyc-verified-containerr {
-    padding: 16px;
-  }
-
-  .kyc-verified-title {
     font-size: 15px;
   }
-
-  .kyc-verified-subtext {
-    font-size: 12px;
+  .kyc-verified-step-card {
+    padding: 14px;
   }
+  .verify-btn {
+    width: 100%;
+  }
+}
 
-  .kyc-verified-steps-wrapper {
-    flex-direction: column;
+@media (max-width: 414px) {
+  .avatar-circle {
+    width: 65px;
+    height: 65px;
+    font-size: 20px;
+  }
+  .profile-info h2 {
+    font-size: 14px;
+  }
+  .profile-left {
     gap: 12px;
   }
+}
 
+@media (max-width: 390px) {
   .kyc-verified-step-card {
-    padding: 12px 16px;
+    padding: 12px;
   }
-
-  .kyc-verified-step-title {
-    font-size: 14px;
+  .profile-info {
+    gap: 4px;
   }
+}
 
-  .kyc-verified-step-desc {
-    font-size: 12px;
-  }
-
-  
+@media (max-width: 360px) {
+  .profile-card,
+  .kyc-card,
+  .status-card,
+  .review-card,
   .rejected-wrapper {
-    padding: 16px;
-    flex-direction: column;
-    gap: 10px;
+    padding: 14px;
   }
-
-  .rejected-title {
-    font-size: 15px;
+  .avatar-circle {
+    width: 60px;
+    height: 60px;
+    font-size: 18px;
   }
-
-  .rejected-subtext {
-    font-size: 12px;
+  .profile-right .edit-btn {
+    font-size: 11px;
+    padding: 6px 10px;
   }
-
-  .rejected-action-btn {
-    padding: 8px 16px;
-    font-size: 12px;
+  .verify-btn {
+    width: 100%;
+    padding: 10px;
   }
+}
 
-  .rejected-reason-text {
-    font-size: 12px;
+@media (max-width: 320px) {
+  .profile-card {
+    padding: 12px;
   }
-  .edit-btn{
-    margin-left: 1rem;
-    margin-top: 0.5rem;
+  .avatar-circle {
+    width: 55px;
+    height: 55px;
+    font-size: 16px;
   }
-
-
-.profile-right .edit-btn {
-    padding: 5px 10px;
-    font-size: 12px;
-
-   
-    position: relative;
-    z-index: 1000; 
+  .profile-info h2 {
+    font-size: 13px;
   }
-
- 
-  .profile-right {
-    position: relative;
-    z-index: 1; 
+  .profile-info .email,
+  .member-since,
+  .bio {
+    font-size: 11px;
   }
-
-  .verify-btn{
-  width: 300px;
+  .verify-btn {
+    padding: 8px 12px;
   }
 }

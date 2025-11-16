@@ -344,112 +344,91 @@
   margin-left: 40px;
 }
 
-/* ========== RESPONSIVENESS ========== */
 
-/* Tablet & Medium Screens */
+@media (max-width: 1024px) {
+  .med-root {
+    padding: 20px;
+  }
+}
+
 @media (max-width: 900px) {
   .med-top-row {
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
   }
-
   .med-locations-row {
     flex-direction: column;
   }
-
   .med-grid {
     flex-direction: column;
   }
-
   .med-profile-card {
     width: 100%;
     order: 2;
   }
-
   .med-timeline-card {
     width: 100%;
     order: 1;
   }
 }
 
-/* Mobile Phones */
 @media (max-width: 480px) {
+  .med-root {
+    padding: 15px;
+  }
   .med-card {
     padding: 18px;
     border-radius: 14px;
   }
-
   .med-top-row {
     flex-direction: column;
     align-items: flex-start;
     gap: 15px;
   }
-
   .med-runner-name {
     font-size: 18px;
   }
-
   .med-runner-stats {
     font-size: 13px;
   }
-
   .med-avatar {
     width: 48px;
     height: 48px;
     font-size: 20px;
   }
-
   .med-locations-row {
     flex-direction: column;
     gap: 15px;
   }
-
   .med-loc-card {
     padding: 14px;
   }
-
   .med-grid {
     flex-direction: column;
   }
-
   .med-profile-card {
     width: 100%;
   }
-
   .med-profile-avatar {
     width: 60px;
     height: 60px;
     font-size: 22px;
   }
-
   .med-chat-btn {
     padding: 10px;
   }
-
-  /* Timeline */
   .progress-timeline {
     padding-left: 30px;
   }
-
   .progress-circle {
     width: 24px;
     height: 24px;
   }
-
   .progress-label {
     font-size: 13px;
   }
-
   .progress-time {
     font-size: 11px;
   }
 }
-
-
-
-
-
-
-
-
