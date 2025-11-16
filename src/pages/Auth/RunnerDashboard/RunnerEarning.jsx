@@ -4,10 +4,14 @@ import { ArrowDownLeft } from "lucide-react";
 import { FaWallet } from "react-icons/fa";
 import { IoCopyOutline } from "react-icons/io5";
 import { RxEyeOpen, RxEyeClosed } from "react-icons/rx";
-import WithdrawBank from "../../../Components/RunnerModal/WithdrawBank";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ModalForWithdraw from "../../../Components/RunnerModal/ModalForWithdraw";
+import ModalForWithdrawal from "../../../Components/RunnerModal/ModalForWithdrawal";
+import ConfirmWithdrawalModal from "../../../Components/RunnerModal/ConfirmWithdrawalModal";
+import WithdrawalSuccessModal from "../../../Components/RunnerModal/WithdrawalSuccessModal";
+
 
 const API_BASE_URL = "https://errandhive-project.onrender.com/api/v1";
 
@@ -15,6 +19,11 @@ const RunnerEarning = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [copied, setCopied] = useState(false);
   const [withdrawModal, setWithdrawModal] = useState(false);
+  const [mod, setMod] = useState(false)
+  const [modal, setModal] = useState(false)
+  const [open, setOpen] = useState(false)
+  const [success, setSuccess] = useState(false)
+  console.log("success",success)
   const [walletData, setWalletData] = useState({
     availableBalance: 0,
     pendingEarnings: 0,
@@ -156,7 +165,7 @@ const RunnerEarning = () => {
           </div>
           <button
             className="withdraw-button"
-            onClick={() => setWithdrawModal(true)}
+            onClick={() => setMod(true)}
           >
             <ArrowDownLeft style={{ fontSize: "1.5rem" }} />
             Withdraw
@@ -229,12 +238,25 @@ const RunnerEarning = () => {
       </section>
 
       {/* ✅ Withdraw Modal */}
-      {withdrawModal && (
-        <WithdrawBank
-          availableBalance={walletData.availableBalance}
+      {/* {withdrawModal && (
+        <WithdrawalMod
+          // availableBalance={walletData.availableBalance}
           close={() => setWithdrawModal(false)}
         />
-      )}
+      )} */}
+     {
+      mod && (<ModalForWithdraw close={setMod} setModal={setModal}/>)
+     }
+     {
+      modal && (<ModalForWithdrawal toclose={setModal} setOpen={setOpen}/>)
+     }
+     {
+      open && (<ConfirmWithdrawalModal toclose={setOpen} setSuccess={setSuccess}/>)
+     }
+     {
+      success && (<WithdrawalSuccessModal toclose={setSuccess} />)
+     }
+ 
     </div>
   );
 };
