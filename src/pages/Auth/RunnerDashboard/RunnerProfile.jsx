@@ -15,15 +15,15 @@ import Bank from "../../../assets/Bank.png"
 
 const RunnerProfile = () => {
   const [user, setUser] = useState(null);
-  const [kycStatus, setKycStatus] = useState(localStorage.getItem("userKyc")|| null);
+  const [kycStatus, setKycStatus] = useState(localStorage.getItem("userKyc") || null);
   const [kycReason, setKycReason] = useState("");
   const [kycLoading, setKycLoading] = useState(true);
   const [kycModel, setKycModel] = useState(false);
   const [image, setImage] = useState(null);
   const [hasBankAccount, setHasBankAccount] = useState(false);
 
-  const navigate= useNavigate()
- 
+  const navigate = useNavigate()
+
   const BaseUrl = import.meta.env.VITE_BASE_URL;
   const token = JSON.parse(localStorage.getItem("userToken"));
   console.log(token)
@@ -254,11 +254,20 @@ const RunnerProfile = () => {
             </div>
           </div>
           <Link to={`/runnerlayout/runnerprofile/bank`}>
-                 <button className="runnerProfile-actionBtn runnerProfile-bankBtn" >Add Bank Account Now</button>
+            <button className="runnerProfile-actionBtn runnerProfile-bankBtn" >Add Bank Account Now</button>
           </Link>
-      
+
         </div>
       )}
+
+      <div className="runnerProfile-carouselNote">
+        <div className="runnerProfile-carouselTrack">
+          <span>⚠️ Note: All withdrawals are on Mondays only</span>
+          {/* <span>⚠️ Note: All withdrawals are on Mondays only</span> */}
+          {/* <span>⚠️ Note: All withdrawals are on Mondays only</span> */}
+        </div>
+      </div>
+
 
       {/* <div className="runnerProfile-withdrawalCard">
         <div className="runnerProfile-featureLeft">
