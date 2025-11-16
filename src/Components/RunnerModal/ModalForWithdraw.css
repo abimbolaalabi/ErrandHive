@@ -1,0 +1,139 @@
+/* OVERLAY */
+.forcontainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5000;
+}
+
+/* MODAL BOX */
+.forchild {
+  width: 90%;
+  max-width: 480px;
+  background: white;
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.25s ease;
+  font-family: "Inter", sans-serif;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.94); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* HEADER */
+.forheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.forheader h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.closeicon {
+  cursor: pointer;
+  color: #444;
+}
+
+/* SUBTEXT */
+.forsub {
+  margin-top: 4px;
+  font-size: 14px;
+  color: #7a7a7a;
+}
+
+/* BALANCE BOX */
+.forbalancebox {
+  margin-top: 22px;
+  border: 1.5px solid #e8d9fa;
+  background: #f8f2ff;
+  padding: 16px 18px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.balance-label {
+  color: #7a7a7a;
+  font-size: 13px;
+}
+
+.balance-amount {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 3px;
+}
+
+.forbalanceicon {
+  height: 38px;
+  width: 38px;
+  background: #7b2cf3;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+/* INPUT LABEL */
+.forlabel {
+  margin-top: 18px;
+  font-size: 14px;
+  color: #3a3a3a;
+  display: block;
+}
+
+/* INPUT */
+.forinput {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #e5e5e5;
+  background: #f5f5f5;
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+.forinput::placeholder {
+  color: #c1c1c1;
+}
+
+/* MINIMUM WARNING */
+.forwarning {
+  background: #f3e9ff;
+  color: #7b2cf3;
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 18px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* BUTTON */
+.forbutton {
+  margin-top: 22px;
+  width: 100%;
+  padding: 14px;
+  background: #7b2cf3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
