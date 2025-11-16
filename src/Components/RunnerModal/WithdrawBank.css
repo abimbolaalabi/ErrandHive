@@ -1,4 +1,4 @@
-.withdraw-overlay {
+/* .withdraw-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -131,64 +131,4 @@
 
 .continue-btn:hover {
   background: #864df0;
-}
-
-/* New Styles for Quick Amount Selector */
-.quick-amount-selector {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
-
-.quick-amount-selector span {
-  padding: 8px 12px;
-  border: 1px solid #e0e0e0;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #8133f1;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.quick-amount-selector span:hover {
-  background-color: #f2ebfe;
-}
-
-/* New Styles for Withdrawal Summary */
-.withdrawal-summary-card {
-  margin-top: 15px;
-  padding: 15px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  background-color: #ffffff;
-  margin-bottom: 20px;
-}
-
-.summary-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
-  font-size: 15px;
-  color: #333;
-}
-
-.summary-row:first-child {
-  border-bottom: 1px solid #e9e9e9;
-}
-
-.summary-row p:first-child {
-  color: #6c757d;
-}
-
-.summary-row p:last-child {
-  font-weight: 500;
-  color: #212121;
-}
-
-.net-row {
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid #dcdcdc;
-}
+} */
