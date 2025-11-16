@@ -624,10 +624,71 @@
     gap: 14px;
   }
   .kyc-verified-step-card {
+<<<<<<< HEAD
+    padding: 12px 16px;
+  }
+
+  .kyc-verified-step-title {
+    font-size: 14px;
+  }
+
+  .kyc-verified-step-desc {
+    font-size: 12px;
+  }
+
+  
+  .rejected-wrapper {
+    padding: 16px;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .rejected-title {
+    font-size: 15px;
+  }
+
+  .rejected-subtext {
+    font-size: 12px;
+  }
+
+  .rejected-action-btn {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  .rejected-reason-text {
+    font-size: 12px;
+  }
+  .edit-btn{
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+=======
     flex: 1 1 48%;
+>>>>>>> f407c218211e187e7ebe3da56b4242cd0f243695
+  }
+
+<<<<<<< HEAD
+
+.profile-right .edit-btn {
+    padding: 5px 10px;
+    font-size: 12px;
+
+   
+    position: relative;
+    z-index: 1000; 
+  }
+
+ 
+  .profile-right {
+    position: relative;
+    z-index: 1; 
+  }
+
+  .verify-btn{
+  width: 300px;
   }
 }
-
+=======
 @media (max-width: 600px) {
   .profile-card {
     padding: 14px;
@@ -710,3 +771,4 @@
     padding: 8px 12px;
   }
 }
+>>>>>>> f407c218211e187e7ebe3da56b4242cd0f243695

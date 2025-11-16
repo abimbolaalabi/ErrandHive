@@ -5,7 +5,7 @@ import ConfirmWithdrawal from "./ConfirmWithdrawal";
 const WithdrawalMod = ({close}) => {
     const [amount, setAmount] = useState("");
     const [modal , setModal] = usState(false)
-
+const [success, setSuccess] = useState(false);
   const formattedAmount = amount
     ? Number(amount.replace(/,/g, "")).toLocaleString()
     : "0";

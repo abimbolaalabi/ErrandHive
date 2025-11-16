@@ -1,18 +1,12 @@
 import { useEffect, useRef, useState, useContext } from "react";
-import { io } from "socket.io-client";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import "./MessagesPage.css";
 import { AppContext } from "../../../Context/App";
-
-// GLOBAL SOCKET
-const socket = io(import.meta.env.VITE_SOCKET_URL, {
-  transports: ["websocket"],
-  reconnection: true,
-});
+import { socket } from "../../../socket";
 
 export default function MessagesPage() {
-  const { id } = useParams();
+  const { id } = useParams(); // errand ID
   const navigate = useNavigate();
   const { user } = useContext(AppContext);
 
@@ -29,9 +23,7 @@ export default function MessagesPage() {
   const messagesEndRef = useRef(null);
   const userId = user?.id;
 
-  // -----------------------------------------------------
-  // FETCH ALL ASSIGNED ERRANDS FOR SIDEBAR
-  // -----------------------------------------------------
+  // ------------------ Fetch errands for sidebar ------------------
   useEffect(() => {
     const fetchMyRunners = async () => {
       try {
@@ -49,9 +41,7 @@ export default function MessagesPage() {
     fetchMyRunners();
   }, []);
 
-  // -----------------------------------------------------
-  // FETCH CHAT INFO + HISTORY
-  // -----------------------------------------------------
+  // ------------------ Load chat info & history ------------------
   useEffect(() => {
     if (!id) return;
 
@@ -67,7 +57,7 @@ export default function MessagesPage() {
         setChatInfo(info.data.data);
 
         const clientId = info.data.data?.poster?.id;
-        const runnerId = info.data.data?.assignedRunner?.id; // FIXED (runner object)
+        const runnerId = info.data.data?.assignedRunner?.id;
 
         if (!clientId || !runnerId) return;
 
@@ -90,9 +80,7 @@ export default function MessagesPage() {
     loadChat();
   }, [id, userId]);
 
-  // -----------------------------------------------------
-  // JOIN SOCKET ROOM
-  // -----------------------------------------------------
+  // ------------------ Join socket room ------------------
   useEffect(() => {
     const clientId = chatInfo?.poster?.id;
     const runnerId = chatInfo?.assignedRunner?.id;
@@ -105,29 +93,25 @@ export default function MessagesPage() {
     socket.emit("join_room", roomId);
   }, [chatInfo, userId]);
 
-  // -----------------------------------------------------
-  // RECEIVE MESSAGES LIVE (NO DUPLICATES)
-  // -----------------------------------------------------
+  // ------------------ Receive live messages (no duplicates) ------------------
   useEffect(() => {
-    const incoming = (msg) => {
-      if (msg.senderId !== userId) {
-        setMessages(prev => [...prev, msg]);
-      }
+    const handleIncoming = (msg) => {
+      setMessages(prev => {
+        if (prev.some(m => m.id && m.id === msg.id)) return prev;
+        return [...prev, msg];
+      });
     };
 
-    socket.on("receive_message", incoming);
-    return () => socket.off("receive_message", incoming);
-  }, [userId]);
+    socket.on("receive_message", handleIncoming);
+    return () => socket.off("receive_message", handleIncoming);
+  }, []);
 
-  // -----------------------------------------------------
-  // SEND MESSAGE
-  // -----------------------------------------------------
+  // ------------------ Send message ------------------
   const sendMessage = async (e) => {
     e.preventDefault();
 
     const clientId = chatInfo?.poster?.id;
     const runnerId = chatInfo?.assignedRunner?.id;
-
     if (!text.trim() || !clientId || !runnerId) return;
 
     const receiverId = userId === clientId ? runnerId : clientId;
@@ -142,8 +126,9 @@ export default function MessagesPage() {
       createdAt: new Date(),
     };
 
-    setMessages(prev => [...prev, payload]);
+    // Emit to socket
     socket.emit("send_message", payload);
+    setText("");
 
     try {
       await axios.post(`${BaseUrl}/messages/${id}`, payload, {
@@ -152,26 +137,19 @@ export default function MessagesPage() {
     } catch (err) {
       console.log("Save error:", err);
     }
-
-    setText("");
   };
 
-  // -----------------------------------------------------
-  // AUTO SCROLL
-  // -----------------------------------------------------
+  // ------------------ Auto scroll ------------------
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // -----------------------------------------------------
-  // PAYMENT LOCK SCREEN
-  // -----------------------------------------------------
+  // ------------------ Payment lock ------------------
   const isPaid = chatInfo?.paymentStatus === "paid";
 
   return (
     <div className="messages-wrapper">
-
-      {/* SIDEBAR LEFT */}
+      {/* Sidebar */}
       <div className="messages-sidebar">
         <h3>Messages</h3>
         <p className="subtext">Chat with your runners</p>
@@ -199,33 +177,32 @@ export default function MessagesPage() {
         ))}
       </div>
 
-      {/* 🔒 LOCK CHAT WHEN PAYMENT IS PENDING */}
+      {/* Lock screen if payment pending */}
       {!isPaid && (
         <div className="messages-chat center-block">
           <h2 className="lock-title">Complete Payment to Continue</h2>
           <p className="lock-desc">
             You must complete the payment for this errand before messaging the runner.
-            Once your payment is verified, chat will be automatically unlocked.
           </p>
         </div>
       )}
 
-      {/* CHAT UI — ONLY SHOW WHEN PAID */}
+      {/* Chat UI */}
       {isPaid && (
         <div className="messages-chat">
           <div className="chat-header">
             <div className="avatar large">
               {chatInfo?.assignedRunner?.firstName?.charAt(0)}
             </div>
-
             <div>
-              <h4>{chatInfo?.assignedRunner?.firstName} {chatInfo?.assignedRunner?.lastName}</h4>
+              <h4>
+                {chatInfo?.assignedRunner?.firstName} {chatInfo?.assignedRunner?.lastName}
+              </h4>
               <p>Runner</p>
             </div>
 
             <div className="menu-container">
               <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)}>⋮</button>
-
               {menuOpen && (
                 <div className="menu-options">
                   <p onClick={() => navigate(`/dashboard/messages/${id}/status`)}>
@@ -236,31 +213,21 @@ export default function MessagesPage() {
             </div>
           </div>
 
-          {/* CHAT BODY */}
+          {/* Chat Body */}
           <div className="chat-body">
             {loading && <p>Loading messages...</p>}
 
-            {messages.map((m, i) => {
+            {messages.map((m) => {
               const mine = m.senderId === userId;
-
               return (
-                <div key={i} className={`message ${mine ? "from-user" : ""}`}>
-                  {!mine && (
-                    <div className="avatar small">
-                      {chatInfo?.assignedRunner?.firstName?.charAt(0)}
-                    </div>
-                  )}
-
+                <div key={m.id || Math.random()} className={`message ${mine ? "from-user" : ""}`}>
+                  {!mine && <div className="avatar small">{chatInfo?.assignedRunner?.firstName?.charAt(0)}</div>}
                   <div className="bubble">
                     <p>{m.text}</p>
                     <span className="time">
-                      {new Date(m.createdAt).toLocaleTimeString([], {
-                        hour: "2-digit",
-                        minute: "2-digit"
-                      })}
+                      {new Date(m.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                     </span>
                   </div>
-
                   {mine && <div className="avatar small">You</div>}
                 </div>
               );
@@ -269,7 +236,7 @@ export default function MessagesPage() {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* CHAT INPUT */}
+          {/* Input */}
           <form className="chat-input" onSubmit={sendMessage}>
             <input
               type="text"
@@ -279,7 +246,6 @@ export default function MessagesPage() {
             />
             <button>➤</button>
           </form>
-
         </div>
       )}
     </div>

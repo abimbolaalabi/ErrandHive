@@ -11,24 +11,25 @@ import { AppContext } from "../../../Context/App";
 const API_BASE_URL = "https://errandhive-project.onrender.com/api/v1";
 
 const ActiveJobs = () => {
-  const { user } = useContext(AppContext);
+  const { user } = useContext(AppContext); 
 
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  const [negotiateModal, setNegotiateModal] = useState(false);
+  const [jobStatus, setJobStatus] = useState({});
+  const [negotiateModal, seJJtNegotiateModal] = useState(false);
   const [counterModal, setCounterModal] = useState(false);
   const [selectedErrand, setSelectedErrand] = useState(null);
 
-  useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("userToken"));
+ 
+ useEffect(() => {
+  const token = JSON.parse(localStorage.getItem("userToken"));
 
-    const fetchJobs = async () => {
-      if (!token) {
-        toast.error("User token missing");
-        setLoading(false);
-        return;
-      }
+  const fetchJobs = async () => {
+    if (!token) {J
+      toast.error("User token missing");
+      setLoading(false);
+      return;
+    }
 
       try {
         const res = await axios.get(`${API_BASE_URL}/errand/getAll`, {
@@ -129,3 +130,4 @@ const ActiveJobs = () => {
 };
 
 export default ActiveJobs;
+//kk

@@ -146,7 +146,7 @@ const SignUp = () => {
                 value={formData.lastName}
                 onChange={handleChange}
                 className={formErrors.lastName ? "error-input" : ""}
-              />
+              /> 
               {formErrors.lastName && (
                 <span className="error-text">{formErrors.lastName}</span>
               )}
