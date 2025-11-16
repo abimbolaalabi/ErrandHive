@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ModalForWithdraw from "../../../Components/RunnerModal/ModalForWithdraw";
 import ModalForWithdrawal from "../../../Components/RunnerModal/ModalForWithdrawal";
 import ConfirmWithdrawalModal from "../../../Components/RunnerModal/ConfirmWithdrawalModal";
-import WithdrawalSuccessModal from "../../../Components/RunnerModal/WithdrawalSuccessModal";
+import WithdrawalSuccessModal from "../../../Components/RunnerModal/SuccessModal";
 
 
 const API_BASE_URL = "https://errandhive-project.onrender.com/api/v1";
