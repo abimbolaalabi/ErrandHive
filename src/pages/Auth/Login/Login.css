@@ -196,7 +196,7 @@
 }
 
 .forgot-password-form {
-  margin-top: 0.3rem;
+  margin-top: 1rem;
   color: #8133f1;
   font-weight: 400;
   font-size: 1rem;
@@ -250,5 +250,8 @@
     display: flex !important;
     justify-content: center;
     margin-bottom: 1rem;
+  }
+  .forgot-password-form{
+    margin-bottom: 1.5rem;
   }
 }
