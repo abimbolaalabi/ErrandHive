@@ -1,24 +1,4 @@
-.review-mod-cont {
-  /* width: 100%;
-    height: 100vh;
-    background-color: rgb(70, 69, 69);
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: ; */
-  /* display: flex;
-    justify-content: center;
-    align-items: center; */
-}
 
-.review-wrapper {
-  /* background-color: #fff;
-    width: 50%;
-    height: 90%; */
-  /* display: flex;
-    justify-content: center;
-    align-items: center; */
-}
 
 .review-mod-cont {
   position: fixed;
@@ -33,7 +13,7 @@
 
 .review-wrapper {
   width: 100%;
-  max-width: 750px;
+  max-width: 600px;
   background: #fff;
   border-radius: 20px;
   padding: 60px 32px 40px;
@@ -103,7 +83,6 @@
   color: #777;
 }
 
-/* Price Box */
 .rev-price-box {
   border: 2px solid #c89bff;
   background: #f7f1ff;
@@ -129,8 +108,7 @@
   gap: 16px;
 }
 
-.rev-btn-outline
- {
+.rev-btn-outline {
   width: 100%;
   padding: 14px 0;
   font-size: 15px;
@@ -139,6 +117,7 @@
   border: none;
   transition: 0.2s ease;
 }
+
 .rev-btn-fill {
   width: 100%;
   padding: 14px 0;
@@ -149,8 +128,8 @@
   transition: 0.2s ease;
   background-color: red;
   text-decoration: none;
-  /* text-decoration: none; */
 }
+
 .rev-btn-outline {
   border: 1px solid #c8c8c8;
   background: transparent;
@@ -169,6 +148,7 @@
   gap: 6px;
   font-weight: 500;
 }
+
 .rev-btn-fill span {
   color: white;
 }
@@ -188,6 +168,34 @@
   }
 }
 
+@media screen and (max-width: 768px) {
+  .review-wrapper {
+    max-width: 600px;
+    padding: 45px 28px 30px;
+    border-radius: 18px;
+  }
+  .rev-assign-title {
+    font-size: 18px;
+  }
+  .rev-price-value {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .review-wrapper {
+    max-width: 92%;
+    padding: 35px 20px 26px;
+    border-radius: 16px;
+  }
+  .rev-btn-flex {
+    gap: 12px;
+  }
+  .rev-btn-outline,
+  .rev-btn-fill {
+    padding: 12px 0;
+  }
+}
 
 @media screen and (max-width: 480px) {
   .review-wrapper {
@@ -195,49 +203,77 @@
     padding: 30px 16px 24px;
     border-radius: 16px;
   }
-
   .rev-top-text {
     font-size: 12px;
     margin-bottom: 20px;
   }
-
   .rev-task-label {
     font-size: 12px;
   }
-
   .rev-task-title {
     font-size: 14px;
   }
-
   .rev-assign-title {
     font-size: 16px;
   }
-
   .rev-assign-sub {
     font-size: 12px;
   }
-
   .rev-price-label {
     font-size: 12px;
   }
-
   .rev-price-value {
     font-size: 16px;
   }
-
   .rev-btn-flex {
     flex-direction: column;
     gap: 10px;
   }
-
-  .rev-btn-outline, .rev-btn-fill {
+  .rev-btn-outline,
+  .rev-btn-fill {
     font-size: 13px;
     padding: 10px 0;
   }
-
   .rev-success-icon {
     width: 50px;
     height: 50px;
     font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .review-wrapper {
+    padding: 26px 14px 20px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .rev-assign-title {
+    font-size: 15px;
+  }
+  .rev-price-value {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .review-wrapper {
+    padding: 22px 12px 18px;
+  }
+  .rev-btn-fill,
+  .rev-btn-outline {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .review-wrapper {
+    padding: 20px 10px 16px;
+  }
+  .rev-task-title {
+    font-size: 13px;
+  }
+  .rev-price-value {
+    font-size: 14px;
   }
 }
