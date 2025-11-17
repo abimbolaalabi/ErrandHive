@@ -21,14 +21,13 @@
   padding: 25px 30px;
   position: relative;
   font-family: "Poppins", sans-serif;
-  
-  overflow-y: scroll;       /* allow scrolling */
-  scrollbar-width: none;    /* Firefox */
-  -ms-overflow-style: none; /* IE 10+ */
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .negotiation-modal::-webkit-scrollbar {
-  display: none;            /* Chrome, Safari, Opera */
+  display: none;
 }
 
 .close-btn {
@@ -176,75 +175,113 @@
 .accept-btn:hover {
   background: #5b21b6;
 }
-/* ============================
-   MOBILE RESPONSIVENESS (480px)
-   ============================ */
+
+/* ======================= */
+/*     ALL SCREEN SIZES    */
+/* ======================= */
+
+@media (max-width: 1440px) {
+  .negotiation-modal {
+    width: 50%;
+  }
+}
+
+@media (max-width: 1366px) {
+  .negotiation-modal {
+    width: 55%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .negotiation-modal {
+    width: 65%;
+    height: 88%;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .negotiation-modal {
+    width: 90%;
+    height: 85%;
+    padding: 18px;
+  }
+  .modal-title {
+    font-size: 1.1rem;
+  }
+  .offer-amount {
+    font-size: 1.25rem;
+  }
+}
+
 @media (max-width: 480px) {
   .negotiation-overlay {
     padding: 10px;
-    align-items: flex-end;        /* modal comes from bottom */
+    align-items: flex-end;
   }
-
   .negotiation-modal {
     width: 100%;
     height: 90%;
     padding: 20px;
-    border-radius: 16px 16px 0 0; /* rounded top */
+    border-radius: 16px 16px 0 0;
   }
-
   .close-btn {
     top: 12px;
     right: 15px;
     font-size: 20px;
   }
-
   .modal-title {
     font-size: 1.1rem;
   }
-
   .modal-subtitle {
     font-size: 0.85rem;
   }
-
   .info-card {
     padding: 12px 14px;
   }
-
   .info-title {
     font-size: 0.82rem;
   }
-
   .info-content {
     font-size: 0.9rem;
   }
-
   .offer-box {
     padding: 12px 0;
     margin: 16px 0;
   }
-
   .offer-amount {
     font-size: 1.3rem;
   }
-
   .propose-label {
     font-size: 0.85rem;
   }
-
   .propose-input {
     padding: 9px 10px;
     font-size: 0.95rem;
   }
-
   .button-row {
-    flex-direction: column;   /* buttons stack */
+    flex-direction: column;
     gap: 10px;
   }
-
   .propose-btn,
   .accept-btn {
     width: 100%;
     padding: 12px 0;
     font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .negotiation-modal {
+    padding: 16px;
+  }
+  .modal-title {
+    font-size: 1rem;
+  }
+  .offer-amount {
+    font-size: 1.2rem;
+  }
+  .propose-input {
+    font-size: 0.9rem;
   }
 }

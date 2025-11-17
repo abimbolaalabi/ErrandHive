@@ -136,3 +136,82 @@
   font-weight: 500;
   cursor: pointer;
 }
+
+
+@media (max-width: 1440px) {
+}
+
+@media (max-width: 1366px) {
+}
+
+@media (max-width: 1024px) {
+  .forchild {
+    max-width: 420px;
+    padding: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .forchild {
+    max-width: 380px;
+    padding: 22px;
+  }
+
+  .forheader h2 {
+    font-size: 18px;
+  }
+
+  .forsub {
+    font-size: 13px;
+  }
+
+  .forinput {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .forchild {
+    width: 94%;
+    padding: 20px;
+    border-radius: 14px;
+  }
+
+  .forheader h2 {
+    font-size: 17px;
+  }
+
+  .forbalancebox {
+    padding: 14px;
+  }
+
+  .balance-amount {
+    font-size: 18px;
+  }
+
+  .forbutton {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 360px) {
+  .forchild {
+    width: 96%;
+    padding: 16px;
+  }
+
+  .forheader h2 {
+    font-size: 16px;
+  }
+
+  .forinput {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .forbutton {
+    padding: 10px;
+    font-size: 13px;
+  }
+}

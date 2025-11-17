@@ -1,18 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Runerdashboard.css";
 import cube from "../../../assets/cube.png";
 import { Link } from "react-router-dom";
-import { AppContext } from "../../../Context/App";
 import axios from "axios";
 
-
 const RunnerDashboard = () => {
-  const { user, kycStatus, userKyc } = useContext(AppContext);
-  const [summary, setSummary] = useState({})
-  const storedUser = user || JSON.parse(localStorage.getItem("userDetails")) || {};
-  const fullName = `${storedUser?.firstName || ""} ${storedUser?.lastName || ""}`.trim();
-  const BaseUrl = import.meta.env.VITE_BASE_URL
+  const [summary, setSummary] = useState({});
 
+  const storedUser = JSON.parse(localStorage.getItem("userDetails")) || {};
+  const userKyc = localStorage.getItem("userKyc");   
+  const BaseUrl = import.meta.env.VITE_BASE_URL;
+
+  const fullName = `${storedUser?.firstName || ""} ${storedUser?.lastName || ""}`.trim();
 
   const runnerSummaryDashBoard = async () => {
     try {
@@ -22,14 +21,13 @@ const RunnerDashboard = () => {
       });
       setSummary(res?.data?.data || {});
     } catch (error) {
-      console.log("This is clientSummaryDashBoard error:", error);
+      console.log("Runner summary error:", error);
     }
   };
 
-
   useEffect(() => {
-    runnerSummaryDashBoard()
-  }, [])
+    runnerSummaryDashBoard();
+  }, []);
 
   const data = [
     {
@@ -72,60 +70,14 @@ const RunnerDashboard = () => {
       icon: (
         <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
           <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-          <g strokeLinecap="round" strokeLinejoin="round">
-            <path d="M8 16V8" />
-            <path d="M16 16V8" />
-            <path d="M8 8l8 8" />
-            <path d="M6 10h12" />
-            <path d="M6 14h12" />
-          </g>
+          <path d="M6 10h12" />
+          <path d="M6 14h12" />
         </svg>
       ),
     },
   ];
 
-
-  const isVerified = userKyc || kycStatus?.toLowerCase() === "verified";
-
-  if (!isVerified) {
-    return (
-      <main className="runner-dashboard-layout">
-        <div className="title-dashboard-runner">
-          <h1>Welcome to your dashboard {storedUser.fullName}! 👋</h1>
-        </div>
-
-        <div className="dashboard-kyc">
-          <div className="cube-holder">
-            <img src={cube} alt="kyc cube" />
-          </div>
-
-          {kycStatus === "Pending" ? (
-            <>
-              <p className="kyc-reminder">Your KYC is under review.</p>
-              <p className="complete-kyc">
-                Please wait for approval to access jobs.
-              </p>
-            </>
-          ) : (
-            <>
-              <p className="kyc-reminder">You have not completed KYC yet.</p>
-              <p className="complete-kyc">
-                Complete KYC to get available jobs
-              </p>
-              <div className="kyc-btn-holder">
-                <Link to="/runnerlayout/runnerprofile">
-                  <button type="submit" className="kyc-btn">
-                    Complete KYC
-                  </button>
-                </Link>
-              </div>
-            </>
-          )}
-        </div>
-      </main>
-    );
-  }
-
+  const isVerified = !!userKyc; 
 
   return (
     <main className="runner-dashboard-layout">
@@ -133,29 +85,52 @@ const RunnerDashboard = () => {
         <h1>Welcome to your dashboard {fullName || "User"}! 👋</h1>
       </div>
 
-      <div className="e-grid-t">
-        {data.map((e, index) => (
-          <div key={index} className="e-card-t">
-            <div className="e-content-t">
-              <h3 className="e-title-t">{e.title}</h3>
-              <p className="e-value-t">{e.value}</p>
-            </div>
-            <div className="e-icon-t" style={{ color: e.color }}>
-              {e.icon}
+    
+      {!isVerified ? (
+        
+        <div className="dashboard-kyc">
+          <div className="cube-holder">
+            <img src={cube} alt="kyc cube" />
+          </div>
+
+          <p className="kyc-reminder">You have not completed KYC yet.</p>
+          <p className="complete-kyc">Complete KYC to access runner jobs</p>
+
+          <div className="kyc-btn-holder">
+            <Link to="/runnerlayout/runnerprofile">
+              <button className="kyc-btn">Complete KYC</button>
+            </Link>
+          </div>
+        </div>
+      ) : (
+    
+        <>
+          <div className="e-grid-t">
+            {data.map((e, index) => (
+              <div key={index} className="e-card-t">
+                <div className="e-content-t">
+                  <h3 className="e-title-t">{e.title}</h3>
+                  <p className="e-value-t">{e.value}</p>
+                </div>
+                <div className="e-icon-t" style={{ color: e.color }}>
+                  {e.icon}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="dashboard-kyc">
+            <p className="kyc-reminder">You have no active job yet</p>
+
+            <div className="kyc-btn-holder" style={{ marginTop: "20px" }}>
+              <Link to="/runnerlayout/runneractive">
+                <button className="kyc-btn browse-btn">Browse Jobs</button>
+              </Link>
             </div>
           </div>
-        ))}
-      </div>
-
-      <div className="dashboard-kyc">
-        <p className="kyc-reminder">You have no active job yet</p>
-
-        <div className="kyc-btn-holder" style={{ marginTop: "20px" }}>
-          <Link to="/runnerlayout/runneractive">
-            <button className="kyc-btn browse-btn">Browse Jobs</button>
-          </Link>
-        </div>
-      </div>
+        </>
+      )}
+     
     </main>
   );
 };

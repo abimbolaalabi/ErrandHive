@@ -51,15 +51,9 @@
   position: relative;
 }
 .ntfy {
-<<<<<<< HEAD
-  /* background-color: red; */
-  width: 15px;
-  height: 15px;
-=======
   background-color: red;
   width: 20px;
   height: 20px;
->>>>>>> f407c218211e187e7ebe3da56b4242cd0f243695
   position: absolute;
   border-radius: 50%;
   border: 1px solid black;
@@ -68,10 +62,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-<<<<<<< HEAD
-=======
-  color: white;
->>>>>>> f407c218211e187e7ebe3da56b4242cd0f243695
 }
 
 /* User profile box */
@@ -116,6 +106,7 @@
   background: #1f2937;
   border-radius: 1px;
 }
+
 
 @media (max-width: 768px) {
   .search-container {

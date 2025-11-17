@@ -1,9 +1,36 @@
-import "./SubHeaderHero.css"
+import "./SubHeaderHero.css";
+import { useNavigate } from "react-router-dom";
 
 const SubHeaderHero = () => {
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const handlePostRequest = () => {
+    if (user) {
+      if (user?.role === "Client") {
+        navigate("/dashboard/my-errands");
+      } else {
+        navigate("/clientvsrunner");
+      }
+    } else {
+      navigate("/clientvsrunner");
+    }
+  };
+
+  const handleWantToEarn = () => {
+    if (user) {
+      if (user?.role === "Runner") {
+        navigate("/runnerlayout");
+      } else {
+        navigate("/clientvsrunner");
+      }
+    } else {
+      navigate("/clientvsrunner");
+    }
+  };
+
   return (
     <section className="subheader-container">
-
       <div className="subheader-container-left-wrapper">
         <article className="subheader-writeup-holder">
           <h1 className="subheader-writeup-holder-h1">
@@ -20,13 +47,17 @@ const SubHeaderHero = () => {
         </article>
 
         <div className="subheader-btn-wrapper">
-          <button className="post-a-request-btn">Post a request</button>
-          <button className="earn-a-request-btn">I want to earn</button>
+          <button className="post-a-request-btn" onClick={handlePostRequest}>
+            Post a request
+          </button>
+
+          <button className="earn-a-request-btn" onClick={handleWantToEarn}>
+            I want to earn
+          </button>
         </div>
       </div>
 
       <div className="subheader-container-right-wrapper">
-
         <div className="right-top-image">
           <img 
             src="https://res.cloudinary.com/dwzomhflw/image/upload/v1761053105/Frame_427318968_tippyy.jpg"
@@ -43,11 +74,9 @@ const SubHeaderHero = () => {
 
         <span className="yellow-dot dot-1"></span>
         <span className="yellow-dot dot-2"></span>
-
-      </div> 
-
+      </div>
     </section>
-  )
-}
+  );
+};
 
-export default SubHeaderHero
+export default SubHeaderHero;

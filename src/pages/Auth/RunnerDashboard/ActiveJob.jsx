@@ -11,25 +11,24 @@ import { AppContext } from "../../../Context/App";
 const API_BASE_URL = "https://errandhive-project.onrender.com/api/v1";
 
 const ActiveJobs = () => {
-  const { user } = useContext(AppContext); 
+  const { user } = useContext(AppContext);
 
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [jobStatus, setJobStatus] = useState({});
-  const [negotiateModal, seJJtNegotiateModal] = useState(false);
+  const [negotiateModal, setNegotiateModal] = useState(false);
   const [counterModal, setCounterModal] = useState(false);
   const [selectedErrand, setSelectedErrand] = useState(null);
 
- 
- useEffect(() => {
-  const token = JSON.parse(localStorage.getItem("userToken"));
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("userToken"));
 
-  const fetchJobs = async () => {
-    if (!token) {J
-      toast.error("User token missing");
-      setLoading(false);
-      return;
-    }
+    const fetchJobs = async () => {
+      if (!token) {
+        toast.error("User token missing");
+        setLoading(false);
+        return;
+      }
 
       try {
         const res = await axios.get(`${API_BASE_URL}/errand/getAll`, {
@@ -38,8 +37,7 @@ const ActiveJobs = () => {
 
         const all = Array.isArray(res.data.data) ? res.data.data : [];
 
-        // Show only jobs NOT assigned to a runner
-        const unassigned = all.filter(job => !job.assignedRunner);
+        const unassigned = all.filter((job) => !job.assignedRunner);
 
         setJobs(unassigned);
       } catch (err) {
@@ -57,6 +55,17 @@ const ActiveJobs = () => {
     setNegotiateModal(true);
   };
 
+  const totalTime = jobs.reduce((acc, job) => acc + (job.estimatedTime || 0), 0);
+  const totalDistance = jobs.reduce((acc, job) => acc + (job.distance || 0), 0);
+  const userRating = user?.rating || 0;
+
+  const statsData = [
+    { label: "Active Jobs", value: jobs.length },
+    { label: "Est Total Time", value: `${totalTime} mins` },
+    { label: "Total Distance", value: `${totalDistance} miles` },
+    { label: "Average Ratings", value: userRating },
+  ];
+
   if (loading) {
     return (
       <div style={{ padding: "2rem", textAlign: "center" }}>
@@ -68,8 +77,20 @@ const ActiveJobs = () => {
   return (
     <div className="card-container-wrapper">
       <ToastContainer position="top-right" autoClose={3000} />
+
       <h1 className="active-job-heading">Active Jobs</h1>
 
+     
+      <div className="card-grid">
+        {statsData.map((stat, index) => (
+          <div key={index} className="stat-card">
+            <p className="stat-label">{stat.label}</p>
+            <h2 className="stat-value">{stat.value}</h2>
+          </div>
+        ))}
+      </div>
+
+      {/* JOBS LIST */}
       {jobs.length === 0 ? (
         <div className="dashboard-kyc verified-kyc">
           <p className="kyc-reminder">No active jobs available at the moment.</p>
@@ -113,21 +134,14 @@ const ActiveJobs = () => {
       )}
 
       {negotiateModal && selectedErrand && (
-        <Negotiation
-          close={() => setNegotiateModal(false)}
-          errand={selectedErrand}
-        />
+        <Negotiation close={() => setNegotiateModal(false)} errand={selectedErrand} />
       )}
 
       {counterModal && selectedErrand && (
-        <CounterSuccess
-          close={() => setCounterModal(false)}
-          task={selectedErrand}
-        />
+        <CounterSuccess close={() => setCounterModal(false)} task={selectedErrand} />
       )}
     </div>
   );
 };
 
 export default ActiveJobs;
-//kkkkrrr
