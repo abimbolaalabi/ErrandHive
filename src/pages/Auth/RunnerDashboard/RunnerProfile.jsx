@@ -31,7 +31,7 @@ const RunnerProfile = () => {
   const id = storedUser?.id;
 
   const memberSince = new Date().toLocaleDateString("en-US", { year: "numeric", month: "long" });
-  const userRating = user?.rating || 4.5;
+  const userRating = user?.rating ;
 
   const getUserById = async () => {
     setKycLoading(true);
