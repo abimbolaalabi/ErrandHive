@@ -1,6 +1,5 @@
-
 .card-container-wrapper {
-    max-width: 1200px; 
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
 }
@@ -19,16 +18,15 @@
     margin-bottom: 25px;
 }
 
-
 .stat-card {
     background-color: white;
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    flex: 1; 
+    flex: 1;
     min-width: 150px;
 }
 
@@ -54,8 +52,8 @@
 }
 
 .stat-icon {
-    background-color: #8A2BE21A; 
-    color: #8A2BE2; 
+    background-color: #8A2BE21A;
+    color: #8A2BE2;
     padding: 5px 8px;
     border-radius: 6px;
     font-size: 0.9em;
@@ -64,18 +62,16 @@
 
 .stat-icon.rating-star {
     background-color: transparent;
-    color: #FFC107; 
+    color: #FFC107;
     padding: 0;
 }
-
-
 
 .document-card {
     background-color: white;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    margin-bottom: 25px; /* 👈 Adds space between each job card */
+    margin-bottom: 25px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -94,7 +90,6 @@
 }
 
 .location-item.right-align {
-    /* Aligns content to the right edge */
     align-items: flex-end;
     text-align: right;
 }
@@ -104,7 +99,7 @@
     color: #666;
     margin-bottom: 5px;
     display: flex;
-    align-items: center; /* Aligns icon and text horizontally */
+    align-items: center;
 }
 
 .location-address {
@@ -116,21 +111,20 @@
 
 .detail-icon {
     font-size: 1em;
-    color: #8A2BE2; 
+    color: #8A2BE2;
     margin-right: 5px;
 }
 
-/* Flexbox for footer alignment */
 .bottom-info-row {
     display: flex;
-    justify-content: space-between; /* Pushes price/time to the left, button to the right */
+    justify-content: space-between;
     align-items: center;
     padding-top: 20px;
     border-top: 1px solid #eee;
 }
 
 .price-time-info {
-    display: flex; /* Aligns the time and price details horizontally */
+    display: flex;
     align-items: center;
     font-size: 1em;
     font-weight: 600;
@@ -138,18 +132,18 @@
 }
 
 .price-time-info .detail-icon {
-    color: #999; 
+    color: #999;
     margin-right: 5px;
 }
 
 .price-time-info .naira-symbol {
     color: #999;
-    margin-left: 15px; 
+    margin-left: 15px;
     margin-right: 2px;
 }
 
 .negotiation-button {
-    background-color: #8A2BE2; 
+    background-color: #8A2BE2;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -160,73 +154,121 @@
 }
 
 .negotiation-button:hover {
-    background-color: #6b20b8; 
+    background-color: #6b20b8;
 }
-/* ========== MOBILE SMALL DEVICES (max-width: 480px) ========== */
-@media (max-width: 480px) {
 
+@media (max-width: 1440px) {
+    .card-container-wrapper {
+        padding: 18px;
+    }
+    .stat-value {
+        font-size: 1.7em;
+    }
+    .document-card {
+        padding: 28px;
+    }
+}
+
+@media (max-width: 1366px) {
+    .card-grid {
+        gap: 15px;
+    }
+    .stat-card {
+        padding: 18px;
+    }
+    .document-card {
+        padding: 26px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .card-grid {
+        flex-wrap: wrap;
+    }
+    .stat-card {
+        min-width: 200px;
+    }
+    .document-details-row {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-title {
+        font-size: 1.4em;
+    }
+    .document-details-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .location-item.right-align {
+        align-items: flex-start;
+        text-align: left;
+    }
+}
+
+@media (max-width: 480px) {
     .card-container-wrapper {
         padding: 15px;
     }
-
     .card-title {
         font-size: 1.3em;
         margin-bottom: 18px;
     }
-
-    /* Stat cards stack */
     .card-grid {
-        display: flex;
         flex-direction: column;
         gap: 15px;
     }
-
     .stat-card {
         padding: 18px;
     }
-
     .stat-value {
         font-size: 1.5em;
     }
-
-    /* Document job card adjustments */
     .document-card {
         padding: 20px;
         border-radius: 10px;
     }
-
-    /* Top row stacks */
     .document-details-row {
         flex-direction: column;
         align-items: flex-start;
         gap: 15px;
         padding: 5px 0 20px;
     }
-
     .location-item {
         width: 100%;
     }
-
     .location-item.right-align {
         align-items: flex-start;
         text-align: left;
     }
-
-    /* Bottom section stacks */
     .bottom-info-row {
         flex-direction: column;
         gap: 15px;
         align-items: flex-start;
     }
-
     .price-time-info {
         font-size: 0.95em;
     }
-
-    /* Button fills width */
     .negotiation-button {
         width: 100%;
         padding: 12px;
         font-size: 1em;
+    }
+}
+
+@media (max-width: 360px) {
+    .card-title {
+        font-size: 1.2em;
+    }
+    .stat-value {
+        font-size: 1.3em;
+    }
+    .document-card {
+        padding: 16px;
+    }
+    .negotiation-button {
+        padding: 10px;
+        font-size: 0.9em;
     }
 }

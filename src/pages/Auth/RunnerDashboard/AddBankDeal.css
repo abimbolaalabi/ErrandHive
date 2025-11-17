@@ -195,3 +195,112 @@
   color: #2c2c2c;
 }
 
+@media (max-width: 1440px) {
+  .bank-wrapper {
+    padding: 25px;
+  }
+
+  .bank-card {
+    padding: 30px;
+  }
+}
+
+
+
+@media (max-width: 1366px) {
+  .bank-account-page {
+    padding: 30px;
+  }
+
+  .bank-card {
+    max-width: 900px;
+  }
+}
+
+
+@media (max-width: 1024px) {
+  .bank-account-page {
+    padding: 25px;
+  }
+
+  .bank-card {
+    height: auto;
+    padding: 28px;
+  }
+
+  .bank-card-actions {
+    top: 20px;
+    right: 20px;
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  .bank-account-page {
+    padding: 20px;
+  }
+
+  .bank-wrapper {
+    padding: 20px;
+  }
+
+  .bank-card {
+    width: 100%;
+    padding: 24px;
+  }
+
+  .bank-header h2 {
+    font-size: 22px;
+  }
+
+  .bank-card-actions {
+    gap: 8px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .bank-account-page {
+    padding: 15px;
+  }
+
+  .bank-card {
+    padding: 20px;
+  }
+
+  .bank-header h2 {
+    font-size: 20px;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  .verified-badge {
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+}
+
+
+
+@media (max-width: 360px) {
+  .bank-account-page {
+    padding: 10px;
+  }
+
+  .bank-card {
+    padding: 16px;
+  }
+
+  .bank-header h2 {
+    font-size: 18px;
+  }
+
+  .bank-empty-title {
+    font-size: 14px;
+  }
+}

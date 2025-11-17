@@ -65,8 +65,6 @@
     align-items: center;
 }
 
-.available-balance-card .card-icon-placeholder { }
-
 .pending-earnings-card .card-icon-placeholder {
     background-color: #FACC151A; 
 }
@@ -265,63 +263,41 @@
 
 
 
-/* ===== Mobile Responsiveness: 480px ===== */
+
+@media (max-width: 1440px) {
+  .summary-card { padding: 18px; }
+  .transaction-history-section { padding: 18px; }
+}
+
+@media (max-width: 1366px) {
+  .wallet-page-container { padding: 18px; }
+  .card-main-value { font-size: 28px; }
+  .summary-cards-container { gap: 18px; }
+}
+
+@media (max-width: 1024px) {
+  .summary-cards-container { gap: 15px; }
+  .withdraw-button { width: 60%; }
+  .transaction-item { padding: 12px 0; }
+}
+
+@media (max-width: 768px) {
+  .summary-cards-container { flex-direction: column; }
+  .withdraw-button { width: 80%; }
+  .wallet-page-container { padding: 15px; }
+}
+
 @media (max-width: 480px) {
-
-  .wallet-page-container {
-    padding: 15px;
-  }
-
-  .summary-cards-container {
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .summary-card {
-    padding: 15px;
-  }
-
-  .card-icon-title-row {
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 10px;
-  }
-
-  .card-main-value {
-    font-size: 24px;
-  }
-
-  .wallet-id-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-  }
-
-  .withdraw-button {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .transaction-history-section {
-    padding: 15px;
-  }
-
-  .transaction-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-  }
-
-  .transaction-amount {
-    width: 100%;
-    text-align: left;
-  }
-
-  .transaction-type {
-    margin-left: 0;
-    margin-top: 3px;
-  }
-
+  .wallet-page-container { padding: 15px; }
+  .summary-cards-container { flex-direction: column; gap: 15px; }
+  .summary-card { padding: 15px; }
+  .card-main-value { font-size: 24px; }
+  .wallet-id-row { flex-direction: column; align-items: flex-start; gap: 5px; }
+  .withdraw-button { width: 100%; justify-content: center; }
+  .transaction-history-section { padding: 15px; }
+  .transaction-item { flex-direction: column; align-items: flex-start; gap: 5px; }
+  .transaction-amount { width: 100%; text-align: left; }
+  .transaction-type { margin-left: 0; margin-top: 3px; }
   .floating-viewer-comment-box {
     bottom: 10px;
     left: 10px;
@@ -330,19 +306,20 @@
     font-size: 0.85em;
     padding: 8px 12px;
   }
-
-  .card-sub-text, 
-  .wallet-id-text, 
-  .wallet-id-number {
-    font-size: 0.75em;
-  }
-
-  .summary-card h4 {
-    font-size: 0.9em;
-  }
-
-  .eye-icon-placeholder, .copy-icon-placeholder {
+  .card-sub-text,
+  .wallet-id-text,
+  .wallet-id-number { font-size: 0.75em; }
+  .summary-card h4 { font-size: 0.9em; }
+  .eye-icon-placeholder,
+  .copy-icon-placeholder {
     width: 18px;
     height: 18px;
   }
+}
+
+@media (max-width: 360px) {
+  .summary-card { padding: 12px; }
+  .card-main-value { font-size: 20px; }
+  .withdraw-button { padding: 8px 15px; font-size: 0.9em; }
+  .transaction-history-section { padding: 12px; }
 }

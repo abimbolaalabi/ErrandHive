@@ -251,34 +251,96 @@
   background: #4caf50;
 }
 
-/* Responsive */
+@media (max-width: 1440px) {
+  .runnerDetailPage-errand-card,
+  .runnerDetailPage-customer-card,
+  .runnerDetailPage-progress-card {
+    padding: 18px;
+  }
+  .runnerDetailPage-errand-header h2 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 1366px) {
+  .runnerDetailPage-main-content {
+    padding: 14px;
+  }
+  .runnerDetailPage-customer-card {
+    width: 270px;
+  }
+  .runnerDetailPage-avatar {
+    width: 55px;
+    height: 55px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .runnerDetailPage-bottom-section {
+    gap: 12px;
+  }
+  .runnerDetailPage-customer-card {
+    width: 250px;
+  }
+  .runnerDetailPages-locations {
+    gap: 14px;
+  }
+}
+
 @media (max-width: 768px) {
   .runnerDetailPage-main-content {
     padding: 12px;
     gap: 12px;
   }
-
   .runnerDetailPage-bottom-section {
     flex-direction: column;
   }
-
   .runnerDetailPage-customer-card {
     width: 100%;
     min-width: auto;
   }
-
-  .runnerDetailPage-locations {
+  .runnerDetailPages-locations {
     flex-direction: column;
     gap: 12px;
   }
-
   .runnerDetailPage-errand-card,
   .runnerDetailPage-customer-card,
   .runnerDetailPage-progress-card {
     padding: 16px;
   }
-
   .runnerDetailPage-errand-header h2 {
     font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .runnerDetailPage-errand-header h2 {
+    font-size: 1.15rem;
+  }
+  .runnerDetailPage-avatar {
+    width: 50px;
+    height: 50px;
+    font-size: 1rem;
+  }
+  .runnerDetailPage-progress-card {
+    padding: 14px;
+  }
+  .runnerDetailPage-step-label {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .runnerDetailPage-main-content {
+    padding: 10px;
+  }
+  .runnerDetailPage-chat-btn,
+  .runnerDetailPage-otp-btn {
+    padding: 10px;
+    font-size: 0.85rem;
+  }
+  .runnerDetailPage-price {
+    font-size: 1rem;
   }
 }
