@@ -23,7 +23,7 @@ const ProfilePage = () => {
   const [kycReason, setKycReason] = useState("");
   const navigate = useNavigate();
   const { user, setUser, getAUser } = useContext(AppContext);
-
+ const [loading, setLoading] = useState(false)
   const BaseUrl = import.meta.env.VITE_BASE_URL;
   const {token} = JSON.parse(localStorage.getItem("userToken"));
   const storedUser = JSON.parse(localStorage.getItem("userDetails"));
@@ -46,6 +46,7 @@ const handleImageUpload = async (e) => {
   setImage(previewURL);
 
   try {
+    setLoading(true)
     const formData = new FormData();
     formData.append("profileImage", file);
 
@@ -77,7 +78,8 @@ const handleImageUpload = async (e) => {
 const token = rawToken ? JSON.parse(rawToken) : null;
 
     try {
-   console.log({ Authorization: `Bearer ${localStorage.getItem("userToken")}` })
+      setLoading(true)
+   ({ Authorization: `Bearer ${localStorage.getItem("userToken")}` })
       const res = await axios.get(`${BaseUrl}/kyc/my`,
          {
         headers: { Authorization: `Bearer ${token}` },
@@ -90,7 +92,9 @@ const token = rawToken ? JSON.parse(rawToken) : null;
       localStorage.setItem("userKyc", verified);
     } catch (error) {
       console.log("KYC fetch error:", error);
-    }
+    }finally{
+    setLoading(false)
+  }
   };
 
   useEffect(() => {

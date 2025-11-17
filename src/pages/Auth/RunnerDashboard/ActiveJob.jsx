@@ -19,6 +19,7 @@ const ActiveJobs = () => {
   const [negotiateModal, setNegotiateModal] = useState(false);
   const [counterModal, setCounterModal] = useState(false);
   const [selectedErrand, setSelectedErrand] = useState(null);
+  const [summary,setSummary] = useState(false)
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("userToken"));
@@ -50,6 +51,25 @@ const ActiveJobs = () => {
     fetchJobs();
   }, []);
 
+    const runnerSummaryDashBoard = async () => {
+      try {
+        const token = JSON.parse(localStorage.getItem("userToken"));
+        const res = await axios.get(`${API_BASE_URL}/runner/dashboard-summary`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setSummary(res?.data?.data || {});
+      } catch (err) {
+        toast.error(err.response?.data || err.message);
+      }
+    };
+  
+    useEffect(() => {
+      runnerSummaryDashBoard();
+    }, []);
+  
+
+
+
   const handleStartNegotiation = (job) => {
     setSelectedErrand(job);
     setNegotiateModal(true);
@@ -59,12 +79,12 @@ const ActiveJobs = () => {
   const totalDistance = jobs.reduce((acc, job) => acc + (job.distance || 0), 0);
   const userRating = user?.rating || 0;
 
-  const statsData = [
-    { label: "Active Jobs", value: jobs.length },
-    { label: "Est Total Time", value: `${totalTime} mins` },
-    { label: "Total Distance", value: `${totalDistance} miles` },
-    { label: "Average Ratings", value: userRating },
-  ];
+const statsData = [
+  { label: "Total Applications", value: summary.totalApplications || 0 },
+  { label: "Accepted Jobs", value: summary.acceptedJobs || 0 },
+  { label: "Active Jobs", value: summary.activeJobs || 0 },
+  { label: "Completed Jobs", value: summary.completedJobs || 0 },
+];
 
   if (loading) {
     return (

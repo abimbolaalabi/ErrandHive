@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Runerdashboard.css";
 import cube from "../../../assets/cube.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { AppContext } from "../../../Context/App";
 
 const RunnerDashboard = () => {
   const [summary, setSummary] = useState({});
-
+   const{getAUser} = useContext(AppContext)
   const storedUser = JSON.parse(localStorage.getItem("userDetails")) || {};
   const userKyc = localStorage.getItem("userKyc");   
   const BaseUrl = import.meta.env.VITE_BASE_URL;
 
   const fullName = `${storedUser?.firstName || ""} ${storedUser?.lastName || ""}`.trim();
-
+  
   const runnerSummaryDashBoard = async () => {
     try {
       const token = JSON.parse(localStorage.getItem("userToken"));
@@ -27,6 +28,7 @@ const RunnerDashboard = () => {
 
   useEffect(() => {
     runnerSummaryDashBoard();
+    getAUser()
   }, []);
 
   const data = [

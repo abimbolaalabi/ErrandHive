@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../DashboardPage/DashboardPage.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -8,6 +8,8 @@ import { BsClock } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import cube from "../../../assets/cube.png";
 import { toast } from "react-toastify";
+import { AppContext } from "../../../Context/App";
+
 
 const DashboardPage = () => {
   const [errandMod, setErrandMod] = useState(false);
@@ -15,6 +17,7 @@ const DashboardPage = () => {
   const [loading, setLoading] = useState(true);
   const [summary, setSummary] = useState({});
   const navigate = useNavigate();
+  const{getAUser} = useContext(AppContext)
 
   const storedUser = JSON.parse(localStorage.getItem("userDetails")) || {};
   const userKyc = localStorage.getItem("userKyc");
@@ -65,6 +68,7 @@ const DashboardPage = () => {
   useEffect(() => {
     fetchErrands();
     clientSummaryDashBoard();
+    getAUser();
   }, []);
 
   
