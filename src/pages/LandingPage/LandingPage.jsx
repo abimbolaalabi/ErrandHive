@@ -1,4 +1,4 @@
-import "./LandingPage.css";
+import "./Landingpage.css";
 import Header from "../../Components/Header/Header";
 import SubHeaderHero from "../../Components/SubHeaderhero/SubHeaderHero";
 import MidHero from "../../Components/Midhero/MidHero";
