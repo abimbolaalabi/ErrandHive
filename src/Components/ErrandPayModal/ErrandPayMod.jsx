@@ -103,6 +103,10 @@ const ErrandPayMod = ({ toclose, setErrandPay, info }) => {
           {loading ? "Processing..." : "Make Payment"}
         </button>
       </div>
+      {
+        loading && (<ModalSpinner/>)
+      }
+      
     </div>
   );
 };

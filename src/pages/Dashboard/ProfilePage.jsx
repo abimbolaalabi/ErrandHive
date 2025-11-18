@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./ProfilePage.css";
 import { FaEnvelope } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
-import { AppContext } from "../../Context/App";
-import { useContext } from "react";
 import {
   IoShieldCheckmarkOutline,
   IoCheckmarkCircleOutline,
@@ -14,6 +12,7 @@ import Modaldashboard from "../../Components/ModalDashboard/Modaldashboard";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { AppContext } from "../../Context/App";
 
 const ProfilePage = () => {
   const [modaldash, setModalDash] = useState(false);
@@ -21,14 +20,18 @@ const ProfilePage = () => {
   const [uploading, setUploading] = useState(false);
   const [kycStatus, setKycStatus] = useState(null);
   const [kycReason, setKycReason] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
-  const { user, setUser, getAUser } = useContext(AppContext);
- const [loading, setLoading] = useState(false)
+  const { user, getAUser } = useContext(AppContext);
+
   const BaseUrl = import.meta.env.VITE_BASE_URL;
-  const {token} = JSON.parse(localStorage.getItem("userToken"));
+
   const storedUser = JSON.parse(localStorage.getItem("userDetails"));
+  const token = JSON.parse(localStorage.getItem("userToken"));
 
   const fullName = `${storedUser?.firstName || ""} ${storedUser?.lastName || ""}`.trim();
+
   const email = storedUser?.email || "No email found";
 
   const getInitials = (name) => {
@@ -37,64 +40,67 @@ const ProfilePage = () => {
     return `${parts[0]?.charAt(0).toUpperCase() || ""}${parts[1]?.charAt(0).toUpperCase() || ""}`;
   };
 
-const handleImageUpload = async (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
 
-  // instant preview
-  const previewURL = URL.createObjectURL(file);
-  setImage(previewURL);
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
 
-  try {
-    setLoading(true)
-    const formData = new FormData();
-    formData.append("profileImage", file);
-
-    const res = await axios.put(
-      `${BaseUrl}/update`,
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-
-    toast.success("Profile image updated");
-    const updatedUser = res?.data?.data;
-    console.log(res.data.data)
-    // setUser(updatedUser);
-    // localStorage.setItem("userDetails", JSON.stringify(updatedUser));
-  } catch (err) {
-    console.log("Image upload error:", err?.response?.data);
-    toast.error(err?.response?.data?.message || "Upload failed");
-    setImage(null);
-  }
-};
-
-  const getKyc = async () => {
-    const rawToken = localStorage.getItem("userToken");
-const token = rawToken ? JSON.parse(rawToken) : null;
+    const previewURL = URL.createObjectURL(file);
+    setImage(previewURL);
 
     try {
-      setLoading(true)
-   ({ Authorization: `Bearer ${localStorage.getItem("userToken")}` })
-      const res = await axios.get(`${BaseUrl}/kyc/my`,
-         {
+      setLoading(true);
+      const formData = new FormData();
+      formData.append("profileImage", file);
+
+      const res = await axios.put(
+        `${BaseUrl}/update`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      toast.success("Profile image updated");
+      console.log(res.data.data);
+    } catch (err) {
+      toast.error(err?.response?.data?.message || "Upload failed");
+      setImage(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+  const getKyc = async () => {
+    try {
+      setLoading(true);
+
+      const rawToken = localStorage.getItem("userToken");
+      const token = rawToken ? JSON.parse(rawToken) : null;
+
+      const res = await axios.get(`${BaseUrl}/kyc/my`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-    
+
       const kyc = res?.data?.data;
-      setKycStatus(kyc?.status?.toLowerCase());
+
+      const normalizedStatus = kyc?.status?.toLowerCase();
+
+      setKycStatus(normalizedStatus);
       setKycReason(kyc?.reason || "");
-      const verified = kyc?.status === "verified" || kyc?.status === "approved";
+
+    
+      const verified = normalizedStatus === "verified" || normalizedStatus === "approved" || normalizedStatus === "completed";
       localStorage.setItem("userKyc", verified);
     } catch (error) {
       console.log("KYC fetch error:", error);
-    }finally{
-    setLoading(false)
-  }
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -109,6 +115,7 @@ const token = rawToken ? JSON.parse(rawToken) : null;
         <p>Manage your account information and preferences</p>
       </div>
 
+   
       <div className="profile-card">
         <div className="profile-left">
           <div className="profile-avatar">
@@ -116,7 +123,7 @@ const token = rawToken ? JSON.parse(rawToken) : null;
               {image ? (
                 <img src={image} alt="profile" className="avatar-img" />
               ) : (
-                getInitials(user?.fullName)
+                getInitials(fullName)
               )}
             </div>
 
@@ -142,13 +149,15 @@ const token = rawToken ? JSON.parse(rawToken) : null;
               onChange={handleImageUpload}
             />
           </div>
-                    <div className="profile-info">
+
+          <div className="profile-info">
             <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
               <h2>{fullName}</h2>
               <p className="email">
-                <FaEnvelope /> {user?.email}
+                <FaEnvelope /> {email}
               </p>
             </div>
+
             <div onClick={() => navigate(`/dashboard/profile/${storedUser.id}`)} className="profile-right">
               <button className="edit-btn">
                 <MdEdit /> Edit Profile
@@ -157,6 +166,7 @@ const token = rawToken ? JSON.parse(rawToken) : null;
           </div>
         </div>
 
+        
         <div style={{ display: "flex", gap: "10px" }}>
           <div style={{ gap: "10px" }}>
             <p className="member-since">
@@ -166,24 +176,26 @@ const token = rawToken ? JSON.parse(rawToken) : null;
             </p>
           </div>
           <div style={{ paddingTop: "10px" }}>
-            <p className="bio">
-             {user?.bio}
-            </p>
+            <p className="bio">{user?.bio}</p>
           </div>
         </div>
       </div>
 
-      {!kycStatus && (
+
+      {kycStatus === null && (
         <div className="kyc-card">
           <div className="kyc-left">
             <div className="kyc-icon">
               <IoShieldCheckmarkOutline size={22} />
             </div>
             <div className="kyc-info">
-              <h3>KYC Verification <span className="pending">Pending Upload</span></h3>
-              <p>Complete verification to be able to post errand</p>
+              <h3>
+                KYC Verification <span className="pending">Pending Upload</span>
+              </h3>
+              <p>Complete verification to be able to post errands.</p>
             </div>
           </div>
+
           <div className="kyc-right">
             <button className="verify-btn" onClick={() => setModalDash(true)}>
               Start Verification
@@ -192,6 +204,7 @@ const token = rawToken ? JSON.parse(rawToken) : null;
         </div>
       )}
 
+   
       {kycStatus === "pending" && (
         <div className="review-card">
           <div className="review-details">
@@ -199,14 +212,18 @@ const token = rawToken ? JSON.parse(rawToken) : null;
               <IoShieldCheckmarkOutline size={22} />
             </div>
             <div className="review-texts">
-              <h3>KYC Verification <span className="status-label">In Progress</span></h3>
+              <h3>
+                KYC Verification{" "}
+                <span className="status-label">In Progress</span>
+              </h3>
               <p>Your submission is currently being reviewed.</p>
             </div>
           </div>
         </div>
       )}
 
-      {(kycStatus === "verified" || kycStatus === "approved") && (
+    
+      {kycStatus === "verified" && (
         <div className="kyc-verified-containerr">
           <div className="kyc-verified-header">
             <div className="kyc-verified-header-left">
@@ -245,6 +262,7 @@ const token = rawToken ? JSON.parse(rawToken) : null;
         </div>
       )}
 
+    
       {kycStatus === "rejected" && (
         <div className="rejected-wrapper">
           <div className="rejected-header">

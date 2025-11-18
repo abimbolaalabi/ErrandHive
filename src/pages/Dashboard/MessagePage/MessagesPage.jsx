@@ -191,18 +191,22 @@ export default function MessagesPage() {
       {isPaid && (
         <div className="messages-chat">
           <div className="chat-header">
-            <div className="avatar large">
-              {chatInfo?.assignedRunner?.firstName?.charAt(0)}
-            </div>
-            <div>
-              <h4>
-                {chatInfo?.assignedRunner?.firstName} {chatInfo?.assignedRunner?.lastName}
-              </h4>
-              <p>Runner</p>
+            <div className="chat-user-info">
+              <div className="avatar large">
+                {chatInfo?.assignedRunner?.firstName?.charAt(0)}
+              </div>
+
+              <div>
+                <h4>
+                  {chatInfo?.assignedRunner?.firstName} {chatInfo?.assignedRunner?.lastName}
+                </h4>
+                <p>Runner</p>
+              </div>
             </div>
 
             <div className="menu-container">
               <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)}>⋮</button>
+
               {menuOpen && (
                 <div className="menu-options">
                   <p onClick={() => navigate(`/dashboard/messages/${id}/status`)}>
@@ -212,6 +216,7 @@ export default function MessagesPage() {
               )}
             </div>
           </div>
+
 
           {/* Chat Body */}
           <div className="chat-body">

@@ -174,12 +174,13 @@
   font-size: 20px;
 }
 
-.wrapper-notification-profile {
+.wrapperr-nnotification-profile {
   width: auto;
   height: 100%;
   display: flex;
   align-items: center;
   gap: 30px; 
+
 }
 
 .profile-notification-box {
@@ -189,6 +190,7 @@
   align-items: center;
   position: relative;
   cursor: pointer;
+  background-color: tomato;
 }
 
 .notify {
@@ -196,7 +198,7 @@
   color: #5d5d5d; 
 }
 
-.wrapper-profile-shit {
+.wrapperr-profile-shit {
   width: auto;
   height: 100%;
   display: flex;
@@ -260,6 +262,27 @@
   /* color:inherit; */
 }
 
+.nnotification-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  position: relative;
+}
+.nntfy {
+  background-color: red;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid black;
+  top: -9px;
+  right: -13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
 @media (max-width: 480px) {
 
 

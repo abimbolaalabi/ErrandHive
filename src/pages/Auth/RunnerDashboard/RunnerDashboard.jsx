@@ -8,6 +8,8 @@ import { AppContext } from "../../../Context/App";
 const RunnerDashboard = () => {
   const [summary, setSummary] = useState({});
    const{getAUser} = useContext(AppContext)
+   const[kycStatus, setKycStatus] = useState(null)
+    const [kycReason, setKycReason] = useState("")
   const storedUser = JSON.parse(localStorage.getItem("userDetails")) || {};
   const userKyc = localStorage.getItem("userKyc");   
   const BaseUrl = import.meta.env.VITE_BASE_URL;
@@ -26,9 +28,35 @@ const RunnerDashboard = () => {
     }
   };
 
+    const getKyc = async () => {
+    try {
+       const token = JSON.parse(localStorage.getItem("userToken"));
+      const res = await axios.get(`${BaseUrl}/kyc/my`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const kyc = res?.data?.data;
+
+      console.log("kyc", kyc)
+      if (kyc && kyc.status) {
+        const status = kyc.status.toLowerCase();
+        setKycStatus(status);
+        setKycReason(kyc.reason || "");
+        localStorage.setItem("userKyc", (status === "verified" || status === "approved").toString());
+      } else {
+        setKycStatus(null);
+        localStorage.setItem("userKyc", "false");
+      }
+    } catch (error) {
+      console.error("KYC fetch error:", error);
+      setKycStatus(null);
+      localStorage.setItem("userKyc", "false");
+    }
+  };
+
   useEffect(() => {
     runnerSummaryDashBoard();
     getAUser()
+    getKyc()
   }, []);
 
   const data = [
@@ -88,51 +116,66 @@ const RunnerDashboard = () => {
       </div>
 
     
-      {!isVerified ? (
-        
-        <div className="dashboard-kyc">
-          <div className="cube-holder">
-            <img src={cube} alt="kyc cube" />
+     {!isVerified ? (
+  <>
+    <div className="e-grid-t">
+      {data.map((e, index) => (
+        <div key={index} className="e-card-t">
+          <div className="e-content-t">
+            <h3 className="e-title-t">{e.title}</h3>
+            <p className="e-value-t">{e.value}</p>
           </div>
-
-          <p className="kyc-reminder">You have not completed KYC yet.</p>
-          <p className="complete-kyc">Complete KYC to access runner jobs</p>
-
-          <div className="kyc-btn-holder">
-            <Link to="/runnerlayout/runnerprofile">
-              <button className="kyc-btn">Complete KYC</button>
-            </Link>
+          <div className="e-icon-t" style={{ color: e.color }}>
+            {e.icon}
           </div>
         </div>
-      ) : (
-    
-        <>
-          <div className="e-grid-t">
-            {data.map((e, index) => (
-              <div key={index} className="e-card-t">
-                <div className="e-content-t">
-                  <h3 className="e-title-t">{e.title}</h3>
-                  <p className="e-value-t">{e.value}</p>
-                </div>
-                <div className="e-icon-t" style={{ color: e.color }}>
-                  {e.icon}
-                </div>
-              </div>
-            ))}
-          </div>
+      ))}
+    </div>
 
-          <div className="dashboard-kyc">
-            <p className="kyc-reminder">You have no active job yet</p>
+    <div className="dashboard-kyc">
+      <div className="cube-holder">
+        <img src={cube} alt="kyc cube" />
+      </div>
 
-            <div className="kyc-btn-holder" style={{ marginTop: "20px" }}>
-              <Link to="/runnerlayout/runneractive">
-                <button className="kyc-btn browse-btn">Browse Jobs</button>
-              </Link>
-            </div>
+      <p className="kyc-reminder">You have not completed KYC yet.</p>
+      <p className="complete-kyc">Complete KYC to access runner jobs</p>
+
+      <div className="kyc-btn-holder">
+        <Link to="/runnerlayout/runnerprofile">
+          <button className="kyc-btn">Complete KYC</button>
+        </Link>
+      </div>
+    </div>
+  </>
+) : (
+  <>
+    <div className="e-grid-t">
+      {data.map((e, index) => (
+        <div key={index} className="e-card-t">
+          <div className="e-content-t">
+            <h3 className="e-title-t">{e.title}</h3>
+            <p className="e-value-t">{e.value}</p>
           </div>
-        </>
-      )}
-     
+          <div className="e-icon-t" style={{ color: e.color }}>
+            {e.icon}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div className="dashboard-kyc">
+      <h2>Ready to start earning?</h2>
+      <p className="kyc-reminder">You have no active job yet</p>
+
+      <div className="kyc-btn-holder" style={{ marginTop: "20px" }}>
+        <Link to="/runnerlayout/runneractive">
+          <button className="kyc-btn browse-btn">Browse Jobs</button>
+        </Link>
+      </div>
+    </div>
+  </>
+)}
+
     </main>
   );
 };

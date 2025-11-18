@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import "./Notification.css";
+import "./RunnerNotification.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BsClock } from "react-icons/bs";
 
-const Notification = () => {
+const RunnerNotification = () => {
   const navigate = useNavigate();
   const BaseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -21,16 +21,13 @@ const Notification = () => {
     ).padStart(2, "0")}/${d.getFullYear()}`;
   };
 
-  // =====================
-  // FETCH NOTIFICATIONS
-  // =====================
+  // Fetch notifications
   const fetchNotifications = async () => {
     try {
       const res = await axios.get(`${BaseUrl}/notifications`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      // correct mapping based on your API response
       setNotifications(res.data?.notifications || []);
     } catch (err) {
       console.log("Error fetching notifications:", err?.response?.data || err);
@@ -39,9 +36,7 @@ const Notification = () => {
     }
   };
 
-  // =====================
-  // MARK A NOTIFICATION AS READ
-  // =====================
+  // Mark a notification as read
   const markAsRead = async (id) => {
     try {
       await axios.put(
@@ -50,7 +45,6 @@ const Notification = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      // Update UI
       setNotifications((prev) =>
         prev.map((n) => (n.id === id ? { ...n, isRead: true } : n))
       );
@@ -63,69 +57,61 @@ const Notification = () => {
     fetchNotifications();
   }, []);
 
-  // =====================
-  // RENDER
-  // =====================
-
   return (
-    <div className="notify-page-container">
-      <p className="back-text" onClick={() => navigate(-1)}>
-        ← Back to dashboard
+    <div className="runner-notify-page">
+      <p className="runner-back-text" onClick={() => navigate(-1)}>
+        ← Back
       </p>
 
-      <div className="notify-header">
+      <div className="runner-notify-header">
         <h2>Notifications</h2>
-        <p>Stay updated on your delivery request and all notifications</p>
+        <p>Updates on your runners job requests, bids & statuses</p>
       </div>
 
       {loading && (
-        <p style={{ textAlign: "center", marginTop: 20 }}>
-          Loading notifications...
-        </p>
+        <p className="runner-loading">Loading notifications...</p>
       )}
 
-      <div className="notify-list">
+      <div className="runner-notify-list">
         {!loading && notifications.length === 0 && (
-          <p style={{ textAlign: "center", color: "#777" }}>
-            No notifications yet
-          </p>
+          <p className="runner-empty">No notifications yet</p>
         )}
 
         {!loading &&
           notifications.map((item) => (
             <div
               key={item.id}
-              className={`notify-card ${item.isRead ? "" : "unread"}`}
+              className={`runner-notify-card ${
+                item.isRead ? "" : "runner-unread"
+              }`}
             >
-              {/* LEFT */}
-              <div className="notify-card-left">
-                <h3 className="notify-title">
+              <div className="runner-notify-content">
+                <h3 className="runner-notify-title">
                   {item.type === "runner_applied"
-                    ? "New Runner Application"
+                    ? "You Applied for a Job"
                     : item.type === "application_accepted"
-                    ? "Application Accepted"
+                    ? "Your Application Was Accepted"
                     : item.type === "proposed_bid"
-                    ? "New Bid Proposal"
+                    ? "New Bid Update"
                     : "Notification"}
                 </h3>
 
-                <p className="notify-message">{item.message}</p>
+                <p className="runner-notify-message">{item.message}</p>
 
-                <div className="notify-time">
+                <div className="runner-notify-time">
                   <BsClock size={16} />
                   <span>{formatDate(item.createdAt)}</span>
                 </div>
               </div>
 
-              {/* RIGHT */}
-              <div className="notify-card-right">
-                {!item.isRead && <span className="notify-badge">New</span>}
+              <div className="runner-notify-right">
+                {!item.isRead && <span className="runner-badge">New</span>}
 
                 <button
-                  className="notify-btn"
+                  className="runner-notify-btn"
                   onClick={() => {
                     markAsRead(item.id);
-                    navigate(`/dashboard/my-errands/${item.meta.errandId}`);
+                    navigate(`/runnerlayout/runnermessage/${item.meta.errandId}`);
                   }}
                 >
                   View Details
@@ -138,4 +124,4 @@ const Notification = () => {
   );
 };
 
-export default Notification;
+export default RunnerNotification;

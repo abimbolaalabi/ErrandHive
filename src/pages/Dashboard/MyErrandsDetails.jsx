@@ -8,6 +8,7 @@ import ModalProposal from '../../Components/ModalProposal/ModalProposal'
 import ReviewModal from '../../Components/ReviewPropModal/ModalProposalRev'
 import ModalProposalRev from '../../Components/ReviewPropModal/ModalProposalRev'
 import ErrandPayMod from '../../Components/ErrandPayModal/ErrandPayMod'
+import RejectModal from '../../Components/Reject Modal/RejectModal'
 
 
 const MyErrandsDetails = () => {
@@ -20,9 +21,11 @@ const MyErrandsDetails = () => {
     const [modalProp, setModProp] = useState(false)
     const [review, setReview] = useState(false)
     const [errandpay, setErrandPay] = useState(false)
+    const [reject, setReject] = useState(false)
     const [info, setInfo] = useState({
         errandId: "",
-        runnerId: ""
+        runnerId: "",
+        applicationId: "",
     })
     const [show, setShow] = useState(false)
 
@@ -39,6 +42,14 @@ const MyErrandsDetails = () => {
         return `${dd}/${mm}/${yyyy}`;
     };
 
+    const maskContact = (c) => {
+        if (!c) return "";
+        const str = c.toString();
+        if (str.length <= 5) return str;
+
+        // Show first 3 + ***** + last 2
+        return `${str.slice(0, 3)}*****${str.slice(-2)}`;
+    };
 
     const getErrandById = async () => {
         try {
@@ -82,6 +93,8 @@ const MyErrandsDetails = () => {
         getAllErrands()
     }, [])
 
+    const isAssigned = errand?.status === "Assigned" || Boolean(errand?.assignedTo);
+
 
 
     return (
@@ -100,7 +113,12 @@ const MyErrandsDetails = () => {
                         <p className="icons-text">
                             <CiLocationOn size={18} /> <span className="label">Pickup location</span>
                         </p>
-                        <p className="addresss">{errand?.pickupAddress}<br />Contact: {errand?.pickupContact}</p>
+
+
+                        <p className="addresss">
+                            {errand?.pickupAddress}<br />
+                            Contact: {maskContact(errand?.pickupContact)}
+                        </p>
                     </div>
 
                     <div className="deliverys-section">
@@ -134,7 +152,22 @@ const MyErrandsDetails = () => {
                             <div className="runner-info">
                                 <div className="top-row">
                                     <h4 className="runner-name">{item?.runner?.firstName} {item?.runner?.lastName}  </h4>
-                                    <button className="view-btn" onClick={() => { setModProp(true); setInfo({ errandId: item?.errandId, runnerId: item?.runnerId, title:errand?.title}) }}>View application</button>
+                                    <button
+                                        className={`view-btn ${isAssigned ? "disabled-btn" : ""}`}
+                                        disabled={isAssigned}
+                                        onClick={() => {
+                                            if (isAssigned) return;
+                                            setModProp(true);
+                                            setInfo({
+                                                errandId: item?.errandId,
+                                                runnerId: item?.runnerId,
+                                                title: errand?.title,
+                                                applicationId: item?.applicationId,
+                                            });
+                                        }}
+                                    >
+                                        {isAssigned ? "Assigned" : "View application"}
+                                    </button>
                                 </div>
 
                                 <p className="runner-rating">
@@ -157,7 +190,7 @@ const MyErrandsDetails = () => {
             </div>
 
             {
-                modalProp && (<ModalProposal toclose={setModProp} setReview={setReview} info={info} setInfo={setInfo}/>)
+                modalProp && (<ModalProposal toclose={setModProp} setReview={setReview} setReject={setReject} info={info} setInfo={setInfo} />)
             }
 
             {
@@ -168,6 +201,10 @@ const MyErrandsDetails = () => {
                 errandpay && (<ErrandPayMod toclose={setErrandPay} info={info} />)
 
             }
+            {
+                reject && (<RejectModal toclose={setReject} info={info} />)
+
+            }
 
 
 
@@ -176,4 +213,3 @@ const MyErrandsDetails = () => {
 }
 
 export default MyErrandsDetails
-
