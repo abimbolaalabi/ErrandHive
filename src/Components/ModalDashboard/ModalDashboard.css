@@ -1,8 +1,4 @@
-/* =========================
-   KYC MODAL RESPONSIVE
-   ========================= */
 
-/* Overlay */
 .kyc-overlay {
   position: fixed;
   top: 0;
@@ -16,13 +12,14 @@
   z-index: 2000;
   overflow-y: auto;
   scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 .kyc-overlay::-webkit-scrollbar {
   display: none;
 }
 
-/* Modal */
 .kyc-modal {
   width: 100%;
   max-width: 620px;
@@ -223,7 +220,6 @@
   line-height: 1.4;
 }
 
-/* Footer */
 .kyc-footer {
   padding: 24px 24px 30px;
   border-top: 1px solid #eee;

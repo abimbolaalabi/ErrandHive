@@ -36,6 +36,7 @@ import RunnerDetailPage from "../pages/Auth/RunnerDashboard/RunnerDetailPage";
 import UnifiedChat from "../pages/Chat/UnifiedChat";
 import AddBankDeal from "../pages/Auth/RunnerDashboard/AddBankDeal";
 import Notification from "../pages/Dashboard/Notification";
+import RunnerNotification from "../pages/Auth/RunnerDashboard/RunnerNotification";
 
 const Router = () => {
   return (
@@ -84,6 +85,7 @@ const Router = () => {
         <Route element={<PrivateRoute allowedRole="Runner" />}>
           <Route path="/runnerlayout" element={<RunnerLayout />}>
             <Route index element={<RunnerDashboard />} />
+              <Route path="rnotification" element={<RunnerNotification />} />
             <Route path="runneractive" element={<ActiveJob />} />
             <Route path="runnerearning" element={<RunnerEarning />} />
             <Route path="runnerprofile" element={<RunnerProfile />} />

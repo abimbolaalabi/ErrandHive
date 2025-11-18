@@ -1,4 +1,4 @@
-/* --- Base Modal Styles (Kept your original code) --- */
+
 .modalerrand-container {
   position: fixed;
   top: 0;
@@ -33,7 +33,8 @@
 
 .top-note-container {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    justify-content: center;
     align-items: center;
     padding: 10px 20px;
     border-top-left-radius: 1rem;
@@ -41,6 +42,7 @@
     font-size: 13px;
     color: #333;
     font-weight: 400;
+    gap: 8rem;
 }
 
 .top-note {
@@ -206,6 +208,18 @@
 
 .post-btn:hover {
     background-color: #8c42e5; 
+}
+
+.error-input{
+  color: red;
+}
+.error-text{
+  color: red;
+}
+.top-note-button {
+  display: flex ;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (min-width: 2560px) {

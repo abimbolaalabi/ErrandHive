@@ -8,10 +8,10 @@ import {
 } from "react-icons/io";
 import { MdOutlineDashboard } from "react-icons/md";
 import { BiMessageRoundedDetail } from "react-icons/bi";
-import { FaRunning } from "react-icons/fa";  
+import { FaRunning } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io"; // Mobile sidebar close
-import Profile from "../../assets/Profile.png"; 
+import Profile from "../../assets/Profile.png";
 import axios from "axios";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -27,6 +27,7 @@ const RunnerLayout = () => {
   const [assignedErrand, setAssignedErrand] = useState(null);
   const [errand, setErrand] = useState(null);
   const [showSidebar, setShowSidebar] = useState(false);
+  const [notifyCount, setNotifyCount] = useState(0);
 
   const BaseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -43,10 +44,27 @@ const RunnerLayout = () => {
       console.log("ERR ERRAND:", error);
     }
   };
+  const fetchNotifyCount = async () => {
+    try {
+      const token = JSON.parse(localStorage.getItem("userToken"))
+      const res = await axios.get(`${BaseUrl}/notifications`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      const unread = res.data?.notifications?.filter(n => !n.isRead).length || 0;
+      setNotifyCount(unread);
+    } catch (err) {
+      console.log("Notify count error:", err);
+    }
+  };
+
+
 
   useEffect(() => {
     getErrandById();
+    fetchNotifyCount();
   }, []);
+
 
   const menuItems = [
     { label: "Dashboard", icon: <MdOutlineDashboard />, path: "/runnerlayout" },
@@ -137,14 +155,17 @@ const RunnerLayout = () => {
 
           <div className="input-holder"></div>
 
-          <div className="wrapper-notification-profile">
-            <div className="profile-notification-box">
-              <div className="notification">
-                <IoMdNotificationsOutline className="notify" />
-              </div>
-            </div>
+          <div className="wrapperr-nnotification-profile">
+            <button className="nnotification-btn" onClick={() => navigate("/runnerlayout/rnotification")}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+              </svg>
+              <div className='nntfy'>{notifyCount}</div>
 
-            <article className="wrapper-profile-shit">
+            </button>
+
+            <article className="wrapperr-profile-shit">
               <div className="Profile-layout-box-runner">
                 <div className="profile-pic-layout">
                   {/* <div style={{color:"white"}}>V</div> */}

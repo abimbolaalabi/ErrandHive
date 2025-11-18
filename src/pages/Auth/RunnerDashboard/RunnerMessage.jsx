@@ -23,7 +23,9 @@ export default function RunnerMessage() {
   const messagesEndRef = useRef(null);
   const userId = user?.id;
 
-  // ------------------ Fetch errands for sidebar ------------------
+  // ================================
+  // Fetch runner errands for sidebar
+  // ================================
   useEffect(() => {
     const fetchRunnerErrands = async () => {
       try {
@@ -38,7 +40,9 @@ export default function RunnerMessage() {
     fetchRunnerErrands();
   }, []);
 
-  // ------------------ Load chat info & history ------------------
+  // ================================
+  // Load chat info & history
+  // ================================
   useEffect(() => {
     if (!id) return;
 
@@ -77,7 +81,9 @@ export default function RunnerMessage() {
     loadChat();
   }, [id, userId]);
 
-  // ------------------ Join socket room ------------------
+  // ================================
+  // Join room after chat loads
+  // ================================
   useEffect(() => {
     const clientId = chatInfo?.poster?.id;
     const runnerId = chatInfo?.assignedTo;
@@ -89,11 +95,12 @@ export default function RunnerMessage() {
     socket.emit("join_room", roomId);
   }, [chatInfo, userId]);
 
-  // ------------------ Receive live messages ------------------
+  // ================================
+  // Receive live messages
+  // ================================
   useEffect(() => {
     const handleIncoming = (msg) => {
       setMessages((prev) => {
-        // skip duplicate messages by DB id
         if (prev.some((m) => m.id && m.id === msg.id)) return prev;
         return [...prev, msg];
       });
@@ -103,22 +110,31 @@ export default function RunnerMessage() {
     return () => socket.off("receive_message", handleIncoming);
   }, []);
 
-  // ------------------ Send message ------------------
+  // ================================
+  // Send message
+  // ================================
   const sendMessage = async (e) => {
     e.preventDefault();
     if (!text.trim()) return;
 
-    const clientId = chatInfo.poster?.id;
-    const runnerId = chatInfo.assignedTo;
+    const clientId = chatInfo?.poster?.id;
+    const runnerId = chatInfo?.assignedTo;
     if (!clientId || !runnerId) return;
 
     const receiverId = userId === runnerId ? clientId : runnerId;
     const roomId = [userId, receiverId].sort().join("_");
 
-    const payload = { senderId: userId, receiverId, text, errandId: id, roomId };
+    const payload = {
+      senderId: userId,
+      receiverId,
+      text,
+      errandId: id,
+      roomId,
+    };
 
-    // Emit to socket (backend will broadcast)
+    // realtime socket
     socket.emit("send_message", payload);
+
     setText("");
 
     try {
@@ -130,7 +146,7 @@ export default function RunnerMessage() {
     }
   };
 
-  // ------------------ Auto scroll ------------------
+  // Scroll to bottom on new messages
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -139,20 +155,28 @@ export default function RunnerMessage() {
 
   return (
     <div className="messages-wrapper">
-      {/* Sidebar */}
+   
       <div className="messages-sidebar">
         <h3>Messages</h3>
         <p className="subtext">Chat with your clients</p>
+
         {errands.map((item) => (
           <div
             key={item.id}
-            className={`conversation ${item.id === id ? "active" : ""}`}
-            onClick={() => navigate(`/runnerlayout/runnermessage/${item.id}`)}
+            className={`conversation ${item.id == id ? "active" : ""}`}
+            onClick={() =>
+              navigate(`/runnerlayout/runnermessage/${item.id}`)
+            }
           >
             <div className="conv-user">
-              <div className="avatar">{item.poster.firstName?.charAt(0)}</div>
+              <div className="avatar">
+                {item.poster?.firstName?.charAt(0)}
+              </div>
+
               <div className="conversation-info">
-                <p className="name">{item.poster.firstName} {item.poster.lastName}</p>
+                <p className="name">
+                  {item.poster?.firstName} {item.poster?.lastName}
+                </p>
                 <p className="status">{item.title}</p>
                 <p className="status-light">Tap to chat</p>
               </div>
@@ -161,30 +185,59 @@ export default function RunnerMessage() {
         ))}
       </div>
 
-      {/* Payment lock */}
-      {!isPaid && (
+      
+
+   
+      {chatInfo?.id && !isPaid && (
         <div className="messages-chat center-block">
-          <h2 className="lock-title">Payment Required</h2>
-          <p className="lock-desc">
-            The client must complete the payment before messaging becomes available.
-          </p>
+          <div className="lock-screen">
+            <h2 className="lock-title">Payment Required</h2>
+            <p className="lock-desc">
+              The client has not made payment for this errand yet.
+            </p>
+            <p className="lock-desc">
+              You cannot chat until payment is completed.
+            </p>
+          </div>
         </div>
       )}
 
-      {/* Chat UI */}
-      {isPaid && (
+      {/* ================================ */}
+      {/* CHAT BOX */}
+      {/* ================================ */}
+      {chatInfo?.id && isPaid && (
         <div className="messages-chat">
+          
           <div className="chat-header">
-            <div className="avatar large">{chatInfo?.poster?.firstName?.charAt(0)}</div>
+            <div style={{display: "flex"}}>
+             <div className="avatar large">
+              {chatInfo?.poster?.firstName?.charAt(0)}
+            </div>
+
             <div>
-              <h4>{chatInfo?.poster?.firstName} {chatInfo?.poster?.lastName}</h4>
+              <h4>
+                {chatInfo?.poster?.firstName} {chatInfo?.poster?.lastName}
+              </h4>
               <p>Client</p>
             </div>
+          </div>
+           
+
             <div className="menu-container">
-              <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)}>⋮</button>
+              <button
+                className="menu-btn"
+                onClick={() => setMenuOpen(!menuOpen)}
+              >
+                ⋮
+              </button>
+
               {menuOpen && (
                 <div className="menu-options">
-                  <p onClick={() => navigate(`/runnerlayout/runnermessage/${id}/status`)}>
+                  <p
+                    onClick={() =>
+                      navigate(`/runnerlayout/runnermessage/${id}/status`)
+                    }
+                  >
                     View Progress
                   </p>
                 </div>
@@ -194,26 +247,44 @@ export default function RunnerMessage() {
 
           <div className="chat-body">
             {loading && <p>Loading messages...</p>}
+
             {messages.map((m) => {
               const mine = m.senderId === userId;
+
               return (
-                <div key={m.id || Math.random()} className={`message ${mine ? "from-user" : ""}`}>
-                  {!mine && <div className="avatar small">{chatInfo?.poster?.firstName?.charAt(0)}</div>}
+                <div
+                  key={m.id || m.createdAt}
+                  className={`message ${mine ? "from-user" : ""}`}
+                >
+                  {!mine && (
+                    <div className="avatar small">
+                      {chatInfo?.poster?.firstName?.charAt(0)}
+                    </div>
+                  )}
+
                   <div className="bubble">
                     <p>{m.text}</p>
                     <span className="time">
-                      {new Date(m.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                      {new Date(m.createdAt).toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
                     </span>
                   </div>
-                  {mine && <div className="avatar small">You</div>}
                 </div>
               );
             })}
+
             <div ref={messagesEndRef} />
           </div>
 
           <form className="chat-input" onSubmit={sendMessage}>
-            <input type="text" placeholder="Type your message..." value={text} onChange={(e) => setText(e.target.value)} />
+            <input
+              type="text"
+              placeholder="Type your message..."
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+            />
             <button>➤</button>
           </form>
         </div>

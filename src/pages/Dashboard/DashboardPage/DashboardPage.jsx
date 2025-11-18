@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../DashboardPage/DashboardPage.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -7,9 +7,6 @@ import { CiLocationOn } from "react-icons/ci";
 import { BsClock } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import cube from "../../../assets/cube.png";
-import { toast } from "react-toastify";
-import { AppContext } from "../../../Context/App";
-
 
 const DashboardPage = () => {
   const [errandMod, setErrandMod] = useState(false);
@@ -17,7 +14,6 @@ const DashboardPage = () => {
   const [loading, setLoading] = useState(true);
   const [summary, setSummary] = useState({});
   const navigate = useNavigate();
-  const{getAUser} = useContext(AppContext)
 
   const storedUser = JSON.parse(localStorage.getItem("userDetails")) || {};
   const userKyc = localStorage.getItem("userKyc");
@@ -46,7 +42,7 @@ const DashboardPage = () => {
       });
       setErrands(res?.data?.data || []);
     } catch (err) {
-      toast.error(err.response?.data || err.message);
+      console.log("Fetch errands error:", err.response?.data || err.message);
       setErrands([]);
     } finally {
       setLoading(false);
@@ -60,15 +56,42 @@ const DashboardPage = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setSummary(res?.data?.data || {});
-    } catch (err) {
-      toast.error(err.response?.data || err.message);
+    } catch (error) {
+      console.log("This is clientSummaryDashBoard error:", error);
     }
   };
 
+  const getKyc = async () => {
+    try {
+      setLoading(true);
+
+      const rawToken = localStorage.getItem("userToken");
+      const token = rawToken ? JSON.parse(rawToken) : null;
+
+      const res = await axios.get(`${BaseUrl}/kyc/my`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      const kyc = res?.data?.data;
+
+      const normalizedStatus = kyc?.status?.toLowerCase();
+
+      setKycStatus(normalizedStatus);
+      setKycReason(kyc?.reason || "");
+
+    
+      const verified = normalizedStatus === "verified" || normalizedStatus === "approved" || normalizedStatus === "completed";
+      localStorage.setItem("userKyc", verified);
+    } catch (error) {
+      console.log("KYC fetch error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
   useEffect(() => {
     fetchErrands();
     clientSummaryDashBoard();
-    getAUser();
+    getKyc()
   }, []);
 
   
