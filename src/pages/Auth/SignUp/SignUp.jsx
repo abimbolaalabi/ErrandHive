@@ -238,7 +238,7 @@ const SignUp = () => {
               </button>
             </div>
 
-            <article className="signup-line-cont">
+            {/* <article className="signup-line-cont">
               <div className="firstline"></div>
               <div className="text-or">or</div>
               <div className="firstline"></div>
@@ -252,7 +252,7 @@ const SignUp = () => {
                 <FcGoogle />
                 <p>Continue with Google</p>
               </button>
-            </Link>
+            </Link> */}
 
             <aside className="account-text">
               <p>
