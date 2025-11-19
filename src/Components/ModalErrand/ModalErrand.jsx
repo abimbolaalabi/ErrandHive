@@ -56,18 +56,12 @@ const ModalErrand = ({ toclose }) => {
     return true;
   };
 
-  // // Add this function to handle the top note button click
-  // const handleTopNoteClick = () => {
-  //   toast.info("For safety reasons, we do not allow errands with items valued above ₦100,000. Please keep your errand items within this value.");
-  // };
-
   const handleSubmit = async () => {
     if (!validateForm()) return;
 
     setLoading(true);
 
     try {
-
       const formDataToSend = new FormData();
       formDataToSend.append("title", formData.title);
       formDataToSend.append("pickupAddress", formData.pickupAddress);
@@ -118,11 +112,12 @@ const ModalErrand = ({ toclose }) => {
   return (
     <div className="modalerrand-container">
       <div className="modalerrand-child">
+        
+        {/* 🔥 UPDATED TOP BAR WITH MOVING TEXT */}
         <div className="top-note-container">
-          {/* Changed from p to button */}
-          <button className="top-note-button" >
+          <p className="top-moving-note">
             Note!! Do not place items above <strong>₦100,000</strong> for pickup
-          </button>
+          </p>
           <span onClick={() => toclose(false)} className="closee-button">X</span>
         </div>
 

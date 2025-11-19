@@ -200,10 +200,10 @@ const Login = () => {
               <div className="line"></div>
             </article>
 
-            <button className="continue-with-google" type="button">
+            {/* <button className="continue-with-google" type="button">
               <FcGoogle style={{ fontSize: "1.5rem" }} />
               Continue with Google
-            </button>
+            </button> */}
 
             <span className="forgot-password-form">
               <Link to={"/forgot"} className="link">

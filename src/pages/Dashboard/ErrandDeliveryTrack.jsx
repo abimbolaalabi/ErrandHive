@@ -128,8 +128,8 @@ const splitId =id.split("_")[0]
           </div>
 
           <div className="med-profile-meta">
-            <span>★ {errand?.assignedRunner?.rating || 4.8}</span> •{" "}
-            <span>{errand?.assignedRunner?.totalJobs || 0} Jobs</span>
+            <span>★ {errand?.assignedRunner?.rating }</span> •{" "}
+            <span>{errand?.assignedRunner?.totalJobs } Jobs</span>
           </div>
 
           <button
