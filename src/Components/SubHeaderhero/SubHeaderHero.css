@@ -1,12 +1,16 @@
 .subheader-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 60px 80px;
   width: 100%;
   min-height: 800px;
 }
-
+.subheader-container-wrapper{
+  display:flex;
+height:100% ;
+width: 95%;
+margin-right: 1.5rem;
+}
 .subheader-container-left-wrapper {
   width: 50%;
   display: flex;

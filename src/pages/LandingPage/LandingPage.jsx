@@ -1,4 +1,4 @@
-
+import "./LandingPage.css";
 import Header from "../../Components/Header/Header";
 import SubHeaderHero from "../../Components/SubHeaderhero/SubHeaderHero";
 import MidHero from "../../Components/Midhero/MidHero";
@@ -7,12 +7,12 @@ import NewHero from "../../Components/Newhero/NewHero";
 import MoreHero from "../../Components/Morehero/MoreHero";
 import DownHero from "../../Components/DownHero/DownHero";
 import Footer from "../../Components/Footer/Footer";
-import "./LandingPage.css"
 
 const LandingPage = () => {
   return (
     <main className="landing-page-container">
-      <Header />
+      <div className="landing-page-wrapper">
+        <Header />
       <section id="home">
         <SubHeaderHero />
       </section>
@@ -32,10 +32,10 @@ const LandingPage = () => {
       <MoreHero />
       <DownHero />
       <Footer />
+      </div>
+      
     </main>
   );
 };
 
 export default LandingPage;
-//checking 
-// errand-hive.vercel.app

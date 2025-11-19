@@ -8,7 +8,8 @@ import imga4 from "../../assets/imga4.svg";
 import "./MoreHero.css";
 
 const MoreHero = () => (
-  <section className="morehero">
+  <section className="morehero-co">
+    <div className="morehero-wrapper">
     <h2 className="morehero-title">User's Feedback</h2>
     <p className="morehero-subtitle">Real experience from real people</p>
 
@@ -91,6 +92,7 @@ const MoreHero = () => (
           </div>
         </div>
       </div>
+    </div>
     </div>
   </section>
 );
