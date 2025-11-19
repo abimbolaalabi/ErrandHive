@@ -12,6 +12,9 @@ export default function RunnerMessage() {
 
   const token = JSON.parse(localStorage.getItem("userToken"));
   const BaseUrl = import.meta.env.VITE_BASE_URL;
+const errandId = id.includes("_") ? id.split("_")[0] : id;
+const roomId = `errand_${errandId}`;
+
 
   const [chatInfo, setChatInfo] = useState({});
   const [messages, setMessages] = useState([]);
@@ -63,7 +66,6 @@ export default function RunnerMessage() {
         if (!clientId || !runnerId) return;
 
         const receiverId = userId === runnerId ? clientId : runnerId;
-        const roomId = [userId, receiverId].sort().join("_");
 
         const history = await axios.get(
           `${BaseUrl}/messages/messages/history/${roomId}`,
@@ -81,34 +83,28 @@ export default function RunnerMessage() {
     loadChat();
   }, [id, userId]);
 
-  // ================================
-  // Join room after chat loads
-  // ================================
-  useEffect(() => {
-    const clientId = chatInfo?.poster?.id;
-    const runnerId = chatInfo?.assignedTo;
-    if (!clientId || !runnerId) return;
 
-    const receiverId = userId === runnerId ? clientId : runnerId;
-    const roomId = [userId, receiverId].sort().join("_");
 
-    socket.emit("join_room", roomId);
-  }, [chatInfo, userId]);
 
-  // ================================
-  // Receive live messages
-  // ================================
-  useEffect(() => {
-    const handleIncoming = (msg) => {
-      setMessages((prev) => {
-        if (prev.some((m) => m.id && m.id === msg.id)) return prev;
-        return [...prev, msg];
-      });
-    };
+ useEffect(() => {
+  if (!roomId) return;
 
-    socket.on("receive_message", handleIncoming);
-    return () => socket.off("receive_message", handleIncoming);
-  }, []);
+  socket.emit("join_room", roomId);
+
+  const handleMessage = (msg) => {
+    // Only append if the message is for THIS room
+    if (msg.roomId === roomId) {
+      setMessages(prev => [...prev, msg]);
+    }
+  };
+
+  socket.on("receive_message", handleMessage);
+
+  return () => {
+    socket.off("receive_message", handleMessage);
+  };
+}, [roomId]);
+
 
   // ================================
   // Send message
@@ -122,15 +118,13 @@ export default function RunnerMessage() {
     if (!clientId || !runnerId) return;
 
     const receiverId = userId === runnerId ? clientId : runnerId;
-    const roomId = [userId, receiverId].sort().join("_");
 
     const payload = {
       senderId: userId,
       receiverId,
       text,
       errandId: id,
-      roomId,
-    };
+ roomId: `errand_${chatInfo.id}`,    };
 
     // realtime socket
     socket.emit("send_message", payload);
@@ -145,7 +139,6 @@ export default function RunnerMessage() {
       console.log("Message save error:", err);
     }
   };
-
   // Scroll to bottom on new messages
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -160,7 +153,7 @@ export default function RunnerMessage() {
         <h3>Messages</h3>
         <p className="subtext">Chat with your clients</p>
 
-        {errands.map((item) => (
+        {errands.filter((jobs)=>jobs.assignedTo ===userId && jobs.status !== "Completed").map((item) => (
           <div
             key={item.id}
             className={`conversation ${item.id == id ? "active" : ""}`}

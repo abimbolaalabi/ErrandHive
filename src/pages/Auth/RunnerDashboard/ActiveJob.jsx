@@ -38,7 +38,7 @@ const ActiveJobs = () => {
 
         const all = Array.isArray(res.data.data) ? res.data.data : [];
 
-        const unassigned = all.filter((job) => !job.assignedRunner);
+        const unassigned = all.filter((job) => job.assignedTo ===null) ;
 
         setJobs(unassigned);
       } catch (err) {

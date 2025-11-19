@@ -9,7 +9,8 @@ export default function MessagesPage() {
   const { id } = useParams(); // errand ID
   const navigate = useNavigate();
   const { user } = useContext(AppContext);
-
+const errandId = id.includes("_") ? id.split("_")[0] : id;
+const roomId = `errand_${errandId}`;
   const token = JSON.parse(localStorage.getItem("userToken"));
   const BaseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -22,7 +23,6 @@ export default function MessagesPage() {
 
   const messagesEndRef = useRef(null);
   const userId = user?.id;
-
   // ------------------ Fetch errands for sidebar ------------------
   useEffect(() => {
     const fetchMyRunners = async () => {
@@ -41,7 +41,6 @@ export default function MessagesPage() {
     fetchMyRunners();
   }, []);
 
-  // ------------------ Load chat info & history ------------------
   useEffect(() => {
     if (!id) return;
 
@@ -49,11 +48,12 @@ export default function MessagesPage() {
       try {
         setLoading(true);
         setMessages([]);
+console.log("hey. ",id)
 
-        const info = await axios.get(`${BaseUrl}/errand/get/${id}`, {
+        const info = await axios.get(`${BaseUrl}/errand/get/${errandId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-
+console.log("hey. ",info)
         setChatInfo(info.data.data);
 
         const clientId = info.data.data?.poster?.id;
@@ -62,13 +62,13 @@ export default function MessagesPage() {
         if (!clientId || !runnerId) return;
 
         const receiverId = userId === clientId ? runnerId : clientId;
-        const roomId = [userId, receiverId].sort().join("_");
+
 
         const msg = await axios.get(
           `${BaseUrl}/messages/messages/history/${roomId}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
-
+console.log("whose msg check :", msg.data?.data )
         setMessages(msg.data?.data || []);
       } catch (err) {
         console.log("Chat load error:", err);
@@ -88,23 +88,32 @@ export default function MessagesPage() {
     if (!clientId || !runnerId) return;
 
     const receiverId = userId === clientId ? runnerId : clientId;
-    const roomId = [userId, receiverId].sort().join("_");
-
+const roomId = `errand_${errandId}`;
+console.log("checking room id ,",roomId)
     socket.emit("join_room", roomId);
   }, [chatInfo, userId]);
 
   // ------------------ Receive live messages (no duplicates) ------------------
-  useEffect(() => {
-    const handleIncoming = (msg) => {
-      setMessages(prev => {
-        if (prev.some(m => m.id && m.id === msg.id)) return prev;
-        return [...prev, msg];
-      });
-    };
 
-    socket.on("receive_message", handleIncoming);
-    return () => socket.off("receive_message", handleIncoming);
-  }, []);
+useEffect(() => {
+  if (!roomId) return;
+
+  // Join the correct room
+  socket.emit("join_room", roomId);
+
+  // Listen only for this room
+  const handleMessage = (msg) => {
+    setMessages(prev => [...prev, msg]);
+  };
+
+  socket.on("receive_message", handleMessage);
+
+  // Cleanup VERY IMPORTANT
+  return () => {
+    socket.off("receive_message", handleMessage);
+  };
+}, [roomId]);
+
 
   // ------------------ Send message ------------------
   const sendMessage = async (e) => {
@@ -115,7 +124,7 @@ export default function MessagesPage() {
     if (!text.trim() || !clientId || !runnerId) return;
 
     const receiverId = userId === clientId ? runnerId : clientId;
-    const roomId = [userId, receiverId].sort().join("_");
+const roomId = `errand_${errandId}`;
 
     const payload = {
       senderId: userId,
