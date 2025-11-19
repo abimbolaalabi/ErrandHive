@@ -92,11 +92,12 @@ const MyErrandsDetails = () => {
         getErrandById()
         getAllErrands()
     }, [])
-
-    const isAssigned = errand?.status === "Assigned" || Boolean(errand?.assignedTo);
-
+;
 
 
+
+    const isAssigned = errand?.status === "Accepted"
+    console.log(isAssigned)
     return (
         <div className='my-errand-detail'>
             <p className="back-link" onClick={() => navigate("/dashboard/my-errands")}>← Back to my errands</p>
