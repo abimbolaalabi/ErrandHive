@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "./ProfileDetailSetting.css"
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Eye, EyeOff } from 'lucide-react'
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 const ProfileDetailSetting = () => {
   const { profileId } = useParams()
   const token = JSON.parse(localStorage.getItem("userToken"));
+  const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -44,7 +45,7 @@ const ProfileDetailSetting = () => {
       );
 
       toast.success(res.data?.message || "Profile updated successfully");
-        localStorage.setItem("userDetails", JSON.stringify(res.data?.data))
+      localStorage.setItem("userDetails", JSON.stringify(res.data?.data))
       console.log("Updated User:", res.data?.data);
 
     } catch (err) {
@@ -94,7 +95,7 @@ const ProfileDetailSetting = () => {
     }
   };
 
-    useEffect(() => {
+  useEffect(() => {
     const user = JSON.parse(localStorage.getItem("userDetails"));
     if (user) {
       setFirstName(user.firstName || "");
@@ -145,7 +146,7 @@ const ProfileDetailSetting = () => {
                 type="email"
                 placeholder="Enter your email address"
                 className="input-field"
-                   value={emailAddress}
+                value={emailAddress}
                 disabled
                 readOnly
               />
@@ -240,10 +241,13 @@ const ProfileDetailSetting = () => {
           <button
             type="button"
             className="btn btn-outline"
-            onClick={handleSaveProfile}
+            onClick={() => {
+              navigate("/dashboard/profile");
+            }}
           >
-            Save changes
+            Cancel
           </button>
+
           <button
             type="button"
             className="btn btn-primary"

@@ -13,10 +13,18 @@ const DashboardPage = () => {
   const [errands, setErrands] = useState([]);
   const [loading, setLoading] = useState(true);
   const [summary, setSummary] = useState({});
+
+
+  const [kycStatus, setKycStatus] = useState("");
+  const [kycReason, setKycReason] = useState("");
+
   const navigate = useNavigate();
 
   const storedUser = JSON.parse(localStorage.getItem("userDetails")) || {};
-  const userKyc = localStorage.getItem("userKyc");
+
+ 
+  const userKyc = localStorage.getItem("userKyc") === "true";
+
   const BaseUrl = import.meta.env.VITE_BASE_URL;
 
   const fullName = `${storedUser?.firstName || ""} ${storedUser?.lastName || ""}`.trim();
@@ -24,7 +32,9 @@ const DashboardPage = () => {
   const formatDate = (iso) => {
     if (!iso) return "";
     const d = new Date(iso);
-    return `${String(d.getDate()).padStart(2, "0")}/${String(d.getMonth() + 1).padStart(2, "0")}/${d.getFullYear()}`;
+    return `${String(d.getDate()).padStart(2, "0")}/${String(
+      d.getMonth() + 1
+    ).padStart(2, "0")}/${d.getFullYear()}`;
   };
 
   const fetchErrands = async () => {
@@ -73,28 +83,32 @@ const DashboardPage = () => {
       });
 
       const kyc = res?.data?.data;
-
       const normalizedStatus = kyc?.status?.toLowerCase();
 
+  
       setKycStatus(normalizedStatus);
       setKycReason(kyc?.reason || "");
 
-    
-      const verified = normalizedStatus === "verified" || normalizedStatus === "approved" || normalizedStatus === "completed";
-      localStorage.setItem("userKyc", verified);
+      const verified =
+        normalizedStatus === "verified" ||
+        normalizedStatus === "approved" ||
+        normalizedStatus === "completed";
+
+      // Store only "true" or "false"
+      localStorage.setItem("userKyc", verified ? "true" : "false");
     } catch (error) {
       console.log("KYC fetch error:", error);
     } finally {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     fetchErrands();
     clientSummaryDashBoard();
-    getKyc()
+    getKyc();
   }, []);
 
-  
   const stats = [
     {
       title: "Total Request",
@@ -156,6 +170,7 @@ const DashboardPage = () => {
           <p className="welcome-subtitle">Manage your errands today.</p>
         </div>
 
+        {/** ✅ THIS NOW WORKS CORRECTLY */}
         {userKyc && (
           <button className="post-errand-btn" onClick={() => setErrandMod(true)}>
             + <span>Post New Errand</span>
@@ -178,7 +193,8 @@ const DashboardPage = () => {
       </div>
 
       {loading && <p style={{ textAlign: "center", marginTop: 24 }}>Loading errands...</p>}
-       <h1>Recent Errands</h1>
+      <h1>Recent Errands</h1>
+
       {!loading && errands.length === 0 && (
         <div className="no-errands-section">
           <div className="no-errands-content">
@@ -189,6 +205,7 @@ const DashboardPage = () => {
             <p className="no-errands-subtitle">
               {userKyc ? "Create your first errand to get started" : "Complete KYC to get started"}
             </p>
+
             {!userKyc && (
               <button onClick={() => navigate("/dashboard/profile")} className="kyc-button">
                 Complete KYC
@@ -197,8 +214,6 @@ const DashboardPage = () => {
           </div>
         </div>
       )}
-
-     
 
       {!loading &&
         errands.length > 0 &&
