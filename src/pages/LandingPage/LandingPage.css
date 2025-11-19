@@ -230,6 +230,20 @@
   line-height: 1.5;
 } */
 
+.landing-page-container{
+  width: 100%;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.landing-page-wrapper{
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -319,10 +333,8 @@
     font-size: 0.9rem;
   }
   
-  
   .role-btn {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
   }
 }
-

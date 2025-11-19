@@ -1,18 +1,20 @@
-.morehero {
+.morehero-co {
   width: 100%;
   max-width: 1443px;
-  margin: 0 auto;
-  padding: 60px;
   background: linear-gradient(
     180deg,
     #361565 34.62%,
     rgba(71, 28, 133, 0.7) 72.12%,
     rgba(71, 28, 133, 0.6) 100%
   );
-  text-align: center;
   color: white;
+  
 }
-
+.morehero-wrapper{
+  width: 90%;
+  height:100%;
+  margin-left: 2rem;
+}
 .morehero-title {
   font-size: 32px;
   font-weight: 500;
@@ -261,3 +263,4 @@
     font-size: 17px;
   }
 }
+

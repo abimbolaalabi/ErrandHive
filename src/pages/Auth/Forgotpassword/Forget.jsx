@@ -46,8 +46,7 @@ const Forget = () => {
       setEmail("");
       toast.success(res?.data?.message);
       navigatetoverify();
-      localStorage.setItem("isReset", true); 
-
+      localStorage.setItem("isReset", true);
     } catch (err) {
       console.error("Error:", err);
       toast.error(
@@ -98,7 +97,9 @@ const Forget = () => {
 
         <div className="input-email-holder">
           <div className="input-label-holder-wrapper">
-            <label className="input-label-text">Input your Email address</label>
+            <label className="input-label-text">
+              Input your Email address
+            </label>
             <div className="forget-email-input-box">
               <input
                 type="email"
@@ -118,16 +119,16 @@ const Forget = () => {
               Send Verification Code
             </button>
 
+            
             <div className="back-to-login-holder">
               <div className="back-hold">
-                <IoChevronBackSharp className="back-icon" />
-                <p className="back-text">
-                  <Link to="/login" className="link">
-                    Back to login
-                  </Link>
-                </p>
+                {/* <IoChevronBackSharp className="back-icon" /> */}
+                <Link to="/login" className="back-text link">
+                  Back to login
+                </Link>
               </div>
             </div>
+           
           </div>
         </div>
       </form>

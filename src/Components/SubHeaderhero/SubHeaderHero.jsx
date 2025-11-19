@@ -31,6 +31,7 @@ const SubHeaderHero = () => {
 
   return (
     <section className="subheader-container">
+      <div className="subheader-container-wrapper">
       <div className="subheader-container-left-wrapper">
         <article className="subheader-writeup-holder">
           <h1 className="subheader-writeup-holder-h1">
@@ -74,6 +75,7 @@ const SubHeaderHero = () => {
 
         <span className="yellow-dot dot-1"></span>
         <span className="yellow-dot dot-2"></span>
+      </div>
       </div>
     </section>
   );
