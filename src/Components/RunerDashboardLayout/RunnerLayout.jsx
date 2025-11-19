@@ -17,6 +17,8 @@ import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const RunnerLayout = () => {
+
+  
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -73,7 +75,9 @@ const RunnerLayout = () => {
     {
       label: "Messages",
       icon: <BiMessageRoundedDetail />,
-      path: "/runnerlayout/runnermessage",
+            
+
+      path: errand ? `/runnerlayout/runnermessage/${errand.id}` :`/runnerlayout/runnermessage`,
     },
     { label: "Profile", icon: <IoMdPerson />, path: "/runnerlayout/runnerprofile" },
   ];

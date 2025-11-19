@@ -95,10 +95,10 @@ const Router = () => {
             <Route
               path="runnerprofile/:bank" element={<AddBankDeal />}/>
             {/* Runner Message */}
-              <Route path="runnermessage" element={<RunnerMessage />} />
+              {/* <Route path="runnermessage" element={<RunnerMessage />} /> */}
             <Route path="runnermessage/:id" element={<RunnerMessage />} />
             <Route path="runnermessage/:id/status" element={< RunnerDetailPage/>} />
-            {/* <Route path="runnertrack/:runnerId" element={<RunnerDetailPage />} /> */}
+            <Route path="runnertrack/:id" element={<RunnerDetailPage />} />
           </Route>
         </Route>
 
