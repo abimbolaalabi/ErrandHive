@@ -5,29 +5,29 @@ const SubHeaderHero = () => {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
 
-  const handlePostRequest = () => {
-    if (user) {
-      if (user?.role === "Client") {
-        navigate("/dashboard/my-errands");
-      } else {
-        navigate("/clientvsrunner");
-      }
-    } else {
-      navigate("/clientvsrunner");
-    }
-  };
+  // const handlePostRequest = () => {
+  //   if (user) {
+  //     if (user?.role === "Client") {
+  //       navigate("/dashboard/my-errands");
+  //     } else {
+  //       navigate("/clientvsrunner");
+  //     }
+  //   } else {
+  //     navigate("/clientvsrunner");
+  //   }
+  // };
 
-  const handleWantToEarn = () => {
-    if (user) {
-      if (user?.role === "Runner") {
-        navigate("/runnerlayout");
-      } else {
-        navigate("/clientvsrunner");
-      }
-    } else {
-      navigate("/clientvsrunner");
-    }
-  };
+  // const handleWantToEarn = () => {
+  //   if (user) {
+  //     if (user?.role === "Runner") {
+  //       navigate("/runnerlayout");
+  //     } else {
+  //       navigate("/clientvsrunner");
+  //     }
+  //   } else {
+  //     navigate("/clientvsrunner");
+  //   }
+  // };
 
   return (
     <section className="subheader-container">
@@ -47,11 +47,11 @@ const SubHeaderHero = () => {
         </article>
 
         <div className="subheader-btn-wrapper">
-          <button className="post-a-request-btn" onClick={handlePostRequest}>
+          <button className="post-a-request-btn" onClick={()=>navigate("/dashboard")}>
             Post a request
           </button>
 
-          <button className="earn-a-request-btn" onClick={handleWantToEarn}>
+          <button className="earn-a-request-btn" onClick={()=>navigate("/runnerlayout")}>
             I want to earn
           </button>
         </div>

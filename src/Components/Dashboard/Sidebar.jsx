@@ -109,7 +109,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       )}
 
       {/* TOP LOGO */}
-      <div className="sidebar-header">
+      <div className="sidebar-header" onClick={()=>navigate("/")}>
         <div className="logoo">
           <img
             src="https://res.cloudinary.com/dwzomhflw/image/upload/v1761056644/IMG-20251021-WA0052_lf7sms.jpg"

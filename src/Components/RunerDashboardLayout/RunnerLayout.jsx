@@ -97,7 +97,7 @@ const RunnerLayout = () => {
       {/* Sidebar */}
       <aside className={`sidebarr-runner ${showSidebar ? "show-mobile-sidebar" : ""}`}>
         <div className="sidebarr-headerr">
-          <div className="sidebarr-headerr-title">
+          <div className="sidebarr-headerr-title" onClick={()=>navigate("/")}>
             <img
               src="https://res.cloudinary.com/dwzomhflw/image/upload/v1761056644/IMG-20251021-WA0052_lf7sms.jpg"
               alt="ErrandHive Logo"
