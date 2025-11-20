@@ -19,7 +19,7 @@ const ActiveJobs = () => {
   const [negotiateModal, setNegotiateModal] = useState(false);
   const [counterModal, setCounterModal] = useState(false);
   const [selectedErrand, setSelectedErrand] = useState(null);
-  const [summary,setSummary] = useState(false)
+  const [summary, setSummary] = useState(false);
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("userToken"));
@@ -38,7 +38,7 @@ const ActiveJobs = () => {
 
         const all = Array.isArray(res.data.data) ? res.data.data : [];
 
-        const unassigned = all.filter((job) => job.assignedTo ===null) ;
+        const unassigned = all.filter((job) => job.assignedTo === null);
 
         setJobs(unassigned);
       } catch (err) {
@@ -51,24 +51,21 @@ const ActiveJobs = () => {
     fetchJobs();
   }, []);
 
-    const runnerSummaryDashBoard = async () => {
-      try {
-        const token = JSON.parse(localStorage.getItem("userToken"));
-        const res = await axios.get(`${API_BASE_URL}/runner/dashboard-summary`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setSummary(res?.data?.data || {});
-      } catch (err) {
-        toast.error(err.response?.data || err.message);
-      }
-    };
-  
-    useEffect(() => {
-      runnerSummaryDashBoard();
-    }, []);
-  
+  const runnerSummaryDashBoard = async () => {
+    try {
+      const token = JSON.parse(localStorage.getItem("userToken"));
+      const res = await axios.get(`${API_BASE_URL}/runner/dashboard-summary`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setSummary(res?.data?.data || {});
+    } catch (err) {
+      toast.error(err.response?.data || err.message);
+    }
+  };
 
-
+  useEffect(() => {
+    runnerSummaryDashBoard();
+  }, []);
 
   const handleStartNegotiation = (job) => {
     setSelectedErrand(job);
@@ -79,12 +76,56 @@ const ActiveJobs = () => {
   const totalDistance = jobs.reduce((acc, job) => acc + (job.distance || 0), 0);
   const userRating = user?.rating || 0;
 
-const statsData = [
-  { label: "Total Applications", value: summary.totalApplications || 0 },
-  { label: "Accepted Jobs", value: summary.acceptedJobs || 0 },
-  { label: "Active Jobs", value: summary.activeJobs || 0 },
-  { label: "Completed Jobs", value: summary.completedJobs || 0 },
-];
+  const statsData = [
+    {
+      label: "Total Applications",
+      value: summary.totalApplications || 0,
+      icon: (
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" strokeWidth="2">
+          <rect x="3" y="3" width="18" height="18" rx="2" />
+          <path d="M9 9h6v6H9z" />
+        </svg>
+      )
+    },
+
+    {
+      label: "Accepted Jobs",
+      value: summary.acceptedJobs || 0,
+      icon: (
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" strokeWidth="2">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+          <polyline points="22 4 12 14 9 11" />
+        </svg>
+      )
+    },
+
+    {
+      label: "Active Jobs",
+      value: summary.activeJobs || 0,
+      icon: (
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" strokeWidth="2">
+          <circle cx="12" cy="12" r="10" />
+          <polyline points="12 6 12 12 16 14" />
+        </svg>
+      )
+    },
+
+    {
+      label: "Completed Jobs",
+      value: summary.completedJobs || 0,
+      icon: (
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" strokeWidth="2">
+          <rect x="3" y="3" width="18" height="18" rx="2" />
+          <path d="M6 10h12" />
+          <path d="M6 14h12" />
+        </svg>
+      )
+    },
+  ];
 
   if (loading) {
     return (
@@ -100,15 +141,23 @@ const statsData = [
 
       <h1 className="active-job-heading">Active Jobs</h1>
 
-     
       <div className="card-grid">
         {statsData.map((stat, index) => (
           <div key={index} className="stat-card">
-            <p className="stat-label">{stat.label}</p>
-            <h2 className="stat-value">{stat.value}</h2>
+
+            <div className="stat-row">
+              <div className="stat-text">
+                <p className="stat-label">{stat.label}</p>
+                <h2 className="stat-value">{stat.value}</h2>
+              </div>
+
+              <div className="stat-icon">{stat.icon}</div>
+            </div>
+
           </div>
         ))}
       </div>
+
 
       {/* JOBS LIST */}
       {jobs.length === 0 ? (

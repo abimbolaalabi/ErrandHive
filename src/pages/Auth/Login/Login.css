@@ -38,6 +38,8 @@
   flex-direction: column;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   gap: 2rem;
+  padding-top: 6rem;
+  
 }
 
 .login-text-layout {
@@ -214,44 +216,93 @@
   color: red;
 }
 
-@media screen and (max-width: 480px) {
-  .login-left,
-  .img-box-wrapper,
-  .carousel,
-  .swiper,
-  .slider,
-  .hero-carousel,
-  .left-images,
-  .login-images {
-    display: none !important;
+@media (min-width: 1440px) {
+  .login-right-form {
+    max-width: 480px;
+    padding: 3rem 2.5rem;
   }
+}
 
-  .login-right-text {
+@media (max-width: 1023px) {
+  .login-left {
     display: none !important;
   }
 
   .login-right {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 1439px) and (min-width: 1024px) {
+  .login-left {
+    width: 50%;
+  }
+  .login-right {
+    width: 50%;
+  }
+  .login-right-form {
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+  .login-left {
+    display: none;
+  }
+  .login-right {
     width: 100%;
-    height: auto;
-    background: white;
-    display: flex;
     justify-content: center;
-    align-items: center;
+    padding: 2rem;
+  }
+  .login-right-form {
+    max-width: 420px;
+    padding: 2rem;
+    border-radius: 1rem;
+  }
+}
+
+@media (max-width: 767px) and (min-width: 480px) {
+  .login-container {
+    padding: 1rem;
+    height: auto;
+  }
+  .login-left {
+    display: none;
+  }
+  .login-right {
+    width: 100%;
     box-shadow: none;
   }
+  .login-right-form {
+    max-width: 95%;
+    box-shadow: none;
+    padding: 1.5rem 1rem;
+  }
+  .login-right-text {
+    font-size: 22px;
+  }
+}
 
+@media (max-width: 479px) {
+  .login-container {
+    padding: 0.7rem;
+    height: auto;
+  }
   .login-right-form {
     width: 100%;
-    padding-inline: 1rem;
-    padding-top: 2rem;
+    padding: 1.5rem 0.8rem;
+    border-radius: 0;
+    box-shadow: none;
   }
-
-  .login-left-header {
-    display: flex !important;
-    justify-content: center;
-    margin-bottom: 1rem;
+  .login-right-text {
+    font-size: 20px;
   }
-  .forgot-password-form{
-    margin-bottom: 1.5rem;
+  .email-right-input-box,
+  .password-right-input-box {
+    height: 44px;
+  }
+  .login-btn {
+    height: 44px;
+    font-size: 0.95rem;
   }
 }

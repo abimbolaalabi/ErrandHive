@@ -261,6 +261,109 @@
     cursor: pointer;
 }
 
+.transaction-container {
+    padding-top: 10px;
+  background: #f8fafc;
+  width: 100%;
+}
+
+.transaction-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.transaction-card {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.08);
+  transition: 0.2s ease;
+}
+
+.transaction-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eff6ff;
+  margin-right: 15px;
+}
+
+.icon-down {
+  color: #4ade80;
+  font-size: 20px;
+}
+
+.icon-up {
+  color: #6366f1;
+  font-size: 20px;
+}
+
+.transaction-details {
+  flex: 1;
+}
+
+.transaction-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.transaction-header h4 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.tx-type {
+  background: #eef2ff;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #6366f1;
+}
+
+.tx-meta {
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+.transaction-status {
+  text-align: right;
+}
+
+.status-completed {
+  color: #22c55e;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.status-pending {
+  color: #f59e0b;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.amount-positive {
+  color: #22c55e;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+.amount-negative {
+  color: #ef4444;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+
 
 
 

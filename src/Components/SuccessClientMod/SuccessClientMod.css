@@ -1,0 +1,250 @@
+/* Successful.css */
+.successful-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: successful-fadeIn 0.2s ease-out;
+}
+
+.successful-modal-content {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 440px;
+  position: relative;
+  animation: successful-slideUp 0.3s ease-out;
+}
+
+.successful-close-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #6b7280;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.successful-close-button:hover {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.successful-modal-body {
+  padding: 24px;
+}
+
+.successful-header {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 20px;
+}
+
+.successful-title-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.successful-checkmark-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #10b981;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+}
+
+.successful-title {
+  font-size: 23px;
+  font-weight: 400;
+  color: #1E293B;
+  margin: 0;
+  font-family: Poppins;
+}
+
+.successful-subtitle {
+  color: #6b7280;
+  font-size: 14px;
+  margin-left: 52px;
+  margin-bottom: 0;
+  font-family: Poppins;
+  font-style: Regular;
+}
+
+.successful-runner-section {
+  padding: 16px 0;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 20px;
+}
+
+.successful-runner-info {
+  display: flex;
+  align-items: center;
+}
+
+.successful-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.successful-runner-details {
+  flex: 1;
+}
+
+.successful-runner-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 4px;
+  margin-top: 0;
+}
+
+.successful-status-badge {
+  display: inline-flex;
+  align-items: center;
+  background-color: #ecfdf5;
+  color: #065f46;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.successful-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10b981;
+  margin-right: 6px;
+}
+
+/* ⭐ PAYMENT SECTION */
+.successful-payment-section {
+  padding: 16px 0;
+  margin-bottom: 20px;
+}
+
+.successful-payment-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.successful-payment-header svg {
+  margin-right: 8px;
+  color: #10b981;
+}
+
+.successful-payment-details {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.successful-amount {
+  font-weight: 700;
+  font-size: 18px;
+  color: #1f2937;
+  margin-right: 6px;
+}
+
+.successful-payment-text {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* ⭐ FOOTER */
+.successful-footer {
+  width: 100%;
+  height: 100px;
+  background: #22C55E33;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #22C55E33;
+}
+
+.succesful-fotter-div {
+  width: 90%;
+  height: 80%;
+}
+
+/* Fix missing text style */
+.payment-shit-text-successful {
+  font-size: 20px;
+  font-family: Poppins;
+  font-weight: 500;
+  color: #22C55E;
+  margin: 0;
+}
+
+/* ⭐ FIX — Missing class */
+.payment-shit-text-successful-p {
+  font-size: 15px;
+  font-family: Poppins;
+  font-weight: 400;
+  color: #1E293B;
+  margin-top: 4px;
+  margin-bottom: 0;
+}
+
+/* Animations */
+@keyframes successful-fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes successful-slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .successful-modal-overlay {
+    padding: 16px;
+  }
+
+  .successful-modal-body {
+    padding: 20px;
+  }
+
+  .successful-footer {
+    flex-direction: column;
+  }
+}
