@@ -6,13 +6,13 @@ import { AppContext } from "../../../Context/App";
 import { socket } from "../../../socket";
 
 export default function MessagesPage() {
-  const audioRef = useRef(new Audio("https://res.cloudinary.com/djxoqpt9t/video/upload/v1763630633/simple-notification-152054_ay6exe.mp3 "));
-
   const { id } = useParams(); // errand ID
   const navigate = useNavigate();
   const { user } = useContext(AppContext);
-const errandId = id.includes("_") ? id.split("_")[0] : id;
-const roomId = `errand_${errandId}`;
+
+  const errandId = id?.includes("_") ? id.split("_")[0] : id;
+  const roomId = `errand_${errandId}`;
+
   const token = JSON.parse(localStorage.getItem("userToken"));
   const BaseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -25,6 +25,7 @@ const roomId = `errand_${errandId}`;
 
   const messagesEndRef = useRef(null);
   const userId = user?.id;
+
   // ------------------ Fetch errands for sidebar ------------------
   useEffect(() => {
     const fetchMyRunners = async () => {
@@ -33,7 +34,7 @@ const roomId = `errand_${errandId}`;
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        const assigned = res?.data?.data?.filter(e => e.assignedTo != null);
+        const assigned = res?.data?.data?.filter((e) => e.assignedTo != null);
         setMyRunners(assigned || []);
       } catch (err) {
         console.log("Runner fetch error:", err);
@@ -43,6 +44,7 @@ const roomId = `errand_${errandId}`;
     fetchMyRunners();
   }, []);
 
+  // ------------------ Load chat ------------------
   useEffect(() => {
     if (!id) return;
 
@@ -50,12 +52,11 @@ const roomId = `errand_${errandId}`;
       try {
         setLoading(true);
         setMessages([]);
-console.log("hey. ",id)
 
         const info = await axios.get(`${BaseUrl}/errand/get/${errandId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-console.log("hey. ",info)
+
         setChatInfo(info.data.data);
 
         const clientId = info.data.data?.poster?.id;
@@ -63,14 +64,13 @@ console.log("hey. ",info)
 
         if (!clientId || !runnerId) return;
 
-        const receiverId = userId === clientId ? runnerId : clientId;
-
-
         const msg = await axios.get(
           `${BaseUrl}/messages/messages/history/${roomId}`,
-          { headers: { Authorization: `Bearer ${token}` } }
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
         );
-console.log("whose msg check :", msg.data?.data )
+
         setMessages(msg.data?.data || []);
       } catch (err) {
         console.log("Chat load error:", err);
@@ -82,8 +82,6 @@ console.log("whose msg check :", msg.data?.data )
     loadChat();
   }, [id, userId]);
 
-
-
   // ------------------ Join socket room ------------------
   useEffect(() => {
     const clientId = chatInfo?.poster?.id;
@@ -91,37 +89,25 @@ console.log("whose msg check :", msg.data?.data )
 
     if (!clientId || !runnerId) return;
 
-    const receiverId = userId === clientId ? runnerId : clientId;
-const roomId = `errand_${errandId}`;
-console.log("checking room id ,",roomId)
     socket.emit("join_room", roomId);
-  }, [chatInfo, userId]);
+  }, [chatInfo, userId, roomId]);
 
-  // ------------------ Receive live messages (no duplicates) ------------------
+  // ------------------ Receive live messages ------------------
+  useEffect(() => {
+    if (!roomId) return;
 
-useEffect(() => {
-  if (!roomId) return;
+    socket.emit("join_room", roomId);
 
-  // Join the correct room
-  socket.emit("join_room", roomId);
+    const handleMessage = (msg) => {
+      setMessages((prev) => [...prev, msg]);
+    };
 
-  // Listen only for this room
-  const handleMessage = (msg) => {
-    setMessages(prev => [...prev, msg]);
-      if (msg.senderId !== userId) {
-    audioRef.current.play().catch(() => {});
-  }
+    socket.on("receive_message", handleMessage);
 
-  };
-
-  socket.on("receive_message", handleMessage);
-
-  // Cleanup VERY IMPORTANT
-  return () => {
-    socket.off("receive_message", handleMessage);
-  };
-}, [roomId]);
-
+    return () => {
+      socket.off("receive_message", handleMessage);
+    };
+  }, [roomId]);
 
   // ------------------ Send message ------------------
   const sendMessage = async (e) => {
@@ -129,26 +115,25 @@ useEffect(() => {
 
     const clientId = chatInfo?.poster?.id;
     const runnerId = chatInfo?.assignedRunner?.id;
+
     if (!text.trim() || !clientId || !runnerId) return;
 
     const receiverId = userId === clientId ? runnerId : clientId;
-const roomId = `errand_${errandId}`;
 
     const payload = {
       senderId: userId,
       receiverId,
       text,
-      errandId: id,
+      errandId,
       roomId,
       createdAt: new Date(),
     };
 
-    // Emit to socket
     socket.emit("send_message", payload);
     setText("");
 
     try {
-      await axios.post(`${BaseUrl}/messages/${id}`, payload, {
+      await axios.post(`${BaseUrl}/messages/${errandId}`, payload, {
         headers: { Authorization: `Bearer ${token}` },
       });
     } catch (err) {
@@ -174,7 +159,7 @@ const roomId = `errand_${errandId}`;
         {myRunners.map((item) => (
           <div
             key={item.id}
-            className={`conversation ${item.id === id ? "active" : ""}`}
+            className={`conversation ${item.id === errandId ? "active" : ""}`}
             onClick={() => navigate(`/dashboard/messages/${item.id}`)}
           >
             <div className="conv-user">
@@ -184,7 +169,8 @@ const roomId = `errand_${errandId}`;
 
               <div className="conversation-info">
                 <p className="name">
-                  {item.assignedRunner?.firstName} {item.assignedRunner?.lastName}
+                  {item.assignedRunner?.firstName}{" "}
+                  {item.assignedRunner?.lastName}
                 </p>
                 <p className="status">{item.title}</p>
                 <p className="status-light">Tap to chat</p>
@@ -194,12 +180,13 @@ const roomId = `errand_${errandId}`;
         ))}
       </div>
 
-      {/* Lock screen if payment pending */}
+      {/* Lock screen */}
       {!isPaid && (
         <div className="messages-chat center-block">
           <h2 className="lock-title">Complete Payment to Continue</h2>
           <p className="lock-desc">
-            You must complete the payment for this errand before messaging the runner.
+            You must complete the payment for this errand before messaging the
+            runner.
           </p>
         </div>
       )}
@@ -208,8 +195,6 @@ const roomId = `errand_${errandId}`;
       {isPaid && (
         <div className="messages-chat">
           <div className="chat-header">
-   
-
             <div className="chat-user-info">
               <div className="avatar large">
                 {chatInfo?.assignedRunner?.firstName?.charAt(0)}
@@ -217,25 +202,34 @@ const roomId = `errand_${errandId}`;
 
               <div>
                 <h4>
-                  {chatInfo?.assignedRunner?.firstName} {chatInfo?.assignedRunner?.lastName}
+                  {chatInfo?.assignedRunner?.firstName}{" "}
+                  {chatInfo?.assignedRunner?.lastName}
                 </h4>
                 <p>Runner</p>
               </div>
             </div>
 
             <div className="menu-container">
-              <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)}>⋮</button>
+              <button
+                className="menu-btn"
+                onClick={() => setMenuOpen(!menuOpen)}
+              >
+                ⋮
+              </button>
 
               {menuOpen && (
                 <div className="menu-options">
-                  <p onClick={() => navigate(`/dashboard/messages/${id}/status`)}>
+                  <p
+                    onClick={() =>
+                      navigate(`/dashboard/messages/${id}/status`)
+                    }
+                  >
                     View Progress
                   </p>
                 </div>
               )}
             </div>
           </div>
-
 
           {/* Chat Body */}
           <div className="chat-body">
@@ -244,14 +238,26 @@ const roomId = `errand_${errandId}`;
             {messages.map((m) => {
               const mine = m.senderId === userId;
               return (
-                <div key={m.id || Math.random()} className={`message ${mine ? "from-user" : ""}`}>
-                  {!mine && <div className="avatar small">{chatInfo?.assignedRunner?.firstName?.charAt(0)}</div>}
+                <div
+                  key={m.id || Math.random()}
+                  className={`message ${mine ? "from-user" : ""}`}
+                >
+                  {!mine && (
+                    <div className="avatar small">
+                      {chatInfo?.assignedRunner?.firstName?.charAt(0)}
+                    </div>
+                  )}
+
                   <div className="bubble">
                     <p>{m.text}</p>
                     <span className="time">
-                      {new Date(m.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                      {new Date(m.createdAt).toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
                     </span>
                   </div>
+
                   {mine && <div className="avatar small">You</div>}
                 </div>
               );
@@ -267,9 +273,7 @@ const roomId = `errand_${errandId}`;
               placeholder="Type your message..."
               value={text}
               onChange={(e) => setText(e.target.value)}
-            
- />
-
+            />
             <button>➤</button>
           </form>
         </div>

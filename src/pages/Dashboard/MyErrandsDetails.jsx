@@ -145,7 +145,7 @@ const MyErrandsDetails = () => {
                 <p className="runner-subtitle">Review and select a runner for your request</p>
 
                 {allerrand && allerrand.length > 0 ? (
-                    allerrand.map((item, id) => (
+                    allerrand.filter((md)=> md !=="Rejected").map((item, id) => (
                         <div className="runner-card" key={id}>
                             <div className="initials-circle">
                                 {item?.runner?.firstName?.charAt(0).toUpperCase() + item?.runner?.lastName?.charAt(0).toUpperCase()}
