@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import ModalSpinner from "../../../Components/ModalSpinner/ModalSpinner";
 
 const SignUp = () => {
   const BaseUrl = import.meta.env.VITE_BASE_URL;
@@ -74,7 +75,7 @@ const SignUp = () => {
 
     if (Object.keys(newErrors).length > 0) {
       const firstError = Object.values(newErrors)[0];
-      toast.error(firstError);
+      // toast.error(firstError);
       return false;
     }
     return true;
@@ -265,6 +266,9 @@ const SignUp = () => {
           </form>
         </div>
       </div>
+     {
+      loading && (<ModalSpinner/>)
+     } 
     </div>
   );
 };

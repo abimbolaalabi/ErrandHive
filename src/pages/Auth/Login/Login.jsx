@@ -10,6 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import { useDispatch } from "react-redux";
 import { setUserDetails } from "../../../global/userSlice";
+import ModalSpinner from "../../../Components/ModalSpinner/ModalSpinner";
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -192,13 +193,13 @@ const Login = () => {
               {loading ? "Logging in..." : "Login"}
             </button>
 
-            <article className="login-right-or">
+            {/* <article className="login-right-or">
               <div className="line"></div>
               <div className="or">
                 <span style={{ fontSize: "1.7rem" }}>o</span>r
               </div>
               <div className="line"></div>
-            </article>
+            </article> */}
 
             {/* <button className="continue-with-google" type="button">
               <FcGoogle style={{ fontSize: "1.5rem" }} />
@@ -224,6 +225,7 @@ const Login = () => {
           </div>
         </form>
       </section>
+       {loading && <ModalSpinner />}
     </main>
   );
 };

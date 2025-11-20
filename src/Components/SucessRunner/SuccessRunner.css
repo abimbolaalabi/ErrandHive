@@ -1,0 +1,288 @@
+.runnersuccessful-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: runnersuccessful-fadeIn 0.2s ease-out;
+}
+
+.runnersuccessful-modal-content {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 440px;
+  position: relative;
+  animation: runnersuccessful-slideUp 0.3s ease-out;
+}
+
+/* Close Button */
+.runnersuccessful-close-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #6b7280;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.runnersuccessful-close-button:hover {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+/* Modal Body */
+.runnersuccessful-modal-body {
+  padding: 24px;
+}
+
+/* Header */
+.runnersuccessful-header {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 20px;
+}
+
+.runnersuccessful-title-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.runnersuccessful-checkmark-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #10b981;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.runnersuccessful-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 4px 0;
+  line-height: 1.2;
+}
+
+.runnersuccessful-subtitle {
+  color: #6b7280;
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Payment Section */
+.runnersuccessful-payment-section {
+  margin-bottom: 24px;
+}
+
+.runnersuccessful-payment-header {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 12px;
+}
+
+.runnersuccessful-payment-details {
+  background-color: #f9fafb;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+}
+
+.runnersuccessful-payment-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.runnersuccessful-payment-label {
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.runnersuccessful-payment-amount {
+  color: #ef4444;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.runnersuccessful-divider {
+  height: 1px;
+  background-color: #e5e7eb;
+  margin: 16px 0;
+}
+
+/* Breakdown */
+.runnersuccessful-payment-breakdown {
+  background-color: white;
+  border-radius: 6px;
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.runnersuccessful-breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.runnersuccessful-breakdown-row:last-child {
+  margin-bottom: 0;
+}
+
+.runnersuccessful-breakdown-label {
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.runnersuccessful-breakdown-amount {
+  color: #1f2937;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.runnersuccessful-breakdown-commission {
+  color: #ef4444;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.runnersuccessful-breakdown-total {
+  padding-top: 8px;
+  border-top: 1px solid #e5e7eb;
+  margin-top: 8px;
+}
+
+.runnersuccessful-breakdown-total-amount {
+  color: #10b981;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* Wallet Section */
+.runnersuccessful-wallet-section {
+  margin-bottom: 24px;
+}
+
+.runnersuccessful-wallet-header {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 16px;
+}
+
+.runnersuccessful-balance-section {
+  background-color: #f0f9ff;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid #bae6fd;
+}
+
+.runnersuccessful-balance-header {
+  color: #0369a1;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.runnersuccessful-balance-amount {
+  color: #0369a1;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* Footer Button */
+.runnersuccessful-footer {
+  display: flex;
+  justify-content: center;
+}
+
+.runnersuccessful-action-button {
+  background-color: #9370db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  min-width: 120px;
+}
+
+.runnersuccessful-action-button:hover {
+  background-color: #7f59c9;
+}
+
+/* Animations */
+@keyframes runnersuccessful-fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes runnersuccessful-slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile (<=480px) */
+@media (max-width: 480px) {
+  .runnersuccessful-modal-overlay {
+    padding: 16px;
+  }
+
+  .runnersuccessful-modal-body {
+    padding: 20px;
+  }
+
+  .runnersuccessful-checkmark-circle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .runnersuccessful-title {
+    font-size: 18px;
+  }
+
+  .runnersuccessful-balance-amount {
+    font-size: 20px;
+  }
+
+  .runnersuccessful-payment-details,
+  .runnersuccessful-payment-breakdown {
+    padding: 12px;
+  }
+}

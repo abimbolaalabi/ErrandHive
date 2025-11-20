@@ -212,23 +212,23 @@
     width: 66%;
   }
 }
-
-@media (max-width: 912px) {
+/* Always keep sidebar + chat side by side */
+@media (max-width: 912px),
+(max-width: 768px) {
   .runner-message-wrapper {
-    flex-direction: column;
-    height: 100vh;
+    flex-direction: row !important;
   }
+
   .runner-message-sidebar {
-    width: 100%;
-    max-height: 240px;
-    padding: 1.2rem;
-    border-radius: 10px;
+    width: 40% !important;
+    max-height: none !important;
   }
+
   .runner-message-chat {
-    width: 100%;
-    border-radius: 10px;
+    width: 60% !important;
   }
 }
+
 
 @media (max-width: 820px) {
   .runner-message-sidebar {
@@ -237,22 +237,7 @@
   }
 }
 
-@media (max-width: 768px) {
-  .runner-message-wrapper {
-    flex-direction: column;
-  }
-  .runner-message-sidebar {
-    width: 100%;
-    max-height: 210px;
-    padding: 1rem;
-  }
-  .runner-chat-body {
-    padding: 1rem;
-  }
-  .chat-header {
-    padding: 0.75rem;
-  }
-}
+
 
 @media (max-width: 600px) {
   .chat-header .avatar.large {

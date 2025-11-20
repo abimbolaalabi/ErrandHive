@@ -16,12 +16,27 @@ const PaymentsPage = () => {
       });
 
       const payments = res?.data?.data?.payments || [];
-      console.log(" Payments fetched:", payments);
+      console.log("Payments fetched:", payments);
+
+      // ⭐ FILTER: If Paid exists, remove Pending duplicates
+      const filtered = payments.filter((tx, index, self) => {
+        const sameGroup = self.filter(
+          (t) => t.transactionId === tx.transactionId
+        );
+
+        const hasPaid = sameGroup.some((t) => t.status === "Paid");
+
+        if (hasPaid) {
+          return tx.status === "Paid"; // keep only the Paid one
+        }
+
+        return true; // no paid exists → keep pending normally
+      });
 
       setAmount(res?.data?.data.summary.totalAmount);
-      setPaymentsData(payments);
+      setPaymentsData(filtered);
     } catch (error) {
-      console.log(" Payment history error:", error);
+      console.log("Payment history error:", error);
     }
   };
 
@@ -84,9 +99,7 @@ const PaymentsPage = () => {
                 {new Date(item.createdAt).toLocaleDateString()}
               </p>
 
-              <p className="col-amount">
-                ₦{formatCurrency(item.amount)}
-              </p>
+              <p className="col-amount">₦{formatCurrency(item.amount)}</p>
 
               <p className="col-status">
                 <span

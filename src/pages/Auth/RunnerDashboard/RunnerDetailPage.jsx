@@ -3,6 +3,7 @@ import "./RunnerDetailPage.css";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import SuccessRunner from "../../../Components/SucessRunner/SuccessRunner";
 
 const RunnerDetailPage = () => {
   const { id } = useParams(); // errandId
@@ -16,6 +17,9 @@ const RunnerDetailPage = () => {
   const [showOtpModal, setShowOtpModal] = useState(false);
   const [currentStep, setCurrentStep] = useState(null);
   const [otp, setOtp] = useState("");
+
+  // ⭐ NEW STATE ADDED
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const uiSteps = [
     { key: "orderAssignedAt", label: "Order assigned" },
@@ -35,7 +39,6 @@ const RunnerDetailPage = () => {
     },
   ];
 
-
   const fetchErrand = async () => {
     try {
       const token = JSON.parse(localStorage.getItem("userToken"));
@@ -49,7 +52,6 @@ const RunnerDetailPage = () => {
     }
   };
 
- 
   const fetchProgress = async () => {
     try {
       const token = JSON.parse(localStorage.getItem("userToken"));
@@ -87,7 +89,6 @@ const RunnerDetailPage = () => {
     }
   };
 
-
   const sendProgressMessage = async (label) => {
     try {
       const token = JSON.parse(localStorage.getItem("userToken"));
@@ -107,13 +108,11 @@ const RunnerDetailPage = () => {
     }
   };
 
-
   const updateStep = async (stepKey, label) => {
     try {
       setLoading(true);
       const token = JSON.parse(localStorage.getItem("userToken"));
 
-      // UI Optimistic update
       setSteps((prev) =>
         prev.map((s) =>
           s.label === label
@@ -131,6 +130,12 @@ const RunnerDetailPage = () => {
       );
 
       fetchProgress();
+
+      // ⭐ SHOW SUCCESS ON LAST STEP (ADDED)
+      if (stepKey === "deliveredConfirmedAt") {
+        setShowSuccessModal(true);
+      }
+
     } catch (err) {
       console.log("Update step error:", err);
     } finally {
@@ -142,7 +147,6 @@ const RunnerDetailPage = () => {
     fetchErrand();
     fetchProgress();
   }, []);
-
 
   const OtpModal = () => {
     const [otpLoading, setOtpLoading] = useState(false);
@@ -181,6 +185,11 @@ const RunnerDetailPage = () => {
         toast.success(res?.data?.message || "OTP verified!");
 
         updateStep(currentStep.stepKey, currentStep.label);
+
+        // ⭐ SHOW SUCCESS MODAL WHEN OTP FINISHES LAST STEP (ADDED)
+        if (currentStep.stepKey === "deliveredConfirmedAt") {
+          setShowSuccessModal(true);
+        }
 
         setOtp("");
         setShowOtpModal(false);
@@ -226,12 +235,12 @@ const RunnerDetailPage = () => {
     );
   };
 
-
   return (
     <div className="runnerDetailPage-container">
       <OtpModal />
 
       <main className="runnerDetailPage-main-content">
+
         {/* ERRAND INFO CARD */}
         <div className="runnerDetailPage-errand-card">
           <div className="runnerDetailPage-errand-header">
@@ -303,11 +312,17 @@ const RunnerDetailPage = () => {
                   className={`runnerDetailPage-progress-step ${
                     step.done ? "done" : ""
                   }`}
+
                   onClick={() => {
                     if (!details.assignedTo) {
                       return toast.error(
                         "You cannot update progress until this errand is assigned."
                       );
+                    }
+
+                    const isPrevStepDone = i === 0 ? true : steps[i - 1].done;
+                    if (!isPrevStepDone) {
+                      return toast.error("You must complete the previous step first.");
                     }
 
                     if (!step.done && !loading) {
@@ -341,6 +356,9 @@ const RunnerDetailPage = () => {
           </div>
         </div>
       </main>
+
+      {/* ⭐ SUCCESS MODAL ONLY WHEN LAST STEP COMPLETES */}
+      {showSuccessModal && <SuccessRunner />}
     </div>
   );
 };

@@ -84,7 +84,7 @@ const RunnerDashboard = () => {
     },
     {
       title: "Active",
-      value: "0",
+      value: summary?.activeJobs ?? 0,
       color: "#8133F1",
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -94,8 +94,8 @@ const RunnerDashboard = () => {
       ),
     },
     {
-      title: "Total Spent",
-      value: `₦${Number(summary?.totalSpent ?? 0).toLocaleString()}`,
+      title: "Total Earnings",
+      value: `₦${Number(summary?.totalEarnings ?? 0).toLocaleString()}`,
       color: "#F97316",
       icon: (
         <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
