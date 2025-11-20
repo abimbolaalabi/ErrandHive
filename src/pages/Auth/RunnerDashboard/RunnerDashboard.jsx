@@ -14,7 +14,7 @@ const RunnerDashboard = () => {
   const userKyc = localStorage.getItem("userKyc");   
   const BaseUrl = import.meta.env.VITE_BASE_URL;
 
-  const fullName = `${storedUser?.firstName || ""} ${storedUser?.lastName || ""}`.trim();
+  const fullName = `${storedUser?.firstName || ""}`.trim();
   
   const runnerSummaryDashBoard = async () => {
     try {

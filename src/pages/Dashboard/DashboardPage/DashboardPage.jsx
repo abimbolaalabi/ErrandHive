@@ -27,7 +27,7 @@ const DashboardPage = () => {
 
   const BaseUrl = import.meta.env.VITE_BASE_URL;
 
-  const fullName = `${storedUser?.firstName || ""} ${storedUser?.lastName || ""}`.trim();
+  const fullName = `${storedUser?.firstName || ""}`.trim();
 
   const formatDate = (iso) => {
     if (!iso) return "";

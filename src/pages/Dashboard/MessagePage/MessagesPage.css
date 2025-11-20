@@ -234,3 +234,16 @@
     width: auto !important;
   }
 }
+.typing-indicator {
+  font-size: 13px;
+  color: #888;
+  margin-left: 70px;
+  margin-top: -10px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0% { opacity: .3; }
+  50% { opacity: 1; }
+  100% { opacity: .3; }
+}

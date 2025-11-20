@@ -69,10 +69,12 @@ const Router = () => {
          
             {/* Client Messages (chat with runner) */}
             <Route path="messages/:id" element={<MessagesPage />} />
+             <Route path="messages" element={<MessagesPage />} />
               <Route
               path="messages/:id/status"
               element={<ErrandDeliveryTrack />}
             />
+            
             <Route path="profile" element={<ProfilePage />} />
             <Route
               path="profile/:profileId"
@@ -97,6 +99,7 @@ const Router = () => {
             {/* Runner Message */}
               {/* <Route path="runnermessage" element={<RunnerMessage />} /> */}
             <Route path="runnermessage/:id" element={<RunnerMessage />} />
+            <Route path="runnermessage" element={<RunnerMessage />} />
             <Route path="runnermessage/:id/status" element={< RunnerDetailPage/>} />
             <Route path="runnertrack/:id" element={<RunnerDetailPage />} />
           </Route>

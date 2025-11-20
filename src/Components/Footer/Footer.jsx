@@ -29,7 +29,13 @@ const Footer = () => {
           <ul>
             <li>Help Center</li>
             <li>Safety</li>
-            <li>Contact</li>
+
+            <li className="cont">
+              <a href="mailto:errandhiveofficial@gmail.com">Contact</a>
+            </li>
+
+
+
           </ul>
         </div>
         <div className="footer-section">
