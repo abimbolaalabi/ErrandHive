@@ -1,6 +1,6 @@
 .morehero-co {
   width: 100%;
-  max-width: 1443px;
+  /* max-width: 1443px; */
   background: linear-gradient(
     180deg,
     #361565 34.62%,
@@ -19,6 +19,9 @@
   font-size: 32px;
   font-weight: 500;
   margin-bottom: 8px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
 }
 
 .morehero-subtitle {
@@ -26,6 +29,9 @@
   opacity: 0.8;
   margin-bottom: 40px;
   font-weight: 300;
+   display: flex;
+  text-align: center;
+  justify-content: center;
 }
 
 .feedback-container {
