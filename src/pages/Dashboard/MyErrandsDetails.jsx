@@ -97,7 +97,7 @@ const MyErrandsDetails = () => {
 
 
   
-    const isAssigned = errand?.status === "Assigned" || Boolean(errand?.assignedTo);
+    const isAssigned = errand?.paymentStatus === "Paid" ;
  
     return (
         <div className='my-errand-detail'>
@@ -168,7 +168,7 @@ const MyErrandsDetails = () => {
                                             });
                                         }}
                                     >
-                                        {isAssigned ? "Assigned" : "View application"}
+                                        {isAssigned ? "Paid" : "View application"}
                                     </button>
                                 </div>
 

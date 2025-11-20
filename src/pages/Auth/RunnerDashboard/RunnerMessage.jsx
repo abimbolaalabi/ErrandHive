@@ -9,11 +9,15 @@ export default function RunnerMessage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useContext(AppContext);
+  const [isTyping, setIsTyping] = useState(false);
+  const audioRef = useRef(new Audio("https://res.cloudinary.com/djxoqpt9t/video/upload/v1763630633/simple-notification-152054_ay6exe.mp3 "));
 
   const token = JSON.parse(localStorage.getItem("userToken"));
   const BaseUrl = import.meta.env.VITE_BASE_URL;
-const errandId = id.includes("_") ? id.split("_")[0] : id;
-const roomId = `errand_${errandId}`;
+
+
+  const errandId = id.includes("_") ? id.split("_")[0] : id;
+  const roomId = `errand_${errandId}`;
 
 
   const [chatInfo, setChatInfo] = useState({});
@@ -25,6 +29,7 @@ const roomId = `errand_${errandId}`;
 
   const messagesEndRef = useRef(null);
   const userId = user?.id;
+  const typingTimeout = useRef(null);
 
   // ================================
   // Fetch runner errands for sidebar
@@ -86,24 +91,42 @@ const roomId = `errand_${errandId}`;
 
 
 
- useEffect(() => {
-  if (!roomId) return;
+  useEffect(() => {
+    if (!roomId) return;
 
-  socket.emit("join_room", roomId);
+    socket.emit("join_room", roomId);
 
-  const handleMessage = (msg) => {
-    // Only append if the message is for THIS room
-    if (msg.roomId === roomId) {
-      setMessages(prev => [...prev, msg]);
+    const handleMessage = (msg) => {
+      // Only append if the message is for THIS room
+      if (msg.roomId === roomId) {
+        setMessages(prev => [...prev, msg]);
+      }
+      // Play audio only if the message is NOT mine
+      if (msg.senderId !== userId) {
+        audioRef.current.play().catch(() => { });
+      }
+    };
+
+    socket.on("receive_message", handleMessage);
+
+    return () => {
+      socket.off("receive_message", handleMessage);
+    };
+  }, [roomId]);
+
+useEffect(() => {
+  const handleTyping = ({ roomId: incomingRoom, userId: sender, isTyping }) => {
+    if (incomingRoom === roomId && sender !== userId) {
+      setIsTyping(isTyping);
     }
   };
 
-  socket.on("receive_message", handleMessage);
+  socket.on("typing", handleTyping);
 
   return () => {
-    socket.off("receive_message", handleMessage);
+    socket.off("typing", handleTyping);
   };
-}, [roomId]);
+}, [roomId, userId]);
 
 
   // ================================
@@ -124,7 +147,8 @@ const roomId = `errand_${errandId}`;
       receiverId,
       text,
       errandId: id,
- roomId: `errand_${chatInfo.id}`,    };
+      roomId: `errand_${chatInfo.id}`,
+    };
 
     // realtime socket
     socket.emit("send_message", payload);
@@ -148,12 +172,12 @@ const roomId = `errand_${errandId}`;
 
   return (
     <div className="messages-wrapper">
-   
+
       <div className="messages-sidebar">
         <h3>Messages</h3>
         <p className="subtext">Chat with your clients</p>
 
-        {errands.filter((jobs)=>jobs.assignedTo ===userId && jobs.status !== "Completed").map((item) => (
+        {errands.filter((jobs) => jobs.assignedTo === userId && jobs.status !== "Completed").map((item) => (
           <div
             key={item.id}
             className={`conversation ${item.id == id ? "active" : ""}`}
@@ -178,9 +202,9 @@ const roomId = `errand_${errandId}`;
         ))}
       </div>
 
-      
 
-   
+
+
       {chatInfo?.id && !isPaid && (
         <div className="messages-chat center-block">
           <div className="lock-screen">
@@ -200,21 +224,25 @@ const roomId = `errand_${errandId}`;
       {/* ================================ */}
       {chatInfo?.id && isPaid && (
         <div className="messages-chat">
-          
+
           <div className="chat-header">
-            <div style={{display: "flex"}}>
-             <div className="avatar large">
-              {chatInfo?.poster?.firstName?.charAt(0)}
+            {isTyping && (
+              <p className="typing-indicator">Typing...</p>
+            )}
+
+            <div style={{ display: "flex" }}>
+              <div className="avatar large">
+                {chatInfo?.poster?.firstName?.charAt(0)}
+              </div>
+
+              <div>
+                <h4>
+                  {chatInfo?.poster?.firstName} {chatInfo?.poster?.lastName}
+                </h4>
+                <p>Client</p>
+              </div>
             </div>
 
-            <div>
-              <h4>
-                {chatInfo?.poster?.firstName} {chatInfo?.poster?.lastName}
-              </h4>
-              <p>Client</p>
-            </div>
-          </div>
-           
 
             <div className="menu-container">
               <button
@@ -276,8 +304,27 @@ const roomId = `errand_${errandId}`;
               type="text"
               placeholder="Type your message..."
               value={text}
-              onChange={(e) => setText(e.target.value)}
+              onChange={(e) => {
+                setText(e.target.value);
+
+                socket.emit("typing", {
+                  roomId,
+                  userId,
+                  isTyping: true
+                });
+
+                // Stop typing after 1.2s of no keypress
+                if (typingTimeout.current) clearTimeout(typingTimeout.current);
+                typingTimeout.current = setTimeout(() => {
+                  socket.emit("typing", {
+                    roomId,
+                    userId,
+                    isTyping: false
+                  });
+                }, 1200);
+              }}
             />
+
             <button>➤</button>
           </form>
         </div>

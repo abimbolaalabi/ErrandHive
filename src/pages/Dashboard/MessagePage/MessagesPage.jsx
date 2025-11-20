@@ -6,6 +6,9 @@ import { AppContext } from "../../../Context/App";
 import { socket } from "../../../socket";
 
 export default function MessagesPage() {
+  const audioRef = useRef(new Audio("https://res.cloudinary.com/djxoqpt9t/video/upload/v1763630633/simple-notification-152054_ay6exe.mp3 "));
+const typingTimeout = useRef(null);
+
   const { id } = useParams(); // errand ID
   const navigate = useNavigate();
   const { user } = useContext(AppContext);
@@ -20,6 +23,7 @@ const roomId = `errand_${errandId}`;
   const [loading, setLoading] = useState(false);
   const [myRunners, setMyRunners] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
+const [isTyping, setIsTyping] = useState(false);
 
   const messagesEndRef = useRef(null);
   const userId = user?.id;
@@ -79,6 +83,20 @@ console.log("whose msg check :", msg.data?.data )
 
     loadChat();
   }, [id, userId]);
+useEffect(() => {
+  const handleTyping = ({ roomId: incomingRoom, userId: sender, isTyping }) => {
+    if (incomingRoom === roomId && sender !== userId) {
+      setIsTyping(isTyping);
+    }
+  };
+
+  socket.on("typing", handleTyping);
+
+  return () => {
+    socket.off("typing", handleTyping);
+  };
+}, [roomId, userId]);
+
 
   // ------------------ Join socket room ------------------
   useEffect(() => {
@@ -104,6 +122,10 @@ useEffect(() => {
   // Listen only for this room
   const handleMessage = (msg) => {
     setMessages(prev => [...prev, msg]);
+      if (msg.senderId !== userId) {
+    audioRef.current.play().catch(() => {});
+  }
+
   };
 
   socket.on("receive_message", handleMessage);
@@ -200,6 +222,10 @@ const roomId = `errand_${errandId}`;
       {isPaid && (
         <div className="messages-chat">
           <div className="chat-header">
+            {isTyping && (
+  <p className="typing-indicator">Typing...</p>
+)}
+
             <div className="chat-user-info">
               <div className="avatar large">
                 {chatInfo?.assignedRunner?.firstName?.charAt(0)}
@@ -252,12 +278,37 @@ const roomId = `errand_${errandId}`;
 
           {/* Input */}
           <form className="chat-input" onSubmit={sendMessage}>
-            <input
+            {/* <input
               type="text"
               placeholder="Type your message..."
               value={text}
               onChange={(e) => setText(e.target.value)}
-            />
+            /> */}
+            <input
+  type="text"
+  placeholder="Type your message..."
+  value={text}
+  onChange={(e) => {
+    setText(e.target.value);
+
+    socket.emit("typing", {
+      roomId,
+      userId,
+      isTyping: true
+    });
+
+    // Stop typing after 1.2s of no keypress
+    if (typingTimeout.current) clearTimeout(typingTimeout.current);
+    typingTimeout.current = setTimeout(() => {
+      socket.emit("typing", {
+        roomId,
+        userId,
+        isTyping: false
+      });
+    }, 1200);
+  }}
+/>
+
             <button>➤</button>
           </form>
         </div>

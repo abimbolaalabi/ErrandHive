@@ -37,6 +37,10 @@
   line-height: 28px;
   opacity: 0.85;
 }
+.cont a{
+  text-decoration: none;
+  color: white;
+}
 
 .footer-section ul li:hover {
   opacity: 1;
