@@ -9,7 +9,6 @@ export default function RunnerMessage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useContext(AppContext);
-  const [isTyping, setIsTyping] = useState(false);
   const audioRef = useRef(new Audio("https://res.cloudinary.com/djxoqpt9t/video/upload/v1763630633/simple-notification-152054_ay6exe.mp3 "));
 
   const token = JSON.parse(localStorage.getItem("userToken"));
@@ -29,7 +28,6 @@ export default function RunnerMessage() {
 
   const messagesEndRef = useRef(null);
   const userId = user?.id;
-  const typingTimeout = useRef(null);
 
   // ================================
   // Fetch runner errands for sidebar
@@ -114,19 +112,7 @@ export default function RunnerMessage() {
     };
   }, [roomId]);
 
-useEffect(() => {
-  const handleTyping = ({ roomId: incomingRoom, userId: sender, isTyping }) => {
-    if (incomingRoom === roomId && sender !== userId) {
-      setIsTyping(isTyping);
-    }
-  };
 
-  socket.on("typing", handleTyping);
-
-  return () => {
-    socket.off("typing", handleTyping);
-  };
-}, [roomId, userId]);
 
 
   // ================================
@@ -226,9 +212,7 @@ useEffect(() => {
         <div className="messages-chat">
 
           <div className="chat-header">
-            {isTyping && (
-              <p className="typing-indicator">Typing...</p>
-            )}
+        
 
             <div style={{ display: "flex" }}>
               <div className="avatar large">
@@ -300,31 +284,13 @@ useEffect(() => {
           </div>
 
           <form className="chat-input" onSubmit={sendMessage}>
-            <input
+             <input
               type="text"
               placeholder="Type your message..."
               value={text}
-              onChange={(e) => {
-                setText(e.target.value);
-
-                socket.emit("typing", {
-                  roomId,
-                  userId,
-                  isTyping: true
-                });
-
-                // Stop typing after 1.2s of no keypress
-                if (typingTimeout.current) clearTimeout(typingTimeout.current);
-                typingTimeout.current = setTimeout(() => {
-                  socket.emit("typing", {
-                    roomId,
-                    userId,
-                    isTyping: false
-                  });
-                }, 1200);
-              }}
-            />
-
+              onChange={(e) => setText(e.target.value)}
+            
+ />
             <button>➤</button>
           </form>
         </div>
