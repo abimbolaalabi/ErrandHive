@@ -221,7 +221,7 @@ export default function MessagesPage() {
                 <div className="menu-options">
                   <p
                     onClick={() =>
-                      navigate(`/runnerlayout/runnermessage/:id/status`)
+                      navigate(`/runnerlayout/runnermessage/${id}/status`)
                     }
                   >
                     View Progress
