@@ -29,7 +29,7 @@ const SignUp = () => {
   // handle input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setFormErrors({ ...formErrors, [e.target.name]: "" }); // clear error for this field
+    setFormErrors({ ...formErrors, [e.target.name]: "" });
   };
 
   const validateForm = () => {
@@ -54,12 +54,11 @@ const SignUp = () => {
       newErrors.email = "Invalid Email Format";
     }
 
+  
     if (!password) {
       newErrors.password = "Password is required";
     } else if (
-      !/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(
-        password
-      )
+      !/^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/.test(password)
     ) {
       newErrors.password =
         "Password must contain at least one letter, one number, one special character, and be 8 characters long";
@@ -74,8 +73,6 @@ const SignUp = () => {
     setFormErrors(newErrors);
 
     if (Object.keys(newErrors).length > 0) {
-      const firstError = Object.values(newErrors)[0];
-      // toast.error(firstError);
       return false;
     }
     return true;
@@ -102,11 +99,14 @@ const SignUp = () => {
         confirmPassword: "",
         role: role,
       });
+
       setFormErrors({});
       navigate("/verifyemail");
     } catch (error) {
       console.log("Signup error:", error);
-      toast.error(error.response?.data?.message || error.message || "Registration failed");
+      toast.error(
+        error.response?.data?.message || error.message || "Registration failed"
+      );
     } finally {
       setLoading(false);
     }
@@ -147,7 +147,7 @@ const SignUp = () => {
                 value={formData.lastName}
                 onChange={handleChange}
                 className={formErrors.lastName ? "error-input" : ""}
-              /> 
+              />
               {formErrors.lastName && (
                 <span className="error-text">{formErrors.lastName}</span>
               )}
@@ -220,9 +220,7 @@ const SignUp = () => {
                 )}
               </div>
               {formErrors.confirmPassword && (
-                <span className="error-text">
-                  {formErrors.confirmPassword}
-                </span>
+                <span className="error-text">{formErrors.confirmPassword}</span>
               )}
             </div>
 
@@ -239,22 +237,6 @@ const SignUp = () => {
               </button>
             </div>
 
-            {/* <article className="signup-line-cont">
-              <div className="firstline"></div>
-              <div className="text-or">or</div>
-              <div className="firstline"></div>
-            </article>
-
-            <Link
-              style={{ display: "flex", gap: "10px", textDecoration: "none" }}
-              to={`https://errandhive-project.onrender.com/api/v1/google`}
-            >
-              <button className="google" type="button" disabled={loading}>
-                <FcGoogle />
-                <p>Continue with Google</p>
-              </button>
-            </Link> */}
-
             <aside className="account-text">
               <p>
                 Already have an account?{" "}
@@ -266,9 +248,8 @@ const SignUp = () => {
           </form>
         </div>
       </div>
-     {
-      loading && (<ModalSpinner/>)
-     } 
+
+      {loading && <ModalSpinner />}
     </div>
   );
 };

@@ -7,6 +7,7 @@
   border-bottom: 1px solid #e5e7eb;
   position: relative;
   z-index: 100;
+  flex-wrap: nowrap;
 }
 
 .header-left {
@@ -22,6 +23,7 @@
   background: #f1f5f9;
   padding: 0.45rem 0.75rem;
   border-radius: 8px;
+  flex-shrink: 0;
 }
 
 .search-icon {
@@ -40,36 +42,39 @@
 .header-right {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
+  flex-shrink: 0;
 }
 
 .notification-btn {
   background: none;
   border: none;
   cursor: pointer;
-
   position: relative;
+  display: flex;
+  align-items: center;
 }
+
 .ntfy {
   background-color: red;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   position: absolute;
   border-radius: 50%;
-  border: 1px solid black;
-  top: -9px;
-  right: -13px;
+  top: -6px;
+  right: -10px;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 11px;
   color: white;
 }
 
-/* User profile box */
 .user-profile {
   display: flex;
   align-items: center;
   gap: 0.6rem;
+  flex-shrink: 0;
 }
 
 .user-info {
@@ -81,15 +86,17 @@
 .user-name {
   font-weight: 600;
   font-size: 0.95rem;
+  white-space: nowrap;
 }
 
 .user-role {
   font-size: 0.75rem;
   color: #6b7280;
+  white-space: nowrap;
 }
 
 .hamburger-btn {
-  display: none; /* desktop hidden */
+  display: none;
   flex-direction: column;
   justify-content: space-between;
   width: 24px;
@@ -97,7 +104,6 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
 }
 
 .hamburger-btn span {
@@ -108,29 +114,87 @@
   border-radius: 1px;
 }
 
+@media (max-width: 992px) {
+  .search-input {
+    width: 200px;
+  }
+  .header-right {
+    gap: 1rem;
+  }
+  .user-name {
+    font-size: 0.85rem;
+  }
+  .user-role {
+    font-size: 0.7rem;
+  }
+}
 
 @media (max-width: 768px) {
   .search-container {
     display: none;
   }
-
   .notification-btn {
-    display: none;
+    display: flex;
   }
-
   .hamburger-btn {
     display: flex;
   }
-
   .header-right {
+    gap: 1rem;
     margin-left: auto;
   }
-
   .user-info {
     text-align: left;
   }
+}
 
-  .user-namee {
-    font-size: 1rem;
+@media (max-width: 480px) {
+  .dashboard-header {
+    padding: 0.8rem 1rem;
+  }
+  .header-right {
+    gap: 0.8rem;
+  }
+  .user-name {
+    font-size: 0.8rem;
+  }
+  .user-role {
+    font-size: 0.65rem;
+  }
+  .ntfy {
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+    top: -6px;
+    right: -8px;
+  }
+}
+
+@media (max-width: 375px) {
+  .header-right {
+    gap: 0.6rem;
+  }
+  .user-name {
+    font-size: 0.75rem;
+  }
+  .user-role {
+    font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .user-profile {
+    gap: 4px;
+  }
+  .user-name {
+    font-size: 0.7rem;
+  }
+  .user-role {
+    font-size: 0.55rem;
+  }
+  .ntfy {
+    width: 14px;
+    height: 14px;
+    font-size: 9px;
   }
 }
