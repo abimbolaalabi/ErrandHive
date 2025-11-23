@@ -1,0 +1,148 @@
+.legalmodal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 9999;
+}
+
+.legalmodal-container {
+  width: 100%;
+  max-width: 650px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 30px;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.2);
+}
+
+.legalmodal-container::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.legalmodal-container {
+  scrollbar-width: none;
+}
+
+.legalmodal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.legalmodal-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.legalmodal-subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.legalmodal-content h3 {
+  margin-top: 18px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.legalmodal-content p {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.6;
+  margin-top: 4px;
+}
+
+@media (max-width: 768px) {
+  .legalmodal-container {
+    padding: 25px;
+    max-width: 550px;
+  }
+
+  .legalmodal-title {
+    font-size: 18px;
+  }
+
+  .legalmodal-content h3 {
+    font-size: 15px;
+  }
+
+  .legalmodal-content p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .legalmodal-overlay {
+    padding: 10px;
+  }
+
+  .legalmodal-container {
+    padding: 20px;
+    max-width: 100%;
+    border-radius: 10px;
+  }
+
+  .legalmodal-title {
+    font-size: 17px;
+  }
+
+  .legalmodal-subtitle {
+    font-size: 13px;
+  }
+
+  .legalmodal-content h3 {
+    font-size: 14px;
+  }
+
+  .legalmodal-content p {
+    font-size: 12.5px;
+    line-height: 1.55;
+  }
+}
+
+@media (max-width: 390px) {
+  .legalmodal-container {
+    padding: 18px;
+  }
+
+  .legalmodal-title {
+    font-size: 16px;
+  }
+
+  .legalmodal-content h3 {
+    font-size: 13.5px;
+  }
+
+  .legalmodal-content p {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .legalmodal-container {
+    padding: 16px;
+  }
+
+  .legalmodal-title {
+    font-size: 15px;
+  }
+
+  .legalmodal-content p {
+    font-size: 11.5px;
+  }
+}
