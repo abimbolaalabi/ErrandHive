@@ -7,6 +7,7 @@ import { FaEyeSlash, FaEye } from "react-icons/fa";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import ModalSpinner from "../../../Components/ModalSpinner/ModalSpinner";
+import TermsModal from "../../../Components/TermsModal/TermsModal";
 
 const SignUp = () => {
   const BaseUrl = import.meta.env.VITE_BASE_URL;
@@ -25,6 +26,7 @@ const SignUp = () => {
   const [formErrors, setFormErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [terms, setTerms] = useState(false)
 
   // handle input changes
   const handleChange = (e) => {
@@ -226,7 +228,7 @@ const SignUp = () => {
 
             <div className="checkbox-input">
               <input type="checkbox" className="checkbox" required />
-              <p className="remember-me-checkbox">
+              <p className="remember-me-checkbox" onClick={()=>setTerms(true)}>
                 I have read and agree to the <span>Terms and Conditions</span>
               </p>
             </div>
@@ -248,7 +250,10 @@ const SignUp = () => {
           </form>
         </div>
       </div>
-
+      {
+        terms && ( <TermsModal toclose={setTerms}/>)
+      }
+     
       {loading && <ModalSpinner />}
     </div>
   );
