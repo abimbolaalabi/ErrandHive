@@ -42,9 +42,11 @@ const ModalErrand = ({ toclose }) => {
 
     if (!deliveryAddress.trim()) newErrors.deliveryAddress = "Delivery address is required";
 
-    if (!price) newErrors.price = "Price is required";
-    else if (isNaN(price) || Number(price) <= 0) newErrors.price = "Price must be a valid number";
-
+if (!price) newErrors.price = "Price is required";
+else if (isNaN(price) || Number(price) <= 0)
+  newErrors.price = "Price must be a valid number";
+else if (Number(price) > 100000)
+  newErrors.price = "Price cannot be above ₦100,000";
     if (!description.trim()) newErrors.description = "Description is required";
 
     setFormErrors(newErrors);

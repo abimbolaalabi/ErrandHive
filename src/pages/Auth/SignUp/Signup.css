@@ -77,6 +77,7 @@ form h1 {
   gap: 0.9rem;
   align-items: center;
   margin-top: 20px;
+  cursor: pointer;
 }
 .checkbox-input input {
   width: 30px;
@@ -174,6 +175,7 @@ form h1 {
   text-align: center;
   justify-content: center;
   margin-top: 10px;
+  cursor: pointer;
 }
 .account-text p {
   font-size: 16px;
