@@ -46,7 +46,7 @@ const RunnerEarning = () => {
   const fetchWalletData = async () => {
     try {
       setLoading(true);
-      const token = JSON.parse(localStorage.getItem("userToken"));
+      const token = localStorage.getItem("userToken");
 
       if (!token) {
         toast.error("No token found! Please login again.");
@@ -78,7 +78,7 @@ const RunnerEarning = () => {
 
       const txData = txResponse.data.data;
 
-      // ⭐ FILTER: Remove pending duplicates if a paid version exists
+      // â­ FILTER: Remove pending duplicates if a paid version exists
       const filtered = txData.payments.filter((tx, index, self) => {
         const sameGroup = self.filter(
           (t) => t.transactionId === tx.transactionId
@@ -152,7 +152,7 @@ const RunnerEarning = () => {
           </div>
 
           <p className="card-main-value">
-            {isVisible ? `₦${walletData.availableBalance}` : "•••••"}
+            {isVisible ? `₦${walletData.availableBalance}` : "â€¢â€¢â€¢â€¢â€¢"}
           </p>
 
           <div className="wallet-id-row">
@@ -261,7 +261,7 @@ const RunnerEarning = () => {
               </p>
             </div>
 
-            {/* ⭐ STATUS + AMOUNT */}
+            {/* â­ STATUS + AMOUNT */}
             <div className="transaction-status">
               <span
                 className={

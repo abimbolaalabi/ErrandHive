@@ -66,7 +66,7 @@ const MyErrandsDetails = () => {
 
             setLoading(true);
 
-            const token = JSON.parse(localStorage.getItem("userToken"));
+            const token = localStorage.getItem("userToken");
             if (!token) {
                 console.log("No token found");
                 setAllErrand([]);
@@ -101,7 +101,7 @@ const MyErrandsDetails = () => {
  
     return (
         <div className='my-errand-detail'>
-            <p className="back-link" onClick={() => navigate("/dashboard/my-errands")}>← Back to my errands</p>
+            <p className="back-link" onClick={() => navigate("/dashboard/my-errands")}>â† Back to my errands</p>
 
             {/* Errand Card */}
             <div className="recents-card">
@@ -173,7 +173,7 @@ const MyErrandsDetails = () => {
                                 </div>
 
                                 <p className="runner-rating">
-                                    ⭐ {item.rating} • {item?.runner?.totalJobs} jobs
+                                    â­ {item.rating} â€¢ {item?.runner?.totalJobs} jobs
                                 </p>
 
                                 <p className="runner-bio">{item?.runner?.bio}</p>

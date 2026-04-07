@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const RunnerPropModal = ({ toclose}) => {
   //   const BaseUrl = import.meta.env.VITE_BASE_URL;
-  //   const token = JSON.parse(localStorage.getItem("userToken"));
+  //   const token = localStorage.getItem("userToken");
   //   const [loading, setLoading] = useState(false);
 
   //   const handleConfirm = async () => {
@@ -58,7 +58,7 @@ const RunnerPropModal = ({ toclose}) => {
 
         <div className="runnerPropModal-center">
           <div className="runnerPropModal-success-icon">
-            <span>✔</span>
+            <span>âœ”</span>
           </div>
 
           <h3 className="runnerPropModal-assign-title">Confirm Runner Assignment</h3>
@@ -83,8 +83,8 @@ const RunnerPropModal = ({ toclose}) => {
             disabled={loading}
             onClick={handleConfirm}
           >
-            <p>⚡ Confirm & Assign</p>
-            {/* {loading ? "Processing..." : <><span>⚡</span> Confirm & Assign</>} */}
+            <p>âš¡ Confirm & Assign</p>
+            {/* {loading ? "Processing..." : <><span>âš¡</span> Confirm & Assign</>} */}
           </button>
         </div>
       </div>

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const ErrandPayMod = ({ toclose, setErrandPay, info }) => {
   const BaseUrl = import.meta.env.VITE_BASE_URL;
-  const token = JSON.parse(localStorage.getItem("userToken"));
+  const token = localStorage.getItem("userToken");
   const [loading, setLoading] = useState(false);
   const Navigate = useNavigate()
 
@@ -74,7 +74,7 @@ const ErrandPayMod = ({ toclose, setErrandPay, info }) => {
 
         <div className="ep-center">
           <div className="ep-success-icon">
-            <span>✔</span>
+            <span>âœ”</span>
           </div>
           <h3 className="ep-mid-title">Price Agreement Reached!</h3>
           <p className="ep-mid-sub">
@@ -122,7 +122,7 @@ export default ErrandPayMod;
 
 // const ErrandPayMod = ({ toclose, setErrandPay, info }) => {
 //   const BaseUrl = import.meta.env.VITE_BASE_URL;
-//   const token = JSON.parse(localStorage.getItem("userToken"));
+//   const token = localStorage.getItem("userToken");
 //   const [loading, setLoading] = useState(false);
 
 //   const price = info.currentPrice || info.bidPrice
@@ -179,7 +179,7 @@ export default ErrandPayMod;
 
 //         <div className="ep-center">
 //           <div className="ep-success-icon">
-//             <span>✔</span>
+//             <span>âœ”</span>
 //           </div>
 //           <h3 className="ep-mid-title">Price Agreement Reached!</h3>
 //           <p className="ep-mid-sub">

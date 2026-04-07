@@ -15,6 +15,7 @@ import Profile from "../../assets/Profile.png";
 import axios from "axios";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { getStoredJson } from "../../utils/storage";
 
 const RunnerLayout = () => {
 
@@ -22,8 +23,8 @@ const RunnerLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const token = JSON.parse(localStorage.getItem("userToken"));
-  const user = JSON.parse(localStorage.getItem("userDetails")) || {};
+  const token = localStorage.getItem("userToken");
+  const user = getStoredJson("userDetails", {});
   const fullName = `${user?.firstName || ""} ${user?.lastName || ""}`.trim();
 
   const [assignedErrand, setAssignedErrand] = useState(null);
@@ -35,7 +36,7 @@ const RunnerLayout = () => {
 
   const getErrandById = async () => {
     try {
-      const token = JSON.parse(localStorage.getItem("userToken"));
+      const token = localStorage.getItem("userToken");
       const res = await axios.get(`${BaseUrl}/errand/my-errands`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -48,7 +49,7 @@ const RunnerLayout = () => {
   };
   const fetchNotifyCount = async () => {
     try {
-      const token = JSON.parse(localStorage.getItem("userToken"))
+      const token = localStorage.getItem("userToken")
       const res = await axios.get(`${BaseUrl}/notifications`, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -145,7 +146,7 @@ const RunnerLayout = () => {
 
       {/* Main Section */}
       <div className="main-section">
-        {/* ⭐ HEADER */}
+        {/* â­ HEADER */}
         <header className="header">
           <button
             className="hamburger-menu"

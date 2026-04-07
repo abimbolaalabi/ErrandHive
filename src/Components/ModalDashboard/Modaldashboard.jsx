@@ -4,6 +4,7 @@ import { X, CheckCircle, Home, CreditCard, Camera } from "lucide-react";
 import { LuDownload } from "react-icons/lu";
 import { toast } from "react-toastify";
 import "./ModalDashboard.css";
+import { getStoredJson } from "../../utils/storage";
 
 const Modaldashboard = ({ close }) => {
   const [files, setFiles] = useState({
@@ -30,8 +31,8 @@ const Modaldashboard = ({ close }) => {
     try {
       setLoading(true);
 
-      const user = JSON.parse(localStorage.getItem("userDetails"));
-      const token = JSON.parse(localStorage.getItem("userToken"));
+      const user = getStoredJson("userDetails", null);
+      const token = localStorage.getItem("userToken");
 
       if (!user || !token) {
         toast.error("User not logged in");
@@ -155,7 +156,7 @@ const Modaldashboard = ({ close }) => {
           </div>
 
           <div className="kyc-guidelines">
-            <h4>ℹ️ Important Guidelines:</h4>
+            <h4>â„¹ï¸ Important Guidelines:</h4>
             <ul>
               <li>All documents must be clear and readable</li>
               <li>Ensure your full name and address are visible</li>

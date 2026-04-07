@@ -1,24 +1,25 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+import { getStoredBoolean, getStoredJson } from "../utils/storage";
 
 const AppContext = createContext(null);
 
 const AppProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [kycStatus, setKycStatus] = useState(null);
-  const [userKyc, setUserKyc] = useState(localStorage.getItem("userKyc") || false );
+  const [userKyc, setUserKyc] = useState(getStoredBoolean("userKyc", false));
 //   const [token,setToken]= useState(localStorage.getItem("userToken") || null)
   const BaseUrl = import.meta.env.VITE_BASE_URL;
 
   const getAUser = async () => {
     try {
-      const userId = JSON.parse(localStorage.getItem("userDetails"));
-      const token = JSON.parse(localStorage.getItem("userToken"));
+      const storedUser = getStoredJson("userDetails", null);
+      const token = localStorage.getItem("userToken");
 
-      if (!userId?.id || !token) return;
+      if (!storedUser?.id || !token) return;
 
      
-      const res = await axios.get(`${BaseUrl}/user/${userId.id}`, {
+      const res = await axios.get(`${BaseUrl}/user/${storedUser.id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUser(res?.data?.data);
@@ -30,8 +31,9 @@ const AppProvider = ({ children }) => {
 
       const kycData = kycRes?.data?.data;
       setKycStatus(kycData?.status);
-      setUserKyc(kycData?.status === "Completed");
-      localStorage.setItem("userKyc", kycData?.status === "Completed");
+      const isVerified = kycData?.status === "Completed";
+      setUserKyc(isVerified);
+      localStorage.setItem("userKyc", String(isVerified));
       localStorage.setItem("kycStatus", kycData?.status);
 
       console.log("AppContext User:", res?.data?.data);

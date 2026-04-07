@@ -1,9 +1,10 @@
 import "./SubHeaderHero.css";
 import { useNavigate } from "react-router-dom";
+import { getStoredJson } from "../../utils/storage";
 
 const SubHeaderHero = () => {
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = getStoredJson("user", null);
 
   // const handlePostRequest = () => {
   //   if (user) {

@@ -10,7 +10,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import { useDispatch } from "react-redux";
 import { setUserDetails } from "../../../global/userSlice";
-import ModalSpinner from "../../../Components/ModalSpinner/ModalSpinner";
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -79,11 +78,16 @@ const Login = () => {
         console.log(res?.data);
         toast.success(res?.data?.message);
         const userDetails = res?.data?.data;
-        const userToken = res?.data?.token;
-         const role = userDetails?.role;
+        const userToken = res?.data?.data?.token;
+        const role = userDetails?.role;
+
+        if (!userDetails || !userToken) {
+          throw new Error("Missing login session data");
+        }
+
         // dispatchUser(setUserDetails({ userDetails, userToken }));
         localStorage.clear()
-        localStorage.setItem("userToken", JSON.stringify(userToken));
+        localStorage.setItem("userToken", userToken);
         localStorage.setItem("userDetails", JSON.stringify(userDetails));
         
           role === "Client"
@@ -193,18 +197,18 @@ const Login = () => {
               {loading ? "Logging in..." : "Login"}
             </button>
 
-            {/* <article className="login-right-or">
+            <article className="login-right-or">
               <div className="line"></div>
               <div className="or">
                 <span style={{ fontSize: "1.7rem" }}>o</span>r
               </div>
               <div className="line"></div>
-            </article> */}
+            </article>
 
-            {/* <button className="continue-with-google" type="button">
+            <button className="continue-with-google" type="button">
               <FcGoogle style={{ fontSize: "1.5rem" }} />
               Continue with Google
-            </button> */}
+            </button>
 
             <span className="forgot-password-form">
               <Link to={"/forgot"} className="link">
@@ -225,7 +229,6 @@ const Login = () => {
           </div>
         </form>
       </section>
-       {loading && <ModalSpinner />}
     </main>
   );
 };

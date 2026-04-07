@@ -13,7 +13,7 @@ const AddBankModal = ({ close }) => {
   });
 
   const [loading, setLoading] = useState(false);
-  const token = JSON.parse(localStorage.getItem("userToken"));
+  const token = localStorage.getItem("userToken");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -57,7 +57,7 @@ const AddBankModal = ({ close }) => {
 
       <div className="bank-modal-container">
         <div className="bank-modal">
-          <button className="bank-close-btn" onClick={() => close(false)}>✕</button>
+          <button className="bank-close-btn" onClick={() => close(false)}>âœ•</button>
 
           <h2 className="bank-title">Add Bank Account</h2>
           <p className="bank-subtitle">
@@ -115,7 +115,7 @@ const AddBankModal = ({ close }) => {
 
             {/* SECURITY */}
             <div className="bank-security-box">
-              <span className="security-icon">🛡️</span>
+              <span className="security-icon">ðŸ›¡ï¸</span>
               <p>Your banking information is encrypted and stored securely.</p>
             </div>
 

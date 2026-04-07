@@ -5,7 +5,7 @@ import axios from "axios";
 
 const PaymentsPage = () => {
   const [paymentsData, setPaymentsData] = useState([]);
-  const token = JSON.parse(localStorage.getItem("userToken"));
+  const token = localStorage.getItem("userToken");
   const [amount, setAmount] = useState("");
   const BaseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -18,7 +18,7 @@ const PaymentsPage = () => {
       const payments = res?.data?.data?.payments || [];
       console.log("Payments fetched:", payments);
 
-      // ⭐ FILTER: If Paid exists, remove Pending duplicates
+      // â­ FILTER: If Paid exists, remove Pending duplicates
       const filtered = payments.filter((tx, index, self) => {
         const sameGroup = self.filter(
           (t) => t.transactionId === tx.transactionId
@@ -30,7 +30,7 @@ const PaymentsPage = () => {
           return tx.status === "Paid"; // keep only the Paid one
         }
 
-        return true; // no paid exists → keep pending normally
+        return true; // no paid exists â†’ keep pending normally
       });
 
       setAmount(res?.data?.data.summary.totalAmount);
@@ -44,7 +44,7 @@ const PaymentsPage = () => {
     getPayments();
   }, []);
 
-  // 🔥 Formatter to always show ₦4,000.00
+  // ðŸ”¥ Formatter to always show ₦4,000.00
   const formatCurrency = (value) =>
     Number(value).toLocaleString("en-NG", {
       minimumFractionDigits: 2,

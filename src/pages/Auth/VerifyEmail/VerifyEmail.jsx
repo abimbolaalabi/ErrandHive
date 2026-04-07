@@ -11,6 +11,7 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import { getStoredBoolean, getStoredString } from "../../../utils/storage";
 
 const VerifyEmail = () => {
   const [codes, setCodes] = useState(["", "", "", "", "", ""]);
@@ -21,17 +22,10 @@ const VerifyEmail = () => {
   const navigate = useNavigate();
 
   const BaseURL = import.meta.env.VITE_BASE_URL;
-  let userEmail = null;
-  try {
-    userEmail =
-      JSON.parse(localStorage.getItem("resetEmail")) ||
-      JSON.parse(localStorage.getItem("email"));
-  } catch {
-    userEmail =
-      localStorage.getItem("resetEmail") || localStorage.getItem("email");
-  }
+  const userEmail =
+    getStoredString("resetEmail") || getStoredString("email");
 
-  const isResetFlow = JSON.parse(localStorage.getItem("isReset"));
+  const isResetFlow = getStoredBoolean("isReset");
   console.log(userEmail);
 
   useEffect(() => {

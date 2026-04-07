@@ -4,9 +4,10 @@ import { Eye, EyeOff } from 'lucide-react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import { getStoredJson } from '../../utils/storage';
 
 const EditProfile = () => {
-  const storedUser = JSON.parse(localStorage.getItem('userDetails')) || {};
+  const storedUser = getStoredJson("userDetails", {});
   const profileId = storedUser.id || storedUser._id;
   const token = localStorage.getItem("userToken");
   const BaseUrl = import.meta.env.VITE_BASE_URL;

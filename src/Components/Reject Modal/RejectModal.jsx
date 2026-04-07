@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 const RejectModal = ({ info, toclose }) => {
     const BaseUrl = import.meta.env.VITE_BASE_URL;
-    const token = JSON.parse(localStorage.getItem("userToken"));
+    const token = localStorage.getItem("userToken");
     const [loading, setLoading] = useState(false);
 
     const handleReject = async () => {
@@ -84,7 +84,7 @@ const RejectModal = ({ info, toclose }) => {
                         disabled={loading}
                         onClick={handleReject}
                     >
-                        {loading ? "Processing..." : <><span className="rejectModal-flash">⚡</span> Confirm & Reject</>}
+                        {loading ? "Processing..." : <><span className="rejectModal-flash">âš¡</span> Confirm & Reject</>}
                     </button>
                 </div>
 

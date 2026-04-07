@@ -22,7 +22,7 @@ const ActiveJobs = () => {
   const [summary, setSummary] = useState(false);
 
   useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("userToken"));
+    const token = localStorage.getItem("userToken");
 
     const fetchJobs = async () => {
       if (!token) {
@@ -53,7 +53,7 @@ const ActiveJobs = () => {
 
   const runnerSummaryDashBoard = async () => {
     try {
-      const token = JSON.parse(localStorage.getItem("userToken"));
+      const token = localStorage.getItem("userToken");
       const res = await axios.get(`${API_BASE_URL}/runner/dashboard-summary`, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -187,7 +187,7 @@ const ActiveJobs = () => {
 
             <div className="bottom-info-row">
               <div className="price-time-info">
-                <CiClock2 /> {new Date(job.createdAt).toLocaleString()} • ₦
+                <CiClock2 /> {new Date(job.createdAt).toLocaleString()} â€¢ ₦
                 {job.price?.toLocaleString() || "0"}
               </div>
 

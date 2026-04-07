@@ -15,7 +15,7 @@ const AddBankDeal = () => {
 
   const fetchBankDetails = async () => {
     try {
-      const token = JSON.parse(localStorage.getItem("userToken"));
+      const token = localStorage.getItem("userToken");
 
       const res = await axios.get(`${BaseUrl}/payment/banks/details`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -91,7 +91,7 @@ const AddBankDeal = () => {
 
           <div className="bank-card">
             {bank.isVerified && (
-              <span className="verified-badge">✔ Verified</span>
+              <span className="verified-badge">âœ” Verified</span>
             )}
 
             <div className="bank-card-actions">
