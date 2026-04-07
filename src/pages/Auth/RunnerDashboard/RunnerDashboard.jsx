@@ -4,13 +4,14 @@ import cube from "../../../assets/cube.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { AppContext } from "../../../Context/App";
+import { getStoredJson } from "../../../utils/storage";
 
 const RunnerDashboard = () => {
   const [summary, setSummary] = useState({});
    const{getAUser} = useContext(AppContext)
    const[kycStatus, setKycStatus] = useState(null)
     const [kycReason, setKycReason] = useState("")
-  const storedUser = JSON.parse(localStorage.getItem("userDetails")) || {};
+  const storedUser = getStoredJson("userDetails", {});
   const userKyc = localStorage.getItem("userKyc");   
   const BaseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -18,7 +19,7 @@ const RunnerDashboard = () => {
   
   const runnerSummaryDashBoard = async () => {
     try {
-      const token = JSON.parse(localStorage.getItem("userToken"));
+      const token = localStorage.getItem("userToken");
       const res = await axios.get(`${BaseUrl}/runner/dashboard-summary`, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -30,7 +31,7 @@ const RunnerDashboard = () => {
 
     const getKyc = async () => {
     try {
-       const token = JSON.parse(localStorage.getItem("userToken"));
+       const token = localStorage.getItem("userToken");
       const res = await axios.get(`${BaseUrl}/kyc/my`, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -112,7 +113,7 @@ const RunnerDashboard = () => {
   return (
     <main className="runner-dashboard-layout">
       <div className="title-dashboard-runner">
-        <h1>Welcome to your dashboard {fullName || "User"}! 👋</h1>
+        <h1>Welcome to your dashboard {fullName || "User"}! ðŸ‘‹</h1>
       </div>
 
     

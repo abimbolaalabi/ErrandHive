@@ -20,7 +20,7 @@ const SuccessPage = () => {
     try {
       setLoading(true);    
 
-      const token = JSON.parse(localStorage.getItem("userToken"));
+      const token = localStorage.getItem("userToken");
       const res = await axios.get(`${BaseUrl}/payment/verify/${reference}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -82,7 +82,7 @@ const SuccessPage = () => {
             {isSuccess && (
               <div className="success-escrow">
                 <BsShieldCheck className="escrow-icon" />
-                <span>○ Funds held securely in escrow</span>
+                <span>â—‹ Funds held securely in escrow</span>
               </div>
             )}
           </div>

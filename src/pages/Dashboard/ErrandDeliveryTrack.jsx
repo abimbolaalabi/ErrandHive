@@ -16,10 +16,10 @@ const ErrandDeliveryTrack = () => {
 
   const [showSuccess, setShowSuccess] = useState(false); 
 
-  // ⭐ Fetch Errand Details
+  // â­ Fetch Errand Details
   const fetchErrand = async () => {
     try {
-      const token = JSON.parse(localStorage.getItem("userToken"));
+      const token = localStorage.getItem("userToken");
       const res = await axios.get(`${BaseUrl}/errand/get/${splitId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -29,11 +29,11 @@ const ErrandDeliveryTrack = () => {
     }
   };
 
-  // ⭐ Fetch Delivery Progress
+  // â­ Fetch Delivery Progress
   const fetchProgress = async () => {
     try {
       setLoading(true);
-      const token = JSON.parse(localStorage.getItem("userToken"));
+      const token = localStorage.getItem("userToken");
 
       const res = await axios.get(`${BaseUrl}/errands/${splitId}/status`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -69,7 +69,7 @@ const ErrandDeliveryTrack = () => {
       {/* BACK BUTTON */}
       <div className="med-back-row">
         <button className="med-back-btn" onClick={() => navigate(-1)}>
-          ← Back to my errands
+          â† Back to my errands
         </button>
       </div>
 
@@ -89,7 +89,7 @@ const ErrandDeliveryTrack = () => {
               </h2>
 
               <div className="med-runner-stats">
-                ★ {errand?.assignedRunner?.rating || 4.8} Rating •{" "}
+                â˜… {errand?.assignedRunner?.rating || 4.8} Rating â€¢{" "}
                 {errand?.assignedRunner?.totalJobs || 0} Deliveries
               </div>
             </div>
@@ -129,7 +129,7 @@ const ErrandDeliveryTrack = () => {
           </div>
 
           <div className="med-profile-meta">
-            <span>★ {errand?.assignedRunner?.rating}</span> •{" "}
+            <span>â˜… {errand?.assignedRunner?.rating}</span> â€¢{" "}
             <span>{errand?.assignedRunner?.totalJobs} Jobs</span>
           </div>
 
@@ -137,7 +137,7 @@ const ErrandDeliveryTrack = () => {
             className="med-chat-btn"
             onClick={() => navigate(`/dashboard/messages/${splitId}`)}
           >
-            💬 Chat with Runner
+            ðŸ’¬ Chat with Runner
           </button>
         </div>
 
@@ -154,7 +154,7 @@ const ErrandDeliveryTrack = () => {
               {steps.map((step, index) => (
                 <div className="progress-step" key={index}>
                   <div className={`progress-circle ${step.done ? "done" : ""}`}>
-                    {step.done ? <span className="check-icon">✓</span> : ""}
+                    {step.done ? <span className="check-icon">âœ“</span> : ""}
                   </div>
 
                   <div className="progress-text">
@@ -168,7 +168,7 @@ const ErrandDeliveryTrack = () => {
         </div>
       </div>
 
-      {/* ⭐ SUCCESS MODAL */}
+      {/* â­ SUCCESS MODAL */}
       {showSuccess && (
         <SuccessClientMod
           onClose={() => setShowSuccess(false)}

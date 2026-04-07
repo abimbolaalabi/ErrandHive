@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const ModalProposalRev = ({ toclose, setErrandPay, info }) => {
   const BaseUrl = import.meta.env.VITE_BASE_URL;
-  const token = JSON.parse(localStorage.getItem("userToken"));
+  const token = localStorage.getItem("userToken");
   const [loading, setLoading] = useState(false);
 
   const handleConfirm = async () => {
@@ -51,7 +51,7 @@ const ModalProposalRev = ({ toclose, setErrandPay, info }) => {
 
         <div className="rev-center">
           <div className="rev-success-icon">
-            <span>✔</span>
+            <span>âœ”</span>
           </div>
 
           <h3 className="rev-assign-title">Confirm Runner Assignment</h3>
@@ -80,7 +80,7 @@ const ModalProposalRev = ({ toclose, setErrandPay, info }) => {
             disabled={loading}
             onClick={handleConfirm}
           >
-            {loading ? "Processing..." : <><span>⚡</span> Confirm & Assign</>}
+            {loading ? "Processing..." : <><span>âš¡</span> Confirm & Assign</>}
           </button>
 
          

@@ -4,10 +4,11 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Eye, EyeOff } from 'lucide-react'
 import axios from "axios";
 import { toast } from "react-toastify";
+import { getStoredJson } from '../../utils/storage';
 
 const ProfileDetailSetting = () => {
   const { profileId } = useParams()
-  const token = JSON.parse(localStorage.getItem("userToken"));
+  const token = localStorage.getItem("userToken");
   const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState('');
@@ -96,7 +97,7 @@ const ProfileDetailSetting = () => {
   };
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("userDetails"));
+    const user = getStoredJson("userDetails", null);
     if (user) {
       setFirstName(user.firstName || "");
       setLastName(user.lastName || "");

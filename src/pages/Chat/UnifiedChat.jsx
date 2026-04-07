@@ -15,7 +15,7 @@ export default function MessagesPage() {
   const { id } = useParams(); // errandId
   const { user } = useContext(AppContext);
 
-  const token = JSON.parse(localStorage.getItem("userToken"));
+  const token = localStorage.getItem("userToken");
   const BaseUrl = import.meta.env.VITE_BASE_URL;
 
   const [chatInfo, setChatInfo] = useState({});
@@ -38,7 +38,7 @@ export default function MessagesPage() {
     receiverId = userId === clientId ? runnerId : clientId;
   }
 
-  // ⭐ JOIN ROOM
+  // â­ JOIN ROOM
   useEffect(() => {
     if (!userId || !receiverId) return;
 
@@ -46,7 +46,7 @@ export default function MessagesPage() {
     socket.emit("join_room", roomId);
   }, [userId, receiverId]);
 
-  // ⭐ LISTEN FOR LIVE MESSAGES
+  // â­ LISTEN FOR LIVE MESSAGES
   useEffect(() => {
     const incoming = (msg) => {
       setMessages((prev) => [...prev, msg]);
@@ -58,7 +58,7 @@ export default function MessagesPage() {
     return () => socket.off("receive_message", incoming);
   }, []);
 
-  // ⭐ LOAD CHAT INFO + MESSAGE HISTORY
+  // â­ LOAD CHAT INFO + MESSAGE HISTORY
   useEffect(() => {
     (async () => {
       try {
@@ -83,7 +83,7 @@ export default function MessagesPage() {
     })();
   }, [id]);
 
-  // ⭐ SEND MESSAGE
+  // â­ SEND MESSAGE
 const sendMessage = async (e) => {
   e.preventDefault();
   if (!text.trim() || !receiverId) return;
@@ -111,7 +111,7 @@ const sendMessage = async (e) => {
   setText("");
 };
 
-  // ⭐ Auto scroll
+  // â­ Auto scroll
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -157,7 +157,7 @@ const sendMessage = async (e) => {
             </h4>
             <p>Runner</p>
           </div>
-          <button className="menu-btn">⋮</button>
+          <button className="menu-btn">â‹®</button>
         </div>
 
         <div className="chat-body">
@@ -200,7 +200,7 @@ const sendMessage = async (e) => {
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
-          <button>➤</button>
+          <button>âž¤</button>
         </form>
       </div>
     </div>

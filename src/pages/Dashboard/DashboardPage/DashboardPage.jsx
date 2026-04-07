@@ -7,26 +7,22 @@ import { CiLocationOn } from "react-icons/ci";
 import { BsClock } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import cube from "../../../assets/cube.png";
+import { getStoredJson } from "../../../utils/storage";
 
 const DashboardPage = () => {
   const [errandMod, setErrandMod] = useState(false);
   const [errands, setErrands] = useState([]);
   const [loading, setLoading] = useState(true);
   const [summary, setSummary] = useState({});
-
-
   const [kycStatus, setKycStatus] = useState("");
   const [kycReason, setKycReason] = useState("");
 
   const navigate = useNavigate();
 
-  const storedUser = JSON.parse(localStorage.getItem("userDetails")) || {};
-
- 
+  // ✅ Parse stored user details correctly
+  const storedUser = getStoredJson("userDetails", {});
   const userKyc = localStorage.getItem("userKyc") === "true";
-
   const BaseUrl = import.meta.env.VITE_BASE_URL;
-
   const fullName = `${storedUser?.firstName || ""}`.trim();
 
   const formatDate = (iso) => {
@@ -40,7 +36,7 @@ const DashboardPage = () => {
   const fetchErrands = async () => {
     try {
       setLoading(true);
-      const token = JSON.parse(localStorage.getItem("userToken"));
+      const token = localStorage.getItem("userToken");
       if (!token) {
         console.log("No token found");
         setErrands([]);
@@ -61,31 +57,41 @@ const DashboardPage = () => {
 
   const clientSummaryDashBoard = async () => {
     try {
-      const token = JSON.parse(localStorage.getItem("userToken"));
+      const token = localStorage.getItem("userToken");
       const res = await axios.get(`${BaseUrl}/client-summary`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setSummary(res?.data?.data || {});
     } catch (error) {
-      console.log("This is clientSummaryDashBoard error:", error);
+      // ✅ Gracefully handle 404 – endpoint may not be implemented yet
+      if (error.response?.status === 404) {
+        console.warn("Client summary endpoint not found – using default values.");
+        setSummary({ totalRequests: 0, completedJobs: 0, activeJobs: 0, totalSpent: 0 });
+      } else {
+        console.log("clientSummaryDashBoard error:", error);
+      }
     }
   };
 
   const getKyc = async () => {
     try {
-      setLoading(true);
-
-      const rawToken = localStorage.getItem("userToken");
-      const token = rawToken ? JSON.parse(rawToken) : null;
+      const token = localStorage.getItem("userToken");
+      if (!token) return;
 
       const res = await axios.get(`${BaseUrl}/kyc/my`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
+      // ✅ Handle case where KYC doesn't exist (res.data.data may be null or message)
       const kyc = res?.data?.data;
-      const normalizedStatus = kyc?.status?.toLowerCase();
+      if (!kyc || res?.data?.message === "KYC not found") {
+        setKycStatus("not_submitted");
+        setKycReason("");
+        localStorage.setItem("userKyc", "false");
+        return;
+      }
 
-  
+      const normalizedStatus = kyc?.status?.toLowerCase();
       setKycStatus(normalizedStatus);
       setKycReason(kyc?.reason || "");
 
@@ -94,12 +100,11 @@ const DashboardPage = () => {
         normalizedStatus === "approved" ||
         normalizedStatus === "completed";
 
-      // Store only "true" or "false"
       localStorage.setItem("userKyc", verified ? "true" : "false");
     } catch (error) {
       console.log("KYC fetch error:", error);
-    } finally {
-      setLoading(false);
+      // On error, assume not verified
+      localStorage.setItem("userKyc", "false");
     }
   };
 
@@ -170,7 +175,6 @@ const DashboardPage = () => {
           <p className="welcome-subtitle">Manage your errands today.</p>
         </div>
 
-        {/** ✅ THIS NOW WORKS CORRECTLY */}
         {userKyc && (
           <button className="post-errand-btn" onClick={() => setErrandMod(true)}>
             + <span>Post New Errand</span>

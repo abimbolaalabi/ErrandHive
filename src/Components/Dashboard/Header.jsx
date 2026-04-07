@@ -5,6 +5,7 @@ import './Header.css';
 import { useNavigate } from 'react-router-dom';
 import Profile from "../../assets/Profile.png"; 
 import axios from 'axios';
+import { getStoredJson } from '../../utils/storage';
 
 const Header = ({ setSidebarOpen }) => {
   const { userType, user } = useContext(AppContext);
@@ -12,13 +13,13 @@ const Header = ({ setSidebarOpen }) => {
   const BaseUrl = import.meta.env.VITE_BASE_URL
   const navigate = useNavigate()
 
-  const storedUser = JSON.parse(localStorage.getItem("userDetails")) || {};
+  const storedUser = getStoredJson("userDetails", {});
   const fullName = `${storedUser?.firstName || ""} ${storedUser?.lastName || ""}`.trim();
 
 
   const fetchNotifyCount = async () => {
   try {
-    const token = JSON.parse(localStorage.getItem("userToken"))
+    const token = localStorage.getItem("userToken")
     const res = await axios.get(`${BaseUrl}/notifications`, {
       headers: { Authorization: `Bearer ${token}` },
     });

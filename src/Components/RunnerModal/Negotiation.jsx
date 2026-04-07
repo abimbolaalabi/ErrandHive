@@ -14,10 +14,10 @@ const Negotiation = ({ close, errand }) => {
   const [isAccepting, setIsAccepting] = useState(false);
   const [runnerPMod, setRunnerPMod] = useState(false);
 
-  const token = JSON.parse(localStorage.getItem("userToken"));
+  const token = localStorage.getItem("userToken");
   const navigate = useNavigate();
 
-  // ✅ Handle proposing a counter price
+  // âœ… Handle proposing a counter price
   const handlePropose = async () => {
     if (!counterPrice) {
       toast.error("Please enter a proposed price.");
@@ -57,7 +57,7 @@ const Negotiation = ({ close, errand }) => {
     }
   };
 
-  // ✅ Handle accepting an errand offer
+  // âœ… Handle accepting an errand offer
   const handleAccept = async () => {
     setIsAccepting(true);
     try {
@@ -72,7 +72,7 @@ const Negotiation = ({ close, errand }) => {
         }
       );
 
-      toast.success(response?.data?.message || "You’ve accepted the current price!");
+      toast.success(response?.data?.message || "Youâ€™ve accepted the current price!");
       close();
       navigate(`/runnerlayout/runnertrack/${errand.id}`);
     } catch (error) {
@@ -92,7 +92,7 @@ const Negotiation = ({ close, errand }) => {
 
       <div className="negotiation-modal">
         <button className="close-btn" onClick={close}>
-          ×
+          Ã—
         </button>
 
         <h2 className="modal-title">Review Errand Price</h2>

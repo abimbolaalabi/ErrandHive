@@ -24,7 +24,7 @@ const ModalErrand = ({ toclose }) => {
   const [formErrors, setFormErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const token = JSON.parse(localStorage.getItem("userToken"));
+  const token = localStorage.getItem("userToken");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -42,11 +42,10 @@ const ModalErrand = ({ toclose }) => {
 
     if (!deliveryAddress.trim()) newErrors.deliveryAddress = "Delivery address is required";
 
-if (!price) newErrors.price = "Price is required";
-else if (isNaN(price) || Number(price) <= 0)
-  newErrors.price = "Price must be a valid number";
-else if (Number(price) > 100000)
-  newErrors.price = "Price cannot be above ₦100,000";
+    if (!price) newErrors.price = "Price is required";
+    else if (isNaN(price) || Number(price) <= 0) newErrors.price = "Price must be a valid number";
+    else if (Number(price) > 100000) newErrors.price = "Price cannot be above ₦100,000";
+
     if (!description.trim()) newErrors.description = "Description is required";
 
     setFormErrors(newErrors);
@@ -76,16 +75,12 @@ else if (Number(price) > 100000)
         formDataToSend.append("attachments", file);
       }
 
-      const res = await axios.post(
-        `${BaseUrl}/errand/create`,
-        formDataToSend,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const res = await axios.post(`${BaseUrl}/errand/create`, formDataToSend, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       toast.success(res?.data?.message || "Errand created successfully!");
       setTimeout(() => {
@@ -114,13 +109,13 @@ else if (Number(price) > 100000)
   return (
     <div className="modalerrand-container">
       <div className="modalerrand-child">
-        
-        {/* 🔥 UPDATED TOP BAR WITH MOVING TEXT */}
         <div className="top-note-container">
           <p className="top-moving-note">
             Note!! Do not place items above <strong>₦100,000</strong> for pickup
           </p>
-          <span onClick={() => toclose(false)} className="closee-button">X</span>
+          <span onClick={() => toclose(false)} className="closee-button">
+            X
+          </span>
         </div>
 
         <h2 className="post-errand-header">Post New Errand</h2>
@@ -129,9 +124,10 @@ else if (Number(price) > 100000)
         </p>
 
         <div className="form-content">
-
           <div className="input-group">
-            <p className="label-with-icon"><FaBook /> Errand Title</p>
+            <p className="label-with-icon">
+              <FaBook /> Errand Title
+            </p>
             <input
               type="text"
               name="title"
@@ -144,7 +140,9 @@ else if (Number(price) > 100000)
           </div>
 
           <div className="input-group">
-            <p className="label-with-icon"><FaLocationDot /> Pickup Address</p>
+            <p className="label-with-icon">
+              <FaLocationDot /> Pickup Address
+            </p>
             <input
               type="text"
               name="pickupAddress"
@@ -157,7 +155,9 @@ else if (Number(price) > 100000)
           </div>
 
           <div className="input-group">
-            <p className="label-with-icon"><FaPhone /> Pickup Contact Phone</p>
+            <p className="label-with-icon">
+              <FaPhone /> Pickup Contact Phone
+            </p>
             <input
               type="tel"
               name="pickupContact"
@@ -170,7 +170,9 @@ else if (Number(price) > 100000)
           </div>
 
           <div className="input-group">
-            <p className="label-with-icon"><FaLocationDot /> Delivery Address</p>
+            <p className="label-with-icon">
+              <FaLocationDot /> Delivery Address
+            </p>
             <input
               type="text"
               name="deliveryAddress"
@@ -183,7 +185,9 @@ else if (Number(price) > 100000)
           </div>
 
           <div className="input-group">
-            <p className="label-with-icon"><FaNairaSign /> Price</p>
+            <p className="label-with-icon">
+              <FaNairaSign /> Price
+            </p>
             <input
               type="number"
               name="price"
@@ -223,7 +227,6 @@ else if (Number(price) > 100000)
               />
             </label>
           </div>
-
         </div>
 
         <div className="action-buttons">
@@ -235,7 +238,7 @@ else if (Number(price) > 100000)
           </button>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 

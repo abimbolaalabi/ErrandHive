@@ -13,7 +13,7 @@ export default function MessagesPage() {
   const errandId = id?.includes("_") ? id.split("_")[0] : id;
   const roomId = `errand_${errandId}`;
 
-  const token = JSON.parse(localStorage.getItem("userToken"));
+  const token = localStorage.getItem("userToken");
   const BaseUrl = import.meta.env.VITE_BASE_URL;
 
   const [chatInfo, setChatInfo] = useState({});
@@ -214,7 +214,7 @@ export default function MessagesPage() {
                 className="menu-btn"
                 onClick={() => setMenuOpen(!menuOpen)}
               >
-                ⋮
+                â‹®
               </button>
 
               {menuOpen && (
@@ -274,7 +274,7 @@ export default function MessagesPage() {
               value={text}
               onChange={(e) => setText(e.target.value)}
             />
-            <button>➤</button>
+            <button>âž¤</button>
           </form>
         </div>
       )}

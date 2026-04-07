@@ -13,11 +13,12 @@ import "./Resetpassword.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import { getStoredString } from "../../../utils/storage";
 
 
 const ResetPassword = () => {
    const BaseUrl = import.meta.env.VITE_BASE_URL;
-   const userEmail = JSON.parse(localStorage.getItem("email"));
+   const userEmail = getStoredString("email");
      
    const nav = useNavigate()
 

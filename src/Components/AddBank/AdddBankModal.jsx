@@ -13,7 +13,7 @@ const AddBankModal = ({ close }) => {
 
   const [loading, setLoading] = useState(false);
 
-  const token =  JSON.parse(localStorage.getItem("userToken"));
+  const token =  localStorage.getItem("userToken");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,10 +42,10 @@ const AddBankModal = ({ close }) => {
         }
       );
 
-      console.log("✅ Bank details response:", res.data);
+      console.log("âœ… Bank details response:", res.data);
       toast.success(res.data.message);
     } catch (err) {
-      console.error("❌ Error saving bank details:", err);
+      console.error("âŒ Error saving bank details:", err);
       toast.error(err.response?.data?.message || "Failed to save bank details");
     } finally {
       setLoading(false);
@@ -62,7 +62,7 @@ const AddBankModal = ({ close }) => {
       <div className="add-bank-modal-overlay">
         <div className="add-bank-modal">
           {/* Close Button */}
-          <button className="add-bank-close-btn" onClick={() => close(false)}>×</button>
+          <button className="add-bank-close-btn" onClick={() => close(false)}>Ã—</button>
 
           {/* Header */}
           <h2 className="add-bank-title">Add Bank Account</h2>

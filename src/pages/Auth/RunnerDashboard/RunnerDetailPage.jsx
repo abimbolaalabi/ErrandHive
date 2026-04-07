@@ -18,7 +18,7 @@ const RunnerDetailPage = () => {
   const [currentStep, setCurrentStep] = useState(null);
   const [otp, setOtp] = useState("");
 
-  // ⭐ NEW STATE ADDED
+  // â­ NEW STATE ADDED
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const uiSteps = [
@@ -41,7 +41,7 @@ const RunnerDetailPage = () => {
 
   const fetchErrand = async () => {
     try {
-      const token = JSON.parse(localStorage.getItem("userToken"));
+      const token = localStorage.getItem("userToken");
       const res = await axios.get(`${BaseUrl}/errand/get/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -54,7 +54,7 @@ const RunnerDetailPage = () => {
 
   const fetchProgress = async () => {
     try {
-      const token = JSON.parse(localStorage.getItem("userToken"));
+      const token = localStorage.getItem("userToken");
       const res = await axios.get(`${BaseUrl}/errands/${id}/status`, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -91,7 +91,7 @@ const RunnerDetailPage = () => {
 
   const sendProgressMessage = async (label) => {
     try {
-      const token = JSON.parse(localStorage.getItem("userToken"));
+      const token = localStorage.getItem("userToken");
 
       await axios.post(
         `${BaseUrl}/messages/send`,
@@ -111,7 +111,7 @@ const RunnerDetailPage = () => {
   const updateStep = async (stepKey, label) => {
     try {
       setLoading(true);
-      const token = JSON.parse(localStorage.getItem("userToken"));
+      const token = localStorage.getItem("userToken");
 
       setSteps((prev) =>
         prev.map((s) =>
@@ -131,7 +131,7 @@ const RunnerDetailPage = () => {
 
       fetchProgress();
 
-      // ⭐ SHOW SUCCESS ON LAST STEP (ADDED)
+      // â­ SHOW SUCCESS ON LAST STEP (ADDED)
       if (stepKey === "deliveredConfirmedAt") {
         setShowSuccessModal(true);
       }
@@ -159,7 +159,7 @@ const RunnerDetailPage = () => {
       try {
         setOtpLoading(true);
 
-        const token = JSON.parse(localStorage.getItem("userToken"));
+        const token = localStorage.getItem("userToken");
 
         let endpoint = "";
 
@@ -186,7 +186,7 @@ const RunnerDetailPage = () => {
 
         updateStep(currentStep.stepKey, currentStep.label);
 
-        // ⭐ SHOW SUCCESS MODAL WHEN OTP FINISHES LAST STEP (ADDED)
+        // â­ SHOW SUCCESS MODAL WHEN OTP FINISHES LAST STEP (ADDED)
         if (currentStep.stepKey === "deliveredConfirmedAt") {
           setShowSuccessModal(true);
         }
@@ -339,7 +339,7 @@ const RunnerDetailPage = () => {
                   }}
                 >
                   <div className="runnerDetailPage-step-circle">
-                    {step.done ? "✓" : ""}
+                    {step.done ? "âœ“" : ""}
                   </div>
 
                   <div className="runnerDetailPage-step-content">
@@ -357,7 +357,7 @@ const RunnerDetailPage = () => {
         </div>
       </main>
 
-      {/* ⭐ SUCCESS MODAL ONLY WHEN LAST STEP COMPLETES */}
+      {/* â­ SUCCESS MODAL ONLY WHEN LAST STEP COMPLETES */}
       {showSuccessModal && <SuccessRunner />}
     </div>
   );

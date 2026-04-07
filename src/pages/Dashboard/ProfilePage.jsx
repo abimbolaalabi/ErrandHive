@@ -13,6 +13,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AppContext } from "../../Context/App";
+import { getStoredJson } from "../../utils/storage";
 
 const ProfilePage = () => {
   const [modaldash, setModalDash] = useState(false);
@@ -27,8 +28,8 @@ const ProfilePage = () => {
 
   const BaseUrl = import.meta.env.VITE_BASE_URL;
 
-  const storedUser = JSON.parse(localStorage.getItem("userDetails"));
-  const token = JSON.parse(localStorage.getItem("userToken"));
+  const storedUser = getStoredJson("userDetails", {});
+  const token = localStorage.getItem("userToken");
 
   const fullName = `${storedUser?.firstName || ""} ${storedUser?.lastName || ""}`.trim();
 
@@ -79,8 +80,7 @@ const ProfilePage = () => {
     try {
       setLoading(true);
 
-      const rawToken = localStorage.getItem("userToken");
-      const token = rawToken ? JSON.parse(rawToken) : null;
+      const token = localStorage.getItem("userToken");
 
       const res = await axios.get(`${BaseUrl}/kyc/my`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -95,7 +95,7 @@ const ProfilePage = () => {
 
     
       const verified = normalizedStatus === "verified" || normalizedStatus === "approved" || normalizedStatus === "completed";
-      localStorage.setItem("userKyc", verified);
+      localStorage.setItem("userKyc", String(verified));
     } catch (error) {
       console.log("KYC fetch error:", error);
     } finally {

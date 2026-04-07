@@ -12,6 +12,7 @@ import {
 import KycPopupModel from "../../../Components/RunnerModal/KycPopupModel";
 import axios from "axios";
 import Bank from "../../../assets/Bank.png"
+import { getStoredJson } from "../../../utils/storage";
 
 const RunnerProfile = () => {
   const [user, setUser] = useState(null);
@@ -25,9 +26,9 @@ const RunnerProfile = () => {
   const navigate = useNavigate()
 
   const BaseUrl = import.meta.env.VITE_BASE_URL;
-  const token = JSON.parse(localStorage.getItem("userToken"));
+  const token = localStorage.getItem("userToken");
   console.log(token)
-  const storedUser = JSON.parse(localStorage.getItem("userDetails"));
+  const storedUser = getStoredJson("userDetails", null);
   const id = storedUser?.id;
 
   const memberSince = new Date().toLocaleDateString("en-US", { year: "numeric", month: "long" });
@@ -262,9 +263,9 @@ const RunnerProfile = () => {
 
       <div className="runnerProfile-carouselNote">
         <div className="runnerProfile-carouselTrack">
-          <span>⚠️ Note: All withdrawals are on Mondays only</span>
-          {/* <span>⚠️ Note: All withdrawals are on Mondays only</span> */}
-          {/* <span>⚠️ Note: All withdrawals are on Mondays only</span> */}
+          <span>âš ï¸ Note: All withdrawals are on Mondays only</span>
+          {/* <span>âš ï¸ Note: All withdrawals are on Mondays only</span> */}
+          {/* <span>âš ï¸ Note: All withdrawals are on Mondays only</span> */}
         </div>
       </div>
 

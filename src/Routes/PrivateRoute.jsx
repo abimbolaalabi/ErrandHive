@@ -1,8 +1,9 @@
 import { Navigate, Outlet } from "react-router-dom";
+import { getStoredJson } from "../utils/storage";
 
 const PrivateRoute = ({ allowedRole }) => {
-  const token = JSON.parse(localStorage.getItem("userToken"));
-  const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+  const token = localStorage.getItem("userToken");
+  const userDetails = getStoredJson("userDetails", null);
 
   
   if (!token || !userDetails) {

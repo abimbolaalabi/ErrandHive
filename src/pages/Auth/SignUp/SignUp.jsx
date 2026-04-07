@@ -91,7 +91,7 @@ const SignUp = () => {
       });
 
       toast.success(res?.data?.message || "Registration successful!");
-      localStorage.setItem("email", JSON.stringify(formData.email));
+      localStorage.setItem("email", formData.email);
 
       setFormData({
         firstName: "",

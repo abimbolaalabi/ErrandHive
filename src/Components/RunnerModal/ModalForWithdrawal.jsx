@@ -19,7 +19,7 @@ const ModalForWithdrawal = ({ toclose, setSuccess, amount , onSuccess }) => {
   // Fetch wallet balance
   const fetchWalletData = async () => {
     try {
-      const token = JSON.parse(localStorage.getItem("userToken"));
+      const token = localStorage.getItem("userToken");
       if (!token) {
         toast.error("No token found! Please login again.");
         return;
@@ -46,7 +46,7 @@ const ModalForWithdrawal = ({ toclose, setSuccess, amount , onSuccess }) => {
   // Fetch bank details
   const fetchBankDetails = async () => {
     try {
-      const token = JSON.parse(localStorage.getItem("userToken"));
+      const token = localStorage.getItem("userToken");
       if (!token) return;
 
       const res = await axios.get(`${API_BASE_URL}/payment/banks/details`, {
@@ -81,7 +81,7 @@ const ModalForWithdrawal = ({ toclose, setSuccess, amount , onSuccess }) => {
     setLoading(true);
     setError("");
     try {
-      const token = JSON.parse(localStorage.getItem("userToken"));
+      const token = localStorage.getItem("userToken");
       await axios.post(
         `${API_BASE_URL}/payment/wallet/withdraw`,
         { amount: Number(amount), bankId: bank.id },
@@ -134,7 +134,7 @@ const ModalForWithdrawal = ({ toclose, setSuccess, amount , onSuccess }) => {
       <div className="detail-text">
         <p className="detail-title">To Bank Account</p>
         <p className="detail-value">
-          {bank.bankName || "Bank Name Missing"} •••• {bank.accountNumber ? bank.accountNumber.slice(-4) : "XXXX"}
+          {bank.bankName || "Bank Name Missing"} â€¢â€¢â€¢â€¢ {bank.accountNumber ? bank.accountNumber.slice(-4) : "XXXX"}
         </p>
         <p className="detail-subtext">
           Account Holder: {bank.accountName || "Name Missing"}

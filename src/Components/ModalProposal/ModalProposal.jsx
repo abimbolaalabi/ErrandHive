@@ -14,7 +14,7 @@ const ModalProposal = ({ toclose, setReview, info, setInfo, setReject }) => {
     const [ErrandId, setErrandId] = useState([])
     const [loading, setLoading] = useState(true);
     const BaseUrl = import.meta.env.VITE_BASE_URL
-    const token = JSON.parse(localStorage.getItem("userToken"));
+    const token = localStorage.getItem("userToken");
 
     const ErrandById = async () => {
         try {
@@ -64,7 +64,7 @@ const ModalProposal = ({ toclose, setReview, info, setInfo, setReject }) => {
                                     {item?.runner?.firstName} {item?.runner?.lastName}
                                 </h3>
                                 <p className="rb-rating">
-                                    <AiFillStar size={16} color="#F8B400" /> {item?.runner?.rating} •{" "}
+                                    <AiFillStar size={16} color="#F8B400" /> {item?.runner?.rating} â€¢{" "}
                                     {item?.runner?.totalJobs} jobs completed
                                 </p>
                             </div>
@@ -92,7 +92,7 @@ const ModalProposal = ({ toclose, setReview, info, setInfo, setReject }) => {
 
                     <div className="rb-actions">
 
-                        {/* FIXED BUTTON — PRICE WILL NOW SHOW IN RejectModal */}
+                        {/* FIXED BUTTON â€” PRICE WILL NOW SHOW IN RejectModal */}
                         <button
                             className="rb-reject"
                             onClick={() => {
@@ -131,7 +131,7 @@ const ModalProposal = ({ toclose, setReview, info, setInfo, setReject }) => {
                                 }));
                             }}
                         >
-                            ✔ ₦{item?.bidPrice || item?.currentPrice}
+                            âœ” ₦{item?.bidPrice || item?.currentPrice}
                         </button>
                     </div>
                 </div>

@@ -11,7 +11,7 @@ const RunnerNotification = () => {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const token = JSON.parse(localStorage.getItem("userToken"));
+  const token = localStorage.getItem("userToken");
 
   const formatDate = (iso) => {
     if (!iso) return "";
@@ -60,7 +60,7 @@ const RunnerNotification = () => {
   return (
     <div className="runner-notify-page">
       <p className="runner-back-text" onClick={() => navigate(-1)}>
-        ← Back
+        â† Back
       </p>
 
       <div className="runner-notify-header">

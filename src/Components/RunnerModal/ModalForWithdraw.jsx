@@ -12,7 +12,7 @@ const ModalForWithdraw = ({ close, setModal, setWithdrawAmount }) => {
   const [loadingBalance, setLoadingBalance] = useState(true);
   const [error, setError] = useState("");
 
-  const token = JSON.parse(localStorage.getItem("userToken"));
+  const token = localStorage.getItem("userToken");
 
   const fetchBalance = async () => {
     try {

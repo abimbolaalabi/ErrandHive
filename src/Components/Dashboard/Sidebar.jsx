@@ -15,7 +15,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
   const getErrandById = async () => {
     try {
-    const token = JSON.parse(localStorage.getItem("userToken"));
+    const token = localStorage.getItem("userToken");
       const res = await axios.get(`${BaseUrl}/errand/my-errands`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -104,7 +104,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             zIndex: 2000,
           }}
         >
-          ✖
+          âœ–
         </button>
       )}
 

@@ -11,7 +11,7 @@ const Notification = () => {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const token = JSON.parse(localStorage.getItem("userToken"));
+  const token = localStorage.getItem("userToken");
 
   const formatDate = (iso) => {
     if (!iso) return "";
@@ -70,7 +70,7 @@ const Notification = () => {
   return (
     <div className="notify-page-container">
       <p className="back-text" onClick={() => navigate(-1)}>
-        ← Back to dashboard
+        â† Back to dashboard
       </p>
 
       <div className="notify-header">

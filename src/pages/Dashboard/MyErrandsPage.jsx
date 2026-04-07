@@ -26,7 +26,7 @@ const BaseUrl = import.meta.env.VITE_BASE_URL
   try {
     setLoading(true);
 
-    const token = JSON.parse(localStorage.getItem("userToken"));
+    const token = localStorage.getItem("userToken");
     if (!token) {
       console.log("No token found");
       setErrands([]);
