@@ -76,7 +76,7 @@ export default function MessagesPage() {
 
         setMessages(msg.data?.data || []);
       } catch (err) {
-        console.log("Chat fetch error:", err);
+        // chat fetch failed silently
       } finally {
         setLoading(false);
       }
@@ -105,7 +105,7 @@ const sendMessage = async (e) => {
       headers: { Authorization: `Bearer ${token}` },
     });
   } catch (err) {
-    console.log("Save error:", err);
+    // message save failed silently
   }
 
   setText("");

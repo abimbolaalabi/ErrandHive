@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
-import { getStoredBoolean, getStoredJson } from "../utils/storage";
+import { getStoredBoolean, getStoredJson, setStoredValue } from "../utils/storage";
 
 const AppContext = createContext(null);
 
@@ -18,13 +18,11 @@ const AppProvider = ({ children }) => {
 
       if (!storedUser?.id || !token) return;
 
-     
       const res = await axios.get(`${BaseUrl}/user/${storedUser.id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUser(res?.data?.data);
 
-     
       const kycRes = await axios.get(`${BaseUrl}/kyc/my`, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -33,13 +31,12 @@ const AppProvider = ({ children }) => {
       setKycStatus(kycData?.status);
       const isVerified = kycData?.status === "Completed";
       setUserKyc(isVerified);
-      localStorage.setItem("userKyc", String(isVerified));
-      localStorage.setItem("kycStatus", kycData?.status);
-
-      console.log("AppContext User:", res?.data?.data);
-      console.log("AppContext KYC:", kycData);
+      setStoredValue("userKyc", String(isVerified));
+      if (kycData?.status) {
+        setStoredValue("kycStatus", kycData.status);
+      }
     } catch (error) {
-      console.log("Error fetching user or KYC:", error.response?.data || error);
+      // user/KYC fetch failed silently
     }
   };
 

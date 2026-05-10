@@ -13,7 +13,6 @@ const ModalProposalRev = ({ toclose, setErrandPay, info }) => {
   const handleConfirm = async () => {
     try {
       setLoading(true);
-      console.log(info)
       const res = await axios.patch(
         `${BaseUrl}/errands/${info?.errandId}/applications/${info?.applicationId}/accept`,
         {},
@@ -23,12 +22,10 @@ const ModalProposalRev = ({ toclose, setErrandPay, info }) => {
       );
 
       toast.success(res?.data?.message || "Runner application accepted successfully");
-      console.log("PATCH response:", res.data);
 
       toclose(false);
       setErrandPay(true);
     } catch (err) {
-      console.log("Error accepting runner:", err.response?.data || err.message);
       toast.error(err?.response?.data?.message || "Failed to assign runner");
     } finally {
       setLoading(false);
@@ -62,7 +59,6 @@ const ModalProposalRev = ({ toclose, setErrandPay, info }) => {
 
         <div className="rev-price-box">
           <p className="rev-price-label">Final Price</p>
-          {console.log(info)}
           <p className="rev-price-value">₦{
   info?.bidPrice
     ? Number(info?.bidPrice).toLocaleString()

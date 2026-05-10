@@ -11,7 +11,6 @@ const ClientVsRunner = () => {
   const [user, setUser] = useState("")
 
 const handleSelectRole = (role) => {
-  console.log("Selected:", role);
   setModal(true);
   setShowDropDown(false);
   

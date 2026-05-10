@@ -99,7 +99,7 @@ const ModalErrand = ({ toclose }) => {
       setFile(null);
       setFormErrors({});
     } catch (error) {
-      console.log(error);
+      // modal errand create failed silently
       toast.error(error?.response?.data?.message || error?.message || "Failed to create errand");
     } finally {
       setLoading(false);

@@ -25,7 +25,7 @@ const ErrandDeliveryTrack = () => {
       });
       setErrand(res.data.data);
     } catch (error) {
-      console.log("Errand fetch error:", error);
+      // errand fetch failed silently
     }
   };
 
@@ -41,7 +41,7 @@ const ErrandDeliveryTrack = () => {
 
       setSteps(res.data.data); // backend sends correct format
     } catch (error) {
-      console.log("Progress fetch error:", error);
+      // progress fetch failed silently
     } finally {
       setLoading(false);
     }

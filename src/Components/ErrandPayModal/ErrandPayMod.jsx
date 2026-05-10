@@ -18,7 +18,6 @@ const ErrandPayMod = ({ toclose, setErrandPay, info }) => {
   const handlePayment = async () => {
     try {
       setLoading(true);
-       console.log(info.errandId)
       const res = await axios.post(
         `${BaseUrl}/payment/initialize/${info?.errandId}`,
         {
@@ -33,14 +32,10 @@ const ErrandPayMod = ({ toclose, setErrandPay, info }) => {
           },
         }
       );
-      console.log(res?.data)
       const checkoutUrl = res?.data?.data?.data?.checkout_url
-      console.log(checkoutUrl)
       const ok = res?.data?.success === true;
 
       if (ok && checkoutUrl) {
-        // toast.success(res.data.message);
-        console.log(res.data.message)
         setTimeout(() => {
           window.location.href = checkoutUrl;
           // window.location.href = url;
@@ -50,7 +45,6 @@ const ErrandPayMod = ({ toclose, setErrandPay, info }) => {
         toast.error();
       }
     } catch (err) {
-      console.log("PAYMENT ERROR:", err);
       toast.error(err?.data?.message);
     } finally {
       setLoading(false);

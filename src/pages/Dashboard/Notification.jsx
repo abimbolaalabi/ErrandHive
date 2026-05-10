@@ -33,7 +33,6 @@ const Notification = () => {
       // correct mapping based on your API response
       setNotifications(res.data?.notifications || []);
     } catch (err) {
-      console.log("Error fetching notifications:", err?.response?.data || err);
     } finally {
       setLoading(false);
     }
@@ -55,7 +54,7 @@ const Notification = () => {
         prev.map((n) => (n.id === id ? { ...n, isRead: true } : n))
       );
     } catch (err) {
-      console.log("Mark read error:", err?.response?.data || err);
+      // mark read failed silently
     }
   };
 

@@ -30,7 +30,7 @@ const RunnerNotification = () => {
 
       setNotifications(res.data?.notifications || []);
     } catch (err) {
-      console.log("Error fetching notifications:", err?.response?.data || err);
+      // notification fetch failed silently
     } finally {
       setLoading(false);
     }
@@ -49,7 +49,7 @@ const RunnerNotification = () => {
         prev.map((n) => (n.id === id ? { ...n, isRead: true } : n))
       );
     } catch (err) {
-      console.log("Mark read error:", err?.response?.data || err);
+      // mark read failed silently
     }
   };
 

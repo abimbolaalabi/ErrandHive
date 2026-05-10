@@ -28,7 +28,6 @@ const BaseUrl = import.meta.env.VITE_BASE_URL
 
     const token = localStorage.getItem("userToken");
     if (!token) {
-      console.log("No token found");
       setErrands([]);
       return;
     }
@@ -44,7 +43,6 @@ const BaseUrl = import.meta.env.VITE_BASE_URL
 
     setErrands(res?.data?.data || []);
   } catch (err) {
-    console.log("Fetch errands error:", err.response?.data || err.message);
     setErrands([]);
   } finally {
     setLoading(false);

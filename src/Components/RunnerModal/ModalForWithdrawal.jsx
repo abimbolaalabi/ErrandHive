@@ -95,7 +95,6 @@ const ModalForWithdrawal = ({ toclose, setSuccess, amount , onSuccess }) => {
       
       toclose(false);
     } catch (err) {
-      console.log(err)
       setError(err.response?.data?.message || "Withdrawal failed. Please try again.");
     } finally {
       setLoading(false);

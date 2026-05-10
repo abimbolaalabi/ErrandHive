@@ -27,7 +27,7 @@ const SuccessPage = () => {
 
       setPayRef(res?.data?.data);
     } catch (error) {
-      console.log(error);
+      // success page fetch failed silently
     } finally {
       setLoading(false);    // END LOADING
     }

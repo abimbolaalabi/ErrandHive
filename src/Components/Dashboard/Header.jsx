@@ -27,7 +27,7 @@ const Header = ({ setSidebarOpen }) => {
     const unread = res.data?.notifications?.filter(n => !n.isRead).length || 0;
     setNotifyCount(unread);
   } catch (err) {
-    console.log("Notify count error:", err);
+    // notify count fetch failed silently
   }
 };
 

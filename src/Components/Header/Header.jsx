@@ -17,8 +17,6 @@ const Header = () => {
     }
   };
 
-  console.log("object", user)
-
   return (
     <header className="header-container">
       <div className="header-container-wrapper">

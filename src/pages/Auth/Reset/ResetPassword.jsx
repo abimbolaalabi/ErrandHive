@@ -42,7 +42,6 @@ const ResetPassword = () => {
     }
 
     setError("");
-    console.log("Password reset:", password, confirmPassword);
     try{
      const res = await axios.post(`${BaseUrl}/reset`,  {
        email : userEmail,
@@ -51,13 +50,11 @@ const ResetPassword = () => {
      },{
        headers: { "Content-Type": "application/json" }
      })
-     console.log(res?.data)
      const successMessage = res?.data?.message || "Password reset successfully!";
      toast.success(successMessage);
      nav("/login")
      
     }catch(err){
-      console.log(err,"err")
       const errorMessage = err?.response?.data?.message || "Failed to reset password.";
        toast.error(errorMessage);
     }

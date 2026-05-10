@@ -37,7 +37,7 @@ export default function MessagesPage() {
         const assigned = res?.data?.data?.filter((e) => e.assignedTo != null);
         setMyRunners(assigned || []);
       } catch (err) {
-        console.log("Runner fetch error:", err);
+        // runner fetch failed silently
       }
     };
 
@@ -73,7 +73,7 @@ export default function MessagesPage() {
 
         setMessages(msg.data?.data || []);
       } catch (err) {
-        console.log("Chat load error:", err);
+        // chat load failed silently
       } finally {
         setLoading(false);
       }
@@ -137,7 +137,7 @@ export default function MessagesPage() {
         headers: { Authorization: `Bearer ${token}` },
       });
     } catch (err) {
-      console.log("Save error:", err);
+      // message save failed silently
     }
   };
 

@@ -105,7 +105,6 @@ const SignUp = () => {
       setFormErrors({});
       navigate("/verifyemail");
     } catch (error) {
-      console.log("Signup error:", error);
       toast.error(
         error.response?.data?.message || error.message || "Registration failed"
       );

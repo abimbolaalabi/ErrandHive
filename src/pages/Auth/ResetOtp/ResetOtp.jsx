@@ -92,8 +92,7 @@ const userEmail = localStorage.getItem("resetEmail");
 
       navigate("/reset");
       
-    } catch (error) { 
-      console.log(error);
+    } catch (error) {
       toast.error(error?.response?.data?.message || "Invalid verification code");
     } finally {
       setBtnLoading(false);

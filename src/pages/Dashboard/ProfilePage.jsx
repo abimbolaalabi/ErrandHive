@@ -66,7 +66,6 @@ const ProfilePage = () => {
       );
 
       toast.success("Profile image updated");
-      console.log(res.data.data);
     } catch (err) {
       toast.error(err?.response?.data?.message || "Upload failed");
       setImage(null);
@@ -97,7 +96,7 @@ const ProfilePage = () => {
       const verified = normalizedStatus === "verified" || normalizedStatus === "approved" || normalizedStatus === "completed";
       localStorage.setItem("userKyc", String(verified));
     } catch (error) {
-      console.log("KYC fetch error:", error);
+      // KYC fetch failed silently
     } finally {
       setLoading(false);
     }
