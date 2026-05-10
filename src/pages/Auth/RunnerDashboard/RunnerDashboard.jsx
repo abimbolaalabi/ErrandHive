@@ -25,7 +25,7 @@ const RunnerDashboard = () => {
       });
       setSummary(res?.data?.data || {});
     } catch (error) {
-      console.log("Runner summary error:", error);
+      // runner summary fetch failed silently
     }
   };
 
@@ -37,7 +37,6 @@ const RunnerDashboard = () => {
       });
       const kyc = res?.data?.data;
 
-      console.log("kyc", kyc)
       if (kyc && kyc.status) {
         const status = kyc.status.toLowerCase();
         setKycStatus(status);

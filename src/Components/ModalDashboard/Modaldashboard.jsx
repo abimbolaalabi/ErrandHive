@@ -59,7 +59,6 @@ const Modaldashboard = ({ close }) => {
       localStorage.setItem("userKyc", "true");
       setTimeout(() => close(false), 800);
     } catch (err) {
-      console.log("KYC Submit Error:", err.response?.data || err.message);
       toast.error(err?.response?.data?.message || "Failed to submit KYC");
     } finally {
       setLoading(false);

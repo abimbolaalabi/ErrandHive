@@ -41,7 +41,6 @@ const Forget = () => {
 
     try {
       const res = await axios.post(`${BaseUrl}/forgot-password`, { email });
-      console.log("Response:", res.data);
       localStorage.setItem("resetEmail", email);
       setEmail("");
       toast.success(res?.data?.message);

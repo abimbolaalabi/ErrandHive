@@ -27,7 +27,6 @@ const RunnerProfile = () => {
 
   const BaseUrl = import.meta.env.VITE_BASE_URL;
   const token = localStorage.getItem("userToken");
-  console.log(token)
   const storedUser = getStoredJson("userDetails", null);
   const id = storedUser?.id;
 
@@ -59,7 +58,6 @@ const RunnerProfile = () => {
       });
       const kyc = res?.data?.data;
 
-      console.log("kyc", kyc)
       if (kyc && kyc.status) {
         const status = kyc.status.toLowerCase();
         setKycStatus(status);

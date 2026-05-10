@@ -6,7 +6,6 @@ import { TbCurrencyNaira } from 'react-icons/tb';
 import { FiLock } from 'react-icons/fi';
 
 const ConfirmWithdrawalModal = ({ toclose, setSuccess }) => {
-     console.log("ConfirmWithdrawalModal")
   const withdrawingAmount = '1,000';
   const bankName = 'Access Bank';
   const accountNumberSuffix = '8901';
@@ -57,7 +56,6 @@ const ConfirmWithdrawalModal = ({ toclose, setSuccess }) => {
           <button className="confirm-button primary-button" onClick={()=> {{
             toclose(false);
             setSuccess(true);
-            console.log("cheecking")
            }}}>Confirm Withdrawal</button>
         </div>
 

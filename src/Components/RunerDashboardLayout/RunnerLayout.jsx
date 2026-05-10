@@ -44,7 +44,7 @@ const RunnerLayout = () => {
       });
       setErrand(res?.data?.data || null);
     } catch (error) {
-      console.log("ERR ERRAND:", error);
+      // errand fetch failed silently
     }
   };
   const fetchNotifyCount = async () => {
@@ -57,7 +57,7 @@ const RunnerLayout = () => {
       const unread = res.data?.notifications?.filter(n => !n.isRead).length || 0;
       setNotifyCount(unread);
     } catch (err) {
-      console.log("Notify count error:", err);
+      // notify count fetch failed silently
     }
   };
 
@@ -119,7 +119,11 @@ const RunnerLayout = () => {
 
         <div className="sidebarr-main">
           {menuItems.map((item, index) => {
-            const isActive = currentPath === item.path;
+            const basePath = item.path.split("/").slice(0, 3).join("/");
+            const isActive =
+              item.path === "/runnerlayout"
+                ? currentPath === "/runnerlayout"
+                : currentPath.startsWith(basePath);
 
             return (
               <div

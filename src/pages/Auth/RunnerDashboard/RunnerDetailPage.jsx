@@ -48,7 +48,7 @@ const RunnerDetailPage = () => {
 
       setDetails(res.data.data);
     } catch (err) {
-      console.log("Fetch errand error", err);
+      // errand fetch failed silently
     }
   };
 
@@ -85,7 +85,7 @@ const RunnerDetailPage = () => {
 
       setSteps(formatted);
     } catch (error) {
-      console.log("Progress error", error);
+      // progress fetch failed silently
     }
   };
 
@@ -104,7 +104,7 @@ const RunnerDetailPage = () => {
         }
       );
     } catch (error) {
-      console.log("Message send error:", error);
+      // progress message send failed silently
     }
   };
 
@@ -137,7 +137,7 @@ const RunnerDetailPage = () => {
       }
 
     } catch (err) {
-      console.log("Update step error:", err);
+      // step update failed silently
     } finally {
       setLoading(false);
     }
@@ -194,7 +194,6 @@ const RunnerDetailPage = () => {
         setOtp("");
         setShowOtpModal(false);
       } catch (error) {
-        console.log("OTP verify error:", error);
         toast.error(error?.response?.data?.message || "OTP verification failed!");
       } finally {
         setOtpLoading(false);

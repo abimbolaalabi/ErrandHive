@@ -4,7 +4,7 @@ import { Eye, EyeOff } from 'lucide-react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-import { getStoredJson } from '../../utils/storage';
+import { getStoredJson, setStoredJson } from '../../utils/storage';
 
 const EditProfile = () => {
   const storedUser = getStoredJson("userDetails", {});
@@ -66,13 +66,15 @@ const EditProfile = () => {
         const updatedUser = res.data.data;
 
         // Update localStorage without touching email
-        localStorage.setItem('userDetails', JSON.stringify({
-          ...storedUser,
-          firstName: updatedUser.firstName,
-          lastName: updatedUser.lastName,
-          bio: updatedUser.bio,
-          profileImage: updatedUser.profileImage
-        }));
+        if (updatedUser) {
+          setStoredJson('userDetails', {
+            ...storedUser,
+            firstName: updatedUser.firstName,
+            lastName: updatedUser.lastName,
+            bio: updatedUser.bio,
+            profileImage: updatedUser.profileImage
+          });
+        }
 
         // Reset password fields
         setCurrentPassword('');

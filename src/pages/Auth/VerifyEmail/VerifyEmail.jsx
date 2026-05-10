@@ -26,7 +26,6 @@ const VerifyEmail = () => {
     getStoredString("resetEmail") || getStoredString("email");
 
   const isResetFlow = getStoredBoolean("isReset");
-  console.log(userEmail);
 
   useEffect(() => {
     if (!userEmail) {
@@ -91,7 +90,6 @@ const VerifyEmail = () => {
         email: userEmail,
         otp: otpCode,
       });
-      console.log(userEmail);
       toast.success(res?.data?.message || "Verification successful!");
       setCodes(["", "", "", "", "", ""]);
 
@@ -103,7 +101,6 @@ const VerifyEmail = () => {
         }
       }, 2000);
     } catch (error) {
-      console.log(error);
       toast.error(
         error?.response?.data?.message || "Invalid verification code"
       );

@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Eye, EyeOff } from 'lucide-react'
 import axios from "axios";
 import { toast } from "react-toastify";
-import { getStoredJson } from '../../utils/storage';
+import { getStoredJson, setStoredJson } from '../../utils/storage';
 
 const ProfileDetailSetting = () => {
   const { profileId } = useParams()
@@ -46,11 +46,9 @@ const ProfileDetailSetting = () => {
       );
 
       toast.success(res.data?.message || "Profile updated successfully");
-      localStorage.setItem("userDetails", JSON.stringify(res.data?.data))
-      console.log("Updated User:", res.data?.data);
+      setStoredJson("userDetails", res.data?.data);
 
     } catch (err) {
-      console.log(" Update error:", err?.response?.data);
       toast.error(err?.response?.data?.message || "Update failed");
     }
   };
@@ -91,7 +89,6 @@ const ProfileDetailSetting = () => {
       setConfirmPassword("");
 
     } catch (err) {
-      console.log("Password update error:", err?.response?.data);
       toast.error(err?.response?.data?.message || "Password update failed");
     }
   };

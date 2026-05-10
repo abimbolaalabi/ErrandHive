@@ -16,7 +16,6 @@ const PaymentsPage = () => {
       });
 
       const payments = res?.data?.data?.payments || [];
-      console.log("Payments fetched:", payments);
 
       // â­ FILTER: If Paid exists, remove Pending duplicates
       const filtered = payments.filter((tx, index, self) => {
@@ -36,7 +35,7 @@ const PaymentsPage = () => {
       setAmount(res?.data?.data.summary.totalAmount);
       setPaymentsData(filtered);
     } catch (error) {
-      console.log("Payment history error:", error);
+      // payment history fetch failed silently
     }
   };
 

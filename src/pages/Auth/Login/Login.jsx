@@ -10,6 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import { useDispatch } from "react-redux";
 import { setUserDetails } from "../../../global/userSlice";
+import { setStoredJson } from "../../../utils/storage";
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -75,7 +76,6 @@ const Login = () => {
           headers: { "Content-Type": "application/json" },
         });
 
-        console.log(res?.data);
         toast.success(res?.data?.message);
         const userDetails = res?.data?.data;
         const userToken = res?.data?.data?.token;
@@ -86,9 +86,9 @@ const Login = () => {
         }
 
         // dispatchUser(setUserDetails({ userDetails, userToken }));
-        localStorage.clear()
+        localStorage.clear();
         localStorage.setItem("userToken", userToken);
-        localStorage.setItem("userDetails", JSON.stringify(userDetails));
+        setStoredJson("userDetails", userDetails);
         
           role === "Client"
         ? navigate("/dashboard")
@@ -103,7 +103,6 @@ const Login = () => {
           remember: false,
         });
       } catch (error) {
-        console.log("Login error:", error.response?.data || error.message);
         toast.error(error?.response?.data?.message || "Login failed");
       } finally {
         setLoading(false);

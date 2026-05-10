@@ -38,7 +38,6 @@ const DashboardPage = () => {
       setLoading(true);
       const token = localStorage.getItem("userToken");
       if (!token) {
-        console.log("No token found");
         setErrands([]);
         return;
       }
@@ -48,7 +47,6 @@ const DashboardPage = () => {
       });
       setErrands(res?.data?.data || []);
     } catch (err) {
-      console.log("Fetch errands error:", err.response?.data || err.message);
       setErrands([]);
     } finally {
       setLoading(false);
@@ -68,7 +66,7 @@ const DashboardPage = () => {
         console.warn("Client summary endpoint not found – using default values.");
         setSummary({ totalRequests: 0, completedJobs: 0, activeJobs: 0, totalSpent: 0 });
       } else {
-        console.log("clientSummaryDashBoard error:", error);
+        // clientSummaryDashBoard error handled silently
       }
     }
   };
@@ -102,8 +100,7 @@ const DashboardPage = () => {
 
       localStorage.setItem("userKyc", verified ? "true" : "false");
     } catch (error) {
-      console.log("KYC fetch error:", error);
-      // On error, assume not verified
+      // KYC fetch failed silently
       localStorage.setItem("userKyc", "false");
     }
   };

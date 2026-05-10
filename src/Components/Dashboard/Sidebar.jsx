@@ -23,7 +23,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       });
       setErrand(res?.data?.data || null);
     } catch (error) {
-      console.log("ERR ERRAND:", error);
+      // errand fetch failed silently
     }
   };
 
@@ -125,13 +125,18 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       {/* NAVIGATION */}
       <nav className="sidebar-nav">
         {menuItems.map((item) => {
-          const isActive = location.pathname === item.path;
+          const basePath = item.path.split("/").slice(0, 3).join("/"); // e.g. /dashboard/messages
+          const isActive =
+            item.path === "/dashboard"
+              ? location.pathname === "/dashboard"
+              : location.pathname.startsWith(basePath);
 
           return (
             <NavLink
               key={item.path}
               to={item.path}
-              className={`nav-item ${isActive ? "active" : ""}`}
+              end={item.path === "/dashboard"}
+              className={() => `nav-item ${isActive ? "active" : ""}`}
               onClick={() => setSidebarOpen(false)}
             >
               <span className="nav-icon">{item.icon}</span>

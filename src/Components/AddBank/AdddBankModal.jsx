@@ -42,7 +42,6 @@ const AddBankModal = ({ close }) => {
         }
       );
 
-      console.log("âœ… Bank details response:", res.data);
       toast.success(res.data.message);
     } catch (err) {
       console.error("âŒ Error saving bank details:", err);

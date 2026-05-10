@@ -55,9 +55,8 @@ const MyErrandsDetails = () => {
         try {
             const response = await axios.get(`${BaseUrl}/errand/get/${errandId}`)
             setErrand(response?.data?.data)
-            // console.log(response.data)
         } catch (error) {
-            console.log("This is the errand error", error)
+            // errand fetch failed silently
         }
     }
 
@@ -68,7 +67,6 @@ const MyErrandsDetails = () => {
 
             const token = localStorage.getItem("userToken");
             if (!token) {
-                console.log("No token found");
                 setAllErrand([]);
                 return;
             }
@@ -81,9 +79,7 @@ const MyErrandsDetails = () => {
                 }
             )
             setAllErrand(response?.data?.data)
-            console.log(response.data.data)
         } catch (error) {
-            console.log("This is the errand error", error)
         } finally {
             setLoading(false);
         }

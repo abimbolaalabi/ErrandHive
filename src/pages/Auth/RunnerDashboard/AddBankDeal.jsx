@@ -31,7 +31,7 @@ const AddBankDeal = () => {
 
       setLoading(false);
     } catch (err) {
-      console.log("BANK DETAILS ERROR:", err);
+      // bank details fetch failed silently
       setBank(null);
       setLoading(false);
     }
