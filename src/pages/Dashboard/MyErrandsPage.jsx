@@ -126,7 +126,7 @@ const BaseUrl = import.meta.env.VITE_BASE_URL
             <p className="price">₦{Number(item.price ?? 0).toLocaleString()}</p>
 
             <button className="details-btn">
-              <Link className='link' to={`/dashboard/my-errands/${item.id}`}>View Details</Link>
+              <Link className='link' to={`/dashboard/my-errands/${item._id}`}>View Details</Link>
             </button>
           </div>
         </div>
